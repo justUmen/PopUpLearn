@@ -1,4 +1,4 @@
-# PopUpLearn
+# PopUpLearn (Work in progress, not working yet. DO NOT TRY :P)
 
 Usage : /home/umen/SyNc/Projects/GameScript/PopUpLearn/toggle_popup.sh  
 
