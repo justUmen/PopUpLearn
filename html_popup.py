@@ -32,4 +32,4 @@ web.showMaximized()
 sys.exit(app.exec_())
 
 #LAUNCHED AUTOMATICLY BY launcher_html_popup.sh with for example :
-#/home/umen/SyNc/Projects/wikiface_new/popup/html_popup.py 0 0 NO QUIZ
+#~/SyNc/Projects/wikiface_new/popup/html_popup.py 0 0 NO QUIZ

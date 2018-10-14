@@ -110,14 +110,14 @@ switch ($LANGUAGE_TAG_2) {
 <script>
 function good_answer(){
 	console.log("function good_answer");
-	execute_with_node_server('echo "<?php echo $LEFT; ?>:<?php echo $RIGHT; ?>" >> /home/umen/SyNc/Projects/wikiface_new/popup/LOGS/good_answer;pkill -f "python3 /home/umen/SyNc/Projects/wikiface_new/popup/html_popup.py"');
+	execute_with_node_server('echo "<?php echo $LEFT; ?>:<?php echo $RIGHT; ?>" >> ~/SyNc/Projects/wikiface_new/popup/LOGS/good_answer;pkill -f "python3 ~/SyNc/Projects/wikiface_new/popup/html_popup.py"');
 	//close_popup();
 }
 function bad_answer(){
 	//1 - Disable launcher_html_popup.sh
 	//2 - kill html popup
 	//3 - start again another question
-	//execute_with_node_server('/home/umen/SyNc/Projects/wikiface_new/popup/toggle_popup.sh;pkill -f "python3 /home/umen/SyNc/Projects/wikiface_new/popup/html_popup.py";sleep 2;/home/umen/SyNc/Projects/wikiface_new/popup/toggle_popup.sh');
+	//execute_with_node_server('~/SyNc/Projects/wikiface_new/popup/toggle_popup.sh;pkill -f "python3 ~/SyNc/Projects/wikiface_new/popup/html_popup.py";sleep 2;~/SyNc/Projects/wikiface_new/popup/toggle_popup.sh');
 	return 0; //DO NOTHING FOR NOW
 	//close_popup();
 }
@@ -259,16 +259,16 @@ echo "</div>";
 function audio_play(arg){
 	console.log(arg);
 	var objReq = new XMLHttpRequest();
-	objReq.open("GET", "http://localhost:8888" + "?type=" + "mplayer \"/home/umen/SyNc/Projects/wikiface_new/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3\"" , false);
-//objReq.open("GET", "http://localhost:8888" + "?type=" + "mplayer /home/umen/SyNc/Projects/wikiface_new/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3 /home/umen/SyNc/Projects/wikiface_new/soundDB/<?php echo $LANGUAGE_TAG_2; ?>/<?php echo $RIGHT; ?>.mp3" , false);	
+	objReq.open("GET", "http://localhost:8888" + "?type=" + "mplayer \"~/SyNc/Projects/wikiface_new/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3\"" , false);
+//objReq.open("GET", "http://localhost:8888" + "?type=" + "mplayer ~/SyNc/Projects/wikiface_new/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3 ~/SyNc/Projects/wikiface_new/soundDB/<?php echo $LANGUAGE_TAG_2; ?>/<?php echo $RIGHT; ?>.mp3" , false);	
 	//FOR QUIZ PLAY ONLY LEFT SIDE :p
 	//???CHANGE NOT ONLY th FIND REAL SOLUTION FOR THIS :P, play sound from the "learning" LANGUAGE, here "th"
 	//~ if("<?php echo $LANGUAGE_TAG_1; ?>"=="th"){
-		//~ objReq.open("GET", "http://localhost:8888" + "?type=" + "mplayer /home/umen/SyNc/Projects/wikiface_new/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3" , false);
+		//~ objReq.open("GET", "http://localhost:8888" + "?type=" + "mplayer ~/SyNc/Projects/wikiface_new/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3" , false);
 	//~ }
 	//~ else{
 		//~ if("<?php echo $LANGUAGE_TAG_2; ?>"=="th"){
-			//~ objReq.open("GET", "http://localhost:8888" + "?type=" + "mplayer /home/umen/SyNc/Projects/wikiface_new/soundDB/<?php echo $LANGUAGE_TAG_2; ?>/<?php echo $RIGHT; ?>.mp3" , false);
+			//~ objReq.open("GET", "http://localhost:8888" + "?type=" + "mplayer ~/SyNc/Projects/wikiface_new/soundDB/<?php echo $LANGUAGE_TAG_2; ?>/<?php echo $RIGHT; ?>.mp3" , false);
 		//~ }
 	//~ }
 	objReq.send(null);

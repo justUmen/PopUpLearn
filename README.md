@@ -1,6 +1,6 @@
 # PopUpLearn (Work in progress, not working yet. DO NOT TRY :P)
 
-Usage : /home/umen/SyNc/Projects/GameScript/PopUpLearn/toggle_popup.sh  
+Usage : ~/SyNc/Projects/PopUpLearn/toggle_popup.sh  
 
 Learning with popups.  
 Made for GameScript but can be used to learn pretty much whatever you want.  
@@ -17,8 +17,8 @@ Use ~/.PopUpLearn to store scripts and data.
 
 1 - Launch server with :  
 
-     php -S 127.0.0.1:9999 -t /home/umen/SyNc/Projects/GameScript/PopUpLearn
+     php -S 127.0.0.1:9999 -t ~/SyNc/Projects/PopUpLearn
 
 2 - Launch client with :  
 
-     /home/umen/SyNc/Projects/GameScript/PopUpLearn/toggle_popup.sh
+     ~/SyNc/Projects/PopUpLearn/toggle_popup.sh

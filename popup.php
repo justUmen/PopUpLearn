@@ -107,7 +107,7 @@ echo "</div>";
 </body>
 <script>
 function new_random_error(){
-	//nodeserver("pkill -f \"/bin/bash /home/umen/SyNc/Projects/python_popup/launcher_html_popup.sh\";");
+	//nodeserver("pkill -f \"/bin/bash ~/SyNc/Projects/python_popup/launcher_html_popup.sh\";");
 	close_popup(); //Close itself
 }
 
@@ -123,10 +123,10 @@ document.onkeypress = function(){
 function audio_play(arg){
 	console.log(arg);
 	var objReq = new XMLHttpRequest();
-//	objReq.open("GET", "http://localhost:8888" + "?type=" + "mplayer /home/umen/SyNc/Projects/wikiface_new/soundDB/mix/<?php echo $LEFT; ?>_<?php echo $RIGHT; ?>.mp3" , false);
-	//~ objReq.open("GET", "http://localhost:8888" + "?type=" + "mplayer /home/umen/SyNc/Projects/wikiface_new/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3 /home/umen/SyNc/Projects/wikiface_new/soundDB/<?php echo $LANGUAGE_TAG_2; ?>/<?php echo $RIGHT; ?>.mp3" , false);
-	objReq.open("GET", "http://localhost:8888" + "?type=" + "mplayer \"/home/umen/SyNc/Projects/wikiface_new/soundDB/<?php echo $LANG; ?>/<?php echo $LEFT; ?>.mp3\" \"/home/umen/SyNc/Projects/wikiface_new/soundDB/<?php echo $LANGUAGE_TAG_2; ?>/<?php echo $RIGHT; ?>.mp3\"" , false);
-	//~ objReq.open("GET", "http://localhost:8888" + "?type=" + "mplayer /home/umen/SyNc/Projects/wikiface_new/soundDB/<?php echo $LANGUAGE_TAG_2; ?>/<?php echo $RIGHT; ?>.mp3" , false);
+//	objReq.open("GET", "http://localhost:8888" + "?type=" + "mplayer ~/SyNc/Projects/wikiface_new/soundDB/mix/<?php echo $LEFT; ?>_<?php echo $RIGHT; ?>.mp3" , false);
+	//~ objReq.open("GET", "http://localhost:8888" + "?type=" + "mplayer ~/SyNc/Projects/wikiface_new/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3 ~/SyNc/Projects/wikiface_new/soundDB/<?php echo $LANGUAGE_TAG_2; ?>/<?php echo $RIGHT; ?>.mp3" , false);
+	objReq.open("GET", "http://localhost:8888" + "?type=" + "mplayer \"~/SyNc/Projects/wikiface_new/soundDB/<?php echo $LANG; ?>/<?php echo $LEFT; ?>.mp3\" \"~/SyNc/Projects/wikiface_new/soundDB/<?php echo $LANGUAGE_TAG_2; ?>/<?php echo $RIGHT; ?>.mp3\"" , false);
+	//~ objReq.open("GET", "http://localhost:8888" + "?type=" + "mplayer ~/SyNc/Projects/wikiface_new/soundDB/<?php echo $LANGUAGE_TAG_2; ?>/<?php echo $RIGHT; ?>.mp3" , false);
 	objReq.send(null);
 }
 
