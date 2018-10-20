@@ -86,7 +86,7 @@ if($TYPE=="BUTTON"){
 	shuffle($a);
 	shuffle($b);
 	echo "</div>";
-	}
+}
 ?>
 
 <script src="react_search/react.min.js"></script>

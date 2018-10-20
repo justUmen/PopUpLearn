@@ -29,7 +29,7 @@ LANGUAGE_1="fr"
 LANGUAGE_2="fr"
 SUBJECT="bash"
 NUMBER="1-11"
-TYPE="TEXT" #TEXT for typing answer, BUTTON for a list of answers
+TYPE="BUTTON" #TEXT for typing answer, BUTTON for a list of answers
 FILE="$HOME/.PopUpLearn/DB/fr/GS/bash/_1-11.pul"
 #SPECIFIC TO BASH
 ANSWER_BEFORE_QUIZ=0 #0 is only quiz, not answer at the beginning
