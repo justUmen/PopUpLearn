@@ -3,8 +3,13 @@
 #EXIT IF SERVER IS NOT RUNNING (php -S 127.0.0.1:9999 -t $HOME/.PopUpLearn)
 #https://stackoverflow.com/questions/9609130/efficiently-test-if-a-port-is-open-on-linux-without-nmap-or-netcat#9609247
 exec 6<>/dev/tcp/127.0.0.1/9999 \
-	&& echo "Server available on port 9999" \
-	|| { echo "Please run the server with : php -S 127.0.0.1:9999 -t $HOME/.PopUpLearn" && exec 6>&- && exec 6<&- && exit; }
+	&& echo "php server available on port 9999" \
+	|| { echo "Please run the php server with : php -S 127.0.0.1:9999 -t ~/.PopUpLearn" && exec 6>&- && exec 6<&- && exit; }
+
+exec 6<>/dev/tcp/127.0.0.1/8888 \
+	&& echo "nodejs server available on port 8888" \
+	|| { echo "Please run the nodejs server with : node ~/.PopUpLearn/node_server.js || nodejs ~/.PopUpLearn/node_server.js" && exec 6>&- && exec 6<&- && exit; }
+
 
 TIME_DISPLAYED=0 #0 for infinite
 SEC_BEFORE_QUIZ=30

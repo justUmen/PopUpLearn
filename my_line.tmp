@@ -1,1 +1,1 @@
-0£bash_1-11£Comment demander la valeur de la variable 'nom' à l'utilisateur ?£read nom£fr£fr£BUTTON
+0£bash_1-11£Comment afficher le contenu du fichier 'test' ?£cat test£fr£fr£TEXT

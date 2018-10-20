@@ -14,11 +14,11 @@ Use ~/.PopUpLearn to store scripts and data.
 
 # Dependencies
 
-    sudo apt-get install python3-pyqt5 php dunst nodejs
+    sudo apt-get install python3-pyqt5 python3-pyqt5.qtwebengine python3-pyqt5.qtwebkit php nodejs
 
 `i3wm` desktop only for now (add to your configuration : `assign [class="html_popup.py"] workspace "Learn"` and `for_window [class="html_popup.py"] fullscreen enable`).  
 
-tested with `dunst` for notifications - aka `notify-send` (my config : `https://github.com/justUmen/PopUpLearn/blob/master/config/dunstrc`)  
+Tested with `dunst` for notifications - aka `notify-send` (my config : `https://github.com/justUmen/PopUpLearn/blob/master/config/dunstrc`)  
 
 # Installation
 
