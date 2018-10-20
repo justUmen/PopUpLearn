@@ -72,22 +72,21 @@ if($TYPE=="BUTTON"){
 		unset($lines_wrong[$RAND]);
 		array_push($result,"{$line}");
 	}
-}
-
-echo "<div style='margin-top:10px;'>";
-$a=array();
-$b=array();
-//ADD BAD ANSWERS
-foreach($result as $row) {
-	array_push($a,"<a style='background-color:black;margin:3px;' class='btn glyphicon' onclick='bad_answer();' href='#'>{$row}</a>");
-	array_push($b,"{$row}");
-}
-//ADD GOOD ANSWER
-array_push($a,"<a style='background-color:black;margin:3px;' class='btn glyphicon' onclick='good_answer(\"{$LEFT}\",\"{$RIGHT}\");' href='#'>{$RIGHT}</a>");
-array_push($b,"{$RIGHT}");
-shuffle($a);
-shuffle($b);
-echo "</div>";
+	echo "<div style='margin-top:10px;'>";
+	$a=array();
+	$b=array();
+	//ADD BAD ANSWERS
+	foreach($result as $row) {
+		array_push($a,"<a style='background-color:black;margin:3px;' class='btn glyphicon' onclick='bad_answer();' href='#'>{$row}</a>");
+		array_push($b,"{$row}");
+	}
+	//ADD GOOD ANSWER
+	array_push($a,"<a style='background-color:black;margin:3px;' class='btn glyphicon' onclick='good_answer(\"{$LEFT}\",\"{$RIGHT}\");' href='#'>{$RIGHT}</a>");
+	array_push($b,"{$RIGHT}");
+	shuffle($a);
+	shuffle($b);
+	echo "</div>";
+	}
 ?>
 
 <script src="react_search/react.min.js"></script>
