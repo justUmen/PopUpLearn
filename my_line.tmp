@@ -1,1 +1,1 @@
-0£bash_1-11£Quel argument pouvez-vous donner à 'if' qui garantira l'exécution du contenu dans son 'else' correspondant ?£false£fr£fr£TEXT
+0£bash_1-11£Comment demander la valeur de la variable 'nom' à l'utilisateur ?£read nom£fr£fr£BUTTON

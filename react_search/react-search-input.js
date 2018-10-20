@@ -35,7 +35,7 @@
     },
 
     updateSearch: function() {
-      var searchTerm = this.refs.search.getDOMNode().value.toLowerCase();
+      var searchTerm = this.refs.search.getDOMNode().value;
       this.setState({
         searchTerm: searchTerm
       }, function() {
@@ -61,7 +61,7 @@
             _name = _name[__key];
           });
 
-          return _name.toLowerCase();
+          return _name;
         };
 
         if (keys) {
@@ -75,7 +75,7 @@
           }
           return false;
         } else {
-          name = name.toLowerCase();
+          name = name;
           return (name.search(term) !== -1);
         }
       }.bind(this);

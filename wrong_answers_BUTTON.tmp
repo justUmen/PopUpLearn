@@ -47,6 +47,7 @@ ls
 ls -l
 ls x*
 rm 12
+mv *.html ../..
 chmod 101 test
 chmod 753 test
 cat cat 2>/dev/null
@@ -78,7 +79,6 @@ source VAR
 head test
 fi
 false
-read nom
 if [ $X -gt 2 ];then echo oui;fi
 [ $X -lt 2 ]&&echo oui
 test $X -eq 2&&echo oui
