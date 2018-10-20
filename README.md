@@ -1,11 +1,12 @@
 # PopUpLearn (Work in progress)
 
-Learning with popups.  
-Made for GameScript but can be used to learn pretty much whatever you want.  
+Learning with popups !!  
 
-Content should be compatible with "WallpaperGenerator", "Brainz" and "GameScript quizzes".  
+Made for GameScript but can be used to learn pretty much whatever you want, but you need a clean DB about it.  
 
-Everything is text-based in .pul files.  
+The DB is text-based in .pul files.  
+
+Content should be / will be compatible with "WallpaperGenerator", "Brainz" and "GameScript quizzes".  
 
 Content is moved from the folder "ToLearn" to the folder "Learned" ???
 
