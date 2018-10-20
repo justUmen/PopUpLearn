@@ -19,6 +19,13 @@ Use ~/.PopUpLearn to store scripts and data.
 
 # Installation
 
+    git clone https://github.com/justUmen/PopUpLearn ~/.PopUpLearn
+
+# Update
+
+	cd ~/.PopUpLearn && git pull origin master && cd -
+
+
 # Nodejs server
 
 # Configuration
