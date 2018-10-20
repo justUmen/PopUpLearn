@@ -53,6 +53,7 @@ time
 father
 mother
 son
+daughter
 teacher
 student
 shoolmate
@@ -124,7 +125,6 @@ be (am, is, are)
 have
 look
 listen
-speak
 read
 write
 see

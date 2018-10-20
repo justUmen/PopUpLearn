@@ -15,7 +15,7 @@ Use ~/.PopUpLearn to store scripts and data.
 
     sudo apt-get install python3-pyqt5 php
 
-i3 desktop only for now  
+`i3wm` desktop only for now, tested with `dunst` for notifications  (~/.PopUpLearn/config/dunstrc)  
 
 # Installation
 
