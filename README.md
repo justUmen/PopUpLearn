@@ -30,7 +30,7 @@ tested with `dunst` for notifications - aka `notify-send` (my config : `https://
 
 # Configuration
 
-All configurations are in the file `~/.PopUpLearn/launcher_html_popup.sh`  
+All configurations are for now in the file `~/.PopUpLearn/launcher_html_popup.sh`  
 
 # Usage
 
