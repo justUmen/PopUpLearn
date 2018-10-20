@@ -61,11 +61,14 @@ function bad_answer(){
 <?php echo "<div id='left_right'>{$LEFT} : _____</div>"; ?>
 
 <?php
-#Array with 30 wrong answers (wrong_answers_BUTTON.tmp created by launcher_html_popup.sh)
+//Array with 30 wrong answers (wrong_answers_BUTTON.tmp created by launcher_html_popup.sh)
 $result=array();
-$f_contents = file("wrong_answers_BUTTON.tmp"); 
-for ($i=0;$i!=30;$i++){
-	$line = preg_replace("/\n/","",$f_contents[rand(0, count($f_contents) - 1)]);
+$lines_wrong=file("wrong_answers_BUTTON.tmp", FILE_IGNORE_NEW_LINES);
+//PB if file contains less than X lines :P infinite loop :D ???
+for ($i=0;$i!=80;$i++){
+	$RAND=array_rand($lines_wrong);
+	$line=$lines_wrong[$RAND];
+	unset($lines_wrong[$RAND]);
 	array_push($result,"{$line}");
 }
 
@@ -102,11 +105,15 @@ var App = React.createClass({
 		<?php
 		for ($i = 0; $i < count($b); $i++) {
 			$elem=$b[$i];
+//~ $elem=preg_replace("/\\/", "\\\\", $b[$i]);
+//~ $elem=preg_replace('/\\\\/','_',$elem);
+//~ $elem=preg_replace('/\\\\\\/','_',$elem);
+//~ $elem_CLEAN=$elem;
 			if($elem==$RIGHT){
 			echo <<<END
 				{
 				  user: {
-					name: '$elem',
+					name: `$elem`,
 					LEFT: `$LEFT`,
 					answer: 'good'
 				  },
@@ -117,7 +124,7 @@ END;
 			echo <<<END
 				{
 				  user: {
-					name: '$elem',
+					name: `$elem`,
 					answer: 'bad'
 				  },
 				},

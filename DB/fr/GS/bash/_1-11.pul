@@ -19,11 +19,11 @@ Quel est la version abrégée de 'ls -a -l' ?£ls -al
 Comment ajouter le mot 'non' à la fin du fichier texte 'oui' ?£echo non>>oui
 Comment remplacer le contenu du fichier 'test' par 'exemple' ?£echo exemple>test
 Comment afficher le contenu du fichier 'test' ?£cat test
-Sur bash, quel est le caractère d'échappement ?£\\
-Comment afficher dans le terminal : a>b£echo a\>b
-Quel est la lettre à utiliser après le caractère d'échappement pour représenter une mise à la ligne ?£n
-Affichez, sans utiliser le caractère d'échappement, la phrase : j'ai bon£echo \"j'ai bon\"
-Affichez trois guillemets (\"), sans utiliser le caractère d'échappement.£echo '\"\"\"'
+Sur bash, quel est le caractère d'échappement ?£\\\\
+Comment afficher dans le terminal : a>b£echo a\\\\>b
+Quel est la lettre à utiliser après le caractère d'échappement pour représenter une mise à la ligne ?£\\\\n
+Affichez, sans utiliser le caractère d'échappement, la phrase : j'ai bon£echo "j'ai bon"
+Affichez trois guillemets ("), sans utiliser le caractère d'échappement.£echo '"""'
 Quelle est la commande pour déplacer des fichiers ou dossiers ?£mv
 Quelle est la commande pour renommer des fichiers ou dossiers ?£mv
 Comment renommer un fichier nommé 'oui' dans votre répertoire courant en 'non' et le déplacer dans son répertoire parent ?£mv oui ../non
@@ -66,7 +66,7 @@ Comment rediriger la sortie standard et la sortie erreur standard de la commande
 Quel est le symbole qui peut préciser l'utilisation de l'entrée standard dans une commande ?£-
 Comment afficher le contenu de la variable 'PATH' ?£echo $PATH
 Comment ajouter ':/bin' à la fin de la variable 'PATH' ?£PATH=$PATH:/bin
-En utilisant le caractère d'échappement, comment ajouter la lettre 'x' à la fin de la variable 'phrase' ?£phrase=$phrase\x
+En utilisant le caractère d'échappement, comment ajouter la lettre 'x' à la fin de la variable 'phrase' ?£phrase=$phrase\\\\x
 Comment afficher vos variables d'environnement ?£printenv
 Comment afficher le chemin absolu du fichier utilisé par la commande 'date' ?£type date
 Si vous executez le script bash '/scripts/sc' dans le dossier '/var/' et que ce script contient le code 'rm f', quel est le chemin absolu du fichier que 'bash' voudra supprimer ?£/var/f

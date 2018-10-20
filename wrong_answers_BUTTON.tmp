@@ -1,152 +1,84 @@
-good
-big
-small
-many, much
-few, little
-cold
-hot
-happy
-beautiful
-no
-no
-quite, very
-too
-all
-and
-here, this
-there, that
-hello
-where
-who
-what, why
-how many, how much
-a few, how many
-how
-how about
-home
-school
-restaurant
-store
-hospital
-train station
-China
-Beijing
-up
-down
-front
-behind
-inside
-today
-tomorrow
-yesterday
-morning
-noon
-afternoon
-year
-month
-day
-week
-dot, spot
-minute
-now
-time
-father
-mother
-son
-daughter
-teacher
-student
-shoolmate
-friend
-doctor
-sir
-Miss
-cloth
-water
-vegetable
-rice
-fruit
-apple
-tea
-cup
-money
-airplane
-taxi
-television
-computer
-movie
-weather
-cat
-dog
-thing
-person
-name
-book
-mandarin Chinese
-character
-desk
-chair
-one
-two
-three
-four
-five
-six
-seven
-eight
-nine
-ten
-zero
-(before a noun, possessive or descriptive)
-(completed action marker)
-(question tag)
-(question particle for subjects already mentioned)
-I, me
-we, us (pl.)
-you
-you (pl.)
-he, him
-she, her
-they (male+female / male, pl.)
-they (females, pl.)
-in, at
-one, a, an
-year
-volume
-some
-piece
-thank
-you are welcome
-good-bye
-please
-sorry
-It doesn’t matter
-be (am, is, are)
-have
-look
-listen
-read
-write
-see
-call
-come
-return
-go
-eat
-drink
-sleep
-call up
-do
-buy
-open
-sit
-live
-study
-work
-rain
-love
-love, like
-want
-know
-can
-can, be able to
+/
+pwd
+ls /
+cd ..
+ls
+rmdir test
+/
+vrai
+rm /home/test
+~
+.
+.
+cd ../..
+.
+man rm
+-
+--
+ls -al
+echo non>>oui
+echo exemple>test
+cat test
+\\
+echo a\\>b
+\\n
+echo "j'ai bon"
+echo '"""'
+mv
+mv
+mv oui ../non
+cp /root/file .
+cp ../.file /root/file
+;
+cd /root&&rm file
+cd /root&&echo good||echo bad
+ls -l ~
+d
+-
+w
+r
+x
+chmod
+u
+chmod u-r test
+chmod go+x test
+chown albert:familleEinstein test
+ls
+ls -l
+ls x*
+rm 12
+chmod 101 test
+chmod 753 test
+cat cat 2>/dev/null
+(mkdir A;touch B)
+faux
+cat ERROR
+cat LOG 1>&2
+mkdir TEST&>/var/mkdir
+pwd>>/tmp/pwd.log 2>&1
+grep a message
+cat grep|grep cat
+cat noms|sort
+sort list|uniq
+wc<wc1>wc2
+cat x|&grep cat
+-
+echo $PATH
+PATH=$PATH:/bin
+phrase=$phrase\\x
+printenv
+type date
+/var/f
+alias gamescript
+alias|less
+PAGER
+tail test
+RET=$?
+source VAR
+head test
+fi
+false
+read nom
+if [ $X -gt 2 ];then echo oui;fi
+[ $X -lt 2 ]&&echo oui
+test $X -eq 2&&echo oui
