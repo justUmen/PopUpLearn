@@ -47,7 +47,6 @@ tested with `dunst` for notifications - aka `notify-send` (my config : `~/.PopUp
 30 => Seconds to wait before displaying quiz after showing the answer  
 60 => Seconds to wait between each quiz  
 
-
 # Logs everything
 
 ...
@@ -57,3 +56,5 @@ tested with `dunst` for notifications - aka `notify-send` (my config : `~/.PopUp
 The format of each line is `question£answer`, £ is used to separate the two  
 
 Avoid double \ ! (\\ like in GameScript quizzes) need to transform into four \\\\  
+
+Maybe issues with ` ??? need testing, avoid them!  
