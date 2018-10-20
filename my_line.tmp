@@ -1,1 +1,1 @@
-0£bash_1-11£Quel est le symbole qui peut préciser l'utilisation de l'entrée standard dans une commande ?£-£fr£fr£TEXT
+0£bash_1-11£Sans utiliser de '.', quelle commande vous permet d'ajouter les variables bash contenu dans le fichier 'VAR' dans votre session bash ?£source VAR£fr£fr£TEXT
