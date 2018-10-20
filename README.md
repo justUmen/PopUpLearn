@@ -58,6 +58,6 @@ Most configurations are for now in the file `~/.PopUpLearn/launcher_html_popup.s
 
 The format of each line is `question£answer`, £ is used to separate the two  
 
-Avoid double \ ! (\\ like in GameScript quizzes) need to transform into four \\\\  
+Avoid double \ ! (like in GameScript quizzes) need to transform into four \  
 
 Maybe issues with ` ??? need testing, avoid them!  
