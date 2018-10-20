@@ -63,13 +63,15 @@ function bad_answer(){
 <?php
 //Array with 30 wrong answers (wrong_answers_BUTTON.tmp created by launcher_html_popup.sh)
 $result=array();
-$lines_wrong=file("wrong_answers_BUTTON.tmp", FILE_IGNORE_NEW_LINES);
-//PB if file contains less than X lines :P infinite loop :D ???
-for ($i=0;$i!=20;$i++){
-	$RAND=array_rand($lines_wrong);
-	$line=$lines_wrong[$RAND];
-	unset($lines_wrong[$RAND]);
-	array_push($result,"{$line}");
+if($TYPE=="BUTTON"){
+	$lines_wrong=file("wrong_answers_BUTTON.tmp", FILE_IGNORE_NEW_LINES);
+	//PB if file contains less than X lines :P infinite loop :D ???
+	for ($i=0;$i!=20;$i++){
+		$RAND=array_rand($lines_wrong);
+		$line=$lines_wrong[$RAND];
+		unset($lines_wrong[$RAND]);
+		array_push($result,"{$line}");
+	}
 }
 
 echo "<div style='margin-top:10px;'>";
