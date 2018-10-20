@@ -18,7 +18,7 @@ Use ~/.PopUpLearn to store scripts and data.
 
 `i3wm` desktop only for now (add to your configuration : `assign [class="html_popup.py"] workspace "Learn"` and `for_window [class="html_popup.py"] fullscreen enable`).  
 
-tested with `dunst` for notifications - aka `notify-send` (my config : `~/.PopUpLearn/config/dunstrc`)  
+tested with `dunst` for notifications - aka `notify-send` (my config : `https://github.com/justUmen/PopUpLearn/blob/master/config/dunstrc`)  
 
 # Installation
 
