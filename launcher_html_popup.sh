@@ -68,11 +68,11 @@ while [ 1 ]; do
 	if [ $ANSWER_BEFORE_QUIZ -eq 1 ];then
 		if [ $SIGSTOP_MPV -eq 1 ]; then $HOME/SyNc/Scripts/System/toggle_mpv_mpc.sh PAUSE; fi
 		if [ "$TIME_DISPLAYED" == 0 ];then #LOCK, unlimited
-			sleep 3 && $HOME/SyNc/Scripts/System/goto_workspace.sh "Learn" &
+			sleep 3 && i3-msg workspace "Learn" &
 			python3 $HOME/.PopUpLearn/html_popup.py 0 0 NO NO
 			i3-msg workspace back_and_forth #What about others wm ?
 		else
-			sleep 3 && $HOME/SyNc/Scripts/System/goto_workspace.sh "Learn" &
+			sleep 3 && i3-msg workspace "Learn" &
 			python3 $HOME/.PopUpLearn/html_popup.py 0 0 NO NO &
 			sleep $TIME_DISPLAYED
 			pkill -f "python3 $HOME/.PopUpLearn/html_popup.py"
@@ -87,7 +87,7 @@ sleep $SEC_BEFORE_QUIZ
 	while [ $LOOP_QUIZ -ne $quizzed ]; do
 		waited=1
 		if [ $SIGSTOP_MPV -eq 1 ]; then $HOME/SyNc/Scripts/System/toggle_mpv_mpc.sh PAUSE; fi
-		sleep 3 && $HOME/SyNc/Scripts/System/goto_workspace.sh "Learn" &
+		sleep 3 && i3-msg workspace "Learn" &
 		python3 $HOME/.PopUpLearn/html_popup.py 0 0 NO QUIZ
 		i3-msg workspace back_and_forth #What about others wm ?
 		if [ $SIGSTOP_MPV -eq 1 ]; then $HOME/SyNc/Scripts/System/toggle_mpv_mpc.sh UNPAUSE; fi
