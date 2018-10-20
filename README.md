@@ -40,6 +40,8 @@ tested with `dunst` for notifications - aka `notify-send` (my config : `~/.PopUp
 
      node ~/.PopUpLearn/node_server.js || nodejs ~/.PopUpLearn/node_server.js
 
+Maybe you should only authorize port 8888 on localhost with : `iptables -A INPUT -p tcp --dport 8888 -j DROP` and `iptables -A INPUT -p tcp -s localhost --dport 8888 -j ACCEPT`  
+
 3 - Launch client with for example :  
 
      bash ~/.PopUpLearn/launcher_html_popup.sh 0 30 60
