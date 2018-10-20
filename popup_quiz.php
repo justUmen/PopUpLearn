@@ -65,7 +65,7 @@ function bad_answer(){
 $result=array();
 $lines_wrong=file("wrong_answers_BUTTON.tmp", FILE_IGNORE_NEW_LINES);
 //PB if file contains less than X lines :P infinite loop :D ???
-for ($i=0;$i!=80;$i++){
+for ($i=0;$i!=20;$i++){
 	$RAND=array_rand($lines_wrong);
 	$line=$lines_wrong[$RAND];
 	unset($lines_wrong[$RAND]);

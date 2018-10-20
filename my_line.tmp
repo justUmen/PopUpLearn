@@ -1,1 +1,1 @@
-0£bash_1-11£En utilisant le caractère d'échappement, comment ajouter la lettre 'x' à la fin de la variable 'phrase' ?£phrase=$phrase\\\\x£fr£fr£TEXT
+0£bash_1-11£Quel argument pouvez-vous donner à 'if' qui garantira l'exécution du contenu dans son 'else' correspondant ?£false£fr£fr£TEXT
