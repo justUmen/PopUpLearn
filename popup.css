@@ -5,7 +5,7 @@ body{
 background-color:black;
 }
 #on_click_close{
-background-image:url("http://localhost:8889/image_created_by_thunar.jpg");
+background-image:url("background.jpeg");
 background-color:#666666;
 width:100%;
 height:100%;

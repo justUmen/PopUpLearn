@@ -20,14 +20,24 @@ SIGSTOP_MPV=0 #ONLY FOR ME AS OF NOW... KEEP 0
 #~ TYPE="TEXT" #TEXT for typing answer, BUTTON for a list of answers
 #~ FILE="$HOME/SyNc/Projects/Wallpaper_Generator/DB/$LANGUAGE/$SUBJECT/_$NUMBER.txt"
 
+LANGUAGE_1="fr"
+LANGUAGE_2="fr"
+SUBJECT="bash"
+NUMBER="1-11"
+TYPE="TEXT" #TEXT for typing answer, BUTTON for a list of answers
+FILE="$HOME/.PopUpLearn/DB/fr/GS/bash/_1-11.pul"
+#SPECIFIC TO BASH
+ANSWER_BEFORE_QUIZ=0 #0 is only quiz, not answer at the beginning
+LOOP_QUIZ=2
+
 #FILE="$HOME/SyNc/Projects/PopUpLearn/DB/custom.pul"
 
-LANGUAGE_1="PI"
-LANGUAGE_2="en"
-SUBJECT="hsk"
-NUMBER="1"
-TYPE="BUTTON"
-FILE="$HOME/SyNc/Projects/PopUpLearn/DB/LANGUAGE/CN/hsk/hsk1/ALL/HSK1_PI_en"
+#~ LANGUAGE_1="PI"
+#~ LANGUAGE_2="en"
+#~ SUBJECT="hsk"
+#~ NUMBER="1"
+#~ TYPE="BUTTON"
+#~ FILE="$HOME/SyNc/Projects/PopUpLearn/DB/LANGUAGE/CN/hsk/hsk1/ALL/HSK1_PI_en"
 
 while [ 1 ]; do
 	# 1 - CHOOSE LINE FROM $FILE (RANDOM ?) AND REMOVE SOMETHING THAT IS ALREADY LEARNED
