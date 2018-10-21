@@ -88,7 +88,12 @@ sleep $SEC_BEFORE_QUIZ
 		python3 $HOME/.PopUpLearn/html_popup.py 0 0 NO QUIZ
 		i3-msg workspace back_and_forth #What about others wm ?
 		if [ $SIGSTOP_MPV -eq 1 ]; then $HOME/SyNc/Scripts/System/toggle_mpv_mpc.sh UNPAUSE; fi
-notify-send "($quizzed/$LOOP_QUIZ) $LEFT : $RIGHT"
+
+if [[ "`cat $HOME/.PopUpLearn/result.tmp`" == "good" ]];then
+	notify-send -i $HOME/.PopUpLearn/img/good.png "$LEFT : $RIGHT ($quizzed/$LOOP_QUIZ)"
+else
+	notify-send -i $HOME/.PopUpLearn/img/bad.png "$LEFT : $RIGHT ($quizzed/$LOOP_QUIZ)"
+fi
 		
 		sleep $SEC_BEFORE_QUIZ
 		#WAIT ONE MORE "$SEC_BEFORE_QUIZ" EVERY LOOP (q/w : 1/0 , 1/1 , 1/2 , 1/3 , 1/4 ...)

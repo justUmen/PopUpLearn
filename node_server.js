@@ -22,8 +22,8 @@ function onRequest(request, response) {
 	switch(code){
 		//POPUPLEARN
 		case "close_PopUpLearn": log_and_run("POPUPLEARN","pkill -f \"python3 $HOME/.PopUpLearn/html_popup.py\"");response.end();break
-		case "close_PopUpLearn_good": log_and_run("POPUPLEARN","notify-send -i $HOME/.PopUpLearn/img/good.png \" \";pkill -f \"python3 $HOME/.PopUpLearn/html_popup.py\"");response.end();break
-		case "close_PopUpLearn_bad": log_and_run("POPUPLEARN","notify-send -i $HOME/.PopUpLearn/img/bad.png \" \";pkill -f \"python3 $HOME/.PopUpLearn/html_popup.py\"");response.end();break
+		case "close_PopUpLearn_good": log_and_run("POPUPLEARN","echo good > $HOME/.PopUpLearn/result.tmp;pkill -f \"python3 $HOME/.PopUpLearn/html_popup.py\"");response.end();break
+		case "close_PopUpLearn_bad": log_and_run("POPUPLEARN","echo bad > $HOME/.PopUpLearn/result.tmp;pkill -f \"python3 $HOME/.PopUpLearn/html_popup.py\"");response.end();break
 	}
 }
 http.createServer(onRequest).listen(8888,'localhost');
