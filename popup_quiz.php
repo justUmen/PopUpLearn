@@ -178,7 +178,7 @@ END;
 
 	document.addEventListener('keydown', function(evt) {
 		if(window.event.keyCode == 13){
-			if (document.getElementById("search-input").value == "<?php echo $RIGHT; ?>"){
+			if (document.getElementById("search-input").value == `<?php echo $RIGHT; ?>`){
 				console.log("Exact answer typed");
 				good_answer();
 			}

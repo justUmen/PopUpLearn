@@ -33,7 +33,7 @@ TYPE="TEXT" #TEXT for typing answer, BUTTON for a list of answers
 FILE="$HOME/.PopUpLearn/DB/fr/GS/bash/_1-11.pul"
 #SPECIFIC TO BASH
 ANSWER_BEFORE_QUIZ=0 #0 is only quiz, not answer at the beginning
-LOOP_QUIZ=2
+LOOP_QUIZ=1
 
 #FILE="$HOME/SyNc/Projects/PopUpLearn/DB/custom.pul"
 
@@ -83,8 +83,9 @@ sleep $SEC_BEFORE_QUIZ
 	fi
 
 	# 3 - WAIT AND QUIZ
-	quizzed=1
+	quizzed=0
 	while [ $LOOP_QUIZ -ne $quizzed ]; do
+		quizzed=`expr $quizzed + 1`
 		waited=1
 		if [ $SIGSTOP_MPV -eq 1 ]; then $HOME/SyNc/Scripts/System/toggle_mpv_mpc.sh PAUSE; fi
 		sleep 3 && i3-msg workspace "Learn" &
@@ -92,7 +93,6 @@ sleep $SEC_BEFORE_QUIZ
 		i3-msg workspace back_and_forth #What about others wm ?
 		if [ $SIGSTOP_MPV -eq 1 ]; then $HOME/SyNc/Scripts/System/toggle_mpv_mpc.sh UNPAUSE; fi
 notify-send "($quizzed/$LOOP_QUIZ) $LEFT : $RIGHT"
-		quizzed=`expr $quizzed + 1`
 		
 		sleep $SEC_BEFORE_QUIZ
 		#WAIT ONE MORE "$SEC_BEFORE_QUIZ" EVERY LOOP (q/w : 1/0 , 1/1 , 1/2 , 1/3 , 1/4 ...)
