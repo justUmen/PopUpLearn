@@ -21,7 +21,7 @@ Comment remplacer le contenu du fichier 'test' par 'exemple' ?£echo exemple>tes
 Comment afficher le contenu du fichier 'test' ?£cat test
 Sur bash, quel est le caractère d'échappement ?£\\\\
 Comment afficher dans le terminal : a>b£echo a\\\\>b
-Quel est la lettre à utiliser après le caractère d'échappement pour représenter une mise à la ligne ?£\\\\n
+Quelle est la lettre à utiliser après le caractère d'échappement pour représenter une mise à la ligne ?£n
 Affichez, sans utiliser le caractère d'échappement, la phrase : j'ai bon£echo "j'ai bon"
 Affichez trois guillemets ("), sans utiliser le caractère d'échappement.£echo '"""'
 Quelle est la commande pour déplacer des fichiers ou dossiers ?£mv
