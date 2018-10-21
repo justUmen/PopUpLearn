@@ -52,9 +52,9 @@ Most configurations are for now in the file `~/.PopUpLearn/launcher_html_popup.s
 30 => Seconds to wait before displaying quiz after showing the answer  
 60 => Seconds to wait between each quiz  
 
-# Logs everything
+# Logs
 
-...
+Todo : Record all errors and success with dates to organize and try to guess what you know well, don't know, probably forgot, etc...
 
 # .pul files restrictions
 
