@@ -10,21 +10,12 @@ exec 6<>/dev/tcp/127.0.0.1/8888 \
 	&& echo "nodejs server available on port 8888" \
 	|| { echo "Please run the nodejs server with : node ~/.PopUpLearn/node_server.js || nodejs ~/.PopUpLearn/node_server.js" && exec 6>&- && exec 6<&- && exit; }
 
+if [ $1 ]; then TIME_DISPLAYED=$1; else TIME_DISPLAYED=0; fi #0 for infinite
+if [ $2 ]; then SEC_BEFORE_QUIZ=$2; else SEC_BEFORE_QUIZ=30; fi
+if [ $3 ]; then SEC_AFTER_QUIZ=$3; else SEC_AFTER_QUIZ=60; fi
+if [ $4 ]; then SIGSTOP_MPV=$4; else SIGSTOP_MPV=0; fi #ONLY FOR ME AS OF NOW... KEEP 0
 
-TIME_DISPLAYED=0 #0 for infinite
-SEC_BEFORE_QUIZ=30
-SEC_AFTER_QUIZ=60
-ANSWER_BEFORE_QUIZ=1 #0 is only quiz, not answer at the beginning
-LOOP_QUIZ=4
-SIGSTOP_MPV=0 #ONLY FOR ME AS OF NOW... KEEP 0
-
-#~ LANGUAGE_1="fr"
-#~ LANGUAGE_2="fr"
-#~ SUBJECT="bash"
-#~ NUMBER="1"
-#~ TYPE="TEXT" #TEXT for typing answer, BUTTON for a list of answers
-#~ FILE="$HOME/SyNc/Projects/Wallpaper_Generator/DB/$LANGUAGE/$SUBJECT/_$NUMBER.txt"
-
+#FILE SPECIFIC OPTIONS
 LANGUAGE_1="fr"
 LANGUAGE_2="fr"
 SUBJECT="bash"
@@ -35,7 +26,12 @@ FILE="$HOME/.PopUpLearn/DB/fr/GS/bash/_1-11.pul"
 ANSWER_BEFORE_QUIZ=0 #0 is only quiz, not answer at the beginning
 LOOP_QUIZ=1
 
-#FILE="$HOME/SyNc/Projects/PopUpLearn/DB/custom.pul"
+#~ LANGUAGE_1="fr"
+#~ LANGUAGE_2="fr"
+#~ SUBJECT="bash"
+#~ NUMBER="1"
+#~ TYPE="TEXT" #TEXT for typing answer, BUTTON for a list of answers
+#~ FILE="$HOME/SyNc/Projects/Wallpaper_Generator/DB/$LANGUAGE/$SUBJECT/_$NUMBER.txt"
 
 #~ LANGUAGE_1="PI"
 #~ LANGUAGE_2="en"
