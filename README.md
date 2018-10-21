@@ -30,7 +30,7 @@ Tested with `dunst` for notifications - aka `notify-send` (my config : `https://
 
 # Configuration
 
-.pul files should store their own specific configurations, but the configuration lines must starts with # (see example https://github.com/justUmen/PopUpLearn/blob/master/DB/fr/GS/bash/_1-11.pul)  
+.pul files should store their own specific configurations, but the configuration lines must starts with #!# (see example https://github.com/justUmen/PopUpLearn/blob/master/DB/fr/GS/bash/_1-11.pul)  
 
 # Usage
 
@@ -59,9 +59,17 @@ Idea : Delay by 1 week / 2 weeks / 4 weeks / 8 weeks ...
 
 Stats : give an overall idea (visual) of how good you are with a specific .pul file  
 
-# .pul files restrictions
+# .pul files restrictions and syntax
 
-The format of each line is `question£answer`, £ is used to separate the two  
+The format of each line is `question£answer`, "£" is used to separate the two.  
+
+If presentation is an issue, you can use " |=| " as a delimiter instead of "£".  
+
+Lines without " |=| " or "£" will be ignored. Use that to comment your .pul files if you want. (Or leave a line with delimiter for a work in progress, question without answer, etc...)  
+
+Tabulations and spaces at the beginning or end of the line can be use for presentation in the .pul file, they will be ignored.  
+
+Line specific variables start with #!#  
 
 Avoid double \ ! (like in GameScript quizzes) need to transform into four \  
 

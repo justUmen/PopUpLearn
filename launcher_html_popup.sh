@@ -10,12 +10,24 @@ exec 6<>/dev/tcp/127.0.0.1/8888 \
 	&& echo "nodejs server available on port 8888" \
 	|| { echo "Please run the nodejs server with : node ~/.PopUpLearn/node_server.js || nodejs ~/.PopUpLearn/node_server.js" && exec 6>&- && exec 6<&- && exit; }
 
-if [ $1 ]; then TIME_DISPLAYED=$1; else TIME_DISPLAYED=0; fi #0 for infinite
-if [ $2 ]; then SEC_BEFORE_QUIZ=$2; else SEC_BEFORE_QUIZ=30; fi
-if [ $3 ]; then SEC_AFTER_QUIZ=$3; else SEC_AFTER_QUIZ=60; fi
-if [ $4 ]; then SIGSTOP_MPV=$4; else SIGSTOP_MPV=0; fi #ONLY FOR ME AS OF NOW... KEEP 0
+if [ $1 ]; then TIME_DISPLAYED="$1"; else TIME_DISPLAYED=0; fi #0 for infinite
+if [ $2 ]; then SEC_BEFORE_QUIZ="$2"; else SEC_BEFORE_QUIZ=30; fi
+if [ $3 ]; then SEC_AFTER_QUIZ="$3"; else SEC_AFTER_QUIZ=60; fi
+if [ $4 ]; then SIGSTOP_MPV="$4"; else SIGSTOP_MPV=0; fi #ONLY FOR ME AS OF NOW... KEEP 0
+if [ $5 ]; then LANGUAGE_1="$5"; else LANGUAGE_1="xx"; fi
+if [ $6 ]; then LANGUAGE_2="$6"; else LANGUAGE_2="xx"; fi
+if [ $7 ]; then SUBJECT="$7"; else SUBJECT="unknown"; fi
+if [ $8 ]; then NUMBER="$8"; else NUMBER="unknown"; fi
+if [ $9 ]; then TYPE="$9"; else TYPE="TEXT"; fi
+if [ $10 ]; then ANSWER_BEFORE_QUIZ="$10"; else ANSWER_BEFORE_QUIZ=1; fi
+if [ $11 ]; then LOOP_QUIZ="$11"; else LOOP_QUIZ=3; fi
 
+#My ~/.PopUpLearn is linked to the real SyNc : ln -fs ~/SyNc/Projects/PopUpLearn ~/.PopUpLearn
 FILE="$HOME/.PopUpLearn/DB/fr/GS/bash/_1-11.pul"
+#~ FILE="$HOME/.PopUpLearn/DB/LANGUAGE/CN/hsk/hsk1/ALL/HSK1_PI_en.pul"
+
+#Personal BrainZ
+#~ FILE="/home/umen/SyNc/Brain/MD/languages/ไทย.md"
 
 #~ LANGUAGE_1="fr"
 #~ LANGUAGE_2="fr"
@@ -24,16 +36,9 @@ FILE="$HOME/.PopUpLearn/DB/fr/GS/bash/_1-11.pul"
 #~ TYPE="TEXT" #TEXT for typing answer, BUTTON for a list of answers
 #~ FILE="$HOME/SyNc/Projects/Wallpaper_Generator/DB/$LANGUAGE/$SUBJECT/_$NUMBER.txt"
 
-#~ LANGUAGE_1="PI"
-#~ LANGUAGE_2="en"
-#~ SUBJECT="hsk"
-#~ NUMBER="1"
-#~ TYPE="BUTTON"
-#~ FILE="$HOME/SyNc/Projects/PopUpLearn/DB/LANGUAGE/CN/hsk/hsk1/ALL/HSK1_PI_en"
-
 #SPLIT CONTENT FROM .pul FILE AND CONFIG + source
-cat $FILE | grep -v "^#" > $HOME/.PopUpLearn/tmp/file_content.tmp
-cat $FILE | grep "^#" | sed 's/^#//' > $HOME/.PopUpLearn/tmp/file_specific_config.tmp
+cat $FILE | grep -v "^#!#" | sed '/^$/d' | sed 's/ |=| /£/' | sed 's/^\t//' | sed 's/^[\t]*//' | sed 's/^[ ]*//' | sed 's/[ ]*$//' | grep '£' > $HOME/.PopUpLearn/tmp/file_content.tmp #Remove empty lines if any
+cat $FILE | grep "^#!#" | sed 's/^#!#//' > $HOME/.PopUpLearn/tmp/file_specific_config.tmp
 source $HOME/.PopUpLearn/tmp/file_specific_config.tmp
 
 while [ 1 ]; do
@@ -44,6 +49,8 @@ while [ 1 ]; do
 	RIGHT=`echo $LINE | sed 's/.*£//'`
 	#85:hsk1_PI:hànyǔ:mandarin_chinese:13:2 (my_line.tmp)
 	echo "0£${SUBJECT}_${NUMBER}£${LEFT}£${RIGHT}£${LANGUAGE_1}£${LANGUAGE_2}£${TYPE}" > $HOME/.PopUpLearn/tmp/my_line.tmp
+	
+	#~ echo " -- $TYPE -- "
 
 	#Prepare "wrong_answers_BUTTON.tmp" for popup_quiz if TYPE is BUTTON
 	if [[ "$TYPE" == "BUTTON" ]];then
@@ -54,7 +61,7 @@ while [ 1 ]; do
 			if [[ "$left" != "$LEFT" ]] || [[ "$right" != "$RIGHT" ]];then
 				echo "$right" >> $HOME/.PopUpLearn/tmp/wrong_answers_BUTTON.tmp
 			fi
-		done < "$HOME/.PopUpLearn/tmp/content.tmp"
+		done < "$HOME/.PopUpLearn/tmp/file_content.tmp"
 	fi
 	
 	# 2 - SHOW ANSWER

@@ -63,6 +63,7 @@ function bad_answer(){
 <?php
 //Array with 30 wrong answers (wrong_answers_BUTTON.tmp created by launcher_html_popup.sh)
 $result=array();
+//~ echo $TYPE;
 if($TYPE=="BUTTON"){
 	$lines_wrong=file("tmp/wrong_answers_BUTTON.tmp", FILE_IGNORE_NEW_LINES);
 	//PB if file contains less than X lines :P infinite loop :D ???
@@ -70,6 +71,7 @@ if($TYPE=="BUTTON"){
 		$RAND=array_rand($lines_wrong);
 		$line=$lines_wrong[$RAND];
 		unset($lines_wrong[$RAND]);
+		//~ echo " + ${line} + ";
 		array_push($result,"{$line}");
 	}
 	echo "<div style='margin-top:10px;'>";
@@ -104,7 +106,7 @@ var App = React.createClass({
 	render: function render(){
 		var mails = [
 		<?php
-		if(isset($b)) for ($i = 0; $i < count($b); $i++) {
+		if(!empty($b)) for ($i = 0; $i < count($b); $i++) {
 			$elem=$b[$i];
 //~ $elem=preg_replace("/\\/", "\\\\", $b[$i]);
 //~ $elem=preg_replace('/\\\\/','_',$elem);

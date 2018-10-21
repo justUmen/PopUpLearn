@@ -1,3 +1,10 @@
+#!#LANGUAGE_1="PI"
+#!#LANGUAGE_2="en"
+#!#SUBJECT="hsk"
+#!#NUMBER="1"
+#!#TYPE="BUTTON"
+#!#ANSWER_BEFORE_QUIZ=1
+#!#LOOP_QUIZ=3
 hǎo£good
 dà£big
 xiǎo£small
