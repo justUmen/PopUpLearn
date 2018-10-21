@@ -56,6 +56,10 @@ Most configurations are for now in the file `~/.PopUpLearn/launcher_html_popup.s
 
 Todo : Record all errors and success with dates to organize and try to guess what you know well, don't know, probably forgot, etc...
 
+Idea : Delay by 1 week / 2 weeks / 4 weeks / 8 weeks ...  
+
+Stats : give an overall idea (visual) of how good you are with a specific .pul file  
+
 # .pul files restrictions
 
 The format of each line is `question£answer`, £ is used to separate the two  
