@@ -22,7 +22,7 @@ function close_popup(){
 <?php
 //£ now
 //$line example : 0:bash_1:Supprimer le fichier test dans le dossier /home:rm /home/test:fr:fr:BUTTON
-$line = fgets(fopen("my_line.tmp", 'r'));
+$line = fgets(fopen("tmp/my_line.tmp", 'r'));
 $e = explode("£", $line);
 $FAMILY=$e[1];
 $LEFT=$e[2];

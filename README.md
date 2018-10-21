@@ -32,6 +32,8 @@ Tested with `dunst` for notifications - aka `notify-send` (my config : `https://
 
 Most configurations are for now in the file `~/.PopUpLearn/launcher_html_popup.sh` and some in arguments  
 
+.pul can also store their own specific configurations if the line starts with # (see example ...)  
+
 # Usage
 
 1 - Launch php server with :  

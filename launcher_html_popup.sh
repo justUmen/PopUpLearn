@@ -15,16 +15,7 @@ if [ $2 ]; then SEC_BEFORE_QUIZ=$2; else SEC_BEFORE_QUIZ=30; fi
 if [ $3 ]; then SEC_AFTER_QUIZ=$3; else SEC_AFTER_QUIZ=60; fi
 if [ $4 ]; then SIGSTOP_MPV=$4; else SIGSTOP_MPV=0; fi #ONLY FOR ME AS OF NOW... KEEP 0
 
-#FILE SPECIFIC OPTIONS
-LANGUAGE_1="fr"
-LANGUAGE_2="fr"
-SUBJECT="bash"
-NUMBER="1-11"
-TYPE="TEXT" #TEXT for typing answer, BUTTON for a list of answers
 FILE="$HOME/.PopUpLearn/DB/fr/GS/bash/_1-11.pul"
-#SPECIFIC TO BASH
-ANSWER_BEFORE_QUIZ=0 #0 is only quiz, not answer at the beginning
-LOOP_QUIZ=1
 
 #~ LANGUAGE_1="fr"
 #~ LANGUAGE_2="fr"
@@ -40,24 +31,30 @@ LOOP_QUIZ=1
 #~ TYPE="BUTTON"
 #~ FILE="$HOME/SyNc/Projects/PopUpLearn/DB/LANGUAGE/CN/hsk/hsk1/ALL/HSK1_PI_en"
 
+#SPLIT CONTENT FROM .pul FILE AND CONFIG + source
+cat $FILE | grep -v "^#" > $HOME/.PopUpLearn/tmp/file_content.tmp
+cat $FILE | grep "^#" | sed 's/^#//' > $HOME/.PopUpLearn/tmp/file_specific_config.tmp
+source $HOME/.PopUpLearn/tmp/file_specific_config.tmp
+
 while [ 1 ]; do
+
 	# 1 - CHOOSE LINE FROM $FILE (RANDOM ?) AND REMOVE SOMETHING THAT IS ALREADY LEARNED
-	LINE=`cat $FILE | sort -R | tail -n 1`
+	LINE=`cat $HOME/.PopUpLearn/tmp/file_content.tmp | sort -R | tail -n 1`
 	LEFT=`echo $LINE | sed 's/£.*//'`
 	RIGHT=`echo $LINE | sed 's/.*£//'`
 	#85:hsk1_PI:hànyǔ:mandarin_chinese:13:2 (my_line.tmp)
-	echo "0£${SUBJECT}_${NUMBER}£$LEFT£$RIGHT£${LANGUAGE_1}£${LANGUAGE_2}£${TYPE}" > $HOME/.PopUpLearn/my_line.tmp
+	echo "0£${SUBJECT}_${NUMBER}£${LEFT}£${RIGHT}£${LANGUAGE_1}£${LANGUAGE_2}£${TYPE}" > $HOME/.PopUpLearn/tmp/my_line.tmp
 
 	#Prepare "wrong_answers_BUTTON.tmp" for popup_quiz if TYPE is BUTTON
 	if [[ "$TYPE" == "BUTTON" ]];then
-		rm $HOME/.PopUpLearn/wrong_answers_BUTTON.tmp
+		rm $HOME/.PopUpLearn/tmp/wrong_answers_BUTTON.tmp
 		while read line; do
 			left=`echo $line | sed 's/£.*//'`
 			right=`echo $line | sed 's/.*£//'`
 			if [[ "$left" != "$LEFT" ]] || [[ "$right" != "$RIGHT" ]];then
-				echo "$right" >> $HOME/.PopUpLearn/wrong_answers_BUTTON.tmp
+				echo "$right" >> $HOME/.PopUpLearn/tmp/wrong_answers_BUTTON.tmp
 			fi
-		done < "$FILE"
+		done < "$HOME/.PopUpLearn/tmp/content.tmp"
 	fi
 	
 	# 2 - SHOW ANSWER
@@ -89,7 +86,7 @@ sleep $SEC_BEFORE_QUIZ
 		i3-msg workspace back_and_forth #What about others wm ?
 		if [ $SIGSTOP_MPV -eq 1 ]; then $HOME/SyNc/Scripts/System/toggle_mpv_mpc.sh UNPAUSE; fi
 
-if [[ "`cat $HOME/.PopUpLearn/result.tmp`" == "good" ]];then
+if [[ "`cat $HOME/.PopUpLearn/tmp/result.tmp`" == "good" ]];then
 	notify-send -i $HOME/.PopUpLearn/img/good.png "$LEFT : $RIGHT ($quizzed/$LOOP_QUIZ)"
 else
 	notify-send -i $HOME/.PopUpLearn/img/bad.png "$LEFT : $RIGHT ($quizzed/$LOOP_QUIZ)"
@@ -108,4 +105,4 @@ fi
 	# ...
 	
 	sleep $SEC_AFTER_QUIZ
-done < $FILE
+done < "$HOME/.PopUpLearn/tmp/file_content.tmp"

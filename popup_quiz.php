@@ -29,7 +29,7 @@ function close_popup_bad(){
 <?php
 //£ now
 //$line example : 0:bash_1:Supprimer le fichier test dans le dossier /home:rm /home/test:fr:fr:BUTTON
-$line = fgets(fopen("my_line.tmp", 'r'));
+$line = fgets(fopen("tmp/my_line.tmp", 'r'));
 $e = explode("£", $line);
 $FAMILY=$e[1];
 $LEFT=$e[2];
@@ -64,7 +64,7 @@ function bad_answer(){
 //Array with 30 wrong answers (wrong_answers_BUTTON.tmp created by launcher_html_popup.sh)
 $result=array();
 if($TYPE=="BUTTON"){
-	$lines_wrong=file("wrong_answers_BUTTON.tmp", FILE_IGNORE_NEW_LINES);
+	$lines_wrong=file("tmp/wrong_answers_BUTTON.tmp", FILE_IGNORE_NEW_LINES);
 	//PB if file contains less than X lines :P infinite loop :D ???
 	for ($i=0;$i!=20;$i++){
 		$RAND=array_rand($lines_wrong);
@@ -104,7 +104,7 @@ var App = React.createClass({
 	render: function render(){
 		var mails = [
 		<?php
-		for ($i = 0; $i < count($b); $i++) {
+		if(isset($b)) for ($i = 0; $i < count($b); $i++) {
 			$elem=$b[$i];
 //~ $elem=preg_replace("/\\/", "\\\\", $b[$i]);
 //~ $elem=preg_replace('/\\\\/','_',$elem);
