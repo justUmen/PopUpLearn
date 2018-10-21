@@ -6,7 +6,7 @@ Made for GameScript but can be used to learn pretty much whatever you want, but 
 
 The DB is text-based in .pul files.  
 
-Content should be / will be compatible with "WallpaperGenerator", "Brainz" and "GameScript quizzes".  
+Content should be / will be compatible with "WallpaperGenerator", "Brainz" and "GameScript quizzes". (but .pu files should give configurations)  
 
 Content is moved from the folder "ToLearn" to the folder "Learned" ???
 
@@ -30,9 +30,7 @@ Tested with `dunst` for notifications - aka `notify-send` (my config : `https://
 
 # Configuration
 
-Most configurations are for now in the file `~/.PopUpLearn/launcher_html_popup.sh` and some in arguments  
-
-.pul can also store their own specific configurations if the line starts with # (see example ...)  
+.pul files should store their own specific configurations, but the configuration lines must starts with # (see example https://github.com/justUmen/PopUpLearn/blob/master/DB/fr/GS/bash/_1-11.pul)  
 
 # Usage
 

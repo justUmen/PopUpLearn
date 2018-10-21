@@ -82,14 +82,19 @@ sleep $SEC_BEFORE_QUIZ
 		waited=1
 		if [ $SIGSTOP_MPV -eq 1 ]; then $HOME/SyNc/Scripts/System/toggle_mpv_mpc.sh PAUSE; fi
 		sleep 3 && i3-msg workspace "Learn" &
+#Unknown if python3 is closed without answering
+echo unknown > $HOME/.PopUpLearn/tmp/result.tmp
 		python3 $HOME/.PopUpLearn/html_popup.py 0 0 NO QUIZ
 		i3-msg workspace back_and_forth #What about others wm ?
 		if [ $SIGSTOP_MPV -eq 1 ]; then $HOME/SyNc/Scripts/System/toggle_mpv_mpc.sh UNPAUSE; fi
 
-if [[ "`cat $HOME/.PopUpLearn/tmp/result.tmp`" == "good" ]];then
+if [[ "`cat $HOME/.PopUpLearn/tmp/result.tmp`" == "good" ]]; then
 	notify-send -i $HOME/.PopUpLearn/img/good.png "$LEFT : $RIGHT ($quizzed/$LOOP_QUIZ)"
-else
+elif [[ "`cat $HOME/.PopUpLearn/tmp/result.tmp`" == "bad" ]]; then
 	notify-send -i $HOME/.PopUpLearn/img/bad.png "$LEFT : $RIGHT ($quizzed/$LOOP_QUIZ)"
+else
+	#~ notify-send -i $HOME/.PopUpLearn/img/unknown.png "$LEFT : $RIGHT ($quizzed/$LOOP_QUIZ)"
+	notify-send -i $HOME/.PopUpLearn/img/unknown.png "You can't do that, you need to answer something..."
 fi
 		
 		sleep $SEC_BEFORE_QUIZ
