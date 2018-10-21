@@ -53,6 +53,7 @@ Tested with `dunst` for notifications - aka `notify-send` (my config : `https://
 # Logs
 
 Todo : Record all errors and success with dates to organize and try to guess what you know well, don't know, probably forgot, etc...
+Simple first then machine learning testing.  
 
 Idea : Delay by 1 week / 2 weeks / 4 weeks / 8 weeks ...  
 
