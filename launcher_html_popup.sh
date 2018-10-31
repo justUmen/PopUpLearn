@@ -13,7 +13,7 @@ exec 6<>/dev/tcp/127.0.0.1/8888 \
 if [ $1 ]; then TIME_DISPLAYED="$1"; else TIME_DISPLAYED=0; fi #0 for infinite
 if [ $2 ]; then SEC_BEFORE_QUIZ="$2"; else SEC_BEFORE_QUIZ=30; fi
 if [ $3 ]; then SEC_AFTER_QUIZ="$3"; else SEC_AFTER_QUIZ=60; fi
-if [ $4 ]; then SIGSTOP_MPV="$4"; else SIGSTOP_MPV=0; fi #ONLY FOR ME AS OF NOW... KEEP 0
+if [ $4 ]; then SIGSTOP_MPV="$4"; else SIGSTOP_MPV=1; fi #ONLY FOR ME AS OF NOW... KEEP 0 FOR ALL
 if [ $5 ]; then LANGUAGE_1="$5"; else LANGUAGE_1="xx"; fi
 if [ $6 ]; then LANGUAGE_2="$6"; else LANGUAGE_2="xx"; fi
 if [ $7 ]; then SUBJECT="$7"; else SUBJECT="unknown"; fi
@@ -42,11 +42,39 @@ cat $FILE | grep "^#!#" | sed 's/^#!#//' > $HOME/.PopUpLearn/tmp/file_specific_c
 source $HOME/.PopUpLearn/tmp/file_specific_config.tmp
 
 while [ 1 ]; do
-
+	# PREPARE LOGS SYSTEM ??? ADD DATE TO THIS
+	TODAY="$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))"
+	FILENAME="`echo "$FILE"|sed 's#.*/##'`"
+	MISTAKE=0
+	mkdir -p "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/" 2> /dev/null
+	ANSWERED_GOOD="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/answer.good"
+	ANSWERED_GOOD_DATE="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/answer.good.date"
+	ANSWERED_BAD="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/answer.bad"
+	ANSWERED_BAD_DATE="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/answer.bad.date"
+	#~ LEARNED="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/`echo "$FILE"|sed 's#.*/##'`.learned"
+	#CREATE $LEARNED IF answer.good more than X times ???
+	
 	# 1 - CHOOSE LINE FROM $FILE (RANDOM ?) AND REMOVE SOMETHING THAT IS ALREADY LEARNED
-	LINE=`cat $HOME/.PopUpLearn/tmp/file_content.tmp | sort -R | tail -n 1`
-	LEFT=`echo $LINE | sed 's/£.*//'`
-	RIGHT=`echo $LINE | sed 's/.*£//'`
+	#grep -F -x -v -f $LEARNED : if not in answer.good file, for now I guess only one time but after need to be answered X times correctly ??
+	#OR maybe answered correctly more than X days ago ???	
+	if [ -e "$ANSWERED_GOOD" ];then
+		cat $HOME/.PopUpLearn/tmp/file_content.tmp | sort -R | grep -F -x -v -f $ANSWERED_GOOD | tail -n 1 > $HOME/.PopUpLearn/tmp/current_line.tmp
+		LINE=`cat $HOME/.PopUpLearn/tmp/current_line.tmp`
+	else
+		cat $HOME/.PopUpLearn/tmp/file_content.tmp | sort -R | tail -n 1 > $HOME/.PopUpLearn/tmp/current_line.tmp
+		LINE=`cat $HOME/.PopUpLearn/tmp/current_line.tmp`
+	fi
+	if [ "$LINE" == "" ]; then
+		notify-send "You know everything about $FILE"
+		exit
+	fi
+	echo "$LINE"
+	
+	LEFT=`echo "$LINE" | sed 's/£.*//'`
+	RIGHT=`echo "$LINE" | sed 's/.*£//'`
+	echo "$LEFT"
+	echo "$RIGHT"
+
 	#85:hsk1_PI:hànyǔ:mandarin_chinese:13:2 (my_line.tmp)
 	echo "0£${SUBJECT}_${NUMBER}£${LEFT}£${RIGHT}£${LANGUAGE_1}£${LANGUAGE_2}£${TYPE}" > $HOME/.PopUpLearn/tmp/my_line.tmp
 	
@@ -66,7 +94,9 @@ while [ 1 ]; do
 	
 	# 2 - SHOW ANSWER
 	if [ $ANSWER_BEFORE_QUIZ -eq 1 ];then
-		if [ $SIGSTOP_MPV -eq 1 ]; then $HOME/SyNc/Scripts/System/toggle_mpv_mpc.sh PAUSE; fi
+		if [ $SIGSTOP_MPV -eq 1 ]; then
+			sleep 3 && $HOME/SyNc/Scripts/System/toggle_mpv_mpc.sh PAUSE &
+		fi
 		if [ "$TIME_DISPLAYED" == 0 ];then #LOCK, unlimited
 			sleep 3 && i3-msg workspace "Learn" &
 			python3 $HOME/.PopUpLearn/html_popup.py 0 0 NO NO
@@ -87,7 +117,9 @@ sleep $SEC_BEFORE_QUIZ
 	while [ $LOOP_QUIZ -ne $quizzed ]; do
 		quizzed=`expr $quizzed + 1`
 		waited=1
-		if [ $SIGSTOP_MPV -eq 1 ]; then $HOME/SyNc/Scripts/System/toggle_mpv_mpc.sh PAUSE; fi
+		if [ $SIGSTOP_MPV -eq 1 ]; then
+			sleep 3 && $HOME/SyNc/Scripts/System/toggle_mpv_mpc.sh PAUSE &
+		fi
 		sleep 3 && i3-msg workspace "Learn" &
 #Unknown if python3 is closed without answering
 echo unknown > $HOME/.PopUpLearn/tmp/result.tmp
@@ -95,10 +127,17 @@ echo unknown > $HOME/.PopUpLearn/tmp/result.tmp
 		i3-msg workspace back_and_forth #What about others wm ?
 		if [ $SIGSTOP_MPV -eq 1 ]; then $HOME/SyNc/Scripts/System/toggle_mpv_mpc.sh UNPAUSE; fi
 
+
+#$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24))) => Days since 1 january 2018
+	#~ ANSWER= #real < can't be displayed by notify-send...
 if [[ "`cat $HOME/.PopUpLearn/tmp/result.tmp`" == "good" ]]; then
-	notify-send -i $HOME/.PopUpLearn/img/good.png "$LEFT : $RIGHT ($quizzed/$LOOP_QUIZ)"
+	notify-send -i $HOME/.PopUpLearn/img/good.png "$LEFT : `echo "$RIGHT"|sed 's/\\\\\\\\/\\\/'|sed 's/\\\\\\\\/\\\/'|sed 's/\\\\\\\\/\\\/'|sed "s/</𝈶/g"` ($quizzed/$LOOP_QUIZ)"
+	echo "$LINE" >> $ANSWERED_GOOD
+	echo "$LINE€$TODAY" >> $ANSWERED_GOOD_DATE
 elif [[ "`cat $HOME/.PopUpLearn/tmp/result.tmp`" == "bad" ]]; then
-	notify-send -i $HOME/.PopUpLearn/img/bad.png "$LEFT : $RIGHT ($quizzed/$LOOP_QUIZ)"
+	notify-send -i $HOME/.PopUpLearn/img/bad.png "$LEFT : `echo "$RIGHT"|sed 's/\\\\\\\\/\\\/'|sed 's/\\\\\\\\/\\\/'|sed 's/\\\\\\\\/\\\/'|sed "s/</𝈶/g"` ($quizzed/$LOOP_QUIZ)"
+	echo "$LINE" >> $ANSWERED_BAD
+	echo "$LINE€$TODAY" >> $ANSWERED_BAD_DATE
 else
 	#~ notify-send -i $HOME/.PopUpLearn/img/unknown.png "$LEFT : $RIGHT ($quizzed/$LOOP_QUIZ)"
 	notify-send -i $HOME/.PopUpLearn/img/unknown.png "You can't do that, you need to answer something..."
@@ -113,8 +152,11 @@ fi
 
 	done
 
-	# 4 - MOVE TO LEARNED
-	# ...
-	
+	# 4 - MOVE TO LEARNED IF NO NMISTAKE IN THE WHOLE SERIES ()
+	#~ ${SUBJECT}_${NUMBER}£${LEFT}£${RIGHT}£${LANGUAGE_1}£${LANGUAGE_2}£${TYPE}"
+	#~ if [ $MISTAKE -eq 0 ];then
+		#~ echo "$LINE" >> $LEARNED
+	#~ fi
+
 	sleep $SEC_AFTER_QUIZ
 done < "$HOME/.PopUpLearn/tmp/file_content.tmp"

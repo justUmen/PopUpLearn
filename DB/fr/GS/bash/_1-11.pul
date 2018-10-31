@@ -49,7 +49,7 @@ Quelle est la commande capable de modifier les permissions d'un fichier ?£chmod
 Quelle lettre représente le propriétaire pour la commande chmod ?£u
 Comment supprimer la permission de lecture au propriétaire du fichier 'test' ?£chmod u-r test
 Comment ajouter la permission d'exécution sur le fichier 'test' à tous les utilisateurs sauf pour le propriétaire ?£chmod go+x test
-Dans terminal root, comment définir 'albert' comme propriétaire et 'familleEinstein' comme groupe au fichier 'test' du répertoire courant ?£chown albert:familleEinstein test
+Dans un terminal root, comment définir 'albert' comme propriétaire et 'familleEinstein' comme groupe au fichier 'test' du répertoire courant ?£chown albert:familleEinstein test
 Quelle commande affiche les éléments du répertoire courant par ordre alphabétique ?£ls
 Quelle commande affiche les métadonnées des éléments du répertoire courant ?£ls -l
 Comment afficher tous les éléments du répertoire courant dont le nom commence par 'x' ?£ls x*

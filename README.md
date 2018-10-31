@@ -12,6 +12,8 @@ Content is moved from the folder "ToLearn" to the folder "Learned" ???
 
 Use ~/.PopUpLearn to store scripts and data.
 
+If you create a cool .pul, share it with the rest of us !  
+
 # Dependencies
 
     sudo apt-get install python3-pyqt5 python3-pyqt5.qtwebengine python3-pyqt5.qtwebkit php nodejs
@@ -69,7 +71,7 @@ Lines without " |=| " or "£" will be ignored. Use that to comment your .pul fil
 
 Tabulations and spaces at the beginning or end of the line can be use for presentation in the .pul file, they will be ignored.  
 
-Line specific variables start with #!#  
+Line specific variables start with #!# , and they shouldn't contains spaces.   
 
 Avoid double \ ! (like in GameScript quizzes) need to transform into four \  
 

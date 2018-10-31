@@ -33,7 +33,7 @@ $line = fgets(fopen("tmp/my_line.tmp", 'r'));
 $e = explode("£", $line);
 $FAMILY=$e[1];
 $LEFT=$e[2];
-$RIGHT=$e[3];
+$RIGHT=preg_replace("/\\\\\\\/","\\",$e[3]);
 $LANGUAGE_TAG_1=$e[4];
 $LANGUAGE_TAG_2=$e[5];
 $TYPE=preg_replace("/\n/","",$e[6]); #TEXT OR BUTTON
@@ -45,6 +45,8 @@ function good_answer(){
 	close_popup_good();
 }
 function bad_answer(){
+console.log("<?php echo $RIGHT; ?>");
+console.log("<?php echo $e[3]; ?>");
 	close_popup_bad();
 	//1 - Disable launcher_html_popup.sh
 	//2 - kill html popup
