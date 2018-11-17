@@ -57,6 +57,10 @@ Tested with `dunst` for notifications - aka `notify-send` (my config : `https://
 Todo : Record all errors and success with dates to organize and try to guess what you know well, don't know, probably forgot, etc...
 Simple first then machine learning testing.  
 
+Types :  
+1 - Answer + Quiz (Work in session)
+2 - Quiz (For content the user already knows / should know)
+
 Idea : Delay by 1 week / 2 weeks / 4 weeks / 8 weeks ...  
 
 Stats : give an overall idea (visual) of how good you are with a specific .pul file  
@@ -74,5 +78,7 @@ Tabulations and spaces at the beginning or end of the line can be use for presen
 Line specific variables start with #!# , and they shouldn't contains spaces.   
 
 Avoid double \ ! (like in GameScript quizzes) need to transform into four \  
+
+.pul files are case sensitive, so be careful with capital letters  
 
 Maybe issues with ` ??? need testing, avoid them!  
