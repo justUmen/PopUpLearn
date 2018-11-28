@@ -624,8 +624,7 @@ function ⬚⬚⬚⬚⬚_session_old(){
 ⬚_before_start
 echo
 echo "Warning : This is an early release, might not work as expected."
-echo "Warning : PopUpLearn is been tested only on i3. (Working on all others wms soon.)"
-echo
+echo "Warning : PopUpLearn is been tested only on i3wm, so code is specific to i3. (All wms supported soon.)"
 if [ $1 ]; then TIME_DISPLAYED="$1"; else TIME_DISPLAYED=0; fi #0 for infinite
 if [ $2 ]; then SEC_BEFORE_QUIZ="$2"; else SEC_BEFORE_QUIZ=30; fi
 if [ $3 ]; then SEC_AFTER_QUIZ="$3"; else SEC_AFTER_QUIZ=60; fi

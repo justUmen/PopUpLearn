@@ -4,11 +4,13 @@ Learning with popups !!
 
 Made for GameScript but can be used to learn pretty much whatever you want, but you need a clean DB about it.  
 
-The DB is text-based in .pul files.  
+The DB is text-based in .pul files. Your personal .pul files must be stored in `~/.PopUpLearn/MYDB` (For example : `~/.PopUpLearn/MYDB/chemistry/elements.pul`).  
 
-Content should be / will be compatible with "WallpaperGenerator", "Brainz" and "GameScript quizzes". (but .pul files should give configurations)  
+If the .pul file is outside of the `~/.PopUpLearn/MYDB` folder, you must give its full path of the .pul to the `~/.PopUpLearn/MYDB/my.list` file. (One per line)  
 
-Use ~/.PopUpLearn to store scripts and data.
+Content should be (or will be) compatible with "WallpaperGenerator", "Brainz" and "GameScript quizzes". (but .pul files can give specific configurations)  
+
+Use `~/.PopUpLearn` folder to store scripts, data and logs.  
 
 If you create a cool and useful .pul, share it with the rest of us !  
 
@@ -44,15 +46,15 @@ Tested with `dunst` for notifications - aka `notify-send` (my config : `https://
 
 # Usage
 
-1 - Launch php server with :  
+Step 1 - Launch php server with :  
 
      php -S 127.0.0.1:9999 -t ~/.PopUpLearn
 
-2 - Launch nodejs server with :  
+Step 2 - Launch nodejs server with :  
 
      node ~/.PopUpLearn/node_server_popup.js || nodejs ~/.PopUpLearn/node_server_popup.js
 
-3 - Launch user interface :  
+Step 3 - Launch user interface : (debug mode enabled for now, which will display the answer in your terminal. You might not want to look at it after launch.)  
 
      bash ~/.PopUpLearn/popup.sh
 
