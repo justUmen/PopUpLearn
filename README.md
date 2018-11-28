@@ -4,7 +4,7 @@ Learning with popups !!
 
 Made for GameScript but can be used to learn pretty much whatever you want, but you need a clean DB about it.  
 
-The DB is text-based in .pul files. Your personal .pul files must be stored in `~/.PopUpLearn/MYDB` (For example : `~/.PopUpLearn/MYDB/chemistry/elements.pul`).  
+The DB is text-based in a .pul file. Your personal .pul files must be stored in `~/.PopUpLearn/MYDB` (For example : `~/.PopUpLearn/MYDB/chemistry/elements.pul`).  
 
 If the .pul file is outside of the `~/.PopUpLearn/MYDB` folder, you must give its full path of the .pul to the `~/.PopUpLearn/MYDB/my.list` file. (One per line)  
 
