@@ -45,8 +45,8 @@ function good_answer(){
 	close_popup_good();
 }
 function bad_answer(){
-console.log("<?php echo $RIGHT; ?>");
-console.log("<?php echo $e[3]; ?>");
+//~ console.log("<?php echo $RIGHT; ?>");
+//~ console.log("<?php echo $e[3]; ?>");
 	close_popup_bad();
 	//1 - Disable launcher_html_popup.sh
 	//2 - kill html popup
