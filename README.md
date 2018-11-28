@@ -54,7 +54,7 @@ Step 2 - Launch nodejs server with :
 
      node ~/.PopUpLearn/node_server_popup.js || nodejs ~/.PopUpLearn/node_server_popup.js
 
-Step 3 - Launch user interface : (debug mode enabled for now, which will display the answer in your terminal. You might not want to look at it after launch.)  
+Step 3 - Launch user interface : (debug mode enabled for now, which will display the answer in your terminal. You might not want to look at it after launch : let it run in the background somewhere.)  
 
      bash ~/.PopUpLearn/popup.sh
 
@@ -90,7 +90,7 @@ Tabulations and spaces at the beginning or end of the line can be used for prese
 
 Line specific variables start with #!# , and they shouldn't contains spaces.  
 
-.pul files are case sensitive, so be careful with capital letters  
+.pul files are case sensitive, so be careful with uppercase letters...  
 
 Avoid double \ ! (like in GameScript quizzes) need to transform into four \  
 
@@ -108,11 +108,11 @@ Maybe issues with ` ??? need testing, avoid them!
 
 # ADDITIONAL VARIABLES AVAILABLE IN .pul FILES
 
-`TYPE="BUTTON"` enable the usage of buttons in quiz popup for multiple choices where you can simply click on the answer instead of typing it. (Default `TYPE=TEXT` where you need to type the exact answer.)  
+`TYPE="BUTTON"` enable the usage of buttons in quiz popup for multiple choices where you can simply click on the answer instead of typing it. (Default `TYPE=TEXT` where you need to type the exact answer.) With this you can also confirm an answer if the good answer is the only one that is currently displayed (Buttons will vanish if they don't contain what you typed. Meaning if the answer is "example" you can type "ex" and confirm with 'Enter' if you see that only the button "example" is currently displayed.).
 
 `LOOP_QUIZ=1` set the number of quiz about the same question to 1, before asking another question.  
 
-`SESSION_SIZE=0` for unlimited size of session, the file is only one big session. (Default SESSION_SIZE=6)  
+`SESSION_SIZE=0`, set number of element in a session. 0 for unlimited number of elements, result : the file is only one big session. (Default SESSION_SIZE=6)  
 
 `ANSWER_BEFORE_QUIZ=1` to display answer before asking for it. Used to learn something the user don't know anything about. (Default ANSWER_BEFORE_QUIZ=0)  
 
@@ -130,8 +130,8 @@ Maybe issues with ` ??? need testing, avoid them!
 
 # TODO
 
-- Stats : give an overall idea (visual) of how good you are with a specific .pul file  
+- Stats : give an overall idea (visual graph) of how good you are with a specific .pul file, your progress, your work per day...  
 
 - Force question if bad answer was X days ago and not followed by a recent good answer on the same question.  
 
-- Clean reverse system for `question£answer` into `answer£question`, and special tracking system  
+- Clean reverse system for `question£answer` into `answer£question`, and special tracking system.  
