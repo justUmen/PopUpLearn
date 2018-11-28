@@ -252,8 +252,11 @@ function display_menu_session(){
 	  LAST_DAY=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | sed 's/.*€//' | sort -n | tail -n 1`
 	  TODAY=$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))
 	  LAST_GOOD_ANSWER=""
+	  ERROR_TEST=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null | tail -n 1`
 	  if [[ "$LAST_DAY" != "" ]]; then
 		LAST_GOOD_ANSWER=": last good answer was `expr $TODAY - $LAST_DAY ` days ago (`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null|wc -l` bad, `cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null|wc -l` good)"
+	  fi
+	  if [[ "$ERROR_TEST" != "" ]]; then
 		cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2> /dev/null | sed 's/.*£//' | sed 's/€.*//' > "$HOME/.PopUpLearn/tmp/list_mistakes.tmp"
 		while read mistake; do
 			sed -i "s/|$mistake|/|\\\e[0;101m$mistake\\\e[0m|/" "$HOME/.PopUpLearn/tmp/list_answers.tmp"
@@ -332,7 +335,7 @@ function ⬚⬚⬚_menu_main(){
 		  else
 			echo -n " used $DAYS days ago"
 		  fi
-		  NB_GOOD=`cat $FILE_PATH/session_*/answer.good|sort|uniq|wc -l`
+		  NB_GOOD=`cat $FILE_PATH/session_*/answer.good 2>/dev/null|sort|uniq|wc -l`
 		  NB_LINES=`cat ${FILES[i]}|wc -l`
 		echo " => `expr $NB_GOOD / $NB_LINES`%"
 	done
@@ -405,8 +408,11 @@ function ⬚⬚⬚⬚⬚_menu_gamescript_chapters(){
 	  LAST_DAY=`cat "$HOME/.PopUpLearn/logs/GS/$LANGUAGE/$SUBJ/_$chapter/answer.good.date" 2>/dev/null | sed 's/.*€//' | sort -n | tail -n 1`
 	  TODAY=$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))
 	  LAST_GOOD_ANSWER=""
+	  ERROR_TEST=`cat "$HOME/.PopUpLearn/logs/GS/$LANGUAGE/$SUBJ/_$chapter/answer.bad.date" 2>/dev/null | tail -n 1`
 	  if [[ "$LAST_DAY" != "" ]]; then
-		LAST_GOOD_ANSWER=": last good answer was `expr $TODAY - $LAST_DAY ` days ago (`cat "$HOME/.PopUpLearn/logs/GS/$LANGUAGE/$SUBJ/_$chapter/answer.bad.date" 2>/dev/null|wc -l` bad, `cat "$HOME/.PopUpLearn/logs/GS/$LANGUAGE/$SUBJ/_$chapter/answer.good.date" 2>/dev/null|wc -l` good)"
+  		LAST_GOOD_ANSWER=": last good answer was `expr $TODAY - $LAST_DAY ` days ago (`cat "$HOME/.PopUpLearn/logs/GS/$LANGUAGE/$SUBJ/_$chapter/answer.bad.date" 2>/dev/null|wc -l` bad, `cat "$HOME/.PopUpLearn/logs/GS/$LANGUAGE/$SUBJ/_$chapter/answer.good.date" 2>/dev/null|wc -l` good)"
+	  fi
+	  if [[ "$ERROR_TEST" != "" ]]; then
 		cat "$HOME/.PopUpLearn/logs/GS/$LANGUAGE/$SUBJ/_$chapter/answer.bad.date" 2> /dev/null | sed 's/.*£//' | sed 's/€.*//' > "$HOME/.PopUpLearn/tmp/list_mistakes.tmp"
 		while read mistake; do
 			# cat $HOME/.PopUpLearn/tmp/list_answers.tmp
