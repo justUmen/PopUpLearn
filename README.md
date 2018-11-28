@@ -49,7 +49,7 @@ Tested with `dunst` for notifications - aka `notify-send` (my config : `https://
     #!#TYPE=BUTTON
     #!#LOOP_QUIZ=3
 
-If no configurations is given, it will use the default.  
+If no variable is given, it will use the default value.  
 
 # Usage
 
