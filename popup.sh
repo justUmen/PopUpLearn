@@ -234,7 +234,7 @@ function quiz_only(){ #OBSOLETE ?
 	done
 	 #~ < "$HOME/.PopUpLearn/tmp/file_content.tmp"
 }
-function display_menu_session(){
+function display_📃_session(){
 	while [ -d "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/" ]; do
 		SESSION_NUMBER=`expr $SESSION_NUMBER + 1`
 	done
@@ -285,6 +285,9 @@ function display_menu_session(){
 		esac
 	done
 }
+function display(){
+	echo
+}
 
 function ⬚_before_start(){
 	command -v surf -F >/dev/null 2>&1 || { echo "Veuillez installer les dépendances requises. Faites en tant qu'administrateur : apt-get install surf" >&2; exit 3; }
@@ -294,14 +297,14 @@ function ⬚_before_start(){
 }
 function ⬚⬚_start(){
 	source $HOME/.GameScript/config 2> /dev/null #LANGUAGE=fr used for quiz language
-	⬚⬚⬚_menu_main
+	⬚⬚⬚_📃_main
 	if [[ "$selected" == "g" ]]; then
-		⬚⬚⬚⬚_menu_gamescript
+		⬚⬚⬚⬚_📃_gamescript
 	else
-		⬚⬚⬚⬚_menu_session
+		⬚⬚⬚⬚_📃_session
 	fi
 }
-function ⬚⬚⬚_menu_main(){
+function ⬚⬚⬚_📃_main(){
 	#PREPARE
 	#Personal BrainZ
 	FILES=()
@@ -352,7 +355,7 @@ function ⬚⬚⬚_menu_main(){
 		esac
 	done
 }
-function ⬚⬚⬚⬚_menu_gamescript(){
+function ⬚⬚⬚⬚_📃_gamescript(){
 	SUBJECTS=();
 	SUBJECTS=("empty")
 	SUBJECTS+=("bash")
@@ -388,9 +391,9 @@ function ⬚⬚⬚⬚_menu_gamescript(){
 			[0-9]*) break ;;
 		esac
 	done
-	⬚⬚⬚⬚⬚_menu_gamescript_chapters
+	⬚⬚⬚⬚⬚_📃_gamescript_chapters
 }
-function ⬚⬚⬚⬚⬚_menu_gamescript_chapters(){
+function ⬚⬚⬚⬚⬚_📃_gamescript_chapters(){
 	SUBJ=${SUBJECTS[selected]}
 	#LIST CHAPTERS OF SUBJECT
 	ls /home/umen/.GameScript/passwords/${SUBJECTS[selected]}* 2>/dev/null | sed "s#.*$SUBJ##" > ~/.PopUpLearn/tmp/list_chapters.tmp
@@ -443,7 +446,7 @@ function ⬚⬚⬚⬚⬚_menu_gamescript_chapters(){
 	else
 		echo -e "\t\t\\e[0;100m a) \\e[0m All my chapters (separate logs)"
 	fi
-	
+
 	echo -e "\t\t\\e[0;100m e) \\e[0m Return"
 	while :; do
 		echo -en "\t\t\e[97;45m # \e[0m"
@@ -456,9 +459,9 @@ function ⬚⬚⬚⬚⬚_menu_gamescript_chapters(){
 		esac
 	done
 	#~ echo "!!! $selected ${SUBJECTS[selected]} !!!"
-	⬚⬚⬚⬚⬚⬚_quiz_gamescript
+	⬚⬚⬚⬚⬚⬚_❓_gamescript
 }
-function ⬚⬚⬚⬚⬚⬚_quiz_gamescript(){
+function ⬚⬚⬚⬚⬚⬚_❓_gamescript(){
 	SESSION_SIZE=999 #For gs, always 999
 	if [[ "$selected_chapter" == "a" ]];then
 		FILE="$HOME/.PopUpLearn/tmp/all_chapters.tmp"
@@ -539,7 +542,7 @@ function ⬚⬚⬚⬚⬚⬚_quiz_gamescript(){
 		sleep $SEC_AFTER_QUIZ
 	done < "$HOME/.PopUpLearn/tmp/file_content.tmp"
 }
-function ⬚⬚⬚⬚_menu_session(){
+function ⬚⬚⬚⬚_📃_session(){
 	FILE=${FILES[selected]}
 	#SPLIT CONTENT FROM .pul FILE AND CONFIG + source
 	cat $FILE | grep "^#!#" | sed 's/^#!#//' > $HOME/.PopUpLearn/tmp/session_specific_config.tmp
@@ -561,24 +564,24 @@ function ⬚⬚⬚⬚_menu_session(){
 	SESSION_NUMBER=1
 	while [ 1 ]; do
 		if [ "$1" != "NO_MENU" ]; then
-			display_menu_session
+			display_📃_session
 		fi
 		if [[ "$selected" == "e" ]]; then
 			break
 		elif [[ "$selected" == "n" ]]; then
-			⬚⬚⬚⬚⬚_session_new
+			⬚⬚⬚⬚⬚_❓_session_new
 		elif [[ "$selected" == "N" ]]; then
 			while [ 1 ];do
-				⬚⬚⬚⬚⬚_session_new
+				⬚⬚⬚⬚⬚_❓_session_new
 				SESSION_NUMBER=`expr $SESSION_NUMBER + 1`
 				echo "----> SESSION_NUMBER=$SESSION_NUMBER"
 			done
 		else
-			⬚⬚⬚⬚⬚_session_old $selected
+			⬚⬚⬚⬚⬚_❓_session_old $selected
 		fi
 	done
 }
-function ⬚⬚⬚⬚⬚_session_new(){
+function ⬚⬚⬚⬚⬚_❓_session_new(){
 	create_session_folder
 	create_session_specific_config #(based on session_specific_config.tmp)
 	create_session_content_pul
@@ -600,7 +603,7 @@ function ⬚⬚⬚⬚⬚_session_new(){
 	done < "$HOME/.PopUpLearn/tmp/session_content.tmp"
 	notify-send -i $HOME/.PopUpLearn/img/unknown.png "End of session $SESSION_NUMBER"
 }
-function ⬚⬚⬚⬚⬚_session_old(){
+function ⬚⬚⬚⬚⬚_❓_session_old(){
 	create_session_content_tmp
 	create_session_content_remove_tmp
 	SESSION_NUMBER=$1

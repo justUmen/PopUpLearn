@@ -42,7 +42,12 @@ Tested with `dunst` for notifications - aka `notify-send` (my config : `https://
 
 # Configuration
 
-.pul files should store their own specific configurations, but the configuration lines must starts with #!# (see example https://github.com/justUmen/PopUpLearn/blob/master/DB/fr/GS/bash/_1-11.pul)  
+.pul files should store their own specific configurations, but the configuration lines must starts with `#!#`, example :  
+
+    #!#LANGUAGE_1=fr
+    #!#LANGUAGE_2=fr
+    #!#TYPE=BUTTON
+    #!#LOOP_QUIZ=3
 
 # Usage
 
