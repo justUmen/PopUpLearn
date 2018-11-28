@@ -42,12 +42,14 @@ Tested with `dunst` for notifications - aka `notify-send` (my config : `https://
 
 # Configuration
 
-.pul files should store their own specific configurations, but the configuration lines must starts with `#!#`, example :  
+.pul files can store their own specific configurations, but the configuration lines must starts with `#!#`, example :  
 
     #!#LANGUAGE_1=fr
     #!#LANGUAGE_2=fr
     #!#TYPE=BUTTON
     #!#LOOP_QUIZ=3
+
+If no configurations is given, it will use the default.  
 
 # Usage
 
