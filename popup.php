@@ -80,6 +80,9 @@ echo "</div>";
    //~ audio_play();
  //~ }, 1000);
 //~ };
+	document.addEventListener('keydown', function(evt) {
+		close_popup();
+	});
 </script>
 
 
