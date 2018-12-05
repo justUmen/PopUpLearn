@@ -87,7 +87,7 @@ Simple first, then machine learning testing prediction system !?
 
 # TYPES OF POPUP
 
-1 - Answer + Quiz (Work in session) `ANSWER_BEFORE_QUIZ=1`
+1 - Answer + Quiz (Work in session) `ANSWER_BEFORE_QUIZ=1`  
 2 - Quiz (For content the user already knows / should know) `ANSWER_BEFORE_QUIZ=0`
 
 # .pul files restrictions and syntax
