@@ -49,13 +49,6 @@ Tested with `dunst` for notifications - aka `notify-send` (my config : `https://
     #!#TYPE=BUTTON
     #!#LOOP_QUIZ=3
 
-If a variable isn't given, it will use the default value, but these 4 variables need to be set to have a valid .pul file :
-
-LANGUAGE_1 : The language of the left element. (abreviation : "en" for english, "fr" for french, "cn" for chinese, "jp" for japanese ...)  
-LANGUAGE_2 : The language of the right element. (abreviation : "en" for english, "fr" for french, "cn" for chinese, "jp" for japanese ...)  
-SUBJECT : The name of the subject (easily identify the type of content of th .pul file)  
-NUMBER : The reference number. If you decide to use a broad title and separate a specific content into several .pul files, you must specify its number. (Set to 1 otherwise)  
-
 # Usage
 
 Step 1 - Launch php server with :  
