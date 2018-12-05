@@ -185,26 +185,26 @@ function ⬚⬚⬚_📃_gamescript(){ 🔧 $FUNCNAME
 	⬚⬚⬚⬚_📃_gamescript_chapters
 }
 function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME
-	
-	
-	
+
+
+
 		LANGUAGE_1=$LANGUAGE
 		LANGUAGE_2=$LANGUAGE
 		SUBJECT=GameScript
 		FILENAME=${SUBJECTS[selected]}
 		NUMBER=1
 		SESSION_NUMBER=${selected}
-		
+
 		echo
 		echo " - Warning : here sessions are chapters (unlock chapters on GameScript to use them here)"
-	
+
 	END="\\\e\[0m"
-	  
+
 	GREY="\\\e\[38;5;59m" #GOOD 2+ / BAD 0
-	  
+
 	BLUE="\\\e\[38;5;33m" #GOOD 0
 	DARK_BLUE="\\\e\[38;5;25m" #GOOD 1
-	  
+
 	YELLOW="\\\e\[38;5;226m" #BAD 1
 	ORANGE="\\\e\[38;5;202m" #BAD 2
 	RED="\\\e\[38;5;196m" #BAD AT LEAST 3
@@ -218,7 +218,7 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME
 		\e[38;5;202mORANGE\e[0m : Bad 2 times
 		\e[38;5;196mRED\e[0m : Bad 3+ times (user need to focus on this)
 	"
-	
+
 	SESSION_NUMBER=1
 	while [ -f "$HOME/.GameScript/passwords/$FILENAME$SESSION_NUMBER" ]; do #
 		SESSION_NUMBER=`expr $SESSION_NUMBER + 1`
@@ -226,8 +226,8 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME
 		mkdir -p "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/"
 		cat $HOME/.PopUpLearn/DB/GameScript/$LANGUAGE/$FILENAME/_$SESSION_NUMBER > "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul"
 	done
-	
-	
+
+
 	NB_SESSION=$SESSION_NUMBER
 	#~ if [ $SESSION_NUMBER -gt 1 ];then
 		#~ echo -e "\t- WORK ON A SESSION OR START A NEW ONE ?"
@@ -258,7 +258,7 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME
 		#~ echo -en "\t\t  BaD : "
 		#~ echo -e $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" | sed "s#^\(.*\)#$GREY[\1]$END#" | sed 's/£/ :: /')
 	  fi
-	  
+
 	  GOOD_TEST=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | tail -n 1`
 	  if [[ "$GOOD_TEST" != "" ]]; then
 		cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good" 2> /dev/null > "$HOME/.PopUpLearn/tmp/list_correct.tmp"
@@ -269,7 +269,7 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME
 		echo -en "\t\t GooD : "
 		echo -e $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" | sed "s#^\(.*\)#$BLUE[\1]$END#" | sed 's/£/ :: /')
 	  fi
-	  
+
 	  #~ echo -en $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp")
 	  #~ echo -n "] "
 	done
@@ -323,7 +323,7 @@ function ⬚⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME
 	echo " === $FILE === "
 	cp $FILE "$HOME/.PopUpLearn/tmp/session_content.tmp"
 	cp $FILE "$HOME/.PopUpLearn/tmp/session_content_remove.tmp"
-	
+
 	LANGUAGE_1=$LANGUAGE
 	LANGUAGE_2=$LANGUAGE
 	SUBJECT=GameScript
@@ -350,13 +350,13 @@ function ⬚⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME
 			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
 				echo "----> SESSION_NUMBER=$SESSION_NUMBER"
-				
+
 	mkdir -p "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/"
 	FILE="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul"
 	echo " === $FILE === "
 	cp $FILE "$HOME/.PopUpLearn/tmp/session_content.tmp"
 	cp $FILE "$HOME/.PopUpLearn/tmp/session_content_remove.tmp"
-	
+
 	LANGUAGE_1=$LANGUAGE
 	LANGUAGE_2=$LANGUAGE
 	SUBJECT=GameScript
@@ -372,13 +372,13 @@ function ⬚⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME
 			done
 	else
 	SESSION_NUMBER=$selected
-	
+
 	mkdir -p "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/"
 	FILE="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul"
 	echo " === $FILE === "
 	cp $FILE "$HOME/.PopUpLearn/tmp/session_content.tmp"
 	cp $FILE "$HOME/.PopUpLearn/tmp/session_content_remove.tmp"
-	
+
 	LANGUAGE_1=$LANGUAGE
 	LANGUAGE_2=$LANGUAGE
 	SUBJECT=GameScript
@@ -392,11 +392,11 @@ function ⬚⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME
 		⬚⬚⬚⬚⬚⬚_🛑_quiz
 	done < "$HOME/.PopUpLearn/tmp/session_content.tmp"
 	fi
-	
+
 	#??? old create_file_content
 	#~ cat $FILE | sed 's/ |=| /£/' | sed 's/^\t//g' | grep '£' > $HOME/.PopUpLearn/tmp/file_content_BAD_answers.tmp
 	#~ cat $HOME/.PopUpLearn/tmp/file_content_BAD_answers.tmp | sort -R | head -n $SESSION_SIZE > $HOME/.PopUpLearn/tmp/file_content.tmp
-	
+
 	#~ SESSION_NUMBER=$selected
 	#~ LANGUAGE_1=$LANGUAGE
 	#~ LANGUAGE_2=$LANGUAGE
@@ -414,7 +414,7 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME
 	FILE=${FILES[selected]}
 	#SPLIT CONTENT FROM .pul FILE AND CONFIG + source
 	cat $FILE | grep "^#!#" | sed 's/^#!#//' > $HOME/.PopUpLearn/tmp/session_specific_config.tmp
-	
+
 	#TEST IF CONTAINS AT LEAST THE MAIN 4 VARIABLES
 	if [ ! `grep 'LANGUAGE_1=' $HOME/.PopUpLearn/tmp/session_specific_config.tmp` ] || [ ! `grep 'LANGUAGE_2=' $HOME/.PopUpLearn/tmp/session_specific_config.tmp` ] || [ ! `grep 'NUMBER=' $HOME/.PopUpLearn/tmp/session_specific_config.tmp` ] || [ ! `grep 'SUBJECT=' $HOME/.PopUpLearn/tmp/session_specific_config.tmp` ]; then
 		echo
@@ -520,12 +520,12 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME
 function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME
 
 	END="\\\e\[0m"
-	  
+
 	GREY="\\\e\[38;5;59m" #GOOD 2+ / BAD 0
-	  
+
 	BLUE="\\\e\[38;5;33m" #GOOD 0
 	DARK_BLUE="\\\e\[38;5;25m" #GOOD 1
-	  
+
 	YELLOW="\\\e\[38;5;226m" #BAD 1
 	ORANGE="\\\e\[38;5;202m" #BAD 2
 	RED="\\\e\[38;5;196m" #BAD AT LEAST 3
@@ -572,7 +572,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME
 		echo -en "\t\t  BaD : "
 		echo -e $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" | sed "s#^\(.*\)#$GREY[\1]$END#" | sed 's/£/ :: /')
 	  fi
-	  
+
 	  GOOD_TEST=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | tail -n 1`
 	  if [[ "$GOOD_TEST" != "" ]]; then
 		cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good" 2> /dev/null > "$HOME/.PopUpLearn/tmp/list_correct.tmp"
@@ -583,7 +583,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME
 		echo -en "\t\t GooD : "
 		echo -e $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" | sed "s#^\(.*\)#$BLUE[\1]$END#" | sed 's/£/ :: /')
 	  fi
-	  
+
 	  #~ echo -en $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp")
 	  #~ echo -n "] "
 	done
