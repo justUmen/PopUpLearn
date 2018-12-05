@@ -80,7 +80,9 @@ function ⬚_before_start(){ 🔧 $FUNCNAME
 	command -v surf -F >/dev/null 2>&1 || { echo "Veuillez installer les dépendances requises. Faites en tant qu'administrateur : apt-get install surf" >&2; exit 3; }
 	exec 6<>/dev/tcp/127.0.0.1/9999 && echo "php server available on port 9999" || { echo "Please run the php server with : php -S 127.0.0.1:9999 -t ~/.PopUpLearn" && exec 6>&- && exec 6<&- && exit; }
 	exec 6<>/dev/tcp/127.0.0.1/8888 && echo "nodejs server available on port 8888" || { echo "Please run the nodejs server with : node ~/.PopUpLearn/node_server.js || nodejs ~/.PopUpLearn/node_server.js" && exec 6>&- && exec 6<&- && exit; }
+	mkdir $HOME/.PopUpLearn/MYDB 2> /dev/null
 	touch $HOME/.PopUpLearn/MYDB/my.list
+	mkdir $HOME/.PopUpLearn/tmp 2> /dev/null
 }
 function ⬚_🔄🔄_start(){ 🔧 $FUNCNAME
 	while [ 1 ]; do
@@ -781,6 +783,7 @@ function ⬚⬚⬚⬚⬚⬚_💣_remove_answer_from_session_tmp(){ 🔧 $FUNCNAM
 	#~ cp $HOME/.PopUpLearn/tmp/session_content_remove.tmp $HOME/.PopUpLearn/tmp/session_content_2.tmp
 	#~ grep -m1 -F -x -v -f $HOME/.PopUpLearn/tmp/current_line.tmp $HOME/.PopUpLearn/tmp/session_content_2.tmp > $HOME/.PopUpLearn/tmp/session_content_remove.tmp
 	#~ rm $HOME/.PopUpLearn/tmp/session_content_2.tmp
+	LINE_TO_DELETE="$(<<< "$LINE_TO_DELETE" sed -e 's`[][\\/.*^$]`\\&`g')"
 	echo "Line $LINE_TO_DELETE removed from session_content_remove.tmp"
 	sed -i "0,/$LINE_TO_DELETE/{/$LINE_TO_DELETE/d;}" $HOME/.PopUpLearn/tmp/session_content_remove.tmp
 }
