@@ -4,6 +4,8 @@ Learning with popups and track down your knowledge.
 
 Made for GameScript but can be used to learn pretty much whatever you want, but you need a clean DB about it.  
 
+Built and tested for linux desktop users, using `bash`. But will eventually be transfered to smartphone, AR glasses, VR headset...  
+
 The DB is text-based in a .pul file. Your personal .pul files must be stored in `~/.PopUpLearn/MYDB` (For example : `~/.PopUpLearn/MYDB/chemistry/elements.pul`).  
 
 If the .pul file is outside of the `~/.PopUpLearn/MYDB` folder, you must give its full path of the .pul to the `~/.PopUpLearn/MYDB/my.list` file. (One per line)  
@@ -21,7 +23,7 @@ If you create a cool and useful .pul, share it with the rest of us !
 ## Window manager
 
 Testing : Only with `i3` window manager for now : `sudo apt-get i3`
-Usage of i3 specific commands that need to be replaced for other wm : `i3-msg workspace back_and_forth` and  
+Usage of i3 specific commands that need to be replaced for other wm : `i3-msg workspace back_and_forth` and so on.  
 
 ## Web browser  
 
