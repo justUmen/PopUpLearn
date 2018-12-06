@@ -6,6 +6,8 @@ Made for GameScript but can be used to learn pretty much whatever you want, but 
 
 Built and tested for linux desktop users, using `bash`. But will eventually be transfered to smartphone, AR glasses, VR headset...  
 
+Technologies : PopUpLearn is using bash, php, js, css, nodejs, reactjs.  
+
 The DB is text-based in a .pul file. Your personal .pul files must be stored in `~/.PopUpLearn/MYDB` (For example : `~/.PopUpLearn/MYDB/chemistry/elements.pul`).  
 
 If the .pul file is outside of the `~/.PopUpLearn/MYDB` folder, you must give its full path of the .pul to the `~/.PopUpLearn/MYDB/my.list` file. (One per line)  
