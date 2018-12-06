@@ -281,7 +281,7 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME
 	#~ echo -e "\t\\e[0;100m N) \\e[0m New sessions (infinite loop of a new session)"
 	echo -e "\t\\e[0;100m s) \\e[0m All questions from all current chapters (chapter random order) - NOT SHOW ANSWER"
 	echo -e "\t\\e[0;100m m) \\e[0m All mistakes from all sessions (chapter random order) - NOT SHOW ANSWER"
-	echo -e "\t\\e[0;100m b) \\e[0m All blue text to make them grey (chapter random order) - NOT SHOW ANSWER"
+	echo -e "\t\\e[0;100m b) \\e[0m \\e[97;42m[Recommended]\\e[0m Detect your knowledge by asking only blue questions. (chapter random order) - NOT SHOW ANSWER"
 	#~ echo -e "\t\\e[0;100m S) \\e[0m All questions from all current sessions (session random order) - SHOW ANSWER FIRST"
 	#~ echo -e "\t\\e[0;100m M) \\e[0m All mistakes from all sessions (session random order) - SHOW ANSWER FIRST"
 	#~ echo -e "\t\\e[0;100m q) \\e[0m All questions from the .pul file \\e[38;5;196m[ not yet implemented... :( ]\\e[0m" #MAYBE NOT... TRIGGER ANOTHER LOG...
