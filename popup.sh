@@ -768,8 +768,6 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME
 		if [[ "$X" == "" ]]; then break; fi
 		⬚⬚⬚⬚⬚⬚_🚧_session_answers
 		⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp
-		echo
-		echo " ---> $X (lines_in_session)"
 		⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer
 		⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ
 		⬚⬚⬚⬚⬚⬚_💣_remove_answer_from_session_tmp
