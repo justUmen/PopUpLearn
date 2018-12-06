@@ -8,7 +8,7 @@ The DB is text-based in a .pul file. Your personal .pul files must be stored in 
 
 If the .pul file is outside of the `~/.PopUpLearn/MYDB` folder, you must give its full path of the .pul to the `~/.PopUpLearn/MYDB/my.list` file. (One per line)  
 
-Content should be (or will be) compatible with "WallpaperGenerator", "Brainz" and "GameScript". (but .pul files can give specific configurations)  
+Content should be (or will be) compatible with "WallpaperGenerator" and "GameScript". (but .pul files can give specific configurations)  
 
 Use `~/.PopUpLearn` folder to store scripts, data and logs.  
 
