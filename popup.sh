@@ -89,7 +89,13 @@ function ⬚_🔄🔄_start(){ 🔧 $FUNCNAME
 		source $HOME/.GameScript/config 2> /dev/null #LANGUAGE=fr used for quiz language
 		⬚⬚_📃_main
 		if [[ "$selected" == "g" ]]; then
-			⬚⬚⬚_📃_gamescript
+			if [ -d "$HOME/.GameScript" ];then
+				⬚⬚⬚_📃_gamescript
+			else
+				echo
+				echo "$HOME/.GameScript n'existe pas..."
+				echo
+			fi
 		else
 			⬚⬚⬚_🔄🔄_session
 		fi
@@ -199,7 +205,8 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME
 		SESSION_NUMBER=${selected}
 
 		echo
-		echo " - Warning : here sessions are chapters (unlock chapters on GameScript to use them here)"
+		echo " - Warning : here sessions are chapters (unlock chapter's password on GameScript to use them here)"
+		echo " - Warning : dates are recorded but are not yet used to organize and optimize your learning experience."
 
 	END="\\\e\[0m"
 
