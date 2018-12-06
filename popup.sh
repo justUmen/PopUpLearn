@@ -347,7 +347,7 @@ function ⬚⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME
 		⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp
 		⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ
 		⬚⬚⬚⬚⬚⬚_💣_remove_answer_from_session_tmp
-		⬚⬚⬚⬚⬚⬚_🛑_quiz
+		⬚⬚⬚⬚⬚⬚_🛑_quiz || break
 	done < "$HOME/.PopUpLearn/tmp/session_content.tmp"
 			done
 	elif [[ "$selected" == "s" ]];then
@@ -380,7 +380,7 @@ function ⬚⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME
 		⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp
 		⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ
 		⬚⬚⬚⬚⬚⬚_💣_remove_answer_from_session_tmp
-		⬚⬚⬚⬚⬚⬚_🛑_quiz
+		⬚⬚⬚⬚⬚⬚_🛑_quiz || break
 	done < "$HOME/.PopUpLearn/tmp/session_content.tmp"
 			done
 	elif [[ "$selected" == "b" ]];then
@@ -423,7 +423,7 @@ function ⬚⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME
 		⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp
 		⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ
 		⬚⬚⬚⬚⬚⬚_💣_remove_answer_from_session_tmp
-		⬚⬚⬚⬚⬚⬚_🛑_quiz
+		⬚⬚⬚⬚⬚⬚_🛑_quiz || break
 	done < "$HOME/.PopUpLearn/tmp/session_content.tmp"
 			done
 	else
@@ -445,7 +445,7 @@ function ⬚⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME
 		⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp
 		⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ
 		⬚⬚⬚⬚⬚⬚_💣_remove_answer_from_session_tmp
-		⬚⬚⬚⬚⬚⬚_🛑_quiz
+		⬚⬚⬚⬚⬚⬚_🛑_quiz || break
 	done < "$HOME/.PopUpLearn/tmp/session_content.tmp"
 	fi
 
@@ -463,7 +463,7 @@ function ⬚⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME
 		#~ ⬚⬚⬚⬚⬚⬚_🚧_session_answers
 		#~ ⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp
 		#~ ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ
-		#~ ⬚⬚⬚⬚⬚⬚_🛑_quiz
+		#~ ⬚⬚⬚⬚⬚⬚_🛑_quiz || break
 	#~ done < "$HOME/.PopUpLearn/tmp/session_content.tmp"
 }
 function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME
@@ -765,15 +765,15 @@ function ⬚⬚⬚⬚⬚_🏗_session_content_tmp_blue_only(){ 🔧 $FUNCNAME
 }
 function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME
 	while read X; do
-		echo
-		echo " ---> $X (lines_in_session)"
 		if [[ "$X" == "" ]]; then break; fi
 		⬚⬚⬚⬚⬚⬚_🚧_session_answers
 		⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp
+		echo
+		echo " ---> $X (lines_in_session)"
 		⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer
 		⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ
 		⬚⬚⬚⬚⬚⬚_💣_remove_answer_from_session_tmp
-		⬚⬚⬚⬚⬚⬚_🛑_quiz
+		⬚⬚⬚⬚⬚⬚_🛑_quiz || break
 	done < "$HOME/.PopUpLearn/tmp/session_content.tmp"
 }
 function ⬚⬚⬚⬚⬚⬚_🚧_session_answers(){ 🔧 $FUNCNAME
@@ -869,9 +869,12 @@ function ⬚⬚⬚⬚⬚⬚_🛑_quiz(){ 🔧 $FUNCNAME
 	#NOT sleep if it was the last line in _remove.tmp
 	LINES_LEFT=`wc -l /home/umen/.PopUpLearn/tmp/session_content_remove.tmp|sed 's/ .*//'`
 	if [ $LINES_LEFT -ne 0 ];then
-		echo "sleep $SEC_AFTER_QUIZ ($LINES_LEFT lines left in session_remove.tmp)"
-		echo
-		sleep $SEC_AFTER_QUIZ
+		echo "Press any key to exit, or wait $SEC_AFTER_QUIZ SECONDS ($LINES_LEFT lines left in session_remove.tmp)"
+		if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
+			return 1 #STOPPED MANUALLY, break loop
+		else
+			return 0
+		fi
 	fi
 	#~ sleep 1
 }
