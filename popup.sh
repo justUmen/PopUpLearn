@@ -286,7 +286,7 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME
 	#~ echo -e "\t\\e[0;100m M) \\e[0m All mistakes from all sessions (session random order) - SHOW ANSWER FIRST"
 	#~ echo -e "\t\\e[0;100m q) \\e[0m All questions from the .pul file \\e[38;5;196m[ not yet implemented... :( ]\\e[0m" #MAYBE NOT... TRIGGER ANOTHER LOG...
 	#~ echo -e "\t\\e[0;100m r) \\e[0m All red mistakes from all sessions \\e[38;5;196m[ not yet implemented... :( ]\\e[0m"
-	echo -e "\t\\e[0;100m a) \\e[0m Automated infinite loop, Optimized by PopUpLearn \\e[38;5;196m[ not yet implemented... :( ]\\e[0m"
+	echo -e "\t\\e[0;100m a) \\e[0m Automated infinite loop, Optimized by PopUpLearn, focus on mistakes. \\e[38;5;196m[ not yet implemented... :( ]\\e[0m"
 	echo -e "\t\\e[0;100m e) \\e[0m Return"
 	while :; do
 		echo -en "\t\e[97;45m # \e[0m"
