@@ -83,10 +83,19 @@ function ⬚_before_start(){ 🔧 $FUNCNAME
 	mkdir $HOME/.PopUpLearn/MYDB 2> /dev/null
 	touch $HOME/.PopUpLearn/MYDB/my.list
 	mkdir $HOME/.PopUpLearn/tmp 2> /dev/null
+	#PREPARE COLORS
+	END="\\\e\[0m"
+	GREY="\\\e\[38;5;59m" #GOOD 2+ / BAD 0
+	BLUE="\\\e\[38;5;33m" #GOOD 0
+	DARK_BLUE="\\\e\[38;5;25m" #GOOD 1
+	YELLOW="\\\e\[38;5;226m" #BAD 1
+	ORANGE="\\\e\[38;5;202m" #BAD 2
+	RED="\\\e\[38;5;196m" #BAD AT LEAST 3
 }
 function ⬚_🔄🔄_start(){ 🔧 $FUNCNAME
 	while [ 1 ]; do
 		source $HOME/.GameScript/config 2> /dev/null #LANGUAGE=fr used for quiz language
+		#source $HOME/.PopUpLearn/my.config is launched later to replace other configurations
 		⬚⬚_📃_main
 		if [[ "$selected" == "g" ]]; then
 			if [ -d "$HOME/.GameScript" ];then
@@ -102,41 +111,39 @@ function ⬚_🔄🔄_start(){ 🔧 $FUNCNAME
 	done
 }
 function ⬚⬚_📃_main(){ 🔧 $FUNCNAME
-	#PREPARE
-	#Personal BrainZ
+	#Prepare .pul files in DB and MYDB
 	FILES=()
 	FILES+=("empty")
 	while read mylist;do
 		FILES+=($mylist)
 	done < $HOME/.PopUpLearn/MYDB/my.list
-
 	find $HOME/.PopUpLearn/DB -name "*.pul" > "$HOME/.PopUpLearn/tmp/list_pul.tmp"
 	find $HOME/.PopUpLearn/MYDB -name "*.pul" >> "$HOME/.PopUpLearn/tmp/list_pul.tmp"
 	while read PUL; do
 		FILES+=($PUL)
 	done < "$HOME/.PopUpLearn/tmp/list_pul.tmp"
-	#DISPLAY
+	#DISPLAY LIST .pul FILES
 	echo
 	echo "Menu list all .pul files in ~/.PopUpLearn/DB/ and ~/.PopUpLearn/MYDB/ folders + manual entries from ~/.PopUpLearn/MYDB/my.list too (Full path of .pul file, one per line.)"
 	arraylength=${#FILES[@]}
 	for (( i=1; i<${arraylength}; i++ )); do
-		  echo -en "\e[0;100m $i) \e[97;42m ${FILES[i]} \e[0m"
-		  FILE_NAME=`echo ${FILES[i]} | sed 's#.*/##'`
-		  FILE_PATH="$HOME/.PopUpLearn/logs/*/*/*/*/$FILE_NAME/"
-		  LAST_DAY=`cat $FILE_PATH/session_*/answer.good.date 2>/dev/null | sed 's/.*€//' | sort -n | tail -n 1`
-		  TODAY=$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))
-		  DAYS=`expr $TODAY - $LAST_DAY 2>/dev/null`
-		  if [[ "$DAYS" == "" ]]; then
+		echo -en "\e[0;100m $i) \e[97;42m ${FILES[i]} \e[0m"
+		FILE_NAME=`echo ${FILES[i]} | sed 's#.*/##'`
+		FILE_PATH="$HOME/.PopUpLearn/logs/*/*/*/*/$FILE_NAME/" # */* ???
+		LAST_DAY=`cat $FILE_PATH/session_*/answer.good.date 2>/dev/null | sed 's/.*€//' | sort -n | tail -n 1`
+		TODAY=$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))
+		DAYS=`expr $TODAY - $LAST_DAY 2>/dev/null`
+		if [[ "$DAYS" == "" ]]; then
 			echo -n " never used"
-		  elif [ $DAYS -eq 0 ]; then
+		elif [ $DAYS -eq 0 ]; then
 			echo -n " used today"
-		  elif [ $DAYS -eq 1 ]; then
+		elif [ $DAYS -eq 1 ]; then
 			echo -n " used yesterday"
-		  else
+		else
 			echo -n " used $DAYS days ago"
-		  fi
-		  NB_GOOD=`cat $FILE_PATH/session_*/answer.good 2>/dev/null|sort|uniq|wc -l`
-		  NB_LINES=`cat ${FILES[i]}|wc -l`
+		fi
+		NB_GOOD=`cat $FILE_PATH/session_*/answer.good 2>/dev/null|sort|uniq|wc -l`
+		NB_LINES=`cat ${FILES[i]}|wc -l`
 		echo " => `expr $NB_GOOD / $NB_LINES`%"
 	done
 	echo -e "\e[0;100m g) \e[0m GameScript Quizzes [for `cat ~/.GameScript/username`]"
@@ -154,48 +161,52 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME
 }
 function ⬚⬚⬚_🔄🔄_gamescript(){ 🔧 $FUNCNAME
 	while [ 1 ]; do
-		SUBJECTS=();
-		SUBJECTS=("empty")
-		SUBJECTS+=("bash")
-		#~ SUBJECTS+=("sys")
-		#~ SUBJECTS+=("i3wm")
-		selected=99
-		echo -e "\n\tPopUpLearn + GameScript [`cat ~/.GameScript/username`]";
-		arraylength=${#SUBJECTS[@]}
-		for (( i=1; i<${arraylength}; i++ )); do
-		  echo -en "\t\e[0;100m $i) \e[97;42m ${SUBJECTS[i]} \e[0m"
-		  LIST_CHAPTERS=`ls 1${SUBJECTS[i]}* 2>/dev/null | sed "s#.*${SUBJECTS[i]}##" | tr '\n' ',' | sed 's/,$//'`
-		  mkdir -p $HOME/.PopUpLearn/logs/GameScript/${SUBJECTS[i]} 2> /dev/null
-		  LAST_DAY=`cat $HOME/.PopUpLearn/logs/${LANGUAGE}/${LANGUAGE}/GameScript/1/${SUBJECTS[i]}/session_*/answer.good.date 2>/dev/null | sed 's/.*€//' | sort -n | tail -n 1`
-		  TODAY=$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))
-		  DAYS=`expr $TODAY - $LAST_DAY 2>/dev/null`
-		  if [ "$LIST_CHAPTERS" ]; then
-			echo -n " [Chapters with password : $LIST_CHAPTERS]"
-		  fi
-		  if [ "$DAYS" ]; then
-				if [[ "$DAYS" == "0" ]];then
-					echo " used today"
-				elif [[ "$DAYS" == "1" ]];then
-					echo " used yesterday"
-				else
-					echo " used $DAYS days ago"
-				fi
-		  else
-			echo " never used"
-		  fi
-		done
-		#~ /home/umen/.GameScript/passwords
-		echo -e "\t\\e[0;100m e) \\e[0m Return"
-		while :; do
-			echo -en "\t\e[97;45m # \e[0m"
-			read selected < /dev/tty
-			case $selected in
-				e) return ;;
-				0) ;;
-				[0-9]*) break ;;
-			esac
-		done
-		⬚⬚⬚⬚_📃_gamescript_chapters
+		⬚⬚⬚⬚_📃_gamescript || return 2
+		⬚⬚⬚⬚_📃_gamescript_chapters || return 2
+		⬚⬚⬚⬚_📗_gamescript || return 2
+	done
+}
+function ⬚⬚⬚⬚_📃_gamescript(){ 🔧 $FUNCNAME
+	SUBJECTS=();
+	SUBJECTS=("empty")
+	SUBJECTS+=("bash")
+	#~ SUBJECTS+=("sys")
+	#~ SUBJECTS+=("i3wm")
+	selected=99
+	echo -e "\n\tPopUpLearn + GameScript [`cat ~/.GameScript/username`]";
+	arraylength=${#SUBJECTS[@]}
+	for (( i=1; i<${arraylength}; i++ )); do
+		echo -en "\t\e[0;100m $i) \e[97;42m ${SUBJECTS[i]} \e[0m"
+		LIST_CHAPTERS=`ls 1${SUBJECTS[i]}* 2>/dev/null | sed "s#.*${SUBJECTS[i]}##" | tr '\n' ',' | sed 's/,$//'`
+		mkdir -p $HOME/.PopUpLearn/logs/GameScript/${SUBJECTS[i]} 2> /dev/null
+		LAST_DAY=`cat $HOME/.PopUpLearn/logs/${LANGUAGE}/${LANGUAGE}/GameScript/1/${SUBJECTS[i]}/session_*/answer.good.date 2>/dev/null | sed 's/.*€//' | sort -n | tail -n 1`
+		TODAY=$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))
+		DAYS=`expr $TODAY - $LAST_DAY 2>/dev/null`
+		if [ "$LIST_CHAPTERS" ]; then
+		echo -n " [Chapters with password : $LIST_CHAPTERS]"
+		fi
+		if [ "$DAYS" ]; then
+			if [[ "$DAYS" == "0" ]];then
+				echo " used today"
+			elif [[ "$DAYS" == "1" ]];then
+				echo " used yesterday"
+			else
+				echo " used $DAYS days ago"
+			fi
+		else
+		echo " never used"
+		fi
+	done
+	#~ /home/umen/.GameScript/passwords
+	echo -e "\t\\e[0;100m e) \\e[0m Return"
+	while :; do
+		echo -en "\t\e[97;45m # \e[0m"
+		read selected < /dev/tty
+		case $selected in
+			e) return 2 ;;
+			0) ;;
+			[0-9]*) break ;;
+		esac
 	done
 }
 function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME
@@ -209,17 +220,6 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME
 		echo
 		echo " - Warning : here sessions are chapters (unlock chapter's password on GameScript to use them here)"
 		echo " - Warning : dates are recorded but are not yet used to organize and optimize your learning experience. (In the future, text will sometimes change colors.)"
-
-	END="\\\e\[0m"
-
-	GREY="\\\e\[38;5;59m" #GOOD 2+ / BAD 0
-
-	BLUE="\\\e\[38;5;33m" #GOOD 0
-	DARK_BLUE="\\\e\[38;5;25m" #GOOD 1
-
-	YELLOW="\\\e\[38;5;226m" #BAD 1
-	ORANGE="\\\e\[38;5;202m" #BAD 2
-	RED="\\\e\[38;5;196m" #BAD AT LEAST 3
 
 	echo -e "
 	\e[4mCOLORS LEGEND :\e[0m
@@ -292,30 +292,30 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME
 	echo -e "\t\\e[0;100m m) \\e[0m All mistakes from all sessions (chapter random order) - NOT SHOW ANSWER"
 	echo -e "\t\\e[0;100m b) \\e[0m \\e[97;42m[Recommended]\\e[0m Detect your knowledge by asking only blue questions. (chapter random order) - NOT SHOW ANSWER"
 	#~ echo -e "\t\\e[0;100m S) \\e[0m All questions from all current sessions (session random order) - SHOW ANSWER FIRST"
-	#~ echo -e "\t\\e[0;100m M) \\e[0m All mistakes from all sessions (session random order) - SHOW ANSWER FIRST"
+	# ~ echo -e "\t\\e[0;100m M) \\e[0m All mistakes from all sessions (session random order) - SHOW ANSWER FIRST"
 	#~ echo -e "\t\\e[0;100m q) \\e[0m All questions from the .pul file \\e[38;5;196m[ not yet implemented... :( ]\\e[0m" #MAYBE NOT... TRIGGER ANOTHER LOG...
-	#~ echo -e "\t\\e[0;100m r) \\e[0m All red mistakes from all sessions \\e[38;5;196m[ not yet implemented... :( ]\\e[0m"
-	echo -e "\t\\e[0;100m a) \\e[0m Automated infinite loop, Optimized by PopUpLearn, focus on mistakes. \\e[38;5;196m[ not yet implemented... :( ]\\e[0m"
+	# ~ echo -e "\t\\e[0;100m r) \\e[0m All red mistakes from all sessions \\e[38;5;196m[ not yet implemented... :( ]\\e[0m"
+	# echo -e "\t\\e[0;100m a) \\e[0m Automated infinite loop, Optimized by PopUpLearn, focus on mistakes. \\e[38;5;196m[ not yet implemented... :( ]\\e[0m"
 	echo -e "\t\\e[0;100m e) \\e[0m Return"
 	while :; do
 		echo -en "\t\e[97;45m # \e[0m"
 		read selected < /dev/tty
 		case $selected in
-			e) return ;;
+			e) return 2 ;;
 			#~ n) break ;;
 			#~ N) break ;;
 			#~ a) break ;;
 			m) break ;;
 			s) break ;;
 			b) break ;;
+			# M) break ;;
 			#~ S) break ;;
 			[0-9]*) SESSION_NUMBER=$selected; test "$selected" -le "`expr $NB_SESSION - 1`" && break ;;
 		esac
 	done
 	#~ echo "!!! $selected ${SUBJECTS[selected]} !!!"
-	⬚⬚⬚⬚⬚_📗_gamescript
 }
-function ⬚⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME
+function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME
 	SESSION_SIZE=999 #For gs, always 999
 	if [[ "$selected" == "m" ]];then
 			ANSWER_BEFORE_QUIZ=0 #USE 'M' INSTEAD TO DISPLAY ANSWER
@@ -331,24 +331,18 @@ function ⬚⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
 				echo "----> SESSION_NUMBER=$SESSION_NUMBER"
 
-	mkdir -p "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/"
-	FILE="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul"
-	echo " === $FILE === "
-	cp $FILE "$HOME/.PopUpLearn/tmp/session_content.tmp"
-	cp $FILE "$HOME/.PopUpLearn/tmp/session_content_remove.tmp"
+				mkdir -p "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/"
+				FILE="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul"
+				echo " === $FILE === "
+				cp $FILE "$HOME/.PopUpLearn/tmp/session_content.tmp"
+				cp $FILE "$HOME/.PopUpLearn/tmp/session_content_remove.tmp"
 
-	LANGUAGE_1=$LANGUAGE
-	LANGUAGE_2=$LANGUAGE
-	SUBJECT=GameScript
-	NUMBER=1
-	LOOP_QUIZ=1
-	while read X; do
-		⬚⬚⬚⬚⬚⬚_🚧_session_answers
-		⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp
-		⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ
-		⬚⬚⬚⬚⬚⬚_💣_remove_answer_from_session_tmp
-		⬚⬚⬚⬚⬚⬚_🛑_quiz || break
-	done < "$HOME/.PopUpLearn/tmp/session_content.tmp"
+				LANGUAGE_1=$LANGUAGE
+				LANGUAGE_2=$LANGUAGE
+				SUBJECT=GameScript
+				NUMBER=1
+				LOOP_QUIZ=1
+				⬚⬚⬚⬚⬚_🔄_lines_in_gamescript_chapter || return 2
 			done
 	elif [[ "$selected" == "s" ]];then
 			ANSWER_BEFORE_QUIZ=0 #USE 'M' INSTEAD TO DISPLAY ANSWER
@@ -364,24 +358,18 @@ function ⬚⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
 				echo "----> SESSION_NUMBER=$SESSION_NUMBER"
 
-	mkdir -p "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/"
-	FILE="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul"
-	echo " === $FILE === "
-	cp $FILE "$HOME/.PopUpLearn/tmp/session_content.tmp"
-	cp $FILE "$HOME/.PopUpLearn/tmp/session_content_remove.tmp"
+				mkdir -p "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/"
+				FILE="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul"
+				echo " === $FILE === "
+				cp $FILE "$HOME/.PopUpLearn/tmp/session_content.tmp"
+				cp $FILE "$HOME/.PopUpLearn/tmp/session_content_remove.tmp"
 
-	LANGUAGE_1=$LANGUAGE
-	LANGUAGE_2=$LANGUAGE
-	SUBJECT=GameScript
-	NUMBER=1
-	LOOP_QUIZ=1
-	while read X; do
-		⬚⬚⬚⬚⬚⬚_🚧_session_answers
-		⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp
-		⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ
-		⬚⬚⬚⬚⬚⬚_💣_remove_answer_from_session_tmp
-		⬚⬚⬚⬚⬚⬚_🛑_quiz || break
-	done < "$HOME/.PopUpLearn/tmp/session_content.tmp"
+				LANGUAGE_1=$LANGUAGE
+				LANGUAGE_2=$LANGUAGE
+				SUBJECT=GameScript
+				NUMBER=1
+				LOOP_QUIZ=1
+				⬚⬚⬚⬚⬚_🔄_lines_in_gamescript_chapter || return 2
 			done
 	elif [[ "$selected" == "b" ]];then
 			ANSWER_BEFORE_QUIZ=0 #USE 'M' INSTEAD TO DISPLAY ANSWER
@@ -397,56 +385,44 @@ function ⬚⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
 				echo "----> SESSION_NUMBER=$SESSION_NUMBER"
 
-	mkdir -p "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/"
+				mkdir -p "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/"
 
-	#b -> 2 TIMES IF 0 GOOD, 1 TIME IF 1 GOOD, 0 TIME IF 2 GOOD (Technique to get rid of blue color quickly)
-	#identical with ⬚⬚⬚⬚⬚_🏗_session_content_tmp_blue_only (change ?)
-	cat $HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/answer.good | sort | uniq -d > "$HOME/.PopUpLearn/tmp/answer_good_at_least_2.tmp"
-	cat $HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/answer.good | sort | uniq -u > "$HOME/.PopUpLearn/tmp/answer_good_only_1.tmp"
+				#b -> 2 TIMES IF 0 GOOD, 1 TIME IF 1 GOOD, 0 TIME IF 2 GOOD (Technique to get rid of blue color quickly)
+				#identical with ⬚⬚⬚⬚⬚_🏗_session_content_tmp_blue_only (change ?)
+				cat $HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/answer.good | sort | uniq -d > "$HOME/.PopUpLearn/tmp/answer_good_at_least_2.tmp"
+				cat $HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/answer.good | sort | uniq -u > "$HOME/.PopUpLearn/tmp/answer_good_only_1.tmp"
 
-	cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul" "$HOME/.PopUpLearn/tmp/answer_good_at_least_2.tmp" | sort | uniq -u > "$HOME/.PopUpLearn/tmp/good_removed_2_times.tmp"
-	cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul" "$HOME/.PopUpLearn/tmp/answer_good_at_least_2.tmp" "$HOME/.PopUpLearn/tmp/answer_good_only_1.tmp" | sort | uniq -u > "$HOME/.PopUpLearn/tmp/good_removed_1_time.tmp"
+				cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul" "$HOME/.PopUpLearn/tmp/answer_good_at_least_2.tmp" | sort | uniq -u > "$HOME/.PopUpLearn/tmp/good_removed_2_times.tmp"
+				cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul" "$HOME/.PopUpLearn/tmp/answer_good_at_least_2.tmp" "$HOME/.PopUpLearn/tmp/answer_good_only_1.tmp" | sort | uniq -u > "$HOME/.PopUpLearn/tmp/good_removed_1_time.tmp"
 
-	cat "$HOME/.PopUpLearn/tmp/good_removed_1_time.tmp" "$HOME/.PopUpLearn/tmp/good_removed_2_times.tmp" > "$HOME/.PopUpLearn/tmp/good_removed.tmp"
+				cat "$HOME/.PopUpLearn/tmp/good_removed_1_time.tmp" "$HOME/.PopUpLearn/tmp/good_removed_2_times.tmp" > "$HOME/.PopUpLearn/tmp/good_removed.tmp"
 
-	cp "$HOME/.PopUpLearn/tmp/good_removed.tmp" "$HOME/.PopUpLearn/tmp/session_content.tmp"
-	cp "$HOME/.PopUpLearn/tmp/good_removed.tmp" "$HOME/.PopUpLearn/tmp/session_content_remove.tmp"
-	#⬚⬚⬚⬚⬚_🏗_session_content_tmp_blue_only
+				cp "$HOME/.PopUpLearn/tmp/good_removed.tmp" "$HOME/.PopUpLearn/tmp/session_content.tmp"
+				cp "$HOME/.PopUpLearn/tmp/good_removed.tmp" "$HOME/.PopUpLearn/tmp/session_content_remove.tmp"
+				#⬚⬚⬚⬚⬚_🏗_session_content_tmp_blue_only
 
-	LANGUAGE_1=$LANGUAGE
-	LANGUAGE_2=$LANGUAGE
-	SUBJECT=GameScript
-	NUMBER=1
-	LOOP_QUIZ=1
-	while read X; do
-		⬚⬚⬚⬚⬚⬚_🚧_session_answers
-		⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp
-		⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ
-		⬚⬚⬚⬚⬚⬚_💣_remove_answer_from_session_tmp
-		⬚⬚⬚⬚⬚⬚_🛑_quiz || break
-	done < "$HOME/.PopUpLearn/tmp/session_content.tmp"
+				LANGUAGE_1=$LANGUAGE
+				LANGUAGE_2=$LANGUAGE
+				SUBJECT=GameScript
+				NUMBER=1
+				LOOP_QUIZ=1
+				⬚⬚⬚⬚⬚_🔄_lines_in_gamescript_chapter || return 2
 			done
 	else
-	SESSION_NUMBER=$selected
+		SESSION_NUMBER=$selected
 
-	mkdir -p "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/"
-	FILE="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul"
-	echo " === $FILE === "
-	cp $FILE "$HOME/.PopUpLearn/tmp/session_content.tmp"
-	cp $FILE "$HOME/.PopUpLearn/tmp/session_content_remove.tmp"
+		mkdir -p "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/"
+		FILE="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul"
+		# echo " === $FILE === "
+		cp $FILE "$HOME/.PopUpLearn/tmp/session_content.tmp"
+		cp $FILE "$HOME/.PopUpLearn/tmp/session_content_remove.tmp"
 
-	LANGUAGE_1=$LANGUAGE
-	LANGUAGE_2=$LANGUAGE
-	SUBJECT=GameScript
-	NUMBER=1
-	LOOP_QUIZ=1
-	while read X; do
-		⬚⬚⬚⬚⬚⬚_🚧_session_answers
-		⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp
-		⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ
-		⬚⬚⬚⬚⬚⬚_💣_remove_answer_from_session_tmp
-		⬚⬚⬚⬚⬚⬚_🛑_quiz || break
-	done < "$HOME/.PopUpLearn/tmp/session_content.tmp"
+		LANGUAGE_1=$LANGUAGE
+		LANGUAGE_2=$LANGUAGE
+		SUBJECT=GameScript
+		NUMBER=1
+		LOOP_QUIZ=1
+		⬚⬚⬚⬚⬚_🔄_lines_in_gamescript_chapter || return 2
 	fi
 
 	#??? old create_file_content
@@ -463,8 +439,17 @@ function ⬚⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME
 		#~ ⬚⬚⬚⬚⬚⬚_🚧_session_answers
 		#~ ⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp
 		#~ ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ
-		#~ ⬚⬚⬚⬚⬚⬚_🛑_quiz || break
+		#~ ⬚⬚⬚⬚⬚⬚_🛑_quiz || return 2
 	#~ done < "$HOME/.PopUpLearn/tmp/session_content.tmp"
+}
+function ⬚⬚⬚⬚⬚_🔄_lines_in_gamescript_chapter(){ 🔧 $FUNCNAME
+	while read X; do
+		⬚⬚⬚⬚⬚⬚_🚧_session_answers
+		⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp
+		⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ
+		⬚⬚⬚⬚⬚⬚_💣_remove_answer_from_session_tmp
+		⬚⬚⬚⬚⬚⬚_🛑_quiz || return 2
+	done < "$HOME/.PopUpLearn/tmp/session_content.tmp"
 }
 function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME
 	FILE=${FILES[selected]}
@@ -589,18 +574,6 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME
 	done
 }
 function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME
-
-	END="\\\e\[0m"
-
-	GREY="\\\e\[38;5;59m" #GOOD 2+ / BAD 0
-
-	BLUE="\\\e\[38;5;33m" #GOOD 0
-	DARK_BLUE="\\\e\[38;5;25m" #GOOD 1
-
-	YELLOW="\\\e\[38;5;226m" #BAD 1
-	ORANGE="\\\e\[38;5;202m" #BAD 2
-	RED="\\\e\[38;5;196m" #BAD AT LEAST 3
-
 	echo
 	echo " - Warning : dates are recorded but are not yet used to organize and optimize your learning experience. (In the future, text will sometimes change colors.)"
 
@@ -771,7 +744,7 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME
 		⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer
 		⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ
 		⬚⬚⬚⬚⬚⬚_💣_remove_answer_from_session_tmp
-		⬚⬚⬚⬚⬚⬚_🛑_quiz || break
+		⬚⬚⬚⬚⬚⬚_🛑_quiz || return 2
 	done < "$HOME/.PopUpLearn/tmp/session_content.tmp"
 }
 function ⬚⬚⬚⬚⬚⬚_🚧_session_answers(){ 🔧 $FUNCNAME
