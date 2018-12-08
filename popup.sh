@@ -15,7 +15,7 @@
 #~ 🌘 : used for new session only
 
 function 🔧(){
-	echo -e "$BG_LIGHT_GRAY$BLACK 🔧 $1 🔧 $ENDO"
+	echo -e "$BG_LIGHT_GRAY$BLACK 🔧 $@ 🔧 $ENDO"
 }
 function 💻_keyboard_language_change(){ 🔧 $FUNCNAME $@
 	command -v ibus >/dev/null 2>&1 || return
