@@ -95,7 +95,7 @@ function ⬚_before_start(){ 🔧 $FUNCNAME
 function ⬚_🔄🔄_start(){ 🔧 $FUNCNAME
 	while [ 1 ]; do
 		source $HOME/.GameScript/config 2> /dev/null #LANGUAGE=fr used for quiz language
-		#source $HOME/.PopUpLearn/my.config is launched later to replace other configurations
+		#source $HOME/.PopUpLearn/my.config is launched later to replace other specific configurations
 		⬚⬚_📃_main
 		if [[ "$selected" == "g" ]]; then
 			if [ -d "$HOME/.GameScript" ];then
@@ -155,9 +155,10 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME
 		case $selected in
 			e) exit ;;
 			g) break ;;
-			[0-9]*) test "$selected" -le "`expr $arraylength - 1`" && echo -e "\n====> ${FILES[selected]}" && break ;;
+			[0-9]*) test "$selected" -le "`expr $arraylength - 1`" && break ;;
 		esac
 	done
+	🔧 "$FUNCNAME : \$selected=$selected"
 }
 function ⬚⬚⬚_🔄🔄_gamescript(){ 🔧 $FUNCNAME
 	while [ 1 ]; do
@@ -177,13 +178,13 @@ function ⬚⬚⬚⬚_📃_gamescript(){ 🔧 $FUNCNAME
 	arraylength=${#SUBJECTS[@]}
 	for (( i=1; i<${arraylength}; i++ )); do
 		echo -en "\t\e[0;100m $i) \e[97;42m ${SUBJECTS[i]} \e[0m"
-		LIST_CHAPTERS=`ls 1${SUBJECTS[i]}* 2>/dev/null | sed "s#.*${SUBJECTS[i]}##" | tr '\n' ',' | sed 's/,$//'`
+		LIST_CHAPTERS=`ls $HOME/.GameScript/passwords/${SUBJECTS[i]}* 2>/dev/null | sed "s#.*${SUBJECTS[i]}##" | tr '\n' ',' | sed 's/,$//'`
 		mkdir -p $HOME/.PopUpLearn/logs/GameScript/${SUBJECTS[i]} 2> /dev/null
 		LAST_DAY=`cat $HOME/.PopUpLearn/logs/${LANGUAGE}/${LANGUAGE}/GameScript/1/${SUBJECTS[i]}/session_*/answer.good.date 2>/dev/null | sed 's/.*€//' | sort -n | tail -n 1`
 		TODAY=$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))
 		DAYS=`expr $TODAY - $LAST_DAY 2>/dev/null`
 		if [ "$LIST_CHAPTERS" ]; then
-		echo -n " [Chapters with password : $LIST_CHAPTERS]"
+			echo -n " [Chapters with password : $LIST_CHAPTERS]"
 		fi
 		if [ "$DAYS" ]; then
 			if [[ "$DAYS" == "0" ]];then
@@ -197,7 +198,6 @@ function ⬚⬚⬚⬚_📃_gamescript(){ 🔧 $FUNCNAME
 		echo " never used"
 		fi
 	done
-	#~ /home/umen/.GameScript/passwords
 	echo -e "\t\\e[0;100m e) \\e[0m Return"
 	while :; do
 		echo -en "\t\e[97;45m # \e[0m"
@@ -208,19 +208,18 @@ function ⬚⬚⬚⬚_📃_gamescript(){ 🔧 $FUNCNAME
 			[0-9]*) break ;;
 		esac
 	done
+	🔧 "$FUNCNAME : \$selected=$selected, \${SUBJECTS[i]}=${SUBJECTS[i]}"
 }
 function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME
-		LANGUAGE_1=$LANGUAGE
-		LANGUAGE_2=$LANGUAGE
-		SUBJECT=GameScript
-		FILENAME=${SUBJECTS[selected]}
-		NUMBER=1
-		SESSION_NUMBER=${selected}
-
-		echo
-		echo " - Warning : here sessions are chapters (unlock chapter's password on GameScript to use them here)"
-		echo " - Warning : dates are recorded but are not yet used to organize and optimize your learning experience. (In the future, text will sometimes change colors.)"
-
+	LANGUAGE_1=$LANGUAGE
+	LANGUAGE_2=$LANGUAGE
+	SUBJECT=GameScript
+	FILENAME=${SUBJECTS[selected]}
+	NUMBER=1
+	SESSION_NUMBER=${selected}
+	echo
+	echo " - Warning : here sessions are chapters (unlock chapter's password on GameScript to use them here)"
+	echo " - Warning : dates are recorded but are not yet used to organize and optimize your learning experience. (In the future, text will sometimes change colors.)"
 	echo -e "
 	\e[4mCOLORS LEGEND :\e[0m
 		\e[38;5;59mGREY\e[0m : Good 2+ times or Bad 0 (user can ignore knowledge in grey)
@@ -234,56 +233,45 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME
 	SESSION_NUMBER=1
 	while [ -f "$HOME/.GameScript/passwords/$FILENAME$SESSION_NUMBER" ]; do #
 		SESSION_NUMBER=`expr $SESSION_NUMBER + 1`
-		#~ echo " ___ $HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/ ___ "
 		mkdir -p "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/"
 		cat $HOME/.PopUpLearn/DB/GameScript/$LANGUAGE/$FILENAME/_$SESSION_NUMBER > "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul"
 	done
 
-
 	NB_SESSION=$SESSION_NUMBER
-	#~ if [ $SESSION_NUMBER -gt 1 ];then
-		#~ echo -e "\t- WORK ON A SESSION OR START A NEW ONE ?"
-	#~ else
-		#~ echo -e "\t- DO YOU WANT TO START A NEW SESSION ?"
-	#~ fi
 	ARG=0
 	while [ $ARG -ne `expr $SESSION_NUMBER - 1` ]; do
 	  ARG=`expr $ARG + 1`
 	  echo -en "\t\e[0;100m $ARG) \e[97;42m Chapter $ARG \e[0m "
-	  #~ cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/session_content.pul" 2>/dev/null | sed 's/.*£//' | tr '\n' '|' | sed 's/^/|/' > "$HOME/.PopUpLearn/tmp/list_answers.tmp"
 	  cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/session_content.pul" 2>/dev/null > "$HOME/.PopUpLearn/tmp/list_lines.tmp"
 	  LAST_DAY=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | sed 's/.*€//' | sort -n | tail -n 1`
 	  TODAY=$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))
 	  LAST_GOOD_ANSWER=""
 	  if [[ "$LAST_DAY" != "" ]]; then
-		LAST_GOOD_ANSWER="\n\tlast good answer was `expr $TODAY - $LAST_DAY ` days ago (`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null|wc -l` bad, `cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null|wc -l` good)"
+			LAST_GOOD_ANSWER="last good answer was `expr $TODAY - $LAST_DAY ` days ago (`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null|wc -l` bad, `cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null|wc -l` good)"
 	  fi
 	  echo -e $LAST_GOOD_ANSWER
-
+		#BAD (Not print if nothing bad)
 	  ERROR_TEST=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null | tail -n 1`
 	  if [[ "$ERROR_TEST" != "" ]]; then
-		cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad" 2> /dev/null > "$HOME/.PopUpLearn/tmp/list_mistakes.tmp"
-		cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" "$HOME/.PopUpLearn/tmp/list_mistakes.tmp" | sort | uniq -c | sed "s#^ \+1 \+\(.*\)#$GREY[\1]$END#" | sed "s#^ \+2 \+\(.*\)#$YELLOW[\1]$END#" | sed "s#^ \+3 \+\(.*\)#$ORANGE[\1]$END#" | sed "s#^ \+[0-9]\+ \+\(.*\)#$RED[\1]$END#" > "$HOME/.PopUpLearn/tmp/display_mistakes.tmp"
-		echo -en "\t\t  BAD : "
-		echo -e $(cat "$HOME/.PopUpLearn/tmp/display_mistakes.tmp" | sed 's/£/ :: /')
-	  #~ else
-		#~ echo -en "\t\t  BaD : "
-		#~ echo -e $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" | sed "s#^\(.*\)#$GREY[\1]$END#" | sed 's/£/ :: /')
+			cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad" 2> /dev/null > "$HOME/.PopUpLearn/tmp/list_mistakes.tmp"
+			cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" "$HOME/.PopUpLearn/tmp/list_mistakes.tmp" | sort | uniq -c | sed "s#^ \+1 \+\(.*\)#$GREY[\1]$END#" | sed "s#^ \+2 \+\(.*\)#$YELLOW[\1]$END#" | sed "s#^ \+3 \+\(.*\)#$ORANGE[\1]$END#" | sed "s#^ \+[0-9]\+ \+\(.*\)#$RED[\1]$END#" > "$HOME/.PopUpLearn/tmp/display_mistakes.tmp"
+			echo -en "\t\t  BAD : "
+			echo -e $(cat "$HOME/.PopUpLearn/tmp/display_mistakes.tmp" | sed 's/£/ :: /')
 	  fi
-
+		#GOOD (Not print if all good : ALL_GOOD=0)
 	  GOOD_TEST=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | tail -n 1`
 	  if [[ "$GOOD_TEST" != "" ]]; then
-		cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good" 2> /dev/null > "$HOME/.PopUpLearn/tmp/list_correct.tmp"
-		cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" "$HOME/.PopUpLearn/tmp/list_correct.tmp" | sort | uniq -c | sed "s#^ \+1 \+\(.*\)#$BLUE[\1]$END#" | sed "s#^ \+2 \+\(.*\)#$DARK_BLUE[\1]$END#" | sed "s#^ \+[0-9]\+ \+\(.*\)#$GREY[\1]$END#" > "$HOME/.PopUpLearn/tmp/display_correct.tmp"
-		echo -en "\t\t GOOD : "
-		echo -e $(cat "$HOME/.PopUpLearn/tmp/display_correct.tmp" | sed 's/£/ :: /')
+			ALL_GOOD=$(expr `wc -l "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date"|sed 's/ .*//'` - `wc -l "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/session_content.pul"|sed 's/ .*//'`)
+			if [[ "$ALL_GOOD" == "0" ]]; then
+				cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good" 2> /dev/null > "$HOME/.PopUpLearn/tmp/list_correct.tmp"
+				cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" "$HOME/.PopUpLearn/tmp/list_correct.tmp" | sort | uniq -c | sed "s#^ \+1 \+\(.*\)#$BLUE[\1]$END#" | sed "s#^ \+2 \+\(.*\)#$DARK_BLUE[\1]$END#" | sed "s#^ \+[0-9]\+ \+\(.*\)#$GREY[\1]$END#" > "$HOME/.PopUpLearn/tmp/display_correct.tmp"
+				echo -en "\t\t GOOD : "
+				echo -e $(cat "$HOME/.PopUpLearn/tmp/display_correct.tmp" | sed 's/£/ :: /')
+			fi
 	  else
-		echo -en "\t\t GooD : "
-		echo -e $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" | sed "s#^\(.*\)#$BLUE[\1]$END#" | sed 's/£/ :: /')
+			echo -en "\t\t GooD : "
+			echo -e $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" | sed "s#^\(.*\)#$BLUE[\1]$END#" | sed 's/£/ :: /')
 	  fi
-
-	  #~ echo -en $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp")
-	  #~ echo -n "] "
 	done
 	selected=99
 	#~ echo -e "\t\\e[0;100m n) \\e[0m New session"
@@ -291,9 +279,9 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME
 	echo -e "\t\\e[0;100m s) \\e[0m All questions from all current chapters (chapter random order) - NOT SHOW ANSWER"
 	echo -e "\t\\e[0;100m m) \\e[0m All mistakes from all sessions (chapter random order) - NOT SHOW ANSWER"
 	echo -e "\t\\e[0;100m b) \\e[0m \\e[97;42m[Recommended]\\e[0m Detect your knowledge by asking only blue questions. (chapter random order) - NOT SHOW ANSWER"
-	#~ echo -e "\t\\e[0;100m S) \\e[0m All questions from all current sessions (session random order) - SHOW ANSWER FIRST"
+	# ~ echo -e "\t\\e[0;100m S) \\e[0m All questions from all current sessions (session random order) - SHOW ANSWER FIRST"
 	# ~ echo -e "\t\\e[0;100m M) \\e[0m All mistakes from all sessions (session random order) - SHOW ANSWER FIRST"
-	#~ echo -e "\t\\e[0;100m q) \\e[0m All questions from the .pul file \\e[38;5;196m[ not yet implemented... :( ]\\e[0m" #MAYBE NOT... TRIGGER ANOTHER LOG...
+	# ~ echo -e "\t\\e[0;100m q) \\e[0m All questions from the .pul file \\e[38;5;196m[ not yet implemented... :( ]\\e[0m" #MAYBE NOT... TRIGGER ANOTHER LOG...
 	# ~ echo -e "\t\\e[0;100m r) \\e[0m All red mistakes from all sessions \\e[38;5;196m[ not yet implemented... :( ]\\e[0m"
 	# echo -e "\t\\e[0;100m a) \\e[0m Automated infinite loop, Optimized by PopUpLearn, focus on mistakes. \\e[38;5;196m[ not yet implemented... :( ]\\e[0m"
 	echo -e "\t\\e[0;100m e) \\e[0m Return"
@@ -313,7 +301,6 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME
 			[0-9]*) SESSION_NUMBER=$selected; test "$selected" -le "`expr $NB_SESSION - 1`" && break ;;
 		esac
 	done
-	#~ echo "!!! $selected ${SUBJECTS[selected]} !!!"
 }
 function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME
 	SESSION_SIZE=999 #For gs, always 999
@@ -329,11 +316,10 @@ function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME
 			#LAUNCH ONE SESSION AFTER THE OTHER
 			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
-				echo "----> SESSION_NUMBER=$SESSION_NUMBER"
 
 				mkdir -p "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/"
 				FILE="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul"
-				echo " === $FILE === "
+
 				cp $FILE "$HOME/.PopUpLearn/tmp/session_content.tmp"
 				cp $FILE "$HOME/.PopUpLearn/tmp/session_content_remove.tmp"
 
@@ -413,7 +399,7 @@ function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME
 
 		mkdir -p "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/"
 		FILE="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul"
-		# echo " === $FILE === "
+		echo " === $FILE === "
 		cp $FILE "$HOME/.PopUpLearn/tmp/session_content.tmp"
 		cp $FILE "$HOME/.PopUpLearn/tmp/session_content_remove.tmp"
 
@@ -424,23 +410,6 @@ function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME
 		LOOP_QUIZ=1
 		⬚⬚⬚⬚⬚_🔄_lines_in_gamescript_chapter || return 2
 	fi
-
-	#??? old create_file_content
-	#~ cat $FILE | sed 's/ |=| /£/' | sed 's/^\t//g' | grep '£' > $HOME/.PopUpLearn/tmp/file_content_BAD_answers.tmp
-	#~ cat $HOME/.PopUpLearn/tmp/file_content_BAD_answers.tmp | sort -R | head -n $SESSION_SIZE > $HOME/.PopUpLearn/tmp/file_content.tmp
-
-	#~ SESSION_NUMBER=$selected
-	#~ LANGUAGE_1=$LANGUAGE
-	#~ LANGUAGE_2=$LANGUAGE
-	#~ SUBJECT=GameScript
-	#~ NUMBER=1
-	#~ LOOP_QUIZ=1
-	#~ while read X; do
-		#~ ⬚⬚⬚⬚⬚⬚_🚧_session_answers
-		#~ ⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp
-		#~ ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ
-		#~ ⬚⬚⬚⬚⬚⬚_🛑_quiz || return 2
-	#~ done < "$HOME/.PopUpLearn/tmp/session_content.tmp"
 }
 function ⬚⬚⬚⬚⬚_🔄_lines_in_gamescript_chapter(){ 🔧 $FUNCNAME
 	while read X; do
@@ -605,38 +574,40 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME
 	  TODAY=$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))
 	  LAST_GOOD_ANSWER=""
 	  if [[ "$LAST_DAY" != "" ]]; then
-		LAST_GOOD_ANSWER="\n\tlast good answer was `expr $TODAY - $LAST_DAY ` days ago (`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null|wc -l` bad, `cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null|wc -l` good)"
+		LAST_GOOD_ANSWER="last good answer was `expr $TODAY - $LAST_DAY ` days ago (`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null|wc -l` bad, `cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null|wc -l` good)"
 	  fi
 	  echo -e $LAST_GOOD_ANSWER
 
 	  ERROR_TEST=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null | tail -n 1`
 	  if [[ "$ERROR_TEST" != "" ]]; then
-		cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad" 2> /dev/null > "$HOME/.PopUpLearn/tmp/list_mistakes.tmp"
-		cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" "$HOME/.PopUpLearn/tmp/list_mistakes.tmp" | sort | uniq -c | sed "s#^ \+1 \+\(.*\)#$GREY[\1]$END#" | sed "s#^ \+2 \+\(.*\)#$YELLOW[\1]$END#" | sed "s#^ \+3 \+\(.*\)#$ORANGE[\1]$END#" | sed "s#^ \+[0-9]\+ \+\(.*\)#$RED[\1]$END#" > "$HOME/.PopUpLearn/tmp/display_mistakes.tmp"
-		echo -en "\t\t  BAD : "
-		echo -e $(cat "$HOME/.PopUpLearn/tmp/display_mistakes.tmp" | sed 's/£/ :: /')
+			cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad" 2> /dev/null > "$HOME/.PopUpLearn/tmp/list_mistakes.tmp"
+			cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" "$HOME/.PopUpLearn/tmp/list_mistakes.tmp" | sort | uniq -c | sed "s#^ \+1 \+\(.*\)#$GREY[\1]$END#" | sed "s#^ \+2 \+\(.*\)#$YELLOW[\1]$END#" | sed "s#^ \+3 \+\(.*\)#$ORANGE[\1]$END#" | sed "s#^ \+[0-9]\+ \+\(.*\)#$RED[\1]$END#" > "$HOME/.PopUpLearn/tmp/display_mistakes.tmp"
+			echo -en "\t\t  BAD : "
+			echo -e $(cat "$HOME/.PopUpLearn/tmp/display_mistakes.tmp" | sed 's/£/ :: /')
 	  else
-		echo -en "\t\t  BaD : "
-		echo -e $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" | sed "s#^\(.*\)#$GREY[\1]$END#" | sed 's/£/ :: /')
+			echo -en "\t\t  BaD : "
+			echo -e $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" | sed "s#^\(.*\)#$GREY[\1]$END#" | sed 's/£/ :: /')
 	  fi
 
 	  GOOD_TEST=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | tail -n 1`
 	  if [[ "$GOOD_TEST" != "" ]]; then
-		cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good" 2> /dev/null > "$HOME/.PopUpLearn/tmp/list_correct.tmp"
-		cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" "$HOME/.PopUpLearn/tmp/list_correct.tmp" | sort | uniq -c | sed "s#^ \+1 \+\(.*\)#$BLUE[\1]$END#" | sed "s#^ \+2 \+\(.*\)#$DARK_BLUE[\1]$END#" | sed "s#^ \+[0-9]\+ \+\(.*\)#$GREY[\1]$END#" > "$HOME/.PopUpLearn/tmp/display_correct.tmp"
-		echo -en "\t\t GOOD : "
-		echo -e $(cat "$HOME/.PopUpLearn/tmp/display_correct.tmp" | sed 's/£/ :: /')
+			SESSION_SIZE=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/session_content.pul"|sort|uniq|wc -l|sed 's/ .*//'`
+			GOOD_SIZE=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good"|sort|uniq|wc -l|sed 's/ .*//'`
+			ALL_GOOD=$(expr $SESSION_SIZE - $GOOD_SIZE)
+			if [[ "$ALL_GOOD" != "0" ]]; then
+				cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good" 2> /dev/null > "$HOME/.PopUpLearn/tmp/list_correct.tmp"
+				cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" "$HOME/.PopUpLearn/tmp/list_correct.tmp" | sort | uniq -c | sed "s#^ \+1 \+\(.*\)#$BLUE[\1]$END#" | sed "s#^ \+2 \+\(.*\)#$DARK_BLUE[\1]$END#" | sed "s#^ \+[0-9]\+ \+\(.*\)#$GREY[\1]$END#" > "$HOME/.PopUpLearn/tmp/display_correct.tmp"
+				echo -en "\t\t GOOD : "
+				echo -e $(cat "$HOME/.PopUpLearn/tmp/display_correct.tmp" | sed 's/£/ :: /')
+			fi
 	  else
-		echo -en "\t\t GooD : "
-		echo -e $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" | sed "s#^\(.*\)#$BLUE[\1]$END#" | sed 's/£/ :: /')
+			echo -en "\t\t GooD : "
+			echo -e $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" | sed "s#^\(.*\)#$BLUE[\1]$END#" | sed 's/£/ :: /')
 	  fi
-
-	  #~ echo -en $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp")
-	  #~ echo -n "] "
 	done
 	selected=99
 	echo -e "\t\\e[0;100m n) \\e[0m New session"
-	echo -e "\t\\e[0;100m N) \\e[0m New sessions (infinite loop of a new session)"
+	# echo -e "\t\\e[0;100m N) \\e[0m New sessions (infinite loop of a new session)"
 	echo -e "\t\\e[0;100m s) \\e[0m All questions from all current sessions (session random order) - NOT SHOW ANSWER"
 	echo -e "\t\\e[0;100m m) \\e[0m All mistakes from all sessions (session random order) - NOT SHOW ANSWER"
 	echo -e "\t\\e[0;100m S) \\e[0m All questions from all current sessions (session random order) - SHOW ANSWER FIRST"
@@ -652,7 +623,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME
 		case $selected in
 			e) return ;;
 			n) break ;;
-			N) break ;;
+			# N) break ;;
 			a) break ;;
 			m) break ;;
 			s) break ;;
@@ -773,6 +744,7 @@ function ⬚⬚⬚⬚⬚⬚_🚧_session_answers(){ 🔧 $FUNCNAME
 	LINE=`cat $HOME/.PopUpLearn/tmp/current_line.tmp`
 	LEFT=`echo "$LINE" | sed 's/£.*//'`
 	RIGHT=`echo "$LINE" | sed 's/.*£//'`
+	🔧 "$FUNCNAME : \$LINE=$LINE (RIGHT / LEFT)"
 }
 function ⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp(){ 🔧 $FUNCNAME
 	#~ echo "my_line.tmp : 0£${SUBJECT}_${NUMBER}£${LEFT}£${RIGHT}£${LANGUAGE_1}£${LANGUAGE_2}£${TYPE}"
