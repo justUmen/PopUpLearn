@@ -210,7 +210,7 @@ function ⬚⬚⬚⬚_📃_gamescript(){ 🔧 $FUNCNAME $@
 		echo " never used"
 		fi
 	done
-	echo -e "\t$COLOR_SELECTION e) \$ENDO Return"
+	echo -e "\t$COLOR_SELECTION e) $ENDO Return"
 	while :; do
 		echo -en "\t\e[97;45m # $ENDO"
 		read selected < /dev/tty
@@ -293,9 +293,9 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME $@
 	echo -e "\t$COLOR_SELECTION b) $ENDO $COLOR_TITLE_SELECTED[Recommended]$ENDO Detect your knowledge by asking only blue questions. (chapter random order) - NOT SHOW ANSWER"
 	# ~ echo -e "\t$COLOR_SELECTION S) $ENDO All questions from all current sessions (session random order) - SHOW ANSWER FIRST"
 	# ~ echo -e "\t$COLOR_SELECTION M) $ENDO All mistakes from all sessions (session random order) - SHOW ANSWER FIRST"
-	# ~ echo -e "\t$COLOR_SELECTION q) $ENDO All questions from the .pul file \\e[38;5;196m[ not yet implemented... :( ]\$ENDO" #MAYBE NOT... TRIGGER ANOTHER LOG...
-	# ~ echo -e "\t$COLOR_SELECTION r) $ENDO All red mistakes from all sessions \\e[38;5;196m[ not yet implemented... :( ]\$ENDO"
-	# echo -e "\t$COLOR_SELECTION a) $ENDO Automated infinite loop, Optimized by PopUpLearn, focus on mistakes. \\e[38;5;196m[ not yet implemented... :( ]\$ENDO"
+	# ~ echo -e "\t$COLOR_SELECTION q) $ENDO All questions from the .pul file \\e[38;5;196m[ not yet implemented... :( ]$ENDO" #MAYBE NOT... TRIGGER ANOTHER LOG...
+	# ~ echo -e "\t$COLOR_SELECTION r) $ENDO All red mistakes from all sessions \\e[38;5;196m[ not yet implemented... :( ]$ENDO"
+	# echo -e "\t$COLOR_SELECTION a) $ENDO Automated infinite loop, Optimized by PopUpLearn, focus on mistakes. \\e[38;5;196m[ not yet implemented... :( ]$ENDO"
 	echo -e "\t$COLOR_SELECTION e) $ENDO Return"
 	while :; do
 		echo -en "\t\e[97;45m # $ENDO"
@@ -665,8 +665,8 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 	echo -e "\t$COLOR_SELECTION S) $ENDO All questions from all current sessions (session random order) - SHOW ANSWER FIRST"
 	echo -e "\t$COLOR_SELECTION M) $ENDO All mistakes from all sessions (session random order) - SHOW ANSWER FIRST"
 	echo -e "\t$COLOR_SELECTION b) $ENDO $COLOR_TITLE_SELECTED[Recommended]$ENDO Detect your knowledge by asking only blue questions. (chapter random order) - NOT SHOW ANSWER"
-	#~ echo -e "\t\$COLOR_SELECTION q) \$ENDO All questions from the .pul file \\e[38;5;196m[ not yet implemented... :( ]\$ENDO" #MAYBE NOT... TRIGGER ANOTHER LOG...
-	#~ echo -e "\t\$COLOR_SELECTION r) \$ENDO All red mistakes from all sessions \\e[38;5;196m[ not yet implemented... :( ]\$ENDO"
+	#~ echo -e "\t\$COLOR_SELECTION q) $ENDO All questions from the .pul file \\e[38;5;196m[ not yet implemented... :( ]$ENDO" #MAYBE NOT... TRIGGER ANOTHER LOG...
+	#~ echo -e "\t\$COLOR_SELECTION r) $ENDO All red mistakes from all sessions \\e[38;5;196m[ not yet implemented... :( ]$ENDO"
 	echo -e "\t$COLOR_SELECTION a) $ENDO Automated infinite loop, Optimized by PopUpLearn \\e[38;5;196m[ not yet implemented... :( ]$ENDO"
 	echo -e "\t$COLOR_SELECTION e) $ENDO Return"
 	while :; do
