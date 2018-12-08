@@ -658,7 +658,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 	  fi
 	done
 	selected=99
-	echo -e "\t$COLOR_SELECTION n) $ENDO New sessions (SHOW ANSWER and quiz - no points, record mistakes)"
+	echo -e "\t$COLOR_SELECTION n) $ENDO New sessions (SHOW ANSWER and quiz - no points for good, log mistakes)"
 	echo -e "\t$COLOR_SELECTION N) $ENDO New sessions (just create a new session, ask nothing)"
 	echo -e "\t$COLOR_SELECTION s) $ENDO All questions from all current sessions (session random order) - NOT SHOW ANSWER"
 	echo -e "\t$COLOR_SELECTION m) $ENDO All mistakes from all sessions (session random order) - NOT SHOW ANSWER"
@@ -774,7 +774,7 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 		if [[ "$X" == "" ]]; then break; fi
 		⬚⬚⬚⬚⬚⬚_🚧_session_answers
 		⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp
-		⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer
+		⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer || return 2
 		if [[ "$1" == "IGNORE_GOOD" ]];then
 			⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ "IGNORE_GOOD"
 		else
@@ -832,7 +832,10 @@ function ⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer(){ 🔧 $FUNCNAME $@
 			i3-msg workspace back_and_forth #What about others wm ?
 		fi
 		if [ $SIGSTOP_MPV -eq 1 ]; then mpv_play &> /dev/null; fi
-		sleep $SEC_BEFORE_QUIZ
+		echo "Press any key to exit, or wait $SEC_BEFORE_QUIZ SECONDS before the question."
+		if read -r -N 1 -t $SEC_BEFORE_QUIZ EXIT < /dev/tty; then
+			return 2 #STOPPED MANUALLY, break loop
+		fi
 	fi
 }
 function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
