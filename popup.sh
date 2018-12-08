@@ -15,9 +15,9 @@
 #~ 🌘 : used for new session only
 
 function 🔧(){
-	echo -e "\e[0;100m 🔧 $1 🔧 \e[0m"
+	echo -e "$BG_LIGHT_GRAY$BLACK 🔧 $1 🔧 $ENDO"
 }
-function 💻_keyboard_language_change(){ 🔧 $FUNCNAME
+function 💻_keyboard_language_change(){ 🔧 $FUNCNAME $@
 	command -v ibus >/dev/null 2>&1 || return
 	ibus engine > $HOME/.PopUpLearn/tmp/ibus.tmp
 	CURRENT_LANGUAGE=`cat $HOME/.PopUpLearn/tmp/ibus.tmp`
@@ -58,7 +58,7 @@ function 💻_keyboard_language_change(){ 🔧 $FUNCNAME
 		;;
 	esac
 }
-function 💻_keyboard_language_previous_one(){ 🔧 $FUNCNAME
+function 💻_keyboard_language_previous_one(){ 🔧 $FUNCNAME $@
 	command -v ibus >/dev/null 2>&1 || return
 	NEW_LANGUAGE=$(cat $HOME/.PopUpLearn/tmp/ibus_new.tmp)
 	CURRENT_LANGUAGE=$(cat $HOME/.PopUpLearn/tmp/ibus.tmp)
@@ -66,33 +66,45 @@ function 💻_keyboard_language_previous_one(){ 🔧 $FUNCNAME
 		ibus engine `cat $HOME/.PopUpLearn/tmp/ibus.tmp`
 	fi
 }
-function 💻_mpv_pause(){ 🔧 $FUNCNAME
+function 💻_mpv_pause(){ 🔧 $FUNCNAME $@
 	echo "{ \"command\": [\"set_property\", \"pause\", true] }" | socat - /tmp/mpvsocket &> /dev/null
 }
-function 💻_mpv_play(){ 🔧 $FUNCNAME
+function 💻_mpv_play(){ 🔧 $FUNCNAME $@
 	echo "{ \"command\": [\"set_property\", \"pause\", false] }" | socat - /tmp/mpvsocket &> /dev/null
 }
-function display(){ 🔧 $FUNCNAME
+function display(){ 🔧 $FUNCNAME $@
 	echo
 }
 
-function ⬚_before_start(){ 🔧 $FUNCNAME
+function ⬚_before_start(){
 	command -v surf -F >/dev/null 2>&1 || { echo "Veuillez installer les dépendances requises. Faites en tant qu'administrateur : apt-get install surf" >&2; exit 3; }
 	exec 6<>/dev/tcp/127.0.0.1/9999 && echo "php server available on port 9999" || { echo "Please run the php server with : php -S 127.0.0.1:9999 -t ~/.PopUpLearn" && exec 6>&- && exec 6<&- && exit; }
 	exec 6<>/dev/tcp/127.0.0.1/8888 && echo "nodejs server available on port 8888" || { echo "Please run the nodejs server with : node ~/.PopUpLearn/node_server.js || nodejs ~/.PopUpLearn/node_server.js" && exec 6>&- && exec 6<&- && exit; }
 	mkdir $HOME/.PopUpLearn/MYDB 2> /dev/null
 	touch $HOME/.PopUpLearn/MYDB/my.list
 	mkdir $HOME/.PopUpLearn/tmp 2> /dev/null
-	#PREPARE COLORS
+	#PREPARE BACKGROUND COLORS
+	ENDO="\e[0m"
+	BG_BLUE="\e[44m"
+	BG_BLACK="\e[40m"
+	BG_LIGHT_GRAY="\e[107m"
+	BG_LIGHT_MAGENTA="\e[105m"
+	BG_LIGHT_GREEN="\e[102m"
+	#PREPARE MENU COLORS
+	BLACK="\e[30m"
+	COLOR_SELECTION="$BG_LIGHT_MAGENTA$BLACK"
+	COLOR_TITLE_SELECTED="$BG_LIGHT_GREEN$BLACK"
+	#PREPARE COLORS QUESTIONS / ANSWERS ONLY !!! DIFFERENT FORMAT
 	END="\\\e\[0m"
 	GREY="\\\e\[38;5;59m" #GOOD 2+ / BAD 0
 	BLUE="\\\e\[38;5;33m" #GOOD 0
 	DARK_BLUE="\\\e\[38;5;25m" #GOOD 1
-	YELLOW="\\\e\[38;5;226m" #BAD 1
+	YELLOW="\\\e\[38;5;184m" #BAD 1
 	ORANGE="\\\e\[38;5;202m" #BAD 2
 	RED="\\\e\[38;5;196m" #BAD AT LEAST 3
+	🔧 $FUNCNAME $@ #HERE TO DISPLAY COLORS PROPERLY :P
 }
-function ⬚_🔄🔄_start(){ 🔧 $FUNCNAME
+function ⬚_🔄🔄_start(){ 🔧 $FUNCNAME $@
 	while [ 1 ]; do
 		source $HOME/.GameScript/config 2> /dev/null #LANGUAGE=fr used for quiz language
 		#source $HOME/.PopUpLearn/my.config is launched later to replace other specific configurations
@@ -110,7 +122,7 @@ function ⬚_🔄🔄_start(){ 🔧 $FUNCNAME
 		fi
 	done
 }
-function ⬚⬚_📃_main(){ 🔧 $FUNCNAME
+function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 	#Prepare .pul files in DB and MYDB
 	FILES=()
 	FILES+=("empty")
@@ -127,7 +139,7 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME
 	echo "Menu list all .pul files in ~/.PopUpLearn/DB/ and ~/.PopUpLearn/MYDB/ folders + manual entries from ~/.PopUpLearn/MYDB/my.list too (Full path of .pul file, one per line.)"
 	arraylength=${#FILES[@]}
 	for (( i=1; i<${arraylength}; i++ )); do
-		echo -en "\e[0;100m $i) \e[97;42m ${FILES[i]} \e[0m"
+		echo -en "$COLOR_SELECTION $i) $COLOR_TITLE_SELECTED ${FILES[i]} $ENDO"
 		FILE_NAME=`echo ${FILES[i]} | sed 's#.*/##'`
 		FILE_PATH="$HOME/.PopUpLearn/logs/*/*/*/*/$FILE_NAME/" # */* ???
 		LAST_DAY=`cat $FILE_PATH/session_*/answer.good.date 2>/dev/null | sed 's/.*€//' | sort -n | tail -n 1`
@@ -146,11 +158,11 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME
 		NB_LINES=`cat ${FILES[i]}|wc -l`
 		echo " => `expr $NB_GOOD / $NB_LINES`%"
 	done
-	echo -e "\e[0;100m g) \e[0m GameScript Quizzes [for `cat ~/.GameScript/username`]"
+	echo -e "$COLOR_SELECTION g) $ENDO GameScript Quizzes [for `cat ~/.GameScript/username`]"
 	selected=99
-	echo -e "\\e[0;100m e) \\e[0m Exit"
+	echo -e "$COLOR_SELECTION e) $ENDO Exit"
 	while :; do
-		echo -en "\e[97;45m # \e[0m"
+		echo -en "\e[97;45m # $ENDO"
 		read selected < /dev/tty
 		case $selected in
 			e) exit ;;
@@ -160,14 +172,14 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME
 	done
 	🔧 "$FUNCNAME : \$selected=$selected"
 }
-function ⬚⬚⬚_🔄🔄_gamescript(){ 🔧 $FUNCNAME
+function ⬚⬚⬚_🔄🔄_gamescript(){ 🔧 $FUNCNAME $@
 	while [ 1 ]; do
 		⬚⬚⬚⬚_📃_gamescript || return 2
 		⬚⬚⬚⬚_📃_gamescript_chapters || return 2
 		⬚⬚⬚⬚_📗_gamescript || return 2
 	done
 }
-function ⬚⬚⬚⬚_📃_gamescript(){ 🔧 $FUNCNAME
+function ⬚⬚⬚⬚_📃_gamescript(){ 🔧 $FUNCNAME $@
 	SUBJECTS=();
 	SUBJECTS=("empty")
 	SUBJECTS+=("bash")
@@ -177,7 +189,7 @@ function ⬚⬚⬚⬚_📃_gamescript(){ 🔧 $FUNCNAME
 	echo -e "\n\tPopUpLearn + GameScript [`cat ~/.GameScript/username`]";
 	arraylength=${#SUBJECTS[@]}
 	for (( i=1; i<${arraylength}; i++ )); do
-		echo -en "\t\e[0;100m $i) \e[97;42m ${SUBJECTS[i]} \e[0m"
+		echo -en "\t$COLOR_SELECTION $i) $COLOR_TITLE_SELECTED ${SUBJECTS[i]} $ENDO"
 		LIST_CHAPTERS=`ls $HOME/.GameScript/passwords/${SUBJECTS[i]}* 2>/dev/null | sed "s#.*${SUBJECTS[i]}##" | tr '\n' ',' | sed 's/,$//'`
 		mkdir -p $HOME/.PopUpLearn/logs/GameScript/${SUBJECTS[i]} 2> /dev/null
 		LAST_DAY=`cat $HOME/.PopUpLearn/logs/${LANGUAGE}/${LANGUAGE}/GameScript/1/${SUBJECTS[i]}/session_*/answer.good.date 2>/dev/null | sed 's/.*€//' | sort -n | tail -n 1`
@@ -198,9 +210,9 @@ function ⬚⬚⬚⬚_📃_gamescript(){ 🔧 $FUNCNAME
 		echo " never used"
 		fi
 	done
-	echo -e "\t\\e[0;100m e) \\e[0m Return"
+	echo -e "\t$COLOR_SELECTION e) \$ENDO Return"
 	while :; do
-		echo -en "\t\e[97;45m # \e[0m"
+		echo -en "\t\e[97;45m # $ENDO"
 		read selected < /dev/tty
 		case $selected in
 			e) return 2 ;;
@@ -210,7 +222,7 @@ function ⬚⬚⬚⬚_📃_gamescript(){ 🔧 $FUNCNAME
 	done
 	🔧 "$FUNCNAME : \$selected=$selected, \${SUBJECTS[i]}=${SUBJECTS[i]}"
 }
-function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME
+function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME $@
 	LANGUAGE_1=$LANGUAGE
 	LANGUAGE_2=$LANGUAGE
 	SUBJECT=GameScript
@@ -219,15 +231,15 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME
 	SESSION_NUMBER=${selected}
 	echo
 	echo " - Warning : here sessions are chapters (unlock chapter's password on GameScript to use them here)"
-	echo " - Warning : dates are recorded but are not yet used to organize and optimize your learning experience. (In the future, text will sometimes change colors.)"
+	echo " - Warning : dates are recorded but are not yet used to organize and optimize your learning experience. (In future versions, the text will change colors depending of when it was answered.)"
 	echo -e "
-	\e[4mCOLORS LEGEND :\e[0m
-		\e[38;5;59mGREY\e[0m : Good 2+ times or Bad 0 (user can ignore knowledge in grey)
-		\e[38;5;33mBLUE\e[0m : Good 0 (user need to do this session until \e[38;5;59mGREY\e[0m)
-		\e[38;5;25mDARK_BLUE\e[0m : Good 1 time (user need to do this session until \e[38;5;59mGREY\e[0m)
-		\e[38;5;226mYELLOW\e[0m : Bad 1 time
-		\e[38;5;202mORANGE\e[0m : Bad 2 times
-		\e[38;5;196mRED\e[0m : Bad 3+ times (user need to focus on this)
+	\e[4mCOLORS LEGEND :$ENDO
+		\e[38;5;59mGREY$ENDO : Good 2+ times or Bad 0 (user can ignore knowledge in grey)
+		\e[38;5;33mBLUE$ENDO : Good 0 (user need to do this session until \e[38;5;59mGREY$ENDO)
+		\e[38;5;25mDARK_BLUE$ENDO : Good 1 time (user need to do this session until \e[38;5;59mGREY$ENDO)
+		\e[38;5;226mYELLOW$ENDO : Bad 1 time
+		\e[38;5;202mORANGE$ENDO : Bad 2 times
+		\e[38;5;196mRED$ENDO : Bad 3+ times (user need to focus on this)
 	"
 
 	SESSION_NUMBER=1
@@ -241,7 +253,7 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME
 	ARG=0
 	while [ $ARG -ne `expr $SESSION_NUMBER - 1` ]; do
 	  ARG=`expr $ARG + 1`
-	  echo -en "\t\e[0;100m $ARG) \e[97;42m Chapter $ARG \e[0m "
+	  echo -en "\t$COLOR_SELECTION $ARG) $COLOR_TITLE_SELECTED Chapter $ARG $ENDO "
 	  cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/session_content.pul" 2>/dev/null > "$HOME/.PopUpLearn/tmp/list_lines.tmp"
 	  LAST_DAY=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | sed 's/.*€//' | sort -n | tail -n 1`
 	  TODAY=$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))
@@ -274,19 +286,19 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME
 	  fi
 	done
 	selected=99
-	#~ echo -e "\t\\e[0;100m n) \\e[0m New session"
-	#~ echo -e "\t\\e[0;100m N) \\e[0m New sessions (infinite loop of a new session)"
-	echo -e "\t\\e[0;100m s) \\e[0m All questions from all current chapters (chapter random order) - NOT SHOW ANSWER"
-	echo -e "\t\\e[0;100m m) \\e[0m All mistakes from all sessions (chapter random order) - NOT SHOW ANSWER"
-	echo -e "\t\\e[0;100m b) \\e[0m \\e[97;42m[Recommended]\\e[0m Detect your knowledge by asking only blue questions. (chapter random order) - NOT SHOW ANSWER"
-	# ~ echo -e "\t\\e[0;100m S) \\e[0m All questions from all current sessions (session random order) - SHOW ANSWER FIRST"
-	# ~ echo -e "\t\\e[0;100m M) \\e[0m All mistakes from all sessions (session random order) - SHOW ANSWER FIRST"
-	# ~ echo -e "\t\\e[0;100m q) \\e[0m All questions from the .pul file \\e[38;5;196m[ not yet implemented... :( ]\\e[0m" #MAYBE NOT... TRIGGER ANOTHER LOG...
-	# ~ echo -e "\t\\e[0;100m r) \\e[0m All red mistakes from all sessions \\e[38;5;196m[ not yet implemented... :( ]\\e[0m"
-	# echo -e "\t\\e[0;100m a) \\e[0m Automated infinite loop, Optimized by PopUpLearn, focus on mistakes. \\e[38;5;196m[ not yet implemented... :( ]\\e[0m"
-	echo -e "\t\\e[0;100m e) \\e[0m Return"
+	#~ echo -e "\t$COLOR_SELECTION n) $ENDO New session"
+	#~ echo -e "\t$COLOR_SELECTION N) $ENDO New sessions (infinite loop of a new session)"
+	echo -e "\t$COLOR_SELECTION s) $ENDO All questions from all current chapters (chapter random order) - NOT SHOW ANSWER"
+	echo -e "\t$COLOR_SELECTION m) $ENDO All mistakes from all sessions (chapter random order) - NOT SHOW ANSWER"
+	echo -e "\t$COLOR_SELECTION b) $ENDO $COLOR_TITLE_SELECTED[Recommended]$ENDO Detect your knowledge by asking only blue questions. (chapter random order) - NOT SHOW ANSWER"
+	# ~ echo -e "\t$COLOR_SELECTION S) $ENDO All questions from all current sessions (session random order) - SHOW ANSWER FIRST"
+	# ~ echo -e "\t$COLOR_SELECTION M) $ENDO All mistakes from all sessions (session random order) - SHOW ANSWER FIRST"
+	# ~ echo -e "\t$COLOR_SELECTION q) $ENDO All questions from the .pul file \\e[38;5;196m[ not yet implemented... :( ]\$ENDO" #MAYBE NOT... TRIGGER ANOTHER LOG...
+	# ~ echo -e "\t$COLOR_SELECTION r) $ENDO All red mistakes from all sessions \\e[38;5;196m[ not yet implemented... :( ]\$ENDO"
+	# echo -e "\t$COLOR_SELECTION a) $ENDO Automated infinite loop, Optimized by PopUpLearn, focus on mistakes. \\e[38;5;196m[ not yet implemented... :( ]\$ENDO"
+	echo -e "\t$COLOR_SELECTION e) $ENDO Return"
 	while :; do
-		echo -en "\t\e[97;45m # \e[0m"
+		echo -en "\t\e[97;45m # $ENDO"
 		read selected < /dev/tty
 		case $selected in
 			e) return 2 ;;
@@ -302,7 +314,7 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME
 		esac
 	done
 }
-function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME
+function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME $@
 	SESSION_SIZE=999 #For gs, always 999
 	if [[ "$selected" == "m" ]];then
 			ANSWER_BEFORE_QUIZ=0 #USE 'M' INSTEAD TO DISPLAY ANSWER
@@ -329,6 +341,14 @@ function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME
 				NUMBER=1
 				LOOP_QUIZ=1
 				⬚⬚⬚⬚⬚_🔄_lines_in_gamescript_chapter || return 2
+
+				echo "Press any key to exit, or wait $SEC_AFTER_QUIZ SECONDS before the next subject."
+				if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
+					return 2 #STOPPED MANUALLY, break loop
+				else
+					return 0
+				fi
+
 			done
 	elif [[ "$selected" == "s" ]];then
 			ANSWER_BEFORE_QUIZ=0 #USE 'M' INSTEAD TO DISPLAY ANSWER
@@ -356,6 +376,13 @@ function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME
 				NUMBER=1
 				LOOP_QUIZ=1
 				⬚⬚⬚⬚⬚_🔄_lines_in_gamescript_chapter || return 2
+
+				echo "Press any key to exit, or wait $SEC_AFTER_QUIZ SECONDS before the next subject."
+				if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
+					return 2 #STOPPED MANUALLY, break loop
+				else
+					return 0
+				fi
 			done
 	elif [[ "$selected" == "b" ]];then
 			ANSWER_BEFORE_QUIZ=0 #USE 'M' INSTEAD TO DISPLAY ANSWER
@@ -393,6 +420,13 @@ function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME
 				NUMBER=1
 				LOOP_QUIZ=1
 				⬚⬚⬚⬚⬚_🔄_lines_in_gamescript_chapter || return 2
+
+				echo "Press any key to exit, or wait $SEC_AFTER_QUIZ SECONDS before the next subject."
+				if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
+					return 2 #STOPPED MANUALLY, break loop
+				else
+					return 0
+				fi
 			done
 	else
 		SESSION_NUMBER=$selected
@@ -411,7 +445,7 @@ function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME
 		⬚⬚⬚⬚⬚_🔄_lines_in_gamescript_chapter || return 2
 	fi
 }
-function ⬚⬚⬚⬚⬚_🔄_lines_in_gamescript_chapter(){ 🔧 $FUNCNAME
+function ⬚⬚⬚⬚⬚_🔄_lines_in_gamescript_chapter(){ 🔧 $FUNCNAME $@
 	while read X; do
 		⬚⬚⬚⬚⬚⬚_🚧_session_answers
 		⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp
@@ -420,7 +454,7 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_gamescript_chapter(){ 🔧 $FUNCNAME
 		⬚⬚⬚⬚⬚⬚_🛑_quiz || return 2
 	done < "$HOME/.PopUpLearn/tmp/session_content.tmp"
 }
-function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME
+function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 	FILE=${FILES[selected]}
 	#SPLIT CONTENT FROM .pul FILE AND CONFIG + source
 	cat $FILE | grep "^#!#" | sed 's/^#!#//' > $HOME/.PopUpLearn/tmp/session_specific_config.tmp
@@ -468,6 +502,10 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
 				echo "----> SESSION_NUMBER=$SESSION_NUMBER"
 				⬚⬚⬚⬚_📗🔢_session_old $SESSION_NUMBER
+				echo "Press any key to exit, or wait $SEC_AFTER_QUIZ SECONDS before the next session."
+				if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
+					break #STOPPED MANUALLY, break loop
+				fi
 			done
 		elif [[ "$selected" == "m" ]]; then
 			ANSWER_BEFORE_QUIZ=0 #USE 'M' INSTEAD TO DISPLAY ANSWER
@@ -483,6 +521,10 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
 				echo "----> SESSION_NUMBER=$SESSION_NUMBER"
 				⬚⬚⬚⬚_📗🔢_session_old_mistakes_only $SESSION_NUMBER
+				echo "Press any key to exit, or wait $SEC_AFTER_QUIZ SECONDS before the next session."
+				if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
+					break #STOPPED MANUALLY, break loop
+				fi
 			done
 		elif [[ "$selected" == "S" ]]; then
 			ANSWER_BEFORE_QUIZ=1
@@ -498,6 +540,10 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
 				echo "----> SESSION_NUMBER=$SESSION_NUMBER"
 				⬚⬚⬚⬚_📗🔢_session_old $SESSION_NUMBER
+				echo "Press any key to exit, or wait $SEC_AFTER_QUIZ SECONDS before the next session."
+				if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
+					break #STOPPED MANUALLY, break loop
+				fi
 			done
 		elif [[ "$selected" == "M" ]]; then
 			ANSWER_BEFORE_QUIZ=1
@@ -513,6 +559,10 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
 				echo "----> SESSION_NUMBER=$SESSION_NUMBER"
 				⬚⬚⬚⬚_📗🔢_session_old_mistakes_only $SESSION_NUMBER
+				echo "Press any key to exit, or wait $SEC_AFTER_QUIZ SECONDS before the next session."
+				if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
+					break #STOPPED MANUALLY, break loop
+				fi
 			done
 		elif [[ "$selected" == "b" ]]; then
 			ANSWER_BEFORE_QUIZ=0
@@ -528,32 +578,34 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
 				echo "----> SESSION_NUMBER=$SESSION_NUMBER"
 				⬚⬚⬚⬚_📗🔢_session_old_blue_only $SESSION_NUMBER
+				echo "Press any key to exit, or wait $SEC_AFTER_QUIZ SECONDS before the next session."
+				if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
+					break #STOPPED MANUALLY, break loop
+				fi
 			done
+		elif [[ "$selected" == "N" ]]; then
+			⬚⬚⬚⬚_📗🌘_session_new
 		elif [[ "$selected" == "n" ]]; then
 			⬚⬚⬚⬚_📗🌘_session_new
-		elif [[ "$selected" == "N" ]]; then
-			while [ 1 ];do
-				⬚⬚⬚⬚_📗🌘_session_new
-				SESSION_NUMBER=`expr $SESSION_NUMBER + 1`
-				echo "----> SESSION_NUMBER=$SESSION_NUMBER"
-			done
+			echo "SESSION_NUMBER = $SESSION_NUMBER"
+			⬚⬚⬚⬚_📗🔢_session_old_with_answers $SESSION_NUMBER
 		else
 			⬚⬚⬚⬚_📗🔢_session_old $selected
 		fi
 	done
 }
-function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME
+function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 	echo
-	echo " - Warning : dates are recorded but are not yet used to organize and optimize your learning experience. (In the future, text will sometimes change colors.)"
+	echo " - Warning : dates are recorded but are not yet used to organize and optimize your learning experience. (In future versions, the text will change colors depending of when it was answered.)"
 
 	echo -e "
-	\e[4mCOLORS LEGEND :\e[0m
-		\e[38;5;59mGREY\e[0m : Good 2+ times or Bad 0 (user can ignore knowledge in grey)
-		\e[38;5;33mBLUE\e[0m : Good 0 (user need to do this session until \e[38;5;59mGREY\e[0m)
-		\e[38;5;25mDARK_BLUE\e[0m : Good 1 time (user need to do this session until \e[38;5;59mGREY\e[0m)
-		\e[38;5;226mYELLOW\e[0m : Bad 1 time
-		\e[38;5;202mORANGE\e[0m : Bad 2 times
-		\e[38;5;196mRED\e[0m : Bad 3+ times (user need to focus on this)
+	\e[4mCOLORS LEGEND :$ENDO
+		\e[38;5;59mGREY$ENDO : Good 2+ times or Bad 0 (user can ignore knowledge in grey)
+		\e[38;5;33mBLUE$ENDO : Good 0 (user need to do this session until \e[38;5;59mGREY$ENDO)
+		\e[38;5;25mDARK_BLUE$ENDO : Good 1 time (user need to do this session until \e[38;5;59mGREY$ENDO)
+		\e[38;5;184mYELLOW$ENDO : Bad 1 time
+		\e[38;5;202mORANGE$ENDO : Bad 2 times
+		\e[38;5;196mRED$ENDO : Bad 3+ times (user need to focus on this)
 	"
 	while [ -d "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/" ]; do
 		SESSION_NUMBER=`expr $SESSION_NUMBER + 1`
@@ -567,7 +619,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME
 	ARG=0
 	while [ $ARG -ne `expr $SESSION_NUMBER - 1` ]; do
 	  ARG=`expr $ARG + 1`
-	  echo -en "\t\e[0;100m $ARG) \e[97;42m Session $ARG \e[0m "
+	  echo -en "\t$COLOR_SELECTION $ARG) $COLOR_TITLE_SELECTED Session $ARG $ENDO "
 	  #~ cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/session_content.pul" 2>/dev/null | sed 's/.*£//' | tr '\n' '|' | sed 's/^/|/' > "$HOME/.PopUpLearn/tmp/list_answers.tmp"
 	  cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/session_content.pul" 2>/dev/null > "$HOME/.PopUpLearn/tmp/list_lines.tmp"
 	  LAST_DAY=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | sed 's/.*€//' | sort -n | tail -n 1`
@@ -606,24 +658,24 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME
 	  fi
 	done
 	selected=99
-	echo -e "\t\\e[0;100m n) \\e[0m New session"
-	# echo -e "\t\\e[0;100m N) \\e[0m New sessions (infinite loop of a new session)"
-	echo -e "\t\\e[0;100m s) \\e[0m All questions from all current sessions (session random order) - NOT SHOW ANSWER"
-	echo -e "\t\\e[0;100m m) \\e[0m All mistakes from all sessions (session random order) - NOT SHOW ANSWER"
-	echo -e "\t\\e[0;100m S) \\e[0m All questions from all current sessions (session random order) - SHOW ANSWER FIRST"
-	echo -e "\t\\e[0;100m M) \\e[0m All mistakes from all sessions (session random order) - SHOW ANSWER FIRST"
-	echo -e "\t\\e[0;100m b) \\e[0m \\e[97;42m[Recommended]\\e[0m Detect your knowledge by asking only blue questions. (chapter random order) - NOT SHOW ANSWER"
-	#~ echo -e "\t\\e[0;100m q) \\e[0m All questions from the .pul file \\e[38;5;196m[ not yet implemented... :( ]\\e[0m" #MAYBE NOT... TRIGGER ANOTHER LOG...
-	#~ echo -e "\t\\e[0;100m r) \\e[0m All red mistakes from all sessions \\e[38;5;196m[ not yet implemented... :( ]\\e[0m"
-	echo -e "\t\\e[0;100m a) \\e[0m Automated infinite loop, Optimized by PopUpLearn \\e[38;5;196m[ not yet implemented... :( ]\\e[0m"
-	echo -e "\t\\e[0;100m e) \\e[0m Return"
+	echo -e "\t$COLOR_SELECTION n) $ENDO New sessions (SHOW ANSWER and quiz - no points, record mistakes)"
+	echo -e "\t$COLOR_SELECTION N) $ENDO New sessions (just create a new session, ask nothing)"
+	echo -e "\t$COLOR_SELECTION s) $ENDO All questions from all current sessions (session random order) - NOT SHOW ANSWER"
+	echo -e "\t$COLOR_SELECTION m) $ENDO All mistakes from all sessions (session random order) - NOT SHOW ANSWER"
+	echo -e "\t$COLOR_SELECTION S) $ENDO All questions from all current sessions (session random order) - SHOW ANSWER FIRST"
+	echo -e "\t$COLOR_SELECTION M) $ENDO All mistakes from all sessions (session random order) - SHOW ANSWER FIRST"
+	echo -e "\t$COLOR_SELECTION b) $ENDO $COLOR_TITLE_SELECTED[Recommended]$ENDO Detect your knowledge by asking only blue questions. (chapter random order) - NOT SHOW ANSWER"
+	#~ echo -e "\t\$COLOR_SELECTION q) \$ENDO All questions from the .pul file \\e[38;5;196m[ not yet implemented... :( ]\$ENDO" #MAYBE NOT... TRIGGER ANOTHER LOG...
+	#~ echo -e "\t\$COLOR_SELECTION r) \$ENDO All red mistakes from all sessions \\e[38;5;196m[ not yet implemented... :( ]\$ENDO"
+	echo -e "\t$COLOR_SELECTION a) $ENDO Automated infinite loop, Optimized by PopUpLearn \\e[38;5;196m[ not yet implemented... :( ]$ENDO"
+	echo -e "\t$COLOR_SELECTION e) $ENDO Return"
 	while :; do
-		echo -en "\t\e[97;45m # \e[0m"
+		echo -en "\t\e[97;45m # $ENDO"
 		read selected < /dev/tty
 		case $selected in
 			e) return ;;
 			n) break ;;
-			# N) break ;;
+			N) break ;;
 			a) break ;;
 			m) break ;;
 			s) break ;;
@@ -634,7 +686,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME
 		esac
 	done
 }
-function ⬚⬚⬚⬚_📗🔢_session_old(){ 🔧 $FUNCNAME
+function ⬚⬚⬚⬚_📗🔢_session_old(){ 🔧 $FUNCNAME $@
 	ANSWER_BEFORE_QUIZ=0
 	⬚⬚⬚⬚⬚_🏗_session_specific_config
 	⬚⬚⬚⬚⬚_🏗_session_content_tmp
@@ -643,7 +695,16 @@ function ⬚⬚⬚⬚_📗🔢_session_old(){ 🔧 $FUNCNAME
 	⬚⬚⬚⬚⬚_🔄_lines_in_session
 	⬚⬚⬚⬚⬚_🛑_lines_in_session
 }
-function ⬚⬚⬚⬚_📗🔢_session_old_mistakes_only(){ 🔧 $FUNCNAME
+function ⬚⬚⬚⬚_📗🔢_session_old_with_answers(){ 🔧 $FUNCNAME $@
+	ANSWER_BEFORE_QUIZ=1
+	⬚⬚⬚⬚⬚_🏗_session_specific_config
+	⬚⬚⬚⬚⬚_🏗_session_content_tmp
+	SESSION_NUMBER=$1
+	LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
+	⬚⬚⬚⬚⬚_🔄_lines_in_session "IGNORE_GOOD"
+	⬚⬚⬚⬚⬚_🛑_lines_in_session
+}
+function ⬚⬚⬚⬚_📗🔢_session_old_mistakes_only(){ 🔧 $FUNCNAME $@
 	⬚⬚⬚⬚⬚_🏗_session_specific_config
 	⬚⬚⬚⬚⬚_🏗_session_content_tmp_mistakes_only
 	SESSION_NUMBER=$1
@@ -651,26 +712,27 @@ function ⬚⬚⬚⬚_📗🔢_session_old_mistakes_only(){ 🔧 $FUNCNAME
 	⬚⬚⬚⬚⬚_🔄_lines_in_session
 	#~ ⬚⬚⬚⬚⬚_🛑_lines_in_session #Don't display end of session, not useful to know, useless spam
 }
-function ⬚⬚⬚⬚_📗🔢_session_old_blue_only(){ 🔧 $FUNCNAME
+function ⬚⬚⬚⬚_📗🔢_session_old_blue_only(){ 🔧 $FUNCNAME $@
 	⬚⬚⬚⬚⬚_🏗_session_specific_config
 	⬚⬚⬚⬚⬚_🏗_session_content_tmp_blue_only
 	SESSION_NUMBER=$1
 	LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
 	⬚⬚⬚⬚⬚_🔄_lines_in_session
 }
-function ⬚⬚⬚⬚_📗🌘_session_new(){ 🔧 $FUNCNAME
+function ⬚⬚⬚⬚_📗🌘_session_new(){ 🔧 $FUNCNAME $@
 	⬚⬚⬚⬚⬚_🏗🌘_session_folder #Newsession only
 	⬚⬚⬚⬚⬚_🏗_session_specific_config
 	⬚⬚⬚⬚⬚_🏗🌘_session_content_pul
-	⬚⬚⬚⬚⬚_🏗_session_content_tmp
-	⬚⬚⬚⬚⬚_🔄_lines_in_session
-	⬚⬚⬚⬚⬚_🛑_lines_in_session
+	echo " --- NEW SESSION CREATED --- "
+	# ⬚⬚⬚⬚⬚_🏗_session_content_tmp
+	# ⬚⬚⬚⬚⬚_🔄_lines_in_session
+	# ⬚⬚⬚⬚⬚_🛑_lines_in_session
 }
-function ⬚⬚⬚⬚⬚_🏗🌘_session_folder(){ 🔧 $FUNCNAME
+function ⬚⬚⬚⬚⬚_🏗🌘_session_folder(){ 🔧 $FUNCNAME $@
 	echo "mkdir $HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/"
 	mkdir -p "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/" 2> /dev/null
 }
-function ⬚⬚⬚⬚⬚_🏗🌘_session_content_pul(){ 🔧 $FUNCNAME
+function ⬚⬚⬚⬚⬚_🏗🌘_session_content_pul(){ 🔧 $FUNCNAME $@
 	echo "create : $HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul"
 	if [ $SESSION_NUMBER -eq 1 ]; then
 		cat $FILE | sed 's/ |=| /£/' | sed 's/^\t//g' | grep '£' | head -n $SESSION_SIZE > "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul"
@@ -679,23 +741,23 @@ function ⬚⬚⬚⬚⬚_🏗🌘_session_content_pul(){ 🔧 $FUNCNAME
 		cat $FILE | sed 's/ |=| /£/' | sed 's/^\t//g' | grep '£' | grep -F -x -v -f $HOME/.PopUpLearn/tmp/content_old_sessions.tmp | head -n $SESSION_SIZE > "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul"
 	fi
 }
-function ⬚⬚⬚⬚⬚_🏗_session_specific_config(){ 🔧 $FUNCNAME
+function ⬚⬚⬚⬚⬚_🏗_session_specific_config(){ 🔧 $FUNCNAME $@
 	echo "create : $HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_specific_config.conf"
 	#add identical configuration but without "ANSWER_BEFORE_QUIZ=1" because you are supposed to know this already...
 	sed 's/ANSWER_BEFORE_QUIZ=1/ANSWER_BEFORE_QUIZ=0/' $HOME/.PopUpLearn/tmp/session_specific_config.tmp > "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_specific_config.conf"
 }
-function ⬚⬚⬚⬚⬚_🏗_session_content_tmp(){ 🔧 $FUNCNAME
+function ⬚⬚⬚⬚⬚_🏗_session_content_tmp(){ 🔧 $FUNCNAME $@
 	#double the content in session_content.tmp and session_content_remove.tmp or not ?
 	# cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul" "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul" > $HOME/.PopUpLearn/tmp/session_content.tmp
 	cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul" > $HOME/.PopUpLearn/tmp/session_content.tmp
 	cat $HOME/.PopUpLearn/tmp/session_content.tmp > $HOME/.PopUpLearn/tmp/session_content_remove.tmp
 }
-function ⬚⬚⬚⬚⬚_🏗_session_content_tmp_mistakes_only(){ 🔧 $FUNCNAME
+function ⬚⬚⬚⬚⬚_🏗_session_content_tmp_mistakes_only(){ 🔧 $FUNCNAME $@
 	#proportional to the number of mistakes i guess...
 	cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/answer.bad" > $HOME/.PopUpLearn/tmp/session_content.tmp
 	cat $HOME/.PopUpLearn/tmp/session_content.tmp > $HOME/.PopUpLearn/tmp/session_content_remove.tmp
 }
-function ⬚⬚⬚⬚⬚_🏗_session_content_tmp_blue_only(){ 🔧 $FUNCNAME
+function ⬚⬚⬚⬚⬚_🏗_session_content_tmp_blue_only(){ 🔧 $FUNCNAME $@
 	cat $HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/answer.good | sort | uniq -d > "$HOME/.PopUpLearn/tmp/answer_good_at_least_2.tmp"
 	cat $HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/answer.good | sort | uniq -u > "$HOME/.PopUpLearn/tmp/answer_good_only_1.tmp"
 
@@ -707,18 +769,22 @@ function ⬚⬚⬚⬚⬚_🏗_session_content_tmp_blue_only(){ 🔧 $FUNCNAME
 	cp "$HOME/.PopUpLearn/tmp/good_removed.tmp" "$HOME/.PopUpLearn/tmp/session_content.tmp"
 	cp "$HOME/.PopUpLearn/tmp/good_removed.tmp" "$HOME/.PopUpLearn/tmp/session_content_remove.tmp"
 }
-function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME
+function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 	while read X; do
 		if [[ "$X" == "" ]]; then break; fi
 		⬚⬚⬚⬚⬚⬚_🚧_session_answers
 		⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp
 		⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer
-		⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ
+		if [[ "$1" == "IGNORE_GOOD" ]];then
+			⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ "IGNORE_GOOD"
+		else
+			⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ
+		fi
 		⬚⬚⬚⬚⬚⬚_💣_remove_answer_from_session_tmp
 		⬚⬚⬚⬚⬚⬚_🛑_quiz || return 2
 	done < "$HOME/.PopUpLearn/tmp/session_content.tmp"
 }
-function ⬚⬚⬚⬚⬚⬚_🚧_session_answers(){ 🔧 $FUNCNAME
+function ⬚⬚⬚⬚⬚⬚_🚧_session_answers(){ 🔧 $FUNCNAME $@
 	TODAY="$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))"
 	ANSWERED_GOOD="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/answer.good"
 	ANSWERED_GOOD_DATE="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/answer.good.date"
@@ -726,6 +792,7 @@ function ⬚⬚⬚⬚⬚⬚_🚧_session_answers(){ 🔧 $FUNCNAME
 	ANSWERED_BAD="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/answer.bad"
 	ANSWERED_BAD_DATE="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/answer.bad.date"
 
+	echo " -------> FILE = $FILE"
 	cat $FILE | sed 's/ |=| /£/' | sed 's/^\t//g' | grep '£' > $HOME/.PopUpLearn/tmp/file_content_BAD_answers.tmp
 	if [[ "$TYPE" == "BUTTON" ]];then
 		rm $HOME/.PopUpLearn/tmp/wrong_answers_BUTTON2.tmp 2> /dev/null
@@ -746,11 +813,11 @@ function ⬚⬚⬚⬚⬚⬚_🚧_session_answers(){ 🔧 $FUNCNAME
 	RIGHT=`echo "$LINE" | sed 's/.*£//'`
 	🔧 "$FUNCNAME : \$LINE=$LINE (RIGHT / LEFT)"
 }
-function ⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp(){ 🔧 $FUNCNAME
+function ⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp(){ 🔧 $FUNCNAME $@
 	#~ echo "my_line.tmp : 0£${SUBJECT}_${NUMBER}£${LEFT}£${RIGHT}£${LANGUAGE_1}£${LANGUAGE_2}£${TYPE}"
 	echo "0£${SUBJECT}_${NUMBER}£${LEFT}£${RIGHT}£${LANGUAGE_1}£${LANGUAGE_2}£${TYPE}" > $HOME/.PopUpLearn/tmp/my_line.tmp
 }
-function ⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer(){ 🔧 $FUNCNAME
+function ⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer(){ 🔧 $FUNCNAME $@
 	if [ $ANSWER_BEFORE_QUIZ -eq 1 ]; then
 		if [ $SIGSTOP_MPV -eq 1 ]; then sleep 5 && mpv_pause &> /dev/null & fi
 		if [ "$TIME_DISPLAYED" == 0 ];then #LOCK, unlimited
@@ -768,7 +835,7 @@ function ⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer(){ 🔧 $FUNCNAME
 		sleep $SEC_BEFORE_QUIZ
 	fi
 }
-function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME
+function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
 	#PHP pages are using tmp/my_line.tmp
 	quizzed=0
 	while [ $1 -ne $quizzed ]; do
@@ -793,8 +860,11 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME
 		if [[ "`cat $HOME/.PopUpLearn/tmp/result.tmp`" == "good" ]]; then
 			#??? UGLY
 			notify-send -i $HOME/.PopUpLearn/img/good.png "$LEFT : `echo "$RIGHT"|sed 's/\\\\\\\\/\\\/'|sed 's/\\\\\\\\/\\\/'|sed 's/\\\\\\\\/\\\/'|sed "s/</𝈶/g"` ($quizzed/$LOOP_QUIZ)"
-			echo "$LINE" >> $ANSWERED_GOOD
-			echo "$LINE€$TODAY" >> $ANSWERED_GOOD_DATE
+			#IF CALLED ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ IGNORE_GOOD, DO NOT RECORD GOOD ANSWER
+			if [[ "$2" != "IGNORE_GOOD" ]];then
+				echo "$LINE" >> $ANSWERED_GOOD
+				echo "$LINE€$TODAY" >> $ANSWERED_GOOD_DATE
+			fi
 		elif [[ "`cat $HOME/.PopUpLearn/tmp/result.tmp`" == "bad" ]]; then
 			notify-send -i $HOME/.PopUpLearn/img/bad.png "$LEFT : `echo "$RIGHT"|sed 's/\\\\\\\\/\\\/'|sed 's/\\\\\\\\/\\\/'|sed 's/\\\\\\\\/\\\/'|sed "s/</𝈶/g"` ($quizzed/$LOOP_QUIZ)"
 			echo "$LINE" >> $ANSWERED_BAD
@@ -808,20 +878,20 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME
 		fi
 	done
 }
-function ⬚⬚⬚⬚⬚⬚_🛑_quiz(){ 🔧 $FUNCNAME
+function ⬚⬚⬚⬚⬚⬚_🛑_quiz(){ 🔧 $FUNCNAME $@
 	#NOT sleep if it was the last line in _remove.tmp
 	LINES_LEFT=`wc -l /home/umen/.PopUpLearn/tmp/session_content_remove.tmp|sed 's/ .*//'`
 	if [ $LINES_LEFT -ne 0 ];then
 		echo "Press any key to exit, or wait $SEC_AFTER_QUIZ SECONDS ($LINES_LEFT lines left in session_remove.tmp)"
 		if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
-			return 1 #STOPPED MANUALLY, break loop
+			return 2 #STOPPED MANUALLY, break loop
 		else
 			return 0
 		fi
 	fi
 	#~ sleep 1
 }
-function ⬚⬚⬚⬚⬚⬚_💣_remove_answer_from_session_tmp(){ 🔧 $FUNCNAME
+function ⬚⬚⬚⬚⬚⬚_💣_remove_answer_from_session_tmp(){ 🔧 $FUNCNAME $@
 	LINE_TO_DELETE=`cat $HOME/.PopUpLearn/tmp/current_line.tmp`
 	#~ cp $HOME/.PopUpLearn/tmp/session_content_remove.tmp $HOME/.PopUpLearn/tmp/session_content_2.tmp
 	#~ grep -m1 -F -x -v -f $HOME/.PopUpLearn/tmp/current_line.tmp $HOME/.PopUpLearn/tmp/session_content_2.tmp > $HOME/.PopUpLearn/tmp/session_content_remove.tmp
@@ -830,7 +900,7 @@ function ⬚⬚⬚⬚⬚⬚_💣_remove_answer_from_session_tmp(){ 🔧 $FUNCNAM
 	echo "Line $LINE_TO_DELETE removed from session_content_remove.tmp"
 	sed -i "0,/$LINE_TO_DELETE/{/$LINE_TO_DELETE/d;}" $HOME/.PopUpLearn/tmp/session_content_remove.tmp
 }
-function ⬚⬚⬚⬚⬚_🛑_lines_in_session(){ 🔧 $FUNCNAME
+function ⬚⬚⬚⬚⬚_🛑_lines_in_session(){ 🔧 $FUNCNAME $@
 	notify-send -i $HOME/.PopUpLearn/img/unknown.png "End of session $SESSION_NUMBER"
 }
 
