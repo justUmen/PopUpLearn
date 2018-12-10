@@ -77,7 +77,7 @@ function display(){ 🔧 $FUNCNAME $@
 }
 
 function ⬚_before_start(){
-	command -v surf -F >/dev/null 2>&1 || { echo "Veuillez installer les dépendances requises. Faites en tant qu'administrateur : apt-get install surf" >&2; exit 3; }
+	command -v surf -F >/dev/null 2>&1 || { echo "Please install surf web browser : apt-get install surf" >&2; exit 3; }
 	exec 6<>/dev/tcp/127.0.0.1/9999 && echo "php server available on port 9999" || { echo "Please run the php server with : php -S 127.0.0.1:9999 -t ~/.PopUpLearn" && exec 6>&- && exec 6<&- && exit; }
 	exec 6<>/dev/tcp/127.0.0.1/8888 && echo "nodejs server available on port 8888" || { echo "Please run the nodejs server with : node ~/.PopUpLearn/node_server.js || nodejs ~/.PopUpLearn/node_server.js" && exec 6>&- && exec 6<&- && exit; }
 	mkdir $HOME/.PopUpLearn/MYDB 2> /dev/null
@@ -92,6 +92,7 @@ function ⬚_before_start(){
 	BG_LIGHT_GREEN="\e[102m"
 	#PREPARE MENU COLORS
 	BLACK="\e[30m"
+	COLOR_PERCENT="$BG_LIGHT_GRAY\e[36m"
 	COLOR_SELECTION="$BG_LIGHT_MAGENTA$BLACK"
 	COLOR_TITLE_SELECTED="$BG_LIGHT_GREEN$BLACK"
 	#PREPARE COLORS QUESTIONS / ANSWERS ONLY !!! DIFFERENT FORMAT
@@ -154,11 +155,13 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 		else
 			echo -n " used $DAYS days ago"
 		fi
-		NB_GOOD=`cat $FILE_PATH/session_*/answer.good 2>/dev/null|sort|uniq|wc -l`
+		NB_GOOD=`cat $FILE_PATH/session_*/answer.good 2>/dev/null|sort|uniq -d|wc -l` #GOOD two times (-d)
 		NB_LINES=`cat ${FILES[i]}|wc -l`
-		echo " => `expr $NB_GOOD / $NB_LINES`%"
+		PERCENT=$(echo "$NB_GOOD / $NB_LINES * 100"| bc -l | sed 's/\..*//')
+		echo -e " => $COLOR_PERCENT $PERCENT% done $ENDO ($NB_GOOD / $NB_LINES)"
 	done
 	echo -e "$COLOR_SELECTION g) $ENDO GameScript Quizzes [for `cat ~/.GameScript/username`]"
+	echo -e "$COLOR_SELECTION d) $ENDO Download and add new .pul files into your ~/.PopUpLearn/MYDB folder \\e[38;5;196m[ not yet implemented... :( ]$ENDO"
 	selected=99
 	echo -e "$COLOR_SELECTION e) $ENDO Exit"
 	while :; do
@@ -341,14 +344,6 @@ function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME $@
 				NUMBER=1
 				LOOP_QUIZ=1
 				⬚⬚⬚⬚⬚_🔄_lines_in_gamescript_chapter || return 2
-
-				echo "Press any key to exit, or wait $SEC_AFTER_QUIZ SECONDS before the next subject."
-				if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
-					return 2 #STOPPED MANUALLY, break loop
-				else
-					return 0
-				fi
-
 			done
 	elif [[ "$selected" == "s" ]];then
 			ANSWER_BEFORE_QUIZ=0 #USE 'M' INSTEAD TO DISPLAY ANSWER
@@ -376,13 +371,6 @@ function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME $@
 				NUMBER=1
 				LOOP_QUIZ=1
 				⬚⬚⬚⬚⬚_🔄_lines_in_gamescript_chapter || return 2
-
-				echo "Press any key to exit, or wait $SEC_AFTER_QUIZ SECONDS before the next subject."
-				if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
-					return 2 #STOPPED MANUALLY, break loop
-				else
-					return 0
-				fi
 			done
 	elif [[ "$selected" == "b" ]];then
 			ANSWER_BEFORE_QUIZ=0 #USE 'M' INSTEAD TO DISPLAY ANSWER
@@ -420,13 +408,6 @@ function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME $@
 				NUMBER=1
 				LOOP_QUIZ=1
 				⬚⬚⬚⬚⬚_🔄_lines_in_gamescript_chapter || return 2
-
-				echo "Press any key to exit, or wait $SEC_AFTER_QUIZ SECONDS before the next subject."
-				if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
-					return 2 #STOPPED MANUALLY, break loop
-				else
-					return 0
-				fi
 			done
 	else
 		SESSION_NUMBER=$selected
@@ -453,6 +434,15 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_gamescript_chapter(){ 🔧 $FUNCNAME $@
 		⬚⬚⬚⬚⬚⬚_💣_remove_answer_from_session_tmp
 		⬚⬚⬚⬚⬚⬚_🛑_quiz || return 2
 	done < "$HOME/.PopUpLearn/tmp/session_content.tmp"
+	#IF session_content.tmp is empty do not wait, go directly new session
+	if [[ "wc -l $HOME/.PopUpLearn/tmp/session_content.tmp|sed 's/ .*//'" == "0" ]]; then
+		echo "Press any key to exit, or wait $SEC_AFTER_QUIZ SECONDS before the next subject."
+		if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
+			return 2 #STOPPED MANUALLY, break loop
+		else
+			return 0
+		fi
+	fi
 }
 function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 	FILE=${FILES[selected]}
@@ -501,11 +491,7 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
 				echo "----> SESSION_NUMBER=$SESSION_NUMBER"
-				⬚⬚⬚⬚_📗🔢_session_old $SESSION_NUMBER
-				echo "Press any key to exit, or wait $SEC_AFTER_QUIZ SECONDS before the next session."
-				if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
-					break #STOPPED MANUALLY, break loop
-				fi
+				⬚⬚⬚⬚_📗🔢_session_old $SESSION_NUMBER || break
 			done
 		elif [[ "$selected" == "m" ]]; then
 			ANSWER_BEFORE_QUIZ=0 #USE 'M' INSTEAD TO DISPLAY ANSWER
@@ -520,11 +506,7 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
 				echo "----> SESSION_NUMBER=$SESSION_NUMBER"
-				⬚⬚⬚⬚_📗🔢_session_old_mistakes_only $SESSION_NUMBER
-				echo "Press any key to exit, or wait $SEC_AFTER_QUIZ SECONDS before the next session."
-				if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
-					break #STOPPED MANUALLY, break loop
-				fi
+				⬚⬚⬚⬚_📗🔢_session_old_mistakes_only $SESSION_NUMBER || break
 			done
 		elif [[ "$selected" == "S" ]]; then
 			ANSWER_BEFORE_QUIZ=1
@@ -539,11 +521,7 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
 				echo "----> SESSION_NUMBER=$SESSION_NUMBER"
-				⬚⬚⬚⬚_📗🔢_session_old $SESSION_NUMBER
-				echo "Press any key to exit, or wait $SEC_AFTER_QUIZ SECONDS before the next session."
-				if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
-					break #STOPPED MANUALLY, break loop
-				fi
+				⬚⬚⬚⬚_📗🔢_session_old $SESSION_NUMBER || break
 			done
 		elif [[ "$selected" == "M" ]]; then
 			ANSWER_BEFORE_QUIZ=1
@@ -558,11 +536,7 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
 				echo "----> SESSION_NUMBER=$SESSION_NUMBER"
-				⬚⬚⬚⬚_📗🔢_session_old_mistakes_only $SESSION_NUMBER
-				echo "Press any key to exit, or wait $SEC_AFTER_QUIZ SECONDS before the next session."
-				if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
-					break #STOPPED MANUALLY, break loop
-				fi
+				⬚⬚⬚⬚_📗🔢_session_old_mistakes_only $SESSION_NUMBER || break
 			done
 		elif [[ "$selected" == "b" ]]; then
 			ANSWER_BEFORE_QUIZ=0
@@ -577,11 +551,7 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
 				echo "----> SESSION_NUMBER=$SESSION_NUMBER"
-				⬚⬚⬚⬚_📗🔢_session_old_blue_only $SESSION_NUMBER
-				echo "Press any key to exit, or wait $SEC_AFTER_QUIZ SECONDS before the next session."
-				if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
-					break #STOPPED MANUALLY, break loop
-				fi
+				⬚⬚⬚⬚_📗🔢_session_old_blue_only $SESSION_NUMBER || break
 			done
 		elif [[ "$selected" == "N" ]]; then
 			⬚⬚⬚⬚_📗🌘_session_new
@@ -692,7 +662,7 @@ function ⬚⬚⬚⬚_📗🔢_session_old(){ 🔧 $FUNCNAME $@
 	⬚⬚⬚⬚⬚_🏗_session_content_tmp
 	SESSION_NUMBER=$1
 	LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
-	⬚⬚⬚⬚⬚_🔄_lines_in_session
+	⬚⬚⬚⬚⬚_🔄_lines_in_session || return 2
 	⬚⬚⬚⬚⬚_🛑_lines_in_session
 }
 function ⬚⬚⬚⬚_📗🔢_session_old_with_answers(){ 🔧 $FUNCNAME $@
@@ -701,7 +671,7 @@ function ⬚⬚⬚⬚_📗🔢_session_old_with_answers(){ 🔧 $FUNCNAME $@
 	⬚⬚⬚⬚⬚_🏗_session_content_tmp
 	SESSION_NUMBER=$1
 	LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
-	⬚⬚⬚⬚⬚_🔄_lines_in_session "IGNORE_GOOD"
+	⬚⬚⬚⬚⬚_🔄_lines_in_session "IGNORE_GOOD" || return 2
 	⬚⬚⬚⬚⬚_🛑_lines_in_session
 }
 function ⬚⬚⬚⬚_📗🔢_session_old_mistakes_only(){ 🔧 $FUNCNAME $@
@@ -709,7 +679,7 @@ function ⬚⬚⬚⬚_📗🔢_session_old_mistakes_only(){ 🔧 $FUNCNAME $@
 	⬚⬚⬚⬚⬚_🏗_session_content_tmp_mistakes_only
 	SESSION_NUMBER=$1
 	LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
-	⬚⬚⬚⬚⬚_🔄_lines_in_session
+	⬚⬚⬚⬚⬚_🔄_lines_in_session || return 2
 	#~ ⬚⬚⬚⬚⬚_🛑_lines_in_session #Don't display end of session, not useful to know, useless spam
 }
 function ⬚⬚⬚⬚_📗🔢_session_old_blue_only(){ 🔧 $FUNCNAME $@
@@ -717,7 +687,7 @@ function ⬚⬚⬚⬚_📗🔢_session_old_blue_only(){ 🔧 $FUNCNAME $@
 	⬚⬚⬚⬚⬚_🏗_session_content_tmp_blue_only
 	SESSION_NUMBER=$1
 	LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
-	⬚⬚⬚⬚⬚_🔄_lines_in_session
+	⬚⬚⬚⬚⬚_🔄_lines_in_session || return 2
 }
 function ⬚⬚⬚⬚_📗🌘_session_new(){ 🔧 $FUNCNAME $@
 	⬚⬚⬚⬚⬚_🏗🌘_session_folder #Newsession only
@@ -783,6 +753,15 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 		⬚⬚⬚⬚⬚⬚_💣_remove_answer_from_session_tmp
 		⬚⬚⬚⬚⬚⬚_🛑_quiz || return 2
 	done < "$HOME/.PopUpLearn/tmp/session_content.tmp"
+	#IF session_content.tmp is empty do not wait, go directly new session
+	if [[ "wc -l $HOME/.PopUpLearn/tmp/session_content.tmp|sed 's/ .*//'" == "0" ]]; then
+		echo "Press any key to exit, or wait $SEC_AFTER_QUIZ SECONDS before the next subject."
+		if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
+			return 2 #STOPPED MANUALLY, break loop
+		else
+			return 0
+		fi
+	fi
 }
 function ⬚⬚⬚⬚⬚⬚_🚧_session_answers(){ 🔧 $FUNCNAME $@
 	TODAY="$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))"
