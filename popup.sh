@@ -138,6 +138,7 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 	#DISPLAY LIST .pul FILES
 	echo
 	echo "Menu list all .pul files in ~/.PopUpLearn/DB/ and ~/.PopUpLearn/MYDB/ folders + manual entries from ~/.PopUpLearn/MYDB/my.list too (Full path of .pul file, one per line.)"
+	echo -e "$COLOR_SELECTION 0) $ENDO Video : What is and how to use PopUpLearn \\e[38;5;196m[ not yet implemented... :( ]$ENDO"
 	arraylength=${#FILES[@]}
 	for (( i=1; i<${arraylength}; i++ )); do
 		echo -en "$COLOR_SELECTION $i) $COLOR_TITLE_SELECTED ${FILES[i]} $ENDO"
@@ -156,12 +157,12 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 			echo -n " used $DAYS days ago"
 		fi
 		NB_GOOD=`cat $FILE_PATH/session_*/answer.good 2>/dev/null|sort|uniq -d|wc -l` #GOOD two times (-d)
-		NB_LINES=`cat ${FILES[i]}|wc -l`
+		NB_LINES=`cat ${FILES[i]}|grep -v "^#"|wc -l`
 		PERCENT=$(echo "$NB_GOOD / $NB_LINES * 100"| bc -l | sed 's/\..*//')
 		echo -e " => $COLOR_PERCENT $PERCENT% done $ENDO ($NB_GOOD / $NB_LINES)"
 	done
 	echo -e "$COLOR_SELECTION g) $ENDO GameScript Quizzes [for `cat ~/.GameScript/username`]"
-	echo -e "$COLOR_SELECTION d) $ENDO Download and add new .pul files into your ~/.PopUpLearn/MYDB folder \\e[38;5;196m[ not yet implemented... :( ]$ENDO"
+	echo -e "$COLOR_SELECTION d) $ENDO Download and add new .pul files from our online database into your ~/.PopUpLearn/MYDB folder \\e[38;5;196m[ not yet implemented... :( ]$ENDO"
 	selected=99
 	echo -e "$COLOR_SELECTION e) $ENDO Exit"
 	while :; do
@@ -435,11 +436,13 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_gamescript_chapter(){ 🔧 $FUNCNAME $@
 		⬚⬚⬚⬚⬚⬚_🛑_quiz || return 2
 	done < "$HOME/.PopUpLearn/tmp/session_content.tmp"
 	#IF session_content.tmp is empty do not wait, go directly new session
-	if [[ "wc -l $HOME/.PopUpLearn/tmp/session_content.tmp|sed 's/ .*//'" == "0" ]]; then
+	echo "wc -l $HOME/.PopUpLearn/tmp/session_content.tmp : `wc -l $HOME/.PopUpLearn/tmp/session_content.tmp`"
+	if [[ "$(wc -l $HOME/.PopUpLearn/tmp/session_content.tmp|sed 's/ .*//')" != "0" ]]; then
 		echo "Press any key to exit, or wait $SEC_AFTER_QUIZ SECONDS before the next subject."
 		if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
 			return 2 #STOPPED MANUALLY, break loop
 		else
+			echo
 			return 0
 		fi
 	fi
@@ -754,11 +757,13 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 		⬚⬚⬚⬚⬚⬚_🛑_quiz || return 2
 	done < "$HOME/.PopUpLearn/tmp/session_content.tmp"
 	#IF session_content.tmp is empty do not wait, go directly new session
-	if [[ "wc -l $HOME/.PopUpLearn/tmp/session_content.tmp|sed 's/ .*//'" == "0" ]]; then
+	echo "wc -l $HOME/.PopUpLearn/tmp/session_content.tmp : `wc -l $HOME/.PopUpLearn/tmp/session_content.tmp`"
+	if [[ "$(wc -l $HOME/.PopUpLearn/tmp/session_content.tmp|sed 's/ .*//')" != "0" ]]; then
 		echo "Press any key to exit, or wait $SEC_AFTER_QUIZ SECONDS before the next subject."
 		if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
 			return 2 #STOPPED MANUALLY, break loop
 		else
+			echo
 			return 0
 		fi
 	fi
@@ -800,20 +805,24 @@ function ⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer(){ 🔧 $FUNCNAME $@
 	if [ $ANSWER_BEFORE_QUIZ -eq 1 ]; then
 		if [ $SIGSTOP_MPV -eq 1 ]; then sleep 5 && mpv_pause &> /dev/null & fi
 		if [ "$TIME_DISPLAYED" == 0 ];then #LOCK, unlimited
-			sleep 5 && i3-msg workspace "Learn" &
+			CURRENT_DESKTOP=$(wmctrl -d | awk '/\*/{print $1}')
+			sleep 5 && i3-msg workspace "Learn"  &
 			surf -F http://127.0.0.1:9999/popup.php &> /dev/null
-			i3-msg workspace back_and_forth #What about others wm ?
+			wmctrl -s $CURRENT_DESKTOP
 		else
+			CURRENT_DESKTOP=$(wmctrl -d | awk '/\*/{print $1}')
 			sleep 5 && i3-msg workspace "Learn" &
 			surf -F http://127.0.0.1:9999/popup.php &> /dev/null &
 			sleep $TIME_DISPLAYED
 			pkill -f "surf -F http://127.0.0.1:9999/popup.php" &> /dev/null
-			i3-msg workspace back_and_forth #What about others wm ?
+			wmctrl -s $CURRENT_DESKTOP
 		fi
 		if [ $SIGSTOP_MPV -eq 1 ]; then mpv_play &> /dev/null; fi
 		echo "Press any key to exit, or wait $SEC_BEFORE_QUIZ SECONDS before the question."
 		if read -r -N 1 -t $SEC_BEFORE_QUIZ EXIT < /dev/tty; then
 			return 2 #STOPPED MANUALLY, break loop
+		else
+			echo
 		fi
 	fi
 }

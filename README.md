@@ -1,6 +1,6 @@
 # PopUpLearn (Work in progress)
 
-Learning with popups and track down your knowledge.  
+Learning with popups and track down your knowledge by letting it run in the background.  
 
 Made for GameScript but can be used to learn pretty much whatever you want, but you need a clean DB about it.  
 
