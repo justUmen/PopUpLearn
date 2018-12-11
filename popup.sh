@@ -21,7 +21,6 @@ function 💻_keyboard_language_change(){ 🔧 $FUNCNAME $@
 	command -v ibus >/dev/null 2>&1 || return
 	ibus engine > $HOME/.PopUpLearn/tmp/ibus.tmp
 	CURRENT_LANGUAGE=`cat $HOME/.PopUpLearn/tmp/ibus.tmp`
-	sleep 5
 	case $LANGUAGE_2 in
 		en)
 		NEW_LANGUAGE="xkb:us::eng"
@@ -77,7 +76,8 @@ function display(){ 🔧 $FUNCNAME $@
 }
 
 function ⬚_before_start(){
-	command -v surf -F >/dev/null 2>&1 || { echo "Please install surf web browser : apt-get install surf" >&2; exit 3; }
+	WEB_BROWSER="surf -F"
+	# command -v $WEB_BROWSER >/dev/null 2>&1 || { echo "Please install surf web browser : apt-get install surf" >&2; exit 3; }
 	exec 6<>/dev/tcp/127.0.0.1/9999 && echo "php server available on port 9999" || { echo "Please run the php server with : php -S 127.0.0.1:9999 -t ~/.PopUpLearn" && exec 6>&- && exec 6<&- && exit; }
 	exec 6<>/dev/tcp/127.0.0.1/8888 && echo "nodejs server available on port 8888" || { echo "Please run the nodejs server with : node ~/.PopUpLearn/node_server.js || nodejs ~/.PopUpLearn/node_server.js" && exec 6>&- && exec 6<&- && exit; }
 	mkdir $HOME/.PopUpLearn/MYDB 2> /dev/null
@@ -108,7 +108,7 @@ function ⬚_before_start(){
 function ⬚_🔄🔄_start(){ 🔧 $FUNCNAME $@
 	while [ 1 ]; do
 		source $HOME/.GameScript/config 2> /dev/null #LANGUAGE=fr used for quiz language
-		#source $HOME/.PopUpLearn/my.config is launched later to replace other specific configurations
+		source $HOME/.PopUpLearn/MYDB/my.config #THis should be launched later agani to replace other specific configurations
 		⬚⬚_📃_main
 		if [[ "$selected" == "g" ]]; then
 			if [ -d "$HOME/.GameScript" ];then
@@ -805,17 +805,27 @@ function ⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer(){ 🔧 $FUNCNAME $@
 	if [ $ANSWER_BEFORE_QUIZ -eq 1 ]; then
 		if [ $SIGSTOP_MPV -eq 1 ]; then sleep 5 && mpv_pause &> /dev/null & fi
 		if [ "$TIME_DISPLAYED" == 0 ];then #LOCK, unlimited
-			CURRENT_DESKTOP=$(wmctrl -d | awk '/\*/{print $1}')
-			sleep 5 && i3-msg workspace "Learn"  &
-			surf -F http://127.0.0.1:9999/popup.php &> /dev/null
-			wmctrl -s $CURRENT_DESKTOP
+			if [[ "$XDG_CURRENT_DESKTOP" == "i3" ]]; then
+				CURRENT_DESKTOP=$(wmctrl -d | awk '/\*/{print $1}')
+				sleep 5 && i3-msg workspace "Learn"  &
+				$WEB_BROWSER http://127.0.0.1:9999/popup.php &> /dev/null
+				wmctrl -s $CURRENT_DESKTOP
+			else
+				$WEB_BROWSER http://127.0.0.1:9999/popup.php &> /dev/null
+			fi
 		else
-			CURRENT_DESKTOP=$(wmctrl -d | awk '/\*/{print $1}')
-			sleep 5 && i3-msg workspace "Learn" &
-			surf -F http://127.0.0.1:9999/popup.php &> /dev/null &
-			sleep $TIME_DISPLAYED
-			pkill -f "surf -F http://127.0.0.1:9999/popup.php" &> /dev/null
-			wmctrl -s $CURRENT_DESKTOP
+			if [[ "$XDG_CURRENT_DESKTOP" == "i3" ]]; then
+				CURRENT_DESKTOP=$(wmctrl -d | awk '/\*/{print $1}')
+				sleep 5 && i3-msg workspace "Learn" &
+				$WEB_BROWSER http://127.0.0.1:9999/popup.php &> /dev/null &
+				sleep $TIME_DISPLAYED
+				pkill -f "$WEB_BROWSER http://127.0.0.1:9999/popup.php" &> /dev/null
+				wmctrl -s $CURRENT_DESKTOP
+			else
+				$WEB_BROWSER http://127.0.0.1:9999/popup.php &> /dev/null
+				sleep $TIME_DISPLAYED
+				pkill -f "$WEB_BROWSER http://127.0.0.1:9999/popup.php" &> /dev/null
+			fi
 		fi
 		if [ $SIGSTOP_MPV -eq 1 ]; then mpv_play &> /dev/null; fi
 		echo "Press any key to exit, or wait $SEC_BEFORE_QUIZ SECONDS before the question."
@@ -838,13 +848,20 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
 		#Unknown if python3 is closed without answering
 		echo unknown > $HOME/.PopUpLearn/tmp/result.tmp
 
-		sleep 5 && i3-msg workspace "Learn" &
-		💻_keyboard_language_change &
-		surf -F http://127.0.0.1:9999/popup_quiz.php &> /dev/null
-		#~ python3 $HOME/.PopUpLearn/html_popup.py 0 0 NO QUIZ &> /dev/null
-		💻_keyboard_language_previous_one
 
-		i3-msg workspace back_and_forth #What about others wm ?
+		if [[ "$XDG_CURRENT_DESKTOP" == "i3" ]]; then
+			CURRENT_DESKTOP=$(wmctrl -d | awk '/\*/{print $1}')
+			sleep 5 && i3-msg workspace "Learn" &
+			sleep 5 && 💻_keyboard_language_change &
+			$WEB_BROWSER http://127.0.0.1:9999/popup_quiz.php &> /dev/null
+			💻_keyboard_language_previous_one
+			wmctrl -s $CURRENT_DESKTOP
+		else
+			💻_keyboard_language_change
+			$WEB_BROWSER http://127.0.0.1:9999/popup_quiz.php &> /dev/null
+			💻_keyboard_language_previous_one
+		fi
+
 		if [ $SIGSTOP_MPV -eq 1 ]; then 💻_mpv_play &> /dev/null; fi
 		#$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24))) => Days since 1 january 2018
 		#~ ANSWER= #real < can't be displayed by notify-send...
