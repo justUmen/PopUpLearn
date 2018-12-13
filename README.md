@@ -78,7 +78,7 @@ System configuration will overwrite all specific configurations and should be st
 
 ## Optional variables in .pul files
 
-`TYPE="BUTTON"` enable the usage of buttons in quiz popup for multiple choices where you can simply click on the answer instead of typing it. (Default `TYPE=TEXT` where you need to type the exact answer.) With this you can also confirm an answer if the good answer is the only one that is currently displayed (Buttons will vanish if they don't contain what you typed. Meaning if the answer is "example" you can type "ex" and confirm with 'Enter' if you see that only the button "example" is currently displayed.).
+`TYPE="BUTTON"` enable the usage of buttons in quiz popup for multiple choices where you can simply click on the answer instead of typing it. (Default `TYPE="TEXT"` where you need to type the exact answer.) With this you can also confirm an answer if the good answer is the only one that is currently displayed (Buttons will vanish if they don't contain what you typed. Meaning if the answer is "example" you can type "ex" and confirm with 'Enter' if you see that only the button "example" is currently displayed.).
 
 `SESSION_SIZE=0`, set number of element in a session. 0 for unlimited number of elements, result : the file is only one big session. (Default SESSION_SIZE=6)  
 
