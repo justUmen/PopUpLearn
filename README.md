@@ -24,7 +24,7 @@ If you create a cool and useful .pul, share it with the rest of us ! :)
 
 ## Web browser  
 
-By default = usage of `surf` web browser to display the answer and the quiz  
+By default = usage of `surf` web browser to display the answer and the quiz. (can be changed with variable `WEB_BROWSER`)  
 i3wm : Add in your i3 configuration to launch `surf` on "Learn" workspace : `assign [class="Surf"] workspace Learn`
 
 ## Notifications  
@@ -43,7 +43,7 @@ Tested with `dunst` for notifications - aka `notify-send` (my config : `https://
 
 System configuration will overwrite all specific configurations and should be stored in file `~/.PopUpLearn/MYDB/my.config`.
 
-## Real world exemple
+## Real world example
 
     WEB_BROWSER="surf -F"
     SEC_AFTER_QUIZ=10
@@ -69,7 +69,7 @@ System configuration will overwrite all specific configurations and should be st
 
 `KEYBOARD_AUTO_CHANGE=1` automatically change keyboard layout with `ibus` for typing the answer (need to be in language available, check source "popup.sh").  
 
-## Real world exemple
+## Real world example
 
 .pul files can store their own specific configurations, but the configuration lines must starts with `#!#`, example with 2 optional variables (TYPE and SESSION_SIZE) :  
 
