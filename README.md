@@ -31,13 +31,28 @@ i3wm : Add in your i3 configuration to launch `surf` on "Learn" workspace : `ass
 
 Tested with `dunst` for notifications - aka `notify-send` (my config : `https://github.com/justUmen/PopUpLearn/blob/master/config/dunstrc`)  
 
-# Installation
+# Install
 
     git clone https://github.com/justUmen/PopUpLearn ~/.PopUpLearn
 
 # Update (Manual update for now)
 
 	cd ~/.PopUpLearn && git pull origin master && cd -
+
+# Launch
+
+Step 1 - Launch php server with :  
+
+     php -S 127.0.0.1:9999 -t ~/.PopUpLearn
+
+Step 2 - Launch nodejs server with :  
+
+     node ~/.PopUpLearn/node_server_popup.js || nodejs ~/.PopUpLearn/node_server_popup.js
+
+Step 3 - Launch user interface : (debug mode enabled for now, which will display the answer in your terminal. You might not want to look at it after launch : let it run in the background somewhere.)  
+
+     bash ~/.PopUpLearn/popup.sh
+
 
 # System configuration (optional)
 
@@ -79,20 +94,6 @@ System configuration will overwrite all specific configurations and should be st
     #!#NUMBER="1"
     #!#TYPE=BUTTON
     #!#SESSION_SIZE=
-
-# How to use PopUpLearn
-
-Step 1 - Launch php server with :  
-
-     php -S 127.0.0.1:9999 -t ~/.PopUpLearn
-
-Step 2 - Launch nodejs server with :  
-
-     node ~/.PopUpLearn/node_server_popup.js || nodejs ~/.PopUpLearn/node_server_popup.js
-
-Step 3 - Launch user interface : (debug mode enabled for now, which will display the answer in your terminal. You might not want to look at it after launch : let it run in the background somewhere.)  
-
-     bash ~/.PopUpLearn/popup.sh
 
 # OPTIONS
 
