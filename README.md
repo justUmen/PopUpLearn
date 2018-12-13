@@ -16,21 +16,16 @@ Content should be (or will be) compatible with "WallpaperGenerator" and "GameScr
 
 Use `~/.PopUpLearn` folder to store scripts, data and logs.  
 
-If you create a cool and useful .pul, share it with the rest of us !  
+If you create a cool and useful .pul, share it with the rest of us ! :)  
 
 # Dependencies
 
     sudo apt-get install php nodejs surf
 
-## Window manager
-
-Testing : Only with `i3` window manager for now : `sudo apt-get i3`
-Usage of i3 specific commands that need to be replaced for other wm : `i3-msg workspace back_and_forth` and so on.  
-
 ## Web browser  
 
-Usage of `surf` web browser to display the answer and the quiz  
-Recommended : Add to your i3 configuration to launch `surf` on "Learn" workspace : `assign [class="Surf"] workspace Learn`
+By default = usage of `surf` web browser to display the answer and the quiz  
+i3wm : Add in your i3 configuration to launch `surf` on "Learn" workspace : `assign [class="Surf"] workspace Learn`
 
 ## Notifications  
 
@@ -44,16 +39,48 @@ Tested with `dunst` for notifications - aka `notify-send` (my config : `https://
 
 	cd ~/.PopUpLearn && git pull origin master && cd -
 
-# Configuration
+# System configuration (optional)
 
-.pul files can store their own specific configurations, but the configuration lines must starts with `#!#`, example :  
+System configuration will overwrite all specific configurations and should be stored in file `~/.PopUpLearn/MYDB/my.config`.
+
+## Real world exemple
+
+    WEB_BROWSER="surf -F"
+    SEC_AFTER_QUIZ=10
+    SEC_BEFORE_QUIZ=10
+
+# .pul files configuration
+
+## Mandatory variables in .pul files
+
+`LANGUAGE_1="en"` the language of the question.  
+
+`LANGUAGE_2="fr"` the language of the answer.  
+
+`SUBJECT="french_sentences"` the subject name. (avoid spaces)  
+
+`NUMBER="1"` number used as a reference for the subject name.  
+
+## Optional variables in .pul files
+
+`TYPE="BUTTON"` enable the usage of buttons in quiz popup for multiple choices where you can simply click on the answer instead of typing it. (Default `TYPE=TEXT` where you need to type the exact answer.) With this you can also confirm an answer if the good answer is the only one that is currently displayed (Buttons will vanish if they don't contain what you typed. Meaning if the answer is "example" you can type "ex" and confirm with 'Enter' if you see that only the button "example" is currently displayed.).
+
+`SESSION_SIZE=0`, set number of element in a session. 0 for unlimited number of elements, result : the file is only one big session. (Default SESSION_SIZE=6)  
+
+`KEYBOARD_AUTO_CHANGE=1` automatically change keyboard layout with `ibus` for typing the answer (need to be in language available, check source "popup.sh").  
+
+## Real world exemple
+
+.pul files can store their own specific configurations, but the configuration lines must starts with `#!#`, example with 2 optional variables (TYPE and SESSION_SIZE) :  
 
     #!#LANGUAGE_1=fr
     #!#LANGUAGE_2=fr
+    #!#SUBJECT="french_sentences"
+    #!#NUMBER="1"
     #!#TYPE=BUTTON
-    #!#LOOP_QUIZ=3
+    #!#SESSION_SIZE=
 
-# Usage
+# How to use PopUpLearn
 
 Step 1 - Launch php server with :  
 
@@ -74,18 +101,14 @@ PUL is using the socket /tmp/mpvsocket, so you need to use in your mpv configura
 
 - change keyboard layout automaticaly for different languages (use `ibus` and variable `$LANGUAGE_2`).  
 english: `xkb:us::eng`, thai: `libthai`, japanese: `anthy`, chinese: `pinyin`  
-To use `ibus` : `sudo apt-get install ibus ibus-libthai ibus-pinyin ibus-anthy`  
+To use `ibus` : `sudo apt-get install ibus`
+And then install the desired language, examples : `ibus-libthai` (thai), `ibus-pinyin` (chinese), `ibus-anthy` (japanese).  
 Of course put `run_im ibus` in the file `~/.xinputrc`.  (`echo run_im ibus >> ~/.xinputrc` and you can restart Xorg)  
 
 # LOGS
 
 Todo : Record all errors and successes in logs/ with dates to organize and try to guess what the user know well, don't know, probably forgot, etc...
 Simple first, then machine learning testing prediction system !?  
-
-# TYPES OF POPUP
-
-1 - Answer + Quiz (Work in session) `ANSWER_BEFORE_QUIZ=1`  
-2 - Quiz (For content the user already knows / should know) `ANSWER_BEFORE_QUIZ=0`
 
 # .pul files restrictions and syntax
 
@@ -105,29 +128,7 @@ Avoid double \ ! (like in GameScript quizzes) need to transform into four \
 
 Maybe issues with ` ??? need testing, avoid them!  
 
-# VARIABLES NEEDED IN .pul FILES
-
-`LANGUAGE_1="en"` the language of the question.  
-
-`LANGUAGE_2="fr"` the language of the answer.  
-
-`SUBJECT="french_sentences"` the subject name. (avoid spaces)  
-
-`NUMBER="1"` number used as a reference for the subject name.  
-
-# ADDITIONAL VARIABLES AVAILABLE IN .pul FILES
-
-`TYPE="BUTTON"` enable the usage of buttons in quiz popup for multiple choices where you can simply click on the answer instead of typing it. (Default `TYPE=TEXT` where you need to type the exact answer.) With this you can also confirm an answer if the good answer is the only one that is currently displayed (Buttons will vanish if they don't contain what you typed. Meaning if the answer is "example" you can type "ex" and confirm with 'Enter' if you see that only the button "example" is currently displayed.).
-
-`LOOP_QUIZ=1` set the number of quiz about the same question to 1, before asking another question.  
-
-`SESSION_SIZE=0`, set number of element in a session. 0 for unlimited number of elements, result : the file is only one big session. (Default SESSION_SIZE=6)  
-
-`ANSWER_BEFORE_QUIZ=1` to display answer before asking for it. Used to learn something the user don't know anything about. (Default ANSWER_BEFORE_QUIZ=0)  
-
-`KEYBOARD_AUTO_CHANGE=1` automatically change keyboard layout with `ibus` for typing the answer (need to be in language available, check source "popup.sh").  
-
-# LAUNCH WITH ARGUMENTS (3 variables that control time)
+# optional : LAUNCH WITH ARGUMENTS (3 variables that control time)
 
      bash ~/.PopUpLearn/popup.sh 0 30 60
 
