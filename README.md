@@ -1,4 +1,4 @@
-# PopUpLearn (Work in progress)
+# PopUpLearn
 
 Learning with popups and track down your knowledge by letting it run in the background.  
 
