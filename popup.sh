@@ -88,8 +88,8 @@ function ⬚_before_start(){
 	pkill -f "nodejs ~/.PopUpLearn/node_server_popup.js" &>/dev/null
 	pkill -f "php -S 127.0.0.1:9995 -t ~/.PopUpLearn" &>/dev/null
 	
-	exec 6<>/dev/tcp/127.0.0.1/9995 && { echo "ERROR port 9995 is already used..."; exec 6>&- && exec 6<&- && close_PopUpLearn; }
-	exec 6<>/dev/tcp/127.0.0.1/8899 && { echo "ERROR port 8899 is already used..."; exec 6>&- && exec 6<&- && close_PopUpLearn; }
+	exec 6<>/dev/tcp/127.0.0.1/9995 2> /dev/null && { echo "ERROR port 9995 is already used..."; exec 6>&- && exec 6<&- && close_PopUpLearn; }
+	exec 6<>/dev/tcp/127.0.0.1/8899 2> /dev/null && { echo "ERROR port 8899 is already used..."; exec 6>&- && exec 6<&- && close_PopUpLearn; }
 	
 	WEB_BROWSER="surf -F"
 	source $HOME/.PopUpLearn/MYDB/my.config &> /dev/null #Use the WEB_BROWSER here instead
