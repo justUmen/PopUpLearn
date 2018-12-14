@@ -18,41 +18,36 @@ Use `~/.PopUpLearn` folder to store scripts, data and logs.
 
 If you create a cool and useful .pul, share it with the rest of us ! :)  
 
-# Dependencies
+# Dependencies (Debian family)
 
-    sudo apt-get install php nodejs surf
+## Minimal dependencies
 
-## Web browser  
+    sudo apt-get install php nodejs
+    
+## ALL dependencies (`dunst` will replace your notification system)
+
+    sudo apt-get install php nodejs surf dunst toilet
+
+## Web browser [surf]  
 
 By default = usage of `surf` web browser to display the answer and the quiz. (can be changed with variable `WEB_BROWSER`)  
 i3wm : Add in your i3 configuration to launch `surf` on "Learn" workspace : `assign [class="Surf"] workspace Learn`
 
-## Notifications  
+## Notifications [dunst]  
 
-Tested with `dunst` for notifications - aka `notify-send` (my config : `https://github.com/justUmen/PopUpLearn/blob/master/config/dunstrc`)  
+PopUpLearn tested with `dunst` (https://github.com/dunst-project/dunst) for notifications - aka `notify-send`.  
 
-# Install
+Download and use my `dunstrc` configuration with :  
 
-    git clone https://github.com/justUmen/PopUpLearn ~/.PopUpLearn
+    mkdir -p ~/.config/dunst/;wget https://github.com/justUmen/PopUpLearn/blob/master/config/dunstrc -O ~/.config/dunst/dunstrc
 
-# Update (Manual update for now)
+# INSTALL
 
-	cd ~/.PopUpLearn && git pull origin master && cd -
+    git clone https://github.com/justUmen/PopUpLearn ~/.PopUpLearn; echo 'alias popuplearn="cd ~/.PopUpLearn && git pull origin master &> /dev/null && cd -;bash ~/.PopUpLearn/popup.sh"'>>~/.zshrc; source ~/.zshrc
 
-# Launch
+# LAUNCH
 
-Step 1 - Launch php server with :  
-
-     php -S 127.0.0.1:9999 -t ~/.PopUpLearn
-
-Step 2 - Launch nodejs server with :  
-
-     node ~/.PopUpLearn/node_server_popup.js || nodejs ~/.PopUpLearn/node_server_popup.js
-
-Step 3 - Launch user interface : (debug mode enabled for now, which will display the answer in your terminal. You might not want to look at it after launch : let it run in the background somewhere.)  
-
-     bash ~/.PopUpLearn/popup.sh
-
+    popuplearn
 
 # System configuration (optional)
 

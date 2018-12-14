@@ -14,7 +14,7 @@ function close_popup(){
 	//record more stuff, date and how many time click to close ???
 	//if click to close i saw it and need confirm + test + record :p
 	var objReq = new XMLHttpRequest();
-	objReq.open("GET", "http://localhost:8888" + "?type=close_PopUpLearn", false);
+	objReq.open("GET", "http://localhost:8899" + "?type=close_PopUpLearn", false);
 	objReq.send(null);
 }
 </script>

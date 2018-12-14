@@ -17,6 +17,14 @@
 function 🔧(){
 	echo -e "$BG_LIGHT_GRAY$BLACK 🔧 $@ 🔧 $ENDO"
 }
+function close_popup_sh(){
+	echo "close_popup_sh"
+	pkill -f "node $HOME/.PopUpLearn/node_server_popup.js" &>/dev/null
+	pkill -f "nodejs $HOME/.PopUpLearn/node_server_popup.js" &>/dev/null
+	pkill -f "php -S 127.0.0.1:9995 -t $HOME/.PopUpLearn" &>/dev/null
+	exit
+}
+
 function 💻_keyboard_language_change(){ 🔧 $FUNCNAME $@
 	command -v ibus >/dev/null 2>&1 || return
 	ibus engine > $HOME/.PopUpLearn/tmp/ibus.tmp
@@ -77,9 +85,30 @@ function display(){ 🔧 $FUNCNAME $@
 
 function ⬚_before_start(){
 	WEB_BROWSER="surf -F"
-	# command -v $WEB_BROWSER >/dev/null 2>&1 || { echo "Please install surf web browser : apt-get install surf" >&2; exit 3; }
-	exec 6<>/dev/tcp/127.0.0.1/9999 && echo "php server available on port 9999" || { echo "Please run the php server with : php -S 127.0.0.1:9999 -t ~/.PopUpLearn" && exec 6>&- && exec 6<&- && exit; }
-	exec 6<>/dev/tcp/127.0.0.1/8888 && echo "nodejs server available on port 8888" || { echo "Please run the nodejs server with : node ~/.PopUpLearn/node_server.js || nodejs ~/.PopUpLearn/node_server.js" && exec 6>&- && exec 6<&- && exit; }
+	source $HOME/.PopUpLearn/MYDB/my.config &> /dev/null #Use the WEB_BROWSER here instead
+	command -v $WEB_BROWSER &> /dev/null || { echo -e "WEB_BROWSER ($WEB_BROWSER) isn't a valid variable... Install this web browser or use a different one by changing the WEB_BROWSER variable in \e[38;5;33m$HOME/.PopUpLearn/MYDB/my.config\e[0m , for example : \e[38;5;33mWEB_BROWSER=\"surf -F\"\e[0m" && exit; }
+			
+	pkill -f "node ~/.PopUpLearn/node_server_popup.js" &>/dev/null
+	pkill -f "nodejs ~/.PopUpLearn/node_server_popup.js" &>/dev/null
+	pkill -f "php -S 127.0.0.1:9995 -t ~/.PopUpLearn" &>/dev/null
+
+	node ~/.PopUpLearn/node_server_popup.js &>/dev/null || nodejs ~/.PopUpLearn/node_server_popup.js &>/dev/null &
+	php -S 127.0.0.1:9995 -t ~/.PopUpLearn &>/dev/null &
+
+	sleep 2
+
+	#Try to connect for a few seconds before leaving
+	for i in {1..5}; do
+		exec 6<>/dev/tcp/127.0.0.1/8899 && break || { exec 6>&- && exec 6<&-; }
+		sleep 1
+	done
+	for i in {1..5}; do
+		exec 6<>/dev/tcp/127.0.0.1/9995 && break || { exec 6>&- && exec 6<&-; }
+		sleep 1
+	done
+	exec 6<>/dev/tcp/127.0.0.1/9995 && echo "php server available on port 9995" || { echo "ERROR php server on port 9995"; exec 6>&- && exec 6<&- && close_popup_sh; }
+	exec 6<>/dev/tcp/127.0.0.1/8899 && echo "nodejs server available on port 8899" || { echo "ERROR nodejs server on port 8899"; exec 6>&- && exec 6<&- && close_popup_sh; }
+
 	mkdir $HOME/.PopUpLearn/MYDB 2> /dev/null
 	touch $HOME/.PopUpLearn/MYDB/my.list
 	mkdir $HOME/.PopUpLearn/tmp 2> /dev/null
@@ -169,7 +198,7 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 		echo -en "\e[97;45m # $ENDO"
 		read selected < /dev/tty
 		case $selected in
-			e) exit ;;
+			e) close_popup_sh ;;
 			g) break ;;
 			[0-9]*) test "$selected" -le "`expr $arraylength - 1`" && break ;;
 		esac
@@ -438,7 +467,7 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_gamescript_chapter(){ 🔧 $FUNCNAME $@
 	#IF session_content.tmp is empty do not wait, go directly new session
 	echo "wc -l $HOME/.PopUpLearn/tmp/session_content.tmp : `wc -l $HOME/.PopUpLearn/tmp/session_content.tmp`"
 	if [[ "$(wc -l $HOME/.PopUpLearn/tmp/session_content.tmp|sed 's/ .*//')" != "0" ]]; then
-		echo "Press any key to exit, or wait $SEC_AFTER_QUIZ SECONDS before the next subject."
+		echo "Press any key to Exit, or wait $SEC_AFTER_QUIZ SECONDS before the next subject."
 		if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
 			return 2 #STOPPED MANUALLY, break loop
 		else
@@ -465,7 +494,7 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 		SESSION_SIZE=5
 	fi
 	if [ $SESSION_SIZE -eq 0 ]; then
-		SESSION_SIZE=9999
+		SESSION_SIZE=9995
 	fi
 
 	echo "$HOME/.PopUpLearn/tmp/session_specific_config.tmp :"
@@ -759,7 +788,7 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 	#IF session_content.tmp is empty do not wait, go directly new session
 	echo "wc -l $HOME/.PopUpLearn/tmp/session_content.tmp : `wc -l $HOME/.PopUpLearn/tmp/session_content.tmp`"
 	if [[ "$(wc -l $HOME/.PopUpLearn/tmp/session_content.tmp|sed 's/ .*//')" != "0" ]]; then
-		echo "Press any key to exit, or wait $SEC_AFTER_QUIZ SECONDS before the next subject."
+		echo "Press any key to Exit, or wait $SEC_AFTER_QUIZ SECONDS before the next subject."
 		if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
 			return 2 #STOPPED MANUALLY, break loop
 		else
@@ -808,27 +837,27 @@ function ⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer(){ 🔧 $FUNCNAME $@
 			if [[ "$XDG_CURRENT_DESKTOP" == "i3" ]]; then
 				CURRENT_DESKTOP=$(wmctrl -d | awk '/\*/{print $1}')
 				sleep 5 && i3-msg workspace "Learn"  &
-				$WEB_BROWSER http://127.0.0.1:9999/popup.php &> /dev/null
+				$WEB_BROWSER http://127.0.0.1:9995/popup.php &> /dev/null
 				wmctrl -s $CURRENT_DESKTOP
 			else
-				$WEB_BROWSER http://127.0.0.1:9999/popup.php &> /dev/null
+				$WEB_BROWSER http://127.0.0.1:9995/popup.php &> /dev/null
 			fi
 		else
 			if [[ "$XDG_CURRENT_DESKTOP" == "i3" ]]; then
 				CURRENT_DESKTOP=$(wmctrl -d | awk '/\*/{print $1}')
 				sleep 5 && i3-msg workspace "Learn" &
-				$WEB_BROWSER http://127.0.0.1:9999/popup.php &> /dev/null &
+				$WEB_BROWSER http://127.0.0.1:9995/popup.php &> /dev/null &
 				sleep $TIME_DISPLAYED
-				pkill -f "$WEB_BROWSER http://127.0.0.1:9999/popup.php" &> /dev/null
+				pkill -f "$WEB_BROWSER http://127.0.0.1:9995/popup.php" &> /dev/null
 				wmctrl -s $CURRENT_DESKTOP
 			else
-				$WEB_BROWSER http://127.0.0.1:9999/popup.php &> /dev/null
+				$WEB_BROWSER http://127.0.0.1:9995/popup.php &> /dev/null
 				sleep $TIME_DISPLAYED
-				pkill -f "$WEB_BROWSER http://127.0.0.1:9999/popup.php" &> /dev/null
+				pkill -f "$WEB_BROWSER http://127.0.0.1:9995/popup.php" &> /dev/null
 			fi
 		fi
 		if [ $SIGSTOP_MPV -eq 1 ]; then mpv_play &> /dev/null; fi
-		echo "Press any key to exit, or wait $SEC_BEFORE_QUIZ SECONDS before the question."
+		echo "Press any key to Exit, or wait $SEC_BEFORE_QUIZ SECONDS before the question."
 		if read -r -N 1 -t $SEC_BEFORE_QUIZ EXIT < /dev/tty; then
 			return 2 #STOPPED MANUALLY, break loop
 		else
@@ -853,12 +882,12 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
 			CURRENT_DESKTOP=$(wmctrl -d | awk '/\*/{print $1}')
 			sleep 5 && i3-msg workspace "Learn" &
 			sleep 5 && 💻_keyboard_language_change &
-			$WEB_BROWSER http://127.0.0.1:9999/popup_quiz.php &> /dev/null
+			$WEB_BROWSER http://127.0.0.1:9995/popup_quiz.php &> /dev/null
 			💻_keyboard_language_previous_one
 			wmctrl -s $CURRENT_DESKTOP
 		else
 			💻_keyboard_language_change
-			$WEB_BROWSER http://127.0.0.1:9999/popup_quiz.php &> /dev/null
+			$WEB_BROWSER http://127.0.0.1:9995/popup_quiz.php &> /dev/null
 			💻_keyboard_language_previous_one
 		fi
 
@@ -890,7 +919,7 @@ function ⬚⬚⬚⬚⬚⬚_🛑_quiz(){ 🔧 $FUNCNAME $@
 	#NOT sleep if it was the last line in _remove.tmp
 	LINES_LEFT=`wc -l /home/umen/.PopUpLearn/tmp/session_content_remove.tmp|sed 's/ .*//'`
 	if [ $LINES_LEFT -ne 0 ];then
-		echo "Press any key to exit, or wait $SEC_AFTER_QUIZ SECONDS ($LINES_LEFT lines left in session_remove.tmp)"
+		echo "Press any key to Exit, or wait $SEC_AFTER_QUIZ SECONDS ($LINES_LEFT lines left in session_remove.tmp)"
 		if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
 			return 2 #STOPPED MANUALLY, break loop
 		else
@@ -916,7 +945,6 @@ command -v toilet &> /dev/null && toilet -f mono12 PopUpLearn -w 100
 ⬚_before_start
 echo
 echo " - Warning : This is an early release, it might not work as expected..."
-echo " - Warning : PopUpLearn is been tested only on i3wm, some code is specific to i3. (All wms supported soon.)"
 echo " - Warning : Dates are logged for all answers, but are not yet used by the system to optimize the learning process. (But it will)"
 echo
 if [ $1 ]; then TIME_DISPLAYED="$1"; else TIME_DISPLAYED=0; fi #0 for infinite
