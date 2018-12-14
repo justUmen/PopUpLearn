@@ -196,7 +196,7 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 	echo -e "$COLOR_SELECTION g) $ENDO GameScript Quizzes [for `cat ~/.GameScript/username`]"
 	echo -e "$COLOR_SELECTION d) $ENDO Download and add new .pul files from our online database into your ~/.PopUpLearn/MYDB folder \\e[38;5;196m[ not yet implemented... :( ]$ENDO"
 	selected=99
-	echo -e "$COLOR_SELECTION e) $ENDO Exit"
+	echo -e "$COLOR_SELECTION e) $ENDO Close PopUpLearn"
 	while :; do
 		echo -en "\e[97;45m # $ENDO"
 		read selected < /dev/tty
