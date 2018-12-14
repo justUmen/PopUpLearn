@@ -941,6 +941,7 @@ function ⬚⬚⬚⬚⬚_🛑_lines_in_session(){ 🔧 $FUNCNAME $@
 	notify-send -i $HOME/.PopUpLearn/img/unknown.png "End of session $SESSION_NUMBER"
 }
 
+echo "LOL"
 command -v toilet &> /dev/null && toilet -f mono12 PopUpLearn -w 100
 ⬚_before_start
 echo
