@@ -169,7 +169,7 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 	done < "$HOME/.PopUpLearn/tmp/list_pul.tmp"
 	#DISPLAY LIST .pul FILES
 	echo
-	echo "Menu list all .pul files in ~/.PopUpLearn/DB/ and ~/.PopUpLearn/MYDB/ folders + manual entries from ~/.PopUpLearn/MYDB/my.list too (Full path of .pul file, one per line.)"
+	echo "Menu list all .pul files in ~/.PopUpLearn/MYDB/ folder + manual entries from ~/.PopUpLearn/MYDB/my.list too (Full path of .pul file, one per line.)"
 	echo -e "$COLOR_SELECTION 0) $ENDO Video : What is and how to use PopUpLearn \\e[38;5;196m[ not yet implemented... :( ]$ENDO"
 	arraylength=${#FILES[@]}
 	for (( i=1; i<${arraylength}; i++ )); do
@@ -948,7 +948,7 @@ command -v toilet &> /dev/null && toilet -f mono12 PopUpLearn -w 100
 ⬚_before_start
 echo
 echo " - Warning : This is an early release, it might not work as expected..."
-echo " - Warning : Do not close PopUpLearn with CTRL + C, the node and php servers will keep running, close PopUpLearn properly by using the menu."
+echo " - Warning : Do not close PopUpLearn with CTRL + C, the node and php servers will keep running, close PopUpLearn properly by using the interactive menu."
 echo " - Warning : Dates are logged for all answers, but are not yet used by the system to optimize the learning process. (But it will)"
 echo
 if [ $1 ]; then TIME_DISPLAYED="$1"; else TIME_DISPLAYED=0; fi #0 for infinite
