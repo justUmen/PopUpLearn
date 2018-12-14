@@ -84,13 +84,16 @@ function display(){ 🔧 $FUNCNAME $@
 }
 
 function ⬚_before_start(){
-	WEB_BROWSER="surf -F"
-	source $HOME/.PopUpLearn/MYDB/my.config &> /dev/null #Use the WEB_BROWSER here instead
-	command -v $WEB_BROWSER &> /dev/null || { echo -e "WEB_BROWSER ($WEB_BROWSER) isn't a valid variable... Install this web browser or use a different one by changing the WEB_BROWSER variable in \e[38;5;33m$HOME/.PopUpLearn/MYDB/my.config\e[0m , for example : \e[38;5;33mWEB_BROWSER=\"surf -F\"\e[0m" && exit; }
-			
 	pkill -f "node ~/.PopUpLearn/node_server_popup.js" &>/dev/null
 	pkill -f "nodejs ~/.PopUpLearn/node_server_popup.js" &>/dev/null
 	pkill -f "php -S 127.0.0.1:9995 -t ~/.PopUpLearn" &>/dev/null
+	
+	exec 6<>/dev/tcp/127.0.0.1/9995 && { echo "ERROR port 9995 is already used..."; exec 6>&- && exec 6<&- && close_PopUpLearn; }
+	exec 6<>/dev/tcp/127.0.0.1/8899 && { echo "ERROR port 8899 is already used..."; exec 6>&- && exec 6<&- && close_PopUpLearn; }
+	
+	WEB_BROWSER="surf -F"
+	source $HOME/.PopUpLearn/MYDB/my.config &> /dev/null #Use the WEB_BROWSER here instead
+	command -v $WEB_BROWSER &> /dev/null || { echo -e "WEB_BROWSER ($WEB_BROWSER) isn't a valid variable... Install this web browser or use a different one by changing the WEB_BROWSER variable in \e[38;5;33m$HOME/.PopUpLearn/MYDB/my.config\e[0m , for example : \e[38;5;33mWEB_BROWSER=\"surf -F\"\e[0m" && exit; }
 
 	node ~/.PopUpLearn/node_server_popup.js &>/dev/null || nodejs ~/.PopUpLearn/node_server_popup.js &>/dev/null &
 	php -S 127.0.0.1:9995 -t ~/.PopUpLearn &>/dev/null &
