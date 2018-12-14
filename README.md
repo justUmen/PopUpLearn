@@ -78,36 +78,9 @@ System configuration will overwrite all specific configurations and should be st
 
 `SESSION_SIZE=0`, set number of element in a session. 0 for unlimited number of elements, result : the file is only one big session. (Default SESSION_SIZE=6)  
 
-`KEYBOARD_AUTO_CHANGE=1` automatically change keyboard layout with `ibus` for typing the answer (need to be in language available, check source "popup.sh").  
+`KEYBOARD_AUTO_CHANGE=1` automatically change keyboard layout with `ibus` for typing the answer - like `ibus-anthy` for japanese... (The language need to be available in PopUpLearn, check source "popup.sh" for more details - or ask for language support here.).  
 
-## Real world example
-
-.pul files can store their own specific configurations, but the configuration lines must starts with `#!#`, example with 2 optional variables (TYPE and SESSION_SIZE) :  
-
-    #!#LANGUAGE_1=fr
-    #!#LANGUAGE_2=fr
-    #!#SUBJECT="french_sentences"
-    #!#NUMBER="1"
-    #!#TYPE=BUTTON
-    #!#SESSION_SIZE=
-
-# OPTIONS
-
-- pause mpv if playing something when quiz popup arrives and unpause it afterwards  
-PUL is using the socket /tmp/mpvsocket, so you need to use in your mpv configuration file : `input-ipc-server=/tmp/mpvsocket`)  
-
-- change keyboard layout automaticaly for different languages (use `ibus` and variable `$LANGUAGE_2`).  
-english: `xkb:us::eng`, thai: `libthai`, japanese: `anthy`, chinese: `pinyin`  
-To use `ibus` : `sudo apt-get install ibus`
-And then install the desired language, examples : `ibus-libthai` (thai), `ibus-pinyin` (chinese), `ibus-anthy` (japanese).  
-Of course put `run_im ibus` in the file `~/.xinputrc`.  (`echo run_im ibus >> ~/.xinputrc` and you can restart Xorg)  
-
-# LOGS
-
-Todo : Record all errors and successes in logs/ with dates to organize and try to guess what the user know well, don't know, probably forgot, etc...
-Simple first, then machine learning testing prediction system !?  
-
-# .pul files restrictions and syntax
+## .pul files restrictions and syntax
 
 The format of each line is `question£answer`, "£" is used to separate the question from the answer.  
 
@@ -124,6 +97,38 @@ Line specific variables start with #!# , and they shouldn't contains spaces.
 Avoid double \ ! (like in GameScript quizzes) need to transform into four \  
 
 Maybe issues with ` ??? need testing, avoid them!  
+
+## Real world example of a .pul file
+
+.pul files can store their own specific configurations, but the configuration lines must starts with `#!#`, the example below have 2 optional variables (TYPE and SESSION_SIZE).  
+
+The path of the file below is `~/.PopUpLearn/MYDB/en/fr/whatever/stupid_name.pul`, but the sub folders are optional (`en`, `fr` and `whatever`) and names (`stupid_name.pul`) makes no difference inside PopUpLearn.   
+But you can use them to organize your .pul files the way you want.  
+
+    #!#LANGUAGE_1=en
+    #!#LANGUAGE_2=fr
+    #!#SUBJECT="learn_french"
+    #!#NUMBER="1"
+    #!#TYPE=BUTTON
+    #!#SESSION_SIZE=10
+    house |=| maison
+    boat |=| bateau
+
+# OPTIONS
+
+- pause mpv when the popup arrives and unpause it afterwards.  
+PUL is pausing/unpausing mpv with the socket `/tmp/mpvsocket`, so you want to use this, you need to add in your mpv configuration file : `input-ipc-server=/tmp/mpvsocket`)  
+
+- change keyboard layout automaticaly for different languages (use `ibus` and variable `$LANGUAGE_2`).  
+english: `xkb:us::eng`, thai: `libthai`, japanese: `anthy`, chinese: `pinyin`  
+To use `ibus` : `sudo apt-get install ibus`
+And then install the desired language, examples : `ibus-libthai` (thai), `ibus-pinyin` (chinese), `ibus-anthy` (japanese).  
+Of course put `run_im ibus` in the file `~/.xinputrc`.  (`echo run_im ibus >> ~/.xinputrc` and you can restart Xorg)  
+
+# LOGS
+
+Todo : Record all errors and successes in logs/ with dates to organize and try to guess what the user know well, don't know, probably forgot, etc...
+Simple first, then machine learning testing prediction system !?  
 
 # optional : LAUNCH WITH ARGUMENTS (3 variables that control time)
 

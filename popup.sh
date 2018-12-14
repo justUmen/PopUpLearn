@@ -17,8 +17,8 @@
 function 🔧(){
 	echo -e "$BG_LIGHT_GRAY$BLACK 🔧 $@ 🔧 $ENDO"
 }
-function close_popup_sh(){
-	echo "close_popup_sh"
+function close_PopUpLearn(){
+	echo "close_PopUpLearn"
 	pkill -f "node $HOME/.PopUpLearn/node_server_popup.js" &>/dev/null
 	pkill -f "nodejs $HOME/.PopUpLearn/node_server_popup.js" &>/dev/null
 	pkill -f "php -S 127.0.0.1:9995 -t $HOME/.PopUpLearn" &>/dev/null
@@ -106,8 +106,8 @@ function ⬚_before_start(){
 		exec 6<>/dev/tcp/127.0.0.1/9995 && break || { exec 6>&- && exec 6<&-; }
 		sleep 1
 	done
-	exec 6<>/dev/tcp/127.0.0.1/9995 && echo "php server available on port 9995" || { echo "ERROR php server on port 9995"; exec 6>&- && exec 6<&- && close_popup_sh; }
-	exec 6<>/dev/tcp/127.0.0.1/8899 && echo "nodejs server available on port 8899" || { echo "ERROR nodejs server on port 8899"; exec 6>&- && exec 6<&- && close_popup_sh; }
+	exec 6<>/dev/tcp/127.0.0.1/9995 && echo "php server available on port 9995" || { echo "ERROR php server on port 9995"; exec 6>&- && exec 6<&- && close_PopUpLearn; }
+	exec 6<>/dev/tcp/127.0.0.1/8899 && echo "nodejs server available on port 8899" || { echo "ERROR nodejs server on port 8899"; exec 6>&- && exec 6<&- && close_PopUpLearn; }
 
 	mkdir $HOME/.PopUpLearn/MYDB 2> /dev/null
 	touch $HOME/.PopUpLearn/MYDB/my.list
@@ -198,7 +198,7 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 		echo -en "\e[97;45m # $ENDO"
 		read selected < /dev/tty
 		case $selected in
-			e) close_popup_sh ;;
+			e) close_PopUpLearn ;;
 			g) break ;;
 			[0-9]*) test "$selected" -le "`expr $arraylength - 1`" && break ;;
 		esac
@@ -945,6 +945,7 @@ command -v toilet &> /dev/null && toilet -f mono12 PopUpLearn -w 100
 ⬚_before_start
 echo
 echo " - Warning : This is an early release, it might not work as expected..."
+echo " - Warning : Do not close PopUpLearn with CTRL + C, the node and php servers will keep running, close PopUpLearn properly by using the menu."
 echo " - Warning : Dates are logged for all answers, but are not yet used by the system to optimize the learning process. (But it will)"
 echo
 if [ $1 ]; then TIME_DISPLAYED="$1"; else TIME_DISPLAYED=0; fi #0 for infinite
