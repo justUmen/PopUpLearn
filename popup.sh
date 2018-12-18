@@ -87,10 +87,10 @@ function ⬚_before_start(){
 	pkill -f "node ~/.PopUpLearn/node_server_popup.js" &>/dev/null
 	pkill -f "nodejs ~/.PopUpLearn/node_server_popup.js" &>/dev/null
 	pkill -f "php -S 127.0.0.1:9995 -t ~/.PopUpLearn" &>/dev/null
-	
+
 	{ exec 6<>/dev/tcp/127.0.0.1/9995 && { echo "ERROR port 9995 is already used..."; exec 6>&- && exec 6<&- && close_PopUpLearn; } } &>/dev/null
 	{ exec 6<>/dev/tcp/127.0.0.1/8899 && { echo "ERROR port 8899 is already used..."; exec 6>&- && exec 6<&- && close_PopUpLearn; } } &>/dev/null
-	
+
 	WEB_BROWSER="surf -F"
 	source $HOME/.PopUpLearn/MYDB/my.config &> /dev/null #Use the WEB_BROWSER here instead
 	command -v $WEB_BROWSER &> /dev/null || { echo -e "WEB_BROWSER ($WEB_BROWSER) isn't a valid variable... Install this web browser or use a different one by changing the WEB_BROWSER variable in \e[38;5;33m$HOME/.PopUpLearn/MYDB/my.config\e[0m , for example : \e[38;5;33mWEB_BROWSER=\"surf -F\"\e[0m" && exit; }
@@ -150,6 +150,8 @@ function ⬚_🔄🔄_start(){ 🔧 $FUNCNAME $@
 				echo "$HOME/.GameScript n'existe pas..."
 				echo
 			fi
+		elif [[ "$selected" == "d" ]]; then
+			⬚⬚⬚_📃🔄🔄_add_to_MYDB || continue
 		else
 			⬚⬚⬚_🔄🔄_session
 		fi
@@ -162,8 +164,8 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 	while read mylist;do
 		FILES+=($mylist)
 	done < $HOME/.PopUpLearn/MYDB/my.list
-	find $HOME/.PopUpLearn/DB -name "*.pul" > "$HOME/.PopUpLearn/tmp/list_pul.tmp"
-	find $HOME/.PopUpLearn/MYDB -name "*.pul" >> "$HOME/.PopUpLearn/tmp/list_pul.tmp"
+	find $HOME/.PopUpLearn/MYDB -name "*.pul" > "$HOME/.PopUpLearn/tmp/list_pul.tmp"
+	# find $HOME/.PopUpLearn/DB -name "*.pul" > "$HOME/.PopUpLearn/tmp/list_pul.tmp"
 	while read PUL; do
 		FILES+=($PUL)
 	done < "$HOME/.PopUpLearn/tmp/list_pul.tmp"
@@ -171,11 +173,12 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 	echo
 	echo "Menu list all .pul files in ~/.PopUpLearn/MYDB/ folder + manual entries from ~/.PopUpLearn/MYDB/my.list too (Full path of .pul file, one per line.)"
 	echo -e "$COLOR_SELECTION 0) $ENDO Video : What is and how to use PopUpLearn \\e[38;5;196m[ not yet implemented... :( ]$ENDO"
+	echo -e "$COLOR_SELECTION d) $ENDO Download and add new .pul files from our online community database to your personal list.$ENDO"
 	arraylength=${#FILES[@]}
 	for (( i=1; i<${arraylength}; i++ )); do
 		echo -en "$COLOR_SELECTION $i) $COLOR_TITLE_SELECTED ${FILES[i]} $ENDO"
 		FILE_NAME=`echo ${FILES[i]} | sed 's#.*/##'`
-		FILE_PATH="$HOME/.PopUpLearn/logs/*/*/*/*/$FILE_NAME/" # */* ???
+		FILE_PATH="$HOME/.PopUpLearn/logs/*/*/*/*/$FILE_NAME/" # */* ???1
 		LAST_DAY=`cat $FILE_PATH/session_*/answer.good.date 2>/dev/null | sed 's/.*€//' | sort -n | tail -n 1`
 		TODAY=$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))
 		DAYS=`expr $TODAY - $LAST_DAY 2>/dev/null`
@@ -194,7 +197,6 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 		echo -e " => $COLOR_PERCENT $PERCENT% done $ENDO ($NB_GOOD / $NB_LINES)"
 	done
 	echo -e "$COLOR_SELECTION g) $ENDO GameScript Quizzes [for `cat ~/.GameScript/username`]"
-	echo -e "$COLOR_SELECTION d) $ENDO Download and add new .pul files from our online database into your ~/.PopUpLearn/MYDB folder \\e[38;5;196m[ not yet implemented... :( ]$ENDO"
 	selected=99
 	echo -e "$COLOR_SELECTION e) $ENDO Close PopUpLearn"
 	while :; do
@@ -202,11 +204,49 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 		read selected < /dev/tty
 		case $selected in
 			e) close_PopUpLearn ;;
+			d) break ;;
 			g) break ;;
 			[0-9]*) test "$selected" -le "`expr $arraylength - 1`" && break ;;
 		esac
 	done
 	🔧 "$FUNCNAME : \$selected=$selected"
+}
+function ⬚⬚⬚_📃🔄🔄_add_to_MYDB(){ 🔧 $FUNCNAME $@
+	while [ 1 ]; do
+		find $HOME/.PopUpLearn/MYDB -name "*.pul" | sed 's#/MYDB/#/DB/#' > "$HOME/.PopUpLearn/tmp/list_pul_DB.tmp"
+		find $HOME/.PopUpLearn/DB -name "*.pul" > "$HOME/.PopUpLearn/tmp/list_pul_MYDB.tmp"
+		cat "$HOME/.PopUpLearn/tmp/list_pul_DB.tmp" "$HOME/.PopUpLearn/tmp/list_pul_MYDB.tmp" | sort | uniq -u > "$HOME/.PopUpLearn/tmp/list_pul.tmp"
+		FILES=()
+		FILES+=("empty")
+		while read PUL; do
+			FILES+=($PUL)
+		done < "$HOME/.PopUpLearn/tmp/list_pul.tmp"
+		#DISPLAY LIST .pul FILES
+		echo
+		echo -e "\tSelect the .pul file you want to add to your personal list : "
+		arraylength=${#FILES[@]}
+		for (( i=1; i<${arraylength}; i++ )); do
+			echo -en "\t$COLOR_SELECTION $i) $COLOR_TITLE_SELECTED ${FILES[i]} $ENDO"
+			echo
+		done
+		echo -e "\t$COLOR_SELECTION e) $ENDO Return"
+		while :; do
+			echo -en "\t\e[97;45m # $ENDO"
+			read selected < /dev/tty
+			case $selected in
+				e) return 2 ;;
+				[0-9]*) break ;;
+			esac
+		done
+		⬚⬚⬚⬚_🏗_add_to_MYDB "${FILES[selected]}"
+	done
+}
+function ⬚⬚⬚⬚_🏗_add_to_MYDB(){ 🔧 $FUNCNAME $@
+	DB_NAME=`echo "$1" | sed 's#.*/##'`
+	MYDB_PATH=`echo "$1" | sed 's#/DB/#/MYDB/#'`
+	echo "---- ln -s $1 ~/.PopUpLearn/MYDB/$DB_NAME ---- $MYDB_PATH (ln -s $1 $MYDB_PATH)"
+	mkdir -p `dirname $MYDB_PATH`
+	ln -s "$1" "$MYDB_PATH" && echo "$DB_NAME was added to your personal list."
 }
 function ⬚⬚⬚_🔄🔄_gamescript(){ 🔧 $FUNCNAME $@
 	while [ 1 ]; do
