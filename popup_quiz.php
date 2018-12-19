@@ -160,7 +160,7 @@ END;
 									React.createElement("img", { onClick : good_answer, src: mail.user.name, className: "btn glyphicon",style: {margin: "3px"}})
 							);
 							else return (
-								React.createElement("div", { onClick : bad_answer, src: mail.user.name, className: "btn glyphicon",style: {margin: "3px"}})
+								React.createElement("img", { onClick : bad_answer, src: mail.user.name, className: "btn glyphicon",style: {margin: "3px"}})
 							);
 						}
 						else{
