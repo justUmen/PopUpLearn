@@ -155,7 +155,7 @@ END;
 				React.createElement("div", null,
 					React.createElement(SearchInput, {id: 'focus_search',ref: "search", onChange: this.searchUpdated}),
 					mails.map(function(mail) {
-						if(<?php if("$LANGUAGE_TAG_2"=="IM"){echo "1";} ?>){
+						if(<?php if("$LANGUAGE_TAG_2"=="IM"){echo "1";}else{echo "0";} ?>){
 							if (mail.user.answer=="good") return (
 									React.createElement("div", { onClick : good_answer, className: "btn glyphicon",style: {margin: "3px", backgroundColor: "black"}}, mail.user.name)
 							);
