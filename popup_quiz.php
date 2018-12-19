@@ -157,7 +157,13 @@ END;
 					mails.map(function(mail) {
 						if (mail.user.answer=="good") return (
 							//(mail.user.LEFT,mail.user.name)
-							React.createElement("div", { onClick : good_answer, className: "btn glyphicon",style: {margin: "3px", backgroundColor: "black"}}, mail.user.name)
+							if(<?php if("$LANGUAGE_TAG_2"=="IM"){echo "1";}else{echo "0";} ?>){
+								React.createElement("div", { onClick : good_answer, className: "btn glyphicon",style: {margin: "3px", backgroundColor: "black"}}, mail.user.name)
+							}
+							else{
+								React.createElement("div", { onClick : good_answer, className: "btn glyphicon",style: {margin: "3px", backgroundColor: "black"}}, mail.user.name)
+							}
+
 						);
 						else return (
 							React.createElement("div", { onClick : bad_answer, className: "btn glyphicon",style: {margin: "3px", backgroundColor: "black"}}, mail.user.name)
