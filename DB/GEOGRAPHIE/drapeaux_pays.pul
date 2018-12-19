@@ -1,0 +1,11 @@
+#!#TYPE="BUTTON"
+#!#BUTTON="1"
+#!#LANGUAGE_1="fr"
+#!#LANGUAGE_2="IM"
+#!#SUBJECT="drapeaux_pays"
+#!#NUMBER="1"
+chine |=| <img src="IMGDB/drapeaux_pays.pul/chine.jpeg">
+nigeria |=| <img src="IMGDB/drapeaux_pays.pul/nigeria.jpeg">
+france |=| <img src="IMGDB/drapeaux_pays.pul/france.jpeg">
+island |=| <img src="IMGDB/drapeaux_pays.pul/islande.jpeg">
+vietnam |=| <img src="IMGDB/drapeaux_pays.pul/vietnam.jpeg">
