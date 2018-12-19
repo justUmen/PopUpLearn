@@ -162,6 +162,7 @@ END;
 							else return (
 								React.createElement("div", { onClick : bad_answer, className: "btn glyphicon",style: {margin: "3px", backgroundColor: "black"}}, mail.user.name)
 							);
+						}
 						else{
 							if (mail.user.answer=="good") return (
 									React.createElement("div", { onClick : good_answer, className: "btn glyphicon",style: {margin: "3px", backgroundColor: "black"}}, mail.user.name)
