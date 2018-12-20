@@ -860,10 +860,9 @@ function ⬚⬚⬚⬚⬚⬚_🚧_session_answers(){ 🔧 $FUNCNAME $@
 			left=`echo $line | sed 's/£.*//'`
 			right=`echo $line | sed 's/.*£//'`
 			#~ if [[ "$left" != "$LEFT" ]] : BETTER FOR MULTIPLE ANSWERS POSSIBLE ???
-			echo ":: `cat $HOME/.PopUpLearn/tmp/current_line.tmp` :: $line ::"
-			if [[ "$line" != "`cat $HOME/.PopUpLearn/tmp/current_line.tmp`" ]]; then
+			# if [[ "$line" != "`cat $HOME/.PopUpLearn/tmp/current_line.tmp`" ]]; then
+			if [[ "$right" != "$RIGHT" ]]; then
 				echo "$right" >> $HOME/.PopUpLearn/tmp/wrong_answers_BUTTON2.tmp
-				#~ echo "---- $line != `cat $HOME/.PopUpLearn/tmp/current_line.tmp` ----"
 			fi
 		done < "$HOME/.PopUpLearn/tmp/file_content_BAD_answers.tmp"
 		cat $HOME/.PopUpLearn/tmp/wrong_answers_BUTTON2.tmp | sort | uniq > $HOME/.PopUpLearn/tmp/wrong_answers_BUTTON.tmp
