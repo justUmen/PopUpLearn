@@ -157,7 +157,7 @@ END;
 					mails.map(function(mail) {
 						if(<?php if("$LANGUAGE_TAG_2"=="IM"){echo "1";}else{echo "0";} ?>){ //IF image
 							if (mail.user.answer=="good") return (
-									React.createElement("div", { onClick : good_answer, className: "btn glyphicon",style: {margin: "3px", backgroundColor: "black"}}).createElement("img", { onClick : good_answer, src: mail.user.name, className: "btn glyphicon",style: {margin: "3px"}})
+								React.createElement("div", { onClick : good_answer, className: "btn glyphicon",style: {margin: "3px", backgroundColor: "black"}}, mail.user.name, React.createElement("img", { onClick : good_answer, src: mail.user.name, className: "btn glyphicon",style: {margin: "3px"}}))
 							);
 							else return (
 								React.createElement("img", { onClick : bad_answer, src: mail.user.name, className: "btn glyphicon",style: {margin: "3px"}})
