@@ -15,7 +15,7 @@
 #~ 🌘 : used for new session only
 
 function 🔧(){
-	echo -e "$BG_LIGHT_GRAY$BLACK 🔧 $@ 🔧 $ENDO"
+	echo -e "$BG_DARK_GRAY$WHITE 🔧 $@ 🔧 $ENDO"
 }
 function close_PopUpLearn(){
 	echo "close_PopUpLearn"
@@ -119,14 +119,17 @@ function ⬚_before_start(){
 	ENDO="\e[0m"
 	BG_BLUE="\e[44m"
 	BG_BLACK="\e[40m"
-	BG_LIGHT_GRAY="\e[107m"
+	BG_DARK_GRAY="\e[100m"
 	BG_LIGHT_MAGENTA="\e[105m"
+	BG_DARK_MAGENTA="\e[48;5;90m"
 	BG_LIGHT_GREEN="\e[102m"
+	BG_DARK_GREEN="\e[48;5;28m"
 	#PREPARE MENU COLORS
 	BLACK="\e[30m"
+	WHITE="\e[97m"
 	COLOR_PERCENT="$BG_LIGHT_GRAY\e[36m"
-	COLOR_SELECTION="$BG_LIGHT_MAGENTA$BLACK"
-	COLOR_TITLE_SELECTED="$BG_LIGHT_GREEN$BLACK"
+	COLOR_SELECTION="$BG_DARK_MAGENTA$WHITE"
+	COLOR_TITLE_SELECTED="$BG_DARK_GREEN$WHITE"
 	#PREPARE COLORS QUESTIONS / ANSWERS ONLY !!! DIFFERENT FORMAT
 	END="\\\e\[0m"
 	GREY="\\\e\[38;5;59m" #GOOD 2+ / BAD 0
