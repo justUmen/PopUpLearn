@@ -1,16 +1,14 @@
 # PopUpLearn
 
-Learning with popups and track down your knowledge by letting it run in the background.  
+Learning / memorize with popups + track down your knowledge by letting PopUpLearn run in the background.  
 
-Made for GameScript but can be used to learn pretty much whatever you want, but you need a clean DB about it.  
+Built and tested for linux desktop users, using `bash`. But it might eventually be transfered for compatibility with smartphones, AR glasses, VR headset...  
 
-Built and tested for linux desktop users, using `bash`. But will eventually be transfered to smartphone, AR glasses, VR headset...  
+Made for GameScript but can be used to learn/remember about pretty much whatever you want, but you need a proper PUL FILE for it.  
 
-Technologies : PopUpLearn is using bash, html, php, js, css, nodejs and reactjs.  
+The PUL FILE is a simple text file with the .pul extension. Your personal .pul files must be stored in `~/.PopUpLearn/MYDB` (For example : `~/.PopUpLearn/MYDB/chemistry/elements.pul`).  
 
-The DB is text-based in a .pul file. Your personal .pul files must be stored in `~/.PopUpLearn/MYDB` (For example : `~/.PopUpLearn/MYDB/chemistry/elements.pul`).  
-
-If the .pul file is outside of the `~/.PopUpLearn/MYDB` folder, you must give its full path of the .pul to the `~/.PopUpLearn/MYDB/my.list` file. (One per line)  
+[//]: # If the .pul file is outside of the `~/.PopUpLearn/MYDB` folder, you must give its full path of the .pul to the `~/.PopUpLearn/MYDB/my.list` file. (One per line)  
 
 Content should be (or will be) compatible with "WallpaperGenerator" and "GameScript". (but .pul files can give specific configurations)  
 
@@ -18,12 +16,14 @@ Use `~/.PopUpLearn` folder to store scripts, data and logs.
 
 If you create a cool and useful .pul, share it with the rest of us ! :)  
 
+Technologies : PopUpLearn is using `bash`, `html`, `php`, `js`, `css`, `nodejs` and `reactjs`.  
+
 # Dependencies (Debian family)
 
 ## Minimal dependencies
 
     sudo apt-get install php nodejs
-    
+
 ## ALL dependencies (`dunst` will replace your notification system)
 
     sudo apt-get install php nodejs surf dunst toilet
