@@ -850,6 +850,10 @@ function ⬚⬚⬚⬚⬚⬚_🚧_session_answers(){ 🔧 $FUNCNAME $@
 
 	echo " -------> FILE = $FILE"
 	cat $FILE | sed 's/ |=| /£/' | sed 's/^\t//g' | grep '£' > $HOME/.PopUpLearn/tmp/file_content_BAD_answers.tmp
+	cat $HOME/.PopUpLearn/tmp/session_content_remove.tmp | sort -R | tail -n 1 > $HOME/.PopUpLearn/tmp/current_line.tmp
+	LINE=`cat $HOME/.PopUpLearn/tmp/current_line.tmp`
+	LEFT=`echo "$LINE" | sed 's/£.*//'`
+	RIGHT=`echo "$LINE" | sed 's/.*£//'`
 	if [[ "$TYPE" == "BUTTON" ]];then
 		rm $HOME/.PopUpLearn/tmp/wrong_answers_BUTTON2.tmp 2> /dev/null
 		while read line; do
@@ -864,10 +868,6 @@ function ⬚⬚⬚⬚⬚⬚_🚧_session_answers(){ 🔧 $FUNCNAME $@
 		done < "$HOME/.PopUpLearn/tmp/file_content_BAD_answers.tmp"
 		cat $HOME/.PopUpLearn/tmp/wrong_answers_BUTTON2.tmp | sort | uniq > $HOME/.PopUpLearn/tmp/wrong_answers_BUTTON.tmp
 	fi
-	cat $HOME/.PopUpLearn/tmp/session_content_remove.tmp | sort -R | tail -n 1 > $HOME/.PopUpLearn/tmp/current_line.tmp
-	LINE=`cat $HOME/.PopUpLearn/tmp/current_line.tmp`
-	LEFT=`echo "$LINE" | sed 's/£.*//'`
-	RIGHT=`echo "$LINE" | sed 's/.*£//'`
 	🔧 "$FUNCNAME : \$LINE=$LINE (RIGHT / LEFT)"
 }
 function ⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp(){ 🔧 $FUNCNAME $@
