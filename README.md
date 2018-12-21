@@ -130,7 +130,7 @@ Of course put `run_im ibus` in the file `~/.xinputrc` to use it with your system
 Todo : Record all errors and successes in logs/ with dates to organize and try to guess what the user know well, don't know, probably forgot, etc...
 Simple first, then machine learning testing prediction system !?  
 
-# optional : LAUNCH WITH ARGUMENTS (3 variables that control time)
+# Optional : LAUNCH WITH ARGUMENTS (3 variables that control time)
 
      bash ~/.PopUpLearn/popup.sh 0 30 60
 
@@ -140,7 +140,7 @@ Simple first, then machine learning testing prediction system !?
 
 0, 30 and 60 are default variables so `bash ~/.PopUpLearn/popup.sh 0 30 60` and `bash ~/.PopUpLearn/popup.sh` are identical.
 
-# TODO
+# Todo
 
 - Stats : give an overall idea (visual graph) of how good you are with a specific .pul file, your progress, your work per day...  
 
@@ -148,8 +148,14 @@ Simple first, then machine learning testing prediction system !?
 
 - Clean reverse system for `question£answer` into `answer£question`, and special tracking system.  
 
-# language table
+# Language table
 
-|french|english|chinese|chinese(pinyin)|thai|japanese|japanese(romaji)|
-|------|-------|-------|---------------|----|--------|----------------|
-|fr|en|cn|PI|th|jp|RO|
+Language table for `LANGUAGE_1` and `LANGUAGE_2` variables.  
+
+If the language is uppercase, it means the language is not a "normal" one, like here RO for romaji and PI for pinyin.  
+
+|french|english|chinese|chinese(pinyin)|thai|japanese|japanese(romaji)|IMAGE|
+|------|-------|-------|---------------|----|--------|----------------|-----|
+|fr|en|cn|PI|th|jp|RO|IM|
+
+In PopUpLearn, an answer can also be an image. In this case, you should use the special value "IM". For example if the answer is an image `LANGUAGE_2="IM"`

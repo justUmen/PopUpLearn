@@ -924,17 +924,36 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
 		echo unknown > $HOME/.PopUpLearn/tmp/result.tmp
 
 
-		if [[ "$XDG_CURRENT_DESKTOP" == "i3" ]]; then
-			CURRENT_DESKTOP=$(wmctrl -d | awk '/\*/{print $1}')
-			sleep 5 && i3-msg workspace "Learn" &
-			sleep 5 && 💻_keyboard_language_change &
-			$WEB_BROWSER http://127.0.0.1:9995/popup_quiz.php &> /dev/null
-			💻_keyboard_language_previous_one
-			wmctrl -s $CURRENT_DESKTOP
+		if [ "$TIME_DISPLAYED" == 0 ];then #LOCK, unlimited
+			if [[ "$XDG_CURRENT_DESKTOP" == "i3" ]]; then
+				CURRENT_DESKTOP=$(wmctrl -d | awk '/\*/{print $1}')
+				sleep 5 && i3-msg workspace "Learn" &
+				sleep 5 && 💻_keyboard_language_change &
+				$WEB_BROWSER http://127.0.0.1:9995/popup_quiz.php &> /dev/null
+				💻_keyboard_language_previous_one
+				wmctrl -s $CURRENT_DESKTOP
+			else
+				💻_keyboard_language_change
+				$WEB_BROWSER http://127.0.0.1:9995/popup_quiz.php &> /dev/null
+				💻_keyboard_language_previous_one
+			fi
 		else
-			💻_keyboard_language_change
-			$WEB_BROWSER http://127.0.0.1:9995/popup_quiz.php &> /dev/null
-			💻_keyboard_language_previous_one
+			if [[ "$XDG_CURRENT_DESKTOP" == "i3" ]]; then
+				CURRENT_DESKTOP=$(wmctrl -d | awk '/\*/{print $1}')
+				sleep 5 && i3-msg workspace "Learn" &
+				sleep 5 && 💻_keyboard_language_change &
+				$WEB_BROWSER http://127.0.0.1:9995/popup.php &> /dev/null &
+				sleep $TIME_DISPLAYED
+				pkill -f "$WEB_BROWSER http://127.0.0.1:9995/popup.php" &> /dev/null
+				💻_keyboard_language_previous_one
+				wmctrl -s $CURRENT_DESKTOP
+			else
+				💻_keyboard_language_change
+				$WEB_BROWSER http://127.0.0.1:9995/popup_quiz.php &> /dev/null&
+				sleep $TIME_DISPLAYED
+				pkill -f "$WEB_BROWSER http://127.0.0.1:9995/popup.php" &> /dev/null
+				💻_keyboard_language_previous_one
+			fi
 		fi
 
 		if [ $SIGSTOP_MPV -eq 1 ]; then 💻_mpv_play &> /dev/null; fi
