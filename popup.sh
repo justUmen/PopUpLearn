@@ -674,6 +674,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 		SESSION_NUMBER=`expr $SESSION_NUMBER + 1`
 	done
 	NB_SESSION=$SESSION_NUMBER
+	echo ":: $SESSION_NUMBER ::"
 	if [ $SESSION_NUMBER -gt 1 ];then
 		echo -e "\t- WORK ON A SESSION OR START A NEW ONE ?"
 	else
