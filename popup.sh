@@ -727,7 +727,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 	echo -e "\t$COLOR_SELECTION m) $ENDO All mistakes from all sessions (session random order) - NOT SHOW ANSWER"
 	echo -e "\t$COLOR_SELECTION S) $ENDO All questions from all current sessions (session random order) - SHOW ANSWER FIRST"
 	echo -e "\t$COLOR_SELECTION M) $ENDO All mistakes from all sessions (session random order) - SHOW ANSWER FIRST"
-	echo -e "\t$COLOR_SELECTION l) $ENDO Learn about all sessions - ANSWER ONLY NO QUIZ"
+	echo -e "\t$COLOR_SELECTION l) $ENDO Learn about all sessions - ANSWER ONLY NO QUIZ (good to use with arguments, like : popuplearn 5 60 60)"
 	echo -e "\t$COLOR_SELECTION b) $ENDO $COLOR_TITLE_SELECTED[Recommended]$ENDO Detect your knowledge by asking only blue questions. (chapter random order) - NOT SHOW ANSWER"
 	#~ echo -e "\t\$COLOR_SELECTION q) $ENDO All questions from the .pul file \\e[38;5;196m[ not yet implemented... :( ]$ENDO" #MAYBE NOT... TRIGGER ANOTHER LOG...
 	#~ echo -e "\t\$COLOR_SELECTION r) $ENDO All red mistakes from all sessions \\e[38;5;196m[ not yet implemented... :( ]$ENDO"
@@ -929,11 +929,13 @@ function ⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer(){ 🔧 $FUNCNAME $@
 			fi
 		fi
 		if [ $SIGSTOP_MPV -eq 1 ]; then mpv_play &> /dev/null; fi
-		echo "Press any key to Exit, or wait $SEC_BEFORE_QUIZ SECONDS before the question."
-		if read -r -N 1 -t $SEC_BEFORE_QUIZ EXIT < /dev/tty; then
-			return 2 #STOPPED MANUALLY, break loop
-		else
-			echo
+		if [ "$TIME_DISPLAYED" == 0 ];then #DOES NOT WAIT EXTRA HERE (!= 0 is kinda like 'l' selection)
+			echo "Press any key to Exit, or wait $SEC_BEFORE_QUIZ SECONDS before the question."
+			if read -r -N 1 -t $SEC_BEFORE_QUIZ EXIT < /dev/tty; then
+				return 2 #STOPPED MANUALLY, break loop
+			else
+				echo
+			fi
 		fi
 	fi
 }
