@@ -12,9 +12,9 @@ The PUL FILE is a simple text file with the .pul extension. Your personal .pul f
 
 Content should be (or will be) compatible with "WallpaperGenerator" and "GameScript". (but .pul files can give specific configurations)  
 
-Use `~/.PopUpLearn` folder to store scripts, data and logs.  
+PopUpLearn is using the folder `~/.PopUpLearn` to store scripts, data and user logs.  
 
-If you create a cool and useful .pul, share it with the rest of us ! :)  
+If you create a cool and useful PUL FILE, share it with the rest of us ! :)  
 
 Technologies : PopUpLearn is using `bash`, `html`, `php`, `js`, `css`, `nodejs` and `reactjs`.  
 
@@ -35,9 +35,9 @@ i3wm : Add in your i3 configuration to launch `surf` on "Learn" workspace : `ass
 
 ## Notifications [dunst]  
 
-PopUpLearn tested with `dunst` (https://github.com/dunst-project/dunst) for notifications - aka `notify-send`.  
+PopUpLearn tested with `dunst` (https://github.com/dunst-project/dunst) for notifications - with `notify-send`.  
 
-Download and use my `dunstrc` configuration with :  
+Download and use my personal `dunstrc` configuration with :  
 
     mkdir -p ~/.config/dunst/;wget https://github.com/justUmen/PopUpLearn/blob/master/config/dunstrc -O ~/.config/dunst/dunstrc
 
@@ -52,58 +52,17 @@ Download and use my `dunstrc` configuration with :
 
 # System configuration (optional)
 
-System configuration will overwrite all specific configurations and should be stored in file `~/.PopUpLearn/MYDB/my.config`.
+System configuration will overwrite ALL specific configurations and should be stored in file `~/.PopUpLearn/MYDB/my.config`.
 
-## Real world example
+## Real world example of a "my.config" file
 
     WEB_BROWSER="surf -F"
     SEC_AFTER_QUIZ=10
     SEC_BEFORE_QUIZ=10
 
-# .pul files configuration
-
-## Mandatory variables in .pul files
-
-`LANGUAGE_1="en"` the language of the question.  
-
-`LANGUAGE_2="fr"` the language of the answer.  
-
-`SUBJECT="french_sentences"` the subject name. (avoid spaces)  
-
-`NUMBER="1"` number used as a reference for the subject name.  
-
-## Optional variables in .pul files
-
-`TYPE="BUTTON"` enable the usage of buttons in quiz popup for multiple choices where you can simply click on the answer instead of typing it. (Default `TYPE="TEXT"` where you need to type the exact answer.) With this you can also confirm an answer if the good answer is the only one that is currently displayed (Buttons will vanish if they don't contain what you typed. Meaning if the answer is "example" you can type "ex" and confirm with 'Enter' if you see that only the button "example" is currently displayed.).
-
-`SESSION_SIZE=0`, set number of element in a session. 0 for unlimited number of elements, result : the file is only one big session. (Default SESSION_SIZE=6)  
-
-`KEYBOARD_AUTO_CHANGE=1` automatically change keyboard layout with `ibus` for typing the answer - like `ibus-anthy` for japanese... (The language need to be available in PopUpLearn, check source "popup.sh" for more details - or ask for language support here.).  
-
-## .pul files restrictions and syntax
-
-The format of each line is `question£answer`, "£" is used to separate the question from the answer.  
-
-If presentation is an issue, you can use " |=| " as a delimiter instead of "£". (Notice the spaces.)  
-
-Lines without " |=| " or "£" will be ignored !!! Use that to comment your .pul files if you want. (Or leave a line without these delimiters for a work in progress, question without answer, etc...)  
-
-Tabulations and spaces at the beginning or end of the line can be used for presentation in the .pul file, they will be ignored.  
-
-Line specific variables start with #!# , and they shouldn't contains spaces.  
-
-.pul files are case sensitive, so be careful with uppercase letters...  
-
-Avoid double \ ! (like in GameScript quizzes) need to transform into four \  
-
-Maybe issues with ` ??? need testing, avoid them!  
+# structure of .pul files
 
 ## Real world example of a .pul file
-
-.pul files can store their own specific configurations, but the configuration lines must starts with `#!#`, the example below have 2 optional variables (TYPE and SESSION_SIZE).  
-
-The path of the file below is `~/.PopUpLearn/MYDB/en/fr/whatever/stupid_name.pul`, but the sub folders are optional (`en`, `fr` and `whatever`) and names (`stupid_name.pul`) makes no difference inside PopUpLearn.   
-But you can use them to organize your .pul files the way you want.  
 
     #!#LANGUAGE_1=en
     #!#LANGUAGE_2=fr
@@ -114,16 +73,57 @@ But you can use them to organize your .pul files the way you want.
     house |=| maison
     boat |=| bateau
 
-# OPTIONS
+.pul files can store their own specific variables, but the variable lines must starts with `#!#`.
+
+The path of this .pul file can be for example : `~/.PopUpLearn/MYDB/en/fr/whatever/stupid_name.pul`.  
+The sub folders after `/MYDB/` are optional (`en`, `fr` and `whatever`) and even the name of the file (`stupid_name.pul`) makes no difference inside PopUpLearn.  
+But you should use them to organize your .pul files the way you want.  
+
+## Mandatory variables in .pul files
+
+`LANGUAGE_1="en"` the language of the question. (always 2 letters - check language table below)  
+
+`LANGUAGE_2="fr"` the language of the answer. (always 2 letters - check language table below)  
+
+`SUBJECT="french_sentences"` the subject name. (avoid spaces)  
+
+`NUMBER="1"` number used as a reference for the subject name.  
+
+## Optional variables/values in .pul files or `my.config`
+
+`TYPE="BUTTON"` enable the usage of buttons in quiz popup for multiple choices where you can simply click on the answer instead of typing it.  
+
+`TYPE="TEXT"` where you need to type the exact answer.) With this you can also confirm an answer if the good answer is the only one that is currently displayed (Buttons will vanish if they don't contain what you typed. Meaning if the answer is "example" you can type "ex" and confirm with 'Enter' if you see that only the button "example" is currently displayed.). (Default value `TYPE="TEXT"`)  
+
+`SESSION_SIZE=0`, set number of element in a session. 0 for unlimited number of elements. Result : the file is only one big session. (Default value `SESSION_SIZE=6`)  
+
+`KEYBOARD_AUTO_CHANGE=1` automatically change keyboard layout to type the answer in another language. (more details in "Options" below)  
+
+## .pul files restrictions and syntax
+
+The format of each line is `question£answer`, "£" is used to separate the question from the answer.  
+
+If presentation is an issue, you can also use " |=| " as a delimiter instead of "£". (Notice the spaces.)  
+
+Only lines with a " |=| " or a "£" will be considered as valid content by PopUpLearn. The others lines (except variable lines) will be considered as comments. (You can use this for writing comments about your .pul file, a work in progress, a question without answer, etc...)  
+
+Tabulations and spaces at the beginning or end of the line can be used for presentation in the .pul file, they will be ignored by PopUpLearn.  
+
+.pul files are case sensitive, so be careful with uppercase letters...  
+
+Avoid double \ ! (like in GameScript quizzes), need to transform them into four \  
+
+Avoid special characters in general when you can.  
+
+# Options
 
 - pause mpv when the popup arrives and unpause it afterwards.  
-PUL is pausing/unpausing mpv with the socket `/tmp/mpvsocket`, so you want to use this, you need to add in your mpv configuration file : `input-ipc-server=/tmp/mpvsocket`)  
+PUL is pausing/unpausing mpv with the socket `/tmp/mpvsocket`, so if you want to use this functionality, you need to add in your mpv configuration file : `input-ipc-server=/tmp/mpvsocket`)  
 
-- change keyboard layout automaticaly for different languages (use `ibus` and variable `$LANGUAGE_2`).  
-english: `xkb:us::eng`, thai: `libthai`, japanese: `anthy`, chinese: `pinyin`  
-To use `ibus` : `sudo apt-get install ibus`
-And then install the desired language, examples : `ibus-libthai` (thai), `ibus-pinyin` (chinese), `ibus-anthy` (japanese).  
-Of course put `run_im ibus` in the file `~/.xinputrc`.  (`echo run_im ibus >> ~/.xinputrc` and you can restart Xorg)  
+- change keyboard layout automatically for different languages (uses `ibus` and variable `$LANGUAGE_2`). (The language need to be available in PopUpLearn, check source "popup.sh" for more details - or ask for another language support here.).  
+Available now => english: `xkb:us::eng`, thai: `libthai`, japanese: `anthy`, chinese: `pinyin`  
+To install `ibus` : `sudo apt-get install ibus`, then install the desired languages, like : `ibus-libthai` (thai), `ibus-pinyin` (chinese), `ibus-anthy` (japanese).  
+Of course put `run_im ibus` in the file `~/.xinputrc` to use it with your system. (`echo run_im ibus >> ~/.xinputrc` and you can restart Xorg)  
 
 # LOGS
 
@@ -147,3 +147,9 @@ Simple first, then machine learning testing prediction system !?
 - Force question if bad answer was X days ago and not followed by a recent good answer on the same question.  
 
 - Clean reverse system for `question£answer` into `answer£question`, and special tracking system.  
+
+# language table
+
+|french|english|chinese|chinese(pinyin)|thai|japanese|japanese(romaji)|
+|------|-------|-------|---------------|----|--------|----------------|
+|fr|en|cn|PI|th|jp|RO|
