@@ -942,16 +942,16 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
 				CURRENT_DESKTOP=$(wmctrl -d | awk '/\*/{print $1}')
 				sleep 5 && i3-msg workspace "Learn" &
 				sleep 5 && 💻_keyboard_language_change &
-				$WEB_BROWSER http://127.0.0.1:9995/popup.php &> /dev/null &
+				$WEB_BROWSER http://127.0.0.1:9995/popup_quiz.php &> /dev/null &
 				sleep $TIME_DISPLAYED
-				pkill -f "$WEB_BROWSER http://127.0.0.1:9995/popup.php" &> /dev/null
+				pkill -f "$WEB_BROWSER http://127.0.0.1:9995/popup_quiz.php" &> /dev/null
 				💻_keyboard_language_previous_one
 				wmctrl -s $CURRENT_DESKTOP
 			else
 				💻_keyboard_language_change
 				$WEB_BROWSER http://127.0.0.1:9995/popup_quiz.php &> /dev/null&
 				sleep $TIME_DISPLAYED
-				pkill -f "$WEB_BROWSER http://127.0.0.1:9995/popup.php" &> /dev/null
+				pkill -f "$WEB_BROWSER http://127.0.0.1:9995/popup_quiz.php" &> /dev/null
 				💻_keyboard_language_previous_one
 			fi
 		fi
