@@ -907,7 +907,7 @@ function ⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer(){ 🔧 $FUNCNAME $@
 		if [ $SIGSTOP_MPV -eq 1 ]; then sleep 5 && mpv_pause &> /dev/null & fi
 		if [ "$TIME_DISPLAYED" == 0 ];then #LOCK, unlimited
 			if [[ "$XDG_CURRENT_DESKTOP" == "i3" ]]; then
-				CURRENT_DESKTOP=$(wmctrl -d | awk '/\*/{print $1}')
+				sleep 5 && CURRENT_DESKTOP=$(wmctrl -d | awk '/\*/{print $1}') &
 				sleep 5 && i3-msg workspace "Learn"  &
 				$WEB_BROWSER http://127.0.0.1:9995/popup.php &> /dev/null
 				wmctrl -s $CURRENT_DESKTOP
@@ -916,7 +916,7 @@ function ⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer(){ 🔧 $FUNCNAME $@
 			fi
 		else
 			if [[ "$XDG_CURRENT_DESKTOP" == "i3" ]]; then
-				CURRENT_DESKTOP=$(wmctrl -d | awk '/\*/{print $1}')
+				sleep 5 && CURRENT_DESKTOP=$(wmctrl -d | awk '/\*/{print $1}') &
 				sleep 5 && i3-msg workspace "Learn" &
 				$WEB_BROWSER http://127.0.0.1:9995/popup.php &> /dev/null &
 				sleep `expr $TIME_DISPLAYED + 5`
