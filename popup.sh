@@ -943,14 +943,14 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
 				sleep 5 && i3-msg workspace "Learn" &
 				sleep 5 && 💻_keyboard_language_change &
 				$WEB_BROWSER http://127.0.0.1:9995/popup_quiz.php &> /dev/null &
-				sleep $TIME_DISPLAYED
+				sleep `expr $TIME_DISPLAYED + 5`
 				pkill -f "$WEB_BROWSER http://127.0.0.1:9995/popup_quiz.php" &> /dev/null
 				💻_keyboard_language_previous_one
 				wmctrl -s $CURRENT_DESKTOP
 			else
 				💻_keyboard_language_change
 				$WEB_BROWSER http://127.0.0.1:9995/popup_quiz.php &> /dev/null&
-				sleep $TIME_DISPLAYED
+				sleep `expr $TIME_DISPLAYED + 1`
 				pkill -f "$WEB_BROWSER http://127.0.0.1:9995/popup_quiz.php" &> /dev/null
 				💻_keyboard_language_previous_one
 			fi
