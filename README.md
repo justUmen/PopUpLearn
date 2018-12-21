@@ -134,9 +134,9 @@ Simple first, then machine learning testing prediction system !?
 
      bash ~/.PopUpLearn/popup.sh 0 30 60
 
-0 => 0 means unlimited display of the answer (until user click and close), otherwise the answer closes after X seconds  
-30 => Seconds to wait before displaying quiz after showing the answer  
-60 => Seconds to wait between each quiz  
+Argument 1 : 0 => 0 means unlimited display of the answer (until user answer or close), otherwise the popup closes after X seconds. (does not count as wrong answer)  
+Argument 2 : 30 => Seconds to wait before displaying quiz after showing the answer  
+Argument 3 : 60 => Seconds to wait between each quiz  
 
 0, 30 and 60 are default variables so `bash ~/.PopUpLearn/popup.sh 0 30 60` and `bash ~/.PopUpLearn/popup.sh` are identical.
 
