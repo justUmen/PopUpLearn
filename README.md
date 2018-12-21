@@ -24,7 +24,7 @@ Technologies : PopUpLearn is using `bash`, `html`, `php`, `js`, `css`, `nodejs` 
 
     sudo apt-get install php nodejs
 
-## ALL dependencies (`dunst` will replace your notification system)
+## ALL dependencies (note that `dunst` will replace your notification system)
 
     sudo apt-get install php nodejs surf dunst toilet
 
