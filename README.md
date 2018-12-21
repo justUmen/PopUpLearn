@@ -1,6 +1,6 @@
 # PopUpLearn
 
-Learning / memorize with popups + track down your knowledge by letting PopUpLearn run in the background.  
+Learn / memorize with popups + track down your knowledge and mistakes with PopUpLearn.  
 
 Built and tested for linux desktop users, using `bash`. But it might eventually be transfered for compatibility with smartphones, AR glasses, VR headset...  
 
