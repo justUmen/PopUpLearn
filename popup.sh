@@ -919,12 +919,12 @@ function ⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer(){ 🔧 $FUNCNAME $@
 				CURRENT_DESKTOP=$(wmctrl -d | awk '/\*/{print $1}')
 				sleep 5 && i3-msg workspace "Learn" &
 				$WEB_BROWSER http://127.0.0.1:9995/popup.php &> /dev/null &
-				sleep $TIME_DISPLAYED
+				sleep `expr $TIME_DISPLAYED + 5`
 				pkill -f "$WEB_BROWSER http://127.0.0.1:9995/popup.php" &> /dev/null
 				wmctrl -s $CURRENT_DESKTOP
 			else
 				$WEB_BROWSER http://127.0.0.1:9995/popup.php &> /dev/null
-				sleep $TIME_DISPLAYED
+				sleep `expr $TIME_DISPLAYED + 1`
 				pkill -f "$WEB_BROWSER http://127.0.0.1:9995/popup.php" &> /dev/null
 			fi
 		fi
