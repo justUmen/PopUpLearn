@@ -134,7 +134,7 @@ Simple first, then machine learning testing prediction system !?
 
      bash ~/.PopUpLearn/popup.sh 0 30 60
 
-Argument 1 : 0 => 0 means unlimited display of the answer (until user answer or close), otherwise the popup closes after X seconds. (does not count as wrong answer)  
+Argument 1 : 0 => 0 means unlimited display of the answer (until user answer or close), otherwise the popup closes after X seconds. Useful if you can't or don't want to interact with PopUpLearn. (Not answering doesn't count as a wrong answer)  
 Argument 2 : 30 => Seconds to wait before displaying quiz after showing the answer  
 Argument 3 : 60 => Seconds to wait between each quiz  
 
@@ -148,11 +148,13 @@ Argument 3 : 60 => Seconds to wait between each quiz
 
 - Clean reverse system for `question£answer` into `answer£question`, and special tracking system.  
 
+- One of the goal is to track down what you learned and create personalised .pul files for you. (Require community effort to link a piece of knowledge to a precise .pul file. For example a .pul file per wikipedia page, a .pul file per online teaching video, etc...)  
+
 # Language table
 
 Language table for `LANGUAGE_1` and `LANGUAGE_2` variables.  
 
-If the language is uppercase, it means the language is not a "normal" one, like here RO for romaji and PI for pinyin.  
+If the language is uppercase, it means the language is not a "normal" one, like here "RO" for romaji and "PI" for pinyin.  
 
 |french|english|chinese|chinese(pinyin)|thai|japanese|japanese(romaji)|IMAGE|
 |------|-------|-------|---------------|----|--------|----------------|-----|

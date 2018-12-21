@@ -973,7 +973,9 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
 			echo "$LINE€$TODAY" >> $ANSWERED_BAD_DATE
 		else
 			#~ notify-send -i $HOME/.PopUpLearn/img/unknown.png "$LEFT : $RIGHT ($quizzed/$LOOP_QUIZ)"
-			notify-send -i $HOME/.PopUpLearn/img/unknown.png "You can't do that, you need to answer something..."
+			if [ "$TIME_DISPLAYED" == 0 ];then
+				notify-send -i $HOME/.PopUpLearn/img/unknown.png "You can't do that, you need to answer something..."
+			fi
 		fi
 		if [ $1 -ne $quizzed ]; then
 			sleep $SEC_BEFORE_QUIZ
