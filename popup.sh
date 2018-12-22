@@ -187,7 +187,7 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 	arraylength=${#FILES[@]}
 	for (( i=1; i<${arraylength}; i++ )); do
 		echo -en "$COLOR_SELECTION $i) $COLOR_TITLE_SELECTED `echo \"${FILES[i]}\" | sed \"s#$HOME/.PopUpLearn/##\"` $ENDO"
-		cat ${FILES[i]} | grep '^#!#' > $HOME/.PopUpLearn/tmp/menu.config
+		cat ${FILES[i]} | grep '^#!#' | sed 's/^#!#//' > $HOME/.PopUpLearn/tmp/menu.config
 		source $HOME/.PopUpLearn/tmp/menu.config
 		FILE_NAME=`echo ${FILES[i]} | sed 's#.*/##'`
 		FILE_PATH="$HOME/.PopUpLearn/logs/*/*/*/*/$FILE_NAME/" # */* ???1
