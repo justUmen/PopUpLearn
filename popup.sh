@@ -220,7 +220,7 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 			"cn") L2="chinese" ;;
 			"th") L2="thai" ;;
 		esac
-		echo -e " => $COLOR_PERCENT $PERCENT% done ($NB_GOOD / $NB_LINES) $ENDO $L1 / $L2"
+		echo -e " => $COLOR_PERCENT $PERCENT% done ($NB_GOOD / $NB_LINES) $ENDO $COLOR_SELECTION $L1 / $L2 $ENDO"
 	done
 	echo -e "$COLOR_SELECTION g) $ENDO GameScript Quizzes [for `cat ~/.GameScript/username`]"
 	selected=99
