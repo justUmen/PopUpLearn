@@ -186,7 +186,7 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 	echo -e "$COLOR_SELECTION d) $ENDO Download and add new .pul files from our online community database to your personal list.$ENDO"
 	arraylength=${#FILES[@]}
 	for (( i=1; i<${arraylength}; i++ )); do
-		echo -en "$COLOR_SELECTION $i) $COLOR_TITLE_SELECTED `echo \"${FILES[i]}\" | sed \"s#$HOME/.PopUpLearn/##\"`` $ENDO"
+		echo -en "$COLOR_SELECTION $i) $COLOR_TITLE_SELECTED `echo \"${FILES[i]}\" | sed \"s#$HOME/.PopUpLearn/##\"` $ENDO"
 		FILE_NAME=`echo ${FILES[i]} | sed 's#.*/##'`
 		FILE_PATH="$HOME/.PopUpLearn/logs/*/*/*/*/$FILE_NAME/" # */* ???1
 		LAST_DAY=`cat $FILE_PATH/session_*/answer.good.date 2>/dev/null | sed 's/.*€//' | sort -n | tail -n 1`
