@@ -220,8 +220,9 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 			"cn") L2="chinese" ;;
 			"th") L2="thai" ;;
 		esac
-		echo -e " => $COLOR_PERCENT $PERCENT% done ($NB_GOOD / $NB_LINES) $ENDO $COLOR_SELECTION $L1 / $L2 $ENDO"
+		echo -e " => $COLOR_PERCENT $PERCENT% done ($NB_GOOD / $NB_LINES) $ENDO $COLOR_SELECTION $L1 / $L2 $ENDO" > $HOME/.PopUpLearn/tmp/color_menu.list
 	done
+	cat $HOME/.PopUpLearn/tmp/color_menu.list | echo -e
 	echo -e "$COLOR_SELECTION g) $ENDO GameScript Quizzes [for `cat ~/.GameScript/username`]"
 	selected=99
 	echo -e "$COLOR_SELECTION e) $ENDO Close PopUpLearn"
