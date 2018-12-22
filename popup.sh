@@ -174,7 +174,7 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 	while read mylist;do
 		FILES+=($mylist)
 	done < $HOME/.PopUpLearn/MYDB/my.list
-	find $HOME/.PopUpLearn/MYDB -name "*.pul" > "$HOME/.PopUpLearn/tmp/list_pul.tmp"
+	find $HOME/.PopUpLearn/MYDB -name "*.pul" | sed "s#$HOME/.PopUpLearn/##" > "$HOME/.PopUpLearn/tmp/list_pul.tmp"
 	# find $HOME/.PopUpLearn/DB -name "*.pul" > "$HOME/.PopUpLearn/tmp/list_pul.tmp"
 	while read PUL; do
 		FILES+=($PUL)
