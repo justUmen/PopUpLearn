@@ -223,7 +223,7 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 		esac
 		echo " => $COLOR_PERCENT $PERCENT% done ($NB_GOOD / $NB_LINES) $ENDO $COLOR_SELECTION $L1 / $L2 $ENDO\n" >> $HOME/.PopUpLearn/tmp/color_menu.list
 	done
-	cat $HOME/.PopUpLearn/tmp/color_menu.list | echo -e
+	echo -e "`cat $HOME/.PopUpLearn/tmp/color_menu.list`"
 	echo -e "$COLOR_SELECTION g) $ENDO GameScript Quizzes [for `cat ~/.GameScript/username`]"
 	selected=99
 	echo -e "$COLOR_SELECTION e) $ENDO Close PopUpLearn"
