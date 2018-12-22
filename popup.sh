@@ -221,7 +221,7 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 			"cn") L2="chinese" ;;
 			"th") L2="thai" ;;
 		esac
-		echo " => $COLOR_PERCENT $PERCENT% done ($NB_GOOD / $NB_LINES) $ENDO $COLOR_SELECTION $L1 / $L2 $ENDO\n" >> $HOME/.PopUpLearn/tmp/color_menu.list
+		echo " => $COLOR_PERCENT $PERCENT% done ($NB_GOOD / $NB_LINES) $ENDO $COLOR_SELECTION $L1 / $L2 $ENDO" >> $HOME/.PopUpLearn/tmp/color_menu.list
 	done
 	echo -e "`cat $HOME/.PopUpLearn/tmp/color_menu.list`"
 	echo -e "$COLOR_SELECTION g) $ENDO GameScript Quizzes [for `cat ~/.GameScript/username`]"
