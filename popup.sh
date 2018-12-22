@@ -655,6 +655,21 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 				echo "----> SESSION_NUMBER=$SESSION_NUMBER"
 				⬚⬚⬚⬚_📗🔢_session_learn $selected || break
 			done
+		elif [[ "$selected" == "L" ]]; then
+			ANSWER_BEFORE_QUIZ=1
+			ARRAY=()
+			NB_SESSIONS=$SESSION_NUMBER
+			#Prepare array with sessions numbers inside
+			for (( i=1; i<$NB_SESSIONS; i++ )); do ARRAY+=($i); done
+			#Shuffle the sessions numbers or a random result
+			readarray -d '' SHUFFLED_SESSION_NUMBERS < <(printf "%s\0" "${ARRAY[@]}" | shuf -z)
+			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do echo " -- ${SHUFFLED_SESSION_NUMBERS[i]} -- "; done
+			#LAUNCH ONE SESSION AFTER THE OTHER
+			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
+				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
+				echo "----> SESSION_NUMBER=$SESSION_NUMBER"
+				⬚⬚⬚⬚_📗🔢_session_learn_mistakes_only $selected || break
+			done
 		else
 			⬚⬚⬚⬚_📗🔢_session_old $selected
 		fi
@@ -678,7 +693,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 		SESSION_NUMBER=`expr $SESSION_NUMBER + 1`
 	done
 	NB_SESSION=$SESSION_NUMBER
-	echo ":: $SESSION_NUMBER ::"
+	# echo ":: $SESSION_NUMBER ::"
 	if [ $SESSION_NUMBER -gt 1 ];then
 		echo -e "\t- WORK ON A SESSION OR START A NEW ONE ?"
 	else
@@ -732,7 +747,8 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 	echo -e "\t$COLOR_SELECTION m) $ENDO All mistakes from all sessions (session random order) - NOT SHOW ANSWER"
 	echo -e "\t$COLOR_SELECTION S) $ENDO All questions from all current sessions (session random order) - SHOW ANSWER FIRST"
 	echo -e "\t$COLOR_SELECTION M) $ENDO All mistakes from all sessions (session random order) - SHOW ANSWER FIRST"
-	echo -e "\t$COLOR_SELECTION l) $ENDO Learn about all sessions - ANSWER ONLY NO QUIZ (good to use with arguments, like : popuplearn 5 60 60)"
+	echo -e "\t$COLOR_SELECTION l) $ENDO Learn about all sessions - ANSWER ONLY NO QUIZ (better with args, like : popuplearn 5 60 60)"
+	echo -e "\t$COLOR_SELECTION L) $ENDO Learn about all mistakes in sessions - ANSWER ONLY NO QUIZ (better with args, like : popuplearn 5 60 60)"
 	echo -e "\t$COLOR_SELECTION b) $ENDO $COLOR_TITLE_SELECTED[Recommended]$ENDO Detect your knowledge by asking only blue questions. (chapter random order) - NOT SHOW ANSWER"
 	#~ echo -e "\t\$COLOR_SELECTION q) $ENDO All questions from the .pul file \\e[38;5;196m[ not yet implemented... :( ]$ENDO" #MAYBE NOT... TRIGGER ANOTHER LOG...
 	#~ echo -e "\t\$COLOR_SELECTION r) $ENDO All red mistakes from all sessions \\e[38;5;196m[ not yet implemented... :( ]$ENDO"
@@ -752,6 +768,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 			S) break ;;
 			b) break ;;
 			l) break ;;
+			L) break ;;
 			[0-9]*) SESSION_NUMBER=$selected; test "$selected" -le "`expr $NB_SESSION - 1`" && break ;;
 		esac
 	done
@@ -769,6 +786,15 @@ function ⬚⬚⬚⬚_📗🔢_session_learn(){ 🔧 $FUNCNAME $@
 	ANSWER_BEFORE_QUIZ=1
 	⬚⬚⬚⬚⬚_🏗_session_specific_config
 	⬚⬚⬚⬚⬚_🏗_session_content_tmp
+	SESSION_NUMBER=$1
+	LOOP_QUIZ=0 #LEARN ONLY NO QUIZ
+	⬚⬚⬚⬚⬚_🔄_lines_in_session "IGNORE_GOOD" || return 2
+	⬚⬚⬚⬚⬚_🛑_lines_in_session
+}
+function ⬚⬚⬚⬚_📗🔢_session_learn_mistakes_only(){ 🔧 $FUNCNAME $@
+	ANSWER_BEFORE_QUIZ=1
+	⬚⬚⬚⬚⬚_🏗_session_specific_config
+	⬚⬚⬚⬚⬚_🏗_session_content_tmp_mistakes_only
 	SESSION_NUMBER=$1
 	LOOP_QUIZ=0 #LEARN ONLY NO QUIZ
 	⬚⬚⬚⬚⬚_🔄_lines_in_session "IGNORE_GOOD" || return 2
