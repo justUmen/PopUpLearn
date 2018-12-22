@@ -187,7 +187,7 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 	arraylength=${#FILES[@]}
 	rm $HOME/.PopUpLearn/tmp/color_menu.list
 	for (( i=1; i<${arraylength}; i++ )); do
-		echo -en "$COLOR_SELECTION $i) $COLOR_TITLE_SELECTED `echo \"${FILES[i]}\" | sed \"s#$HOME/.PopUpLearn/##\"` $ENDO"
+		echo -n "$COLOR_SELECTION $i) $COLOR_TITLE_SELECTED `echo \"${FILES[i]}\" | sed \"s#$HOME/.PopUpLearn/##\"` $ENDO"  >> $HOME/.PopUpLearn/tmp/color_menu.list
 		cat ${FILES[i]} | grep '^#!#' | sed 's/^#!#//' > $HOME/.PopUpLearn/tmp/menu.config
 		source $HOME/.PopUpLearn/tmp/menu.config
 		FILE_NAME=`echo ${FILES[i]} | sed 's#.*/##'`
@@ -196,13 +196,13 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 		TODAY=$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))
 		DAYS=`expr $TODAY - $LAST_DAY 2>/dev/null`
 		if [[ "$DAYS" == "" ]]; then
-			echo -n " never used"
+			echo -n " never used" >> $HOME/.PopUpLearn/tmp/color_menu.list
 		elif [ $DAYS -eq 0 ]; then
-			echo -n " used today"
+			echo -n " used today" >> $HOME/.PopUpLearn/tmp/color_menu.list
 		elif [ $DAYS -eq 1 ]; then
-			echo -n " used yesterday"
+			echo -n " used yesterday" >> $HOME/.PopUpLearn/tmp/color_menu.list
 		else
-			echo -n " used $DAYS days ago"
+			echo -n " used $DAYS days ago" >> $HOME/.PopUpLearn/tmp/color_menu.list
 		fi
 		NB_GOOD=`cat $FILE_PATH/session_*/answer.good 2>/dev/null|sort|uniq -d|wc -l` #GOOD two times (-d)
 		NB_LINES=`cat ${FILES[i]}|grep -v "^#"|wc -l`
@@ -221,7 +221,7 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 			"cn") L2="chinese" ;;
 			"th") L2="thai" ;;
 		esac
-		echo " => $COLOR_PERCENT $PERCENT% done ($NB_GOOD / $NB_LINES) $ENDO $COLOR_SELECTION $L1 / $L2 $ENDO\n\n" >> $HOME/.PopUpLearn/tmp/color_menu.list
+		echo " => $COLOR_PERCENT $PERCENT% done ($NB_GOOD / $NB_LINES) $ENDO $COLOR_SELECTION $L1 / $L2 $ENDO\n" >> $HOME/.PopUpLearn/tmp/color_menu.list
 	done
 	cat $HOME/.PopUpLearn/tmp/color_menu.list | echo -e
 	echo -e "$COLOR_SELECTION g) $ENDO GameScript Quizzes [for `cat ~/.GameScript/username`]"
