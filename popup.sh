@@ -204,7 +204,7 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 		NB_GOOD=`cat $FILE_PATH/session_*/answer.good 2>/dev/null|sort|uniq -d|wc -l` #GOOD two times (-d)
 		NB_LINES=`cat ${FILES[i]}|grep -v "^#"|wc -l`
 		PERCENT=$(echo "$NB_GOOD / $NB_LINES * 100"| bc -l | sed 's/\..*//')
-		echo -e " => $COLOR_PERCENT $PERCENT% done ($NB_GOOD / $NB_LINES) $ENDO"
+		echo -e " => $COLOR_PERCENT $PERCENT% done ($NB_GOOD / $NB_LINES) $ENDO $LANGUAGE_1 / $LANGUAGE_2"
 	done
 	echo -e "$COLOR_SELECTION g) $ENDO GameScript Quizzes [for `cat ~/.GameScript/username`]"
 	selected=99
