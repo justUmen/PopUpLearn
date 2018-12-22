@@ -185,6 +185,7 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 	echo -e "$COLOR_SELECTION 0) $ENDO Video : What is and how to use PopUpLearn \\e[38;5;196m[ not yet implemented... :( ]$ENDO"
 	echo -e "$COLOR_SELECTION d) $ENDO Download and add new .pul files from our online community database to your personal list.$ENDO"
 	arraylength=${#FILES[@]}
+	rm $HOME/.PopUpLearn/tmp/color_menu.list
 	for (( i=1; i<${arraylength}; i++ )); do
 		echo -en "$COLOR_SELECTION $i) $COLOR_TITLE_SELECTED `echo \"${FILES[i]}\" | sed \"s#$HOME/.PopUpLearn/##\"` $ENDO"
 		cat ${FILES[i]} | grep '^#!#' | sed 's/^#!#//' > $HOME/.PopUpLearn/tmp/menu.config
@@ -220,7 +221,7 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 			"cn") L2="chinese" ;;
 			"th") L2="thai" ;;
 		esac
-		echo -e " => $COLOR_PERCENT $PERCENT% done ($NB_GOOD / $NB_LINES) $ENDO $COLOR_SELECTION $L1 / $L2 $ENDO\n" > $HOME/.PopUpLearn/tmp/color_menu.list
+		echo " => $COLOR_PERCENT $PERCENT% done ($NB_GOOD / $NB_LINES) $ENDO $COLOR_SELECTION $L1 / $L2 $ENDO\n\n" >> $HOME/.PopUpLearn/tmp/color_menu.list
 	done
 	cat $HOME/.PopUpLearn/tmp/color_menu.list | echo -e
 	echo -e "$COLOR_SELECTION g) $ENDO GameScript Quizzes [for `cat ~/.GameScript/username`]"
