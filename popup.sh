@@ -669,6 +669,18 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 			⬚⬚⬚⬚_📗🌘_session_new
 			echo "SESSION_NUMBER = $SESSION_NUMBER"
 			⬚⬚⬚⬚_📗🔢_session_old $SESSION_NUMBER
+		elif [[ "$selected" == "in" ]]; then
+			while [ true ]; do
+				⬚⬚⬚⬚_📗🌘_session_new
+				echo "SESSION_NUMBER = $SESSION_NUMBER"
+				⬚⬚⬚⬚_📗🔢_session_old_with_answers $SESSION_NUMBER
+			done
+		elif [[ "$selected" == "in2" ]]; then
+			while [ true ]; do
+				⬚⬚⬚⬚_📗🌘_session_new
+				echo "SESSION_NUMBER = $SESSION_NUMBER"
+				⬚⬚⬚⬚_📗🔢_session_old $SESSION_NUMBER
+			done
 		elif [[ "$selected" == "l" ]]; then
 			ANSWER_BEFORE_QUIZ=1
 			ARRAY=()
