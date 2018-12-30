@@ -81,11 +81,11 @@ if($TYPE=="BUTTON"){
 	$b=array();
 	//ADD BAD ANSWERS
 	foreach($result as $row) {
-		array_push($a,"<a style='background-color:black;margin:3px;' class='btn glyphicon bigfont' onclick='bad_answer();' href='#'>{$row}</a>");
+		array_push($a,"<a style='background-color:black;margin:3px;' class='btn glyphicon' onclick='bad_answer();' href='#'>{$row}</a>");
 		array_push($b,"{$row}");
 	}
 	//ADD GOOD ANSWER
-	array_push($a,"<a style='background-color:black;margin:3px;' class='btn glyphicon bigfont' onclick='good_answer(\"{$LEFT}\",\"{$RIGHT}\");' href='#'>{$RIGHT}</a>");
+	array_push($a,"<a style='background-color:black;margin:3px;' class='btn glyphicon' onclick='good_answer(\"{$LEFT}\",\"{$RIGHT}\");' href='#'>{$RIGHT}</a>");
 	array_push($b,"{$RIGHT}");
 	shuffle($a);
 	shuffle($b);
@@ -157,18 +157,18 @@ END;
 					mails.map(function(mail) {
 						if(<?php if("$LANGUAGE_TAG_2"=="IM"){echo "1";}else{echo "0";} ?>){ //IF image
 							if (mail.user.answer=="good") return (
-								React.createElement("div", { onClick : good_answer, className: "btn glyphicon",style: {margin: "3px", backgroundColor: "black"}}, "", React.createElement("img", { onClick : good_answer, src: mail.user.name, className: "btn glyphicon",style: {margin: "3px"}}))
+								React.createElement("div", { onClick : good_answer, className: "btn glyphicon bigfont",style: {margin: "3px", backgroundColor: "black"}}, "", React.createElement("img", { onClick : good_answer, src: mail.user.name, className: "btn glyphicon bigfont",style: {margin: "3px"}}))
 							);
 							else return (
-								React.createElement("div", { onClick : bad_answer, className: "btn glyphicon",style: {margin: "3px", backgroundColor: "black"}}, "", React.createElement("img", { onClick : bad_answer, src: mail.user.name, className: "btn glyphicon",style: {margin: "3px"}}))
+								React.createElement("div", { onClick : bad_answer, className: "btn glyphicon bigfont",style: {margin: "3px", backgroundColor: "black"}}, "", React.createElement("img", { onClick : bad_answer, src: mail.user.name, className: "btn glyphicon bigfont",style: {margin: "3px"}}))
 							);
 						}
 						else{
 							if (mail.user.answer=="good") return (
-									React.createElement("div", { onClick : good_answer, className: "btn glyphicon",style: {margin: "3px", backgroundColor: "black"}}, mail.user.name)
+									React.createElement("div", { onClick : good_answer, className: "btn glyphicon bigfont",style: {margin: "3px", backgroundColor: "black"}}, mail.user.name)
 							);
 							else return (
-								React.createElement("div", { onClick : bad_answer, className: "btn glyphicon",style: {margin: "3px", backgroundColor: "black"}}, mail.user.name)
+								React.createElement("div", { onClick : bad_answer, className: "btn glyphicon bigfont",style: {margin: "3px", backgroundColor: "black"}}, mail.user.name)
 							);
 						}
 					})
