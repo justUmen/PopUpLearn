@@ -59,8 +59,8 @@ function bad_answer(){
 <body onload="document.getElementById('search-input').focus();">
 <div id="on_click_close">
 <div class='widget' id="content" style="top:10%;">
-<?php echo "<div id='left_right'><img src='img/flags/{$LANGUAGE_TAG_1}.jpeg' /> : <img src='img/flags/{$LANGUAGE_TAG_2}.jpeg' /></div>"; ?><br>
-<?php echo "<div id='left_right'>{$LEFT} : _____</div>"; ?>
+<?php echo "<div id='left_right'>(<img src='img/flags/{$LANGUAGE_TAG_1}.jpeg' />) |=| (<img src='img/flags/{$LANGUAGE_TAG_2}.jpeg' />)</div>"; ?><br>
+<?php echo "<div class='bigfont'>{$LEFT} : _____</div>"; ?>
 
 <?php
 //Array with 30 wrong answers (wrong_answers_BUTTON.tmp created by launcher_html_popup.sh)
@@ -81,11 +81,11 @@ if($TYPE=="BUTTON"){
 	$b=array();
 	//ADD BAD ANSWERS
 	foreach($result as $row) {
-		array_push($a,"<a style='background-color:black;margin:3px;' class='btn glyphicon' onclick='bad_answer();' href='#'>{$row}</a>");
+		array_push($a,"<a style='background-color:black;margin:3px;' class='btn glyphicon bigfont' onclick='bad_answer();' href='#'>{$row}</a>");
 		array_push($b,"{$row}");
 	}
 	//ADD GOOD ANSWER
-	array_push($a,"<a style='background-color:black;margin:3px;' class='btn glyphicon' onclick='good_answer(\"{$LEFT}\",\"{$RIGHT}\");' href='#'>{$RIGHT}</a>");
+	array_push($a,"<a style='background-color:black;margin:3px;' class='btn glyphicon bigfont' onclick='good_answer(\"{$LEFT}\",\"{$RIGHT}\");' href='#'>{$RIGHT}</a>");
 	array_push($b,"{$RIGHT}");
 	shuffle($a);
 	shuffle($b);
