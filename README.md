@@ -44,7 +44,7 @@ Download and use my personal `dunstrc` configuration with :
 # INSTALL
 
     git clone --depth 1 https://github.com/justUmen/PopUpLearn ~/.PopUpLearn
-    echo 'alias popuplearn="cd ~/.PopUpLearn && git pull --unshallow origin master && cd -;bash ~/.PopUpLearn/popup.sh"'>>~/.zshrc; source ~/.zshrc
+    echo 'alias popuplearn="cd ~/.PopUpLearn && git pull --unshallow origin master && cd -;bash ~/.PopUpLearn/popup.sh"'>>~/.bashrc; source ~/.bashrc
 
 # LAUNCH
 
