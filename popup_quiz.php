@@ -210,9 +210,9 @@ END;
 
 <?php
 //MENU BAR : out of #on_click_close so onclick don't close
-echo "<div id='bottom_bar' style='text-align:center;'>";
-echo "<a class='btn glyphicon glyphicon-trash' onclick='close_popup();' href='#' title='$RIGHT'></a>";
-echo "</div>";
+// echo "<div id='bottom_bar' style='text-align:center;'>";
+// echo "<a class='btn glyphicon glyphicon-trash' onclick='close_popup();' href='#' title='$RIGHT'></a>";
+// echo "</div>";
 ?>
 </body>
 </html>
