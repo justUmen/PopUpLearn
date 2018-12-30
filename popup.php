@@ -34,7 +34,7 @@ $LANGUAGE_TAG_2=$e[5];
 <body>
 <div id="on_click_close" onclick="close_popup();return false;">
 	<div class='widget' id="content">
-		<div><pre class="bigfont"><?php echo $LEFT; ?></pre> |=| <pre class="bigfont"><?php echo $RIGHT; ?></pre></div>
+		<div><span class="bigfont"><?php echo $LEFT; ?></span> |=| <span class="bigfont"><?php echo $RIGHT; ?></span></div>
 		<div><img src='img/flags/<?php echo $LANGUAGE_TAG_1; ?>.jpeg' /> |=| <img src='img/flags/<?php echo $LANGUAGE_TAG_2; ?>.jpeg' /></div>
 	</div>
 	<?php
