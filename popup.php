@@ -37,18 +37,20 @@ $LANGUAGE_TAG_2=$e[5];
 	<?php //echo "<div id='link'>{$FAMILY}</div>"; ?>
 	<?php //echo "<div id='left_right'>{$LEFT} |=| {$RIGHT}</div>"; ?>
 	<?php //echo "<div id='left_right'><img src='img/flags/{$LANGUAGE_TAG_1}.jpeg' /> <img src='img/flags/{$LANGUAGE_TAG_2}.jpeg' /></div>"; ?>
-	<table id='left_right'>
-		<tr>
-			<td><?php echo $LEFT; ?></td>
-			<td> |=| </td>
-			<td><?php echo $RIGHT; ?></td>
-		</tr>
-		<tr>
-			<td><img src='img/flags/<?php echo $LANGUAGE_TAG_1; ?>.jpeg' /></td>
-			<td> |=| </td>
-			<td><img src='img/flags/<?php echo $LANGUAGE_TAG_2; ?>.jpeg' /></td>
-		</tr>
-	</table>
+		<div id='left_right'>
+		<table>
+			<tr>
+				<td><?php echo $LEFT; ?></td>
+				<td> |=| </td>
+				<td><?php echo $RIGHT; ?></td>
+			</tr>
+			<tr>
+				<td><img src='img/flags/<?php echo $LANGUAGE_TAG_1; ?>.jpeg' /></td>
+				<td> |=| </td>
+				<td><img src='img/flags/<?php echo $LANGUAGE_TAG_2; ?>.jpeg' /></td>
+			</tr>
+		</table>
+		<div>
 	</div>
 	<?php
 	if(isset($_GET['img'])){
