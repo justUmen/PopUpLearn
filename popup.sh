@@ -792,6 +792,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 		case $selected in
 			e) return ;;
 			n) break ;;
+			n1) break ;;
 			N) break ;;
 			a) break ;;
 			m) break ;;
@@ -801,6 +802,8 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 			b) break ;;
 			l) break ;;
 			L) break ;;
+			in) break ;;
+			in2) break ;;
 			[0-9]*) SESSION_NUMBER=$selected; test "$selected" -le "`expr $NB_SESSION - 1`" && break ;;
 		esac
 	done
