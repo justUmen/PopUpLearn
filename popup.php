@@ -35,9 +35,9 @@ $LANGUAGE_TAG_2=$e[5];
 <div id="on_click_close" onclick="close_popup();return false;">
 	<div class='widget' id="content">
 	<?php //echo "<div id='link'>{$FAMILY}</div>"; ?>
-	<?php echo "<div id='left_right'>{$LEFT} |=| {$RIGHT}</div>"; ?>
-	<?php echo "<div id='left_right'><img src='img/flags/{$LANGUAGE_TAG_1}.jpeg' /> <img src='img/flags/{$LANGUAGE_TAG_2}.jpeg' /></div>"; ?>
-	<table>
+	<?php //echo "<div id='left_right'>{$LEFT} |=| {$RIGHT}</div>"; ?>
+	<?php //echo "<div id='left_right'><img src='img/flags/{$LANGUAGE_TAG_1}.jpeg' /> <img src='img/flags/{$LANGUAGE_TAG_2}.jpeg' /></div>"; ?>
+	<table id='left_right'>
 		<tr>
 			<td><?php echo $LEFT; ?></td>
 			<td> |=| </td>
