@@ -59,7 +59,7 @@ function bad_answer(){
 <body onload="document.getElementById('search-input').focus();">
 <div id="on_click_close">
 <div class='widget' id="content" style="top:10%;">
-<?php echo "<div id='left_right'>(<img src='img/flags/{$LANGUAGE_TAG_1}.jpeg' />) |=| (<img src='img/flags/{$LANGUAGE_TAG_2}.jpeg' />)</div>"; ?><br>
+<?php echo "<div id='left_right'><img src='img/flags/{$LANGUAGE_TAG_1}.jpeg' /> |=| <img src='img/flags/{$LANGUAGE_TAG_2}.jpeg' /></div>"; ?><br>
 <?php echo "<div class='bigfont'>{$LEFT} : _____</div>"; ?>
 
 <?php
