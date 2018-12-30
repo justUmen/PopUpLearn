@@ -50,7 +50,7 @@ $LANGUAGE_TAG_2=$e[5];
 				<td><img src='img/flags/<?php echo $LANGUAGE_TAG_2; ?>.jpeg' /></td>
 			</tr>
 		</table>
-		<div>
+		</div>
 	</div>
 	<?php
 	if(isset($_GET['img'])){
