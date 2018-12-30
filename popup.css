@@ -26,6 +26,7 @@ font-size:1.5em; /* NEW */
 position:absolute;
 text-align:center;
 top:35%; /* NEW, 42 before, related to font size */
+color:#444;
 }
 #link{
 color:white;
