@@ -30,9 +30,9 @@ top:35%; /* NEW, 42 before, related to font size */
 #link{
 color:white;
 }
-#left_right{
-font-size:2em;
-color:yellow;
+.bigfont{
+  font-size:2em;
+  color:yellow;
 }
 #Image1{
 position:absolute;
