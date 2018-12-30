@@ -184,8 +184,8 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 	echo -e "$COLOR_SELECTION 0) $ENDO Video : What is and how to use PopUpLearn \\e[38;5;196m[ not yet implemented... :( ]$ENDO"
 	echo -e "$COLOR_SELECTION d) $ENDO Download and add new .pul files from our online community database to your personal list.$ENDO"
 	arraylength=${#FILES[@]}
-	rm $HOME/.PopUpLearn/tmp/color_menu.list 2> /dev/null
-	echo > $HOME/.PopUpLearn/tmp/color_menu.list
+	rm "$HOME/.PopUpLearn/tmp/color_menu.list" 2> /dev/null
+	echo "" > $HOME/.PopUpLearn/tmp/color_menu.list
 	for (( i=1; i<${arraylength}; i++ )); do
 		echo -n "$COLOR_SELECTION $i) $COLOR_TITLE_SELECTED `echo \"${FILES[i]}\" | sed \"s#$HOME/.PopUpLearn/##\"` $ENDO"  >> $HOME/.PopUpLearn/tmp/color_menu.list
 		cat ${FILES[i]} | grep '^#!#' | sed 's/^#!#//' > $HOME/.PopUpLearn/tmp/menu.config
