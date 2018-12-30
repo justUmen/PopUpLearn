@@ -185,6 +185,7 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 	echo -e "$COLOR_SELECTION d) $ENDO Download and add new .pul files from our online community database to your personal list.$ENDO"
 	arraylength=${#FILES[@]}
 	rm $HOME/.PopUpLearn/tmp/color_menu.list 2> /dev/null
+	echo > $HOME/.PopUpLearn/tmp/color_menu.list
 	for (( i=1; i<${arraylength}; i++ )); do
 		echo -n "$COLOR_SELECTION $i) $COLOR_TITLE_SELECTED `echo \"${FILES[i]}\" | sed \"s#$HOME/.PopUpLearn/##\"` $ENDO"  >> $HOME/.PopUpLearn/tmp/color_menu.list
 		cat ${FILES[i]} | grep '^#!#' | sed 's/^#!#//' > $HOME/.PopUpLearn/tmp/menu.config
@@ -257,7 +258,7 @@ function ⬚⬚⬚_📃🔄🔄_add_to_MYDB(){ 🔧 $FUNCNAME $@
 		echo -e "\tSelect the .pul file you want to add to your personal list : "
 		arraylength=${#FILES[@]}
 		for (( i=1; i<${arraylength}; i++ )); do
-			echo -en "\t$COLOR_SELECTION $i) $COLOR_TITLE_SELECTED ${FILES[i]} $ENDO"
+			echo -en "\t$COLOR_SELECTION $i) $COLOR_TITLE_SELECTED ${FILES[i]} $ENDO `wc -l ${FILES[i]} | sed 's# .*##'` "
 			echo
 		done
 		echo -e "\t$COLOR_SELECTION e) $ENDO Return"
