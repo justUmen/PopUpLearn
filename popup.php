@@ -34,7 +34,7 @@ $LANGUAGE_TAG_2=$e[5];
 <body>
 <div id="on_click_close" onclick="close_popup();return false;">
 	<div class='widget' id="content">
-		<div>(<img src='img/flags/<?php echo $LANGUAGE_TAG_1; ?>.jpeg' />) <span class="bigfont"><?php echo $LEFT; ?></span> |=| <span class="bigfont"><?php echo $RIGHT; ?> (<img src='img/flags/<?php echo $LANGUAGE_TAG_2; ?>.jpeg' />)</span></div>
+		<div>(<img src='img/flags/<?php echo $LANGUAGE_TAG_1; ?>.jpeg' />) <span class="bigfont"><?php echo $LEFT; ?></span> |=| <span class="bigfont"><?php echo $RIGHT; ?></span> (<img src='img/flags/<?php echo $LANGUAGE_TAG_2; ?>.jpeg' />)</div>
 	</div>
 	<?php
 	if(isset($_GET['img'])){
@@ -45,15 +45,15 @@ $LANGUAGE_TAG_2=$e[5];
 </div>
 <?php
 //MENU BAR : out of #on_click_close so onclick don't close ??? TODO
-echo "<div id='bottom_bar'>";
-echo "	<a class='btn glyphicon glyphicon-random' onclick='new_random_error();' href='#' title='New random error'></a>";
-echo "	<a class='btn glyphicon glyphicon-headphones' onclick='audio_play();return false' href='#' title='Play sound'></a>";
-echo "	<a class='btn glyphicon glyphicon-list' onclick='return false' href='#' title='List all'></a>";
-echo "	<a class='btn glyphicon glyphicon-stats' onclick='return false' href='#' title='My stats'></a>";
-echo "	<a class='btn glyphicon glyphicon-volume-up' onclick='return false' href='#' title='Toggle Sound'></a>";
-echo "	<a class='btn glyphicon glyphicon-edit' onclick='return false' href='#' title='Edit this page'></a>";
-echo "	<a class='btn glyphicon glyphicon-trash' onclick='return false' href='#' title='Delete this link'></a>";
-echo "</div>";
+// echo "<div id='bottom_bar'>";
+// echo "	<a class='btn glyphicon glyphicon-random' onclick='new_random_error();' href='#' title='New random error'></a>";
+// echo "	<a class='btn glyphicon glyphicon-headphones' onclick='audio_play();return false' href='#' title='Play sound'></a>";
+// echo "	<a class='btn glyphicon glyphicon-list' onclick='return false' href='#' title='List all'></a>";
+// echo "	<a class='btn glyphicon glyphicon-stats' onclick='return false' href='#' title='My stats'></a>";
+// echo "	<a class='btn glyphicon glyphicon-volume-up' onclick='return false' href='#' title='Toggle Sound'></a>";
+// echo "	<a class='btn glyphicon glyphicon-edit' onclick='return false' href='#' title='Edit this page'></a>";
+// echo "	<a class='btn glyphicon glyphicon-trash' onclick='return false' href='#' title='Delete this link'></a>";
+// echo "</div>";
 ?>
 </body>
 <script>
