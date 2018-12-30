@@ -673,13 +673,13 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 			while [ true ]; do
 				⬚⬚⬚⬚_📗🌘_session_new
 				echo "SESSION_NUMBER = $SESSION_NUMBER"
-				⬚⬚⬚⬚_📗🔢_session_old_with_answers $SESSION_NUMBER
+				⬚⬚⬚⬚_📗🔢_session_old_with_answers $SESSION_NUMBER || break
 			done
 		elif [[ "$selected" == "in2" ]]; then
 			while [ true ]; do
 				⬚⬚⬚⬚_📗🌘_session_new
 				echo "SESSION_NUMBER = $SESSION_NUMBER"
-				⬚⬚⬚⬚_📗🔢_session_old $SESSION_NUMBER
+				⬚⬚⬚⬚_📗🔢_session_old $SESSION_NUMBER || break
 			done
 		elif [[ "$selected" == "l" ]]; then
 			ANSWER_BEFORE_QUIZ=1
