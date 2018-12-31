@@ -20,9 +20,13 @@ function 🔧(){
 function close_PopUpLearn(){
 	echo "close_PopUpLearn"
 	pkill -f "node $HOME/.PopUpLearn/node_server_popup.js" &>/dev/null
+	sleep .5
 	pkill -f "node ~/.PopUpLearn/node_server_popup.js" &>/dev/null
+	sleep .5
 	pkill -f "nodejs $HOME/.PopUpLearn/node_server_popup.js" &>/dev/null
+	sleep .5
 	pkill -f "nodejs ~/.PopUpLearn/node_server_popup.js" &>/dev/null
+	sleep .5
 	pkill -f "php -S 127.0.0.1:9995 -t $HOME/.PopUpLearn" &>/dev/null
 	exit
 }
@@ -91,7 +95,9 @@ function display_SESSION_NUMBER(){
 function ⬚_before_start(){
 	echo "..."
 	pkill -f "node $HOME/.PopUpLearn/node_server_popup.js" &>/dev/null
+	sleep .5
 	pkill -f "nodejs $HOME/.PopUpLearn/node_server_popup.js" &>/dev/null
+	sleep .5
 	pkill -f "php -S 127.0.0.1:9995 -t $HOME/.PopUpLearn" &>/dev/null
 
 	sleep 1
