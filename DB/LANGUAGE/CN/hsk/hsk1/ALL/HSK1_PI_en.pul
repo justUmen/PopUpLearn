@@ -5,156 +5,156 @@
 #!#TYPE="BUTTON"
 #!#ANSWER_BEFORE_QUIZ=1
 #!#LOOP_QUIZ=3
-hǎo£good
-dà£big
-xiǎo£small
-duō£many, much
-shǎo£few, little
-lěng£cold
-rè£hot
-gāoxìng£happy
-piàoliàng£beautiful
-bù£no
-méi£no
-hěn£quite, very
-tài£too
-dōu£all
-hé£and
-zhè (zhèr)£here, this
-nà (nàr)£there, that
-wèi£hello
-nǎ (nǎr)£where
-shéi£who
-shěnme£what, why
-duōshǎo£how many, how much
-jǐ£a few, how many
-zěnme£how
-zěnmeyàng£how about
-jiā£home
-xuéxiào£school
-fàndiàn£restaurant
-shāngdiàn£store
-yīyuàn£hospital
-huǒchēzhàn£train station
-zhōng guó£China
-běijīng£Beijing
-shàng£up
-xià£down
-qiánmiàn£front
-hòumiàn£behind
-lǐmiàn£inside
-jīntiān£today
-míngtiān£tomorrow
-zuòtiān£yesterday
-shàngwǔ£morning
-zhōngwǔ£noon
-xiàwǔ£afternoon
-nián£year
-yuè£month
-rì£day
-xīngqī£week
-diǎn£dot, spot
-fēnzhōng£minute
-xiànzài£now
-shíhóu£time
-bàba£father
-māma£mother
-érzi£son
-nǚér£daughter
-lǎoshī£teacher
-xuéshēng£student
-tóngxué£shoolmate
-péngyǒu£friend
-yīshēng£doctor
-xiānshēng£sir
-xiǎojiě£Miss
-yīfu£cloth
-shuǐ£water
-cài£vegetable
-mǐfàn£rice
-shuǐguǒ£fruit
-píngguǒ£apple
-chá£tea
-bēizi£cup
-qián£money
-fēijī£airplane
-chūzūchē£taxi
-diànshì£television
-diànnǎo£computer
-diànyǐng£movie
-tiānqì£weather
-māo£cat
-gǒu£dog
-dōngxī£thing
-rén£person
-míngzi£name
-shū£book
-hànyǔ£mandarin Chinese
-zì£character
-zhuōzi£desk
-yǐzi£chair
-yī£one
-èr£two
-sān£three
-sì£four
-wǔ£five
-liù£six
-qī£seven
-bā£eight
-jiǔ£nine
-shí£ten
-líng£zero
-de£(before a noun, possessive or descriptive)
-le£(completed action marker)
-ma£(question tag)
-ne£(question particle for subjects already mentioned)
-wǒ£I, me
-wǒmen£we, us (pl.)
-nǐ£you
-nǐmen£you (pl.)
-tā£he, him
-tā£she, her
-tāmen£they (male+female / male, pl.)
-tāmen£they (females, pl.)
-zài£in, at
-gè£one, a, an
-suì£year
-běn£volume
-xiē£some
-kuài£piece
-xièxie£thank
-búkèqì£you are welcome
-zàijiàn£good-bye
-qǐng£please
-duìbùqǐ£sorry
-méiguānxì£It doesn’t matter
-shì£be (am, is, are)
-yǒu£have
-kàn£look
-tīng£listen
-shuōhuà£speak
-dú£read
-xiě£write
-kànjiàn£see
-jiào£call
-lái£come
-huí£return
-qù£go
-chī£eat
-hē£drink
-shuìjiào£sleep
-dǎdiànhuà£call up
-zuò£do
-mǎi£buy
-kāi£open
-zuò£sit
-zhù£live
-xuéxí£study
-gōngzuò£work
-xiàyǔ£rain
-ài£love
-xǐhuān£love, like
-xiǎng£want
-rènshi£know
-huì£can
-néng£can, be able to
+hǎo |=| good
+dà |=| big
+xiǎo |=| small
+duō |=| many, much
+shǎo |=| few, little
+lěng |=| cold
+rè |=| hot
+gāoxìng |=| happy
+piàoliàng |=| beautiful
+bù |=| no
+méi |=| no
+hěn |=| quite, very
+tài |=| too
+dōu |=| all
+hé |=| and
+zhè (zhèr) |=| here, this
+nà (nàr) |=| there, that
+wèi |=| hello
+nǎ (nǎr) |=| where
+shéi |=| who
+shěnme |=| what, why
+duōshǎo |=| how many, how much
+jǐ |=| a few, how many
+zěnme |=| how
+zěnmeyàng |=| how about
+jiā |=| home
+xuéxiào |=| school
+fàndiàn |=| restaurant
+shāngdiàn |=| store
+yīyuàn |=| hospital
+huǒchēzhàn |=| train station
+zhōng guó |=| China
+běijīng |=| Beijing
+shàng |=| up
+xià |=| down
+qiánmiàn |=| front
+hòumiàn |=| behind
+lǐmiàn |=| inside
+jīntiān |=| today
+míngtiān |=| tomorrow
+zuòtiān |=| yesterday
+shàngwǔ |=| morning
+zhōngwǔ |=| noon
+xiàwǔ |=| afternoon
+nián |=| year
+yuè |=| month
+rì |=| day
+xīngqī |=| week
+diǎn |=| dot, spot
+fēnzhōng |=| minute
+xiànzài |=| now
+shíhóu |=| time
+bàba |=| father
+māma |=| mother
+érzi |=| son
+nǚér |=| daughter
+lǎoshī |=| teacher
+xuéshēng |=| student
+tóngxué |=| shoolmate
+péngyǒu |=| friend
+yīshēng |=| doctor
+xiānshēng |=| sir
+xiǎojiě |=| Miss
+yīfu |=| cloth
+shuǐ |=| water
+cài |=| vegetable
+mǐfàn |=| rice
+shuǐguǒ |=| fruit
+píngguǒ |=| apple
+chá |=| tea
+bēizi |=| cup
+qián |=| money
+fēijī |=| airplane
+chūzūchē |=| taxi
+diànshì |=| television
+diànnǎo |=| computer
+diànyǐng |=| movie
+tiānqì |=| weather
+māo |=| cat
+gǒu |=| dog
+dōngxī |=| thing
+rén |=| person
+míngzi |=| name
+shū |=| book
+hànyǔ |=| mandarin Chinese
+zì |=| character
+zhuōzi |=| desk
+yǐzi |=| chair
+yī |=| one
+èr |=| two
+sān |=| three
+sì |=| four
+wǔ |=| five
+liù |=| six
+qī |=| seven
+bā |=| eight
+jiǔ |=| nine
+shí |=| ten
+líng |=| zero
+de |=| (before a noun, possessive or descriptive)
+le |=| (completed action marker)
+ma |=| (question tag)
+ne |=| (question particle for subjects already mentioned)
+wǒ |=| I, me
+wǒmen |=| we, us (pl.)
+nǐ |=| you
+nǐmen |=| you (pl.)
+tā |=| he, him
+tā |=| she, her
+tāmen |=| they (male+female / male, pl.)
+tāmen |=| they (females, pl.)
+zài |=| in, at
+gè |=| one, a, an
+suì |=| year
+běn |=| volume
+xiē |=| some
+kuài |=| piece
+xièxie |=| thank
+búkèqì |=| you are welcome
+zàijiàn |=| good-bye
+qǐng |=| please
+duìbùqǐ |=| sorry
+méiguānxì |=| It doesn’t matter
+shì |=| be (am, is, are)
+yǒu |=| have
+kàn |=| look
+tīng |=| listen
+shuōhuà |=| speak
+dú |=| read
+xiě |=| write
+kànjiàn |=| see
+jiào |=| call
+lái |=| come
+huí |=| return
+qù |=| go
+chī |=| eat
+hē |=| drink
+shuìjiào |=| sleep
+dǎdiànhuà |=| call up
+zuò |=| do
+mǎi |=| buy
+kāi |=| open
+zuò |=| sit
+zhù |=| live
+xuéxí |=| study
+gōngzuò |=| work
+xiàyǔ |=| rain
+ài |=| love
+xǐhuān |=| love, like
+xiǎng |=| want
+rènshi |=| know
+huì |=| can
+néng |=| can, be able to
