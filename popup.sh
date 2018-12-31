@@ -751,7 +751,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 		while read LINE; do
 			LINE_1=`echo $LINE | sed 's#£# |=| #'`
 			if grep -Fxq "$LINE_1" $FILE ; then
-				break 2
+				echo "ERROR"
 			fi
 		done < "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/session_content.pul"
 
