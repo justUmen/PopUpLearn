@@ -82,6 +82,9 @@ function 💻_mpv_play(){ 🔧 $FUNCNAME $@
 function display(){ 🔧 $FUNCNAME $@
 	echo
 }
+function display_SESSION_NUMBER(){
+	echo -e "\n----> SESSION_NUMBER=$SESSION_NUMBER"
+}
 
 function ⬚_before_start(){
 	echo "..."
@@ -435,6 +438,7 @@ function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME $@
 			#LAUNCH ONE SESSION AFTER THE OTHER
 			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
+				display_SESSION_NUMBER
 
 				mkdir -p "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/"
 				FILE="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul"
@@ -461,7 +465,7 @@ function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME $@
 			#LAUNCH ONE SESSION AFTER THE OTHER
 			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
-				echo "----> SESSION_NUMBER=$SESSION_NUMBER"
+				display_SESSION_NUMBER
 
 				mkdir -p "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/"
 				FILE="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul"
@@ -488,7 +492,7 @@ function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME $@
 			#LAUNCH ONE SESSION AFTER THE OTHER
 			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
-				echo "----> SESSION_NUMBER=$SESSION_NUMBER"
+				display_SESSION_NUMBER
 
 				mkdir -p "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/"
 
@@ -515,6 +519,7 @@ function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME $@
 			done
 	else
 		SESSION_NUMBER=$selected
+		display_SESSION_NUMBER
 
 		mkdir -p "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/"
 		FILE="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul"
@@ -596,7 +601,7 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 			#LAUNCH ONE SESSION AFTER THE OTHER
 			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
-				echo "----> SESSION_NUMBER=$SESSION_NUMBER"
+				display_SESSION_NUMBER
 				⬚⬚⬚⬚_📗🔢_session_old $SESSION_NUMBER || break
 			done
 		elif [[ "$selected" == "m" ]]; then
@@ -611,7 +616,7 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 			#LAUNCH ONE SESSION AFTER THE OTHER
 			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
-				echo "----> SESSION_NUMBER=$SESSION_NUMBER"
+				display_SESSION_NUMBER
 				⬚⬚⬚⬚_📗🔢_session_old_mistakes_only $SESSION_NUMBER || break
 			done
 		elif [[ "$selected" == "S" ]]; then
@@ -626,7 +631,7 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 			#LAUNCH ONE SESSION AFTER THE OTHER
 			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
-				echo "----> SESSION_NUMBER=$SESSION_NUMBER"
+				display_SESSION_NUMBER
 				⬚⬚⬚⬚_📗🔢_session_old $SESSION_NUMBER || break
 			done
 		elif [[ "$selected" == "M" ]]; then
@@ -641,7 +646,7 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 			#LAUNCH ONE SESSION AFTER THE OTHER
 			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
-				echo "----> SESSION_NUMBER=$SESSION_NUMBER"
+				display_SESSION_NUMBER
 				⬚⬚⬚⬚_📗🔢_session_old_mistakes_only $SESSION_NUMBER || break
 			done
 		elif [[ "$selected" == "b" ]]; then
@@ -656,29 +661,29 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 			#LAUNCH ONE SESSION AFTER THE OTHER
 			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
-				echo "----> SESSION_NUMBER=$SESSION_NUMBER"
+				display_SESSION_NUMBER
 				⬚⬚⬚⬚_📗🔢_session_old_blue_only $SESSION_NUMBER || break
 			done
 		elif [[ "$selected" == "N" ]]; then
 			⬚⬚⬚⬚_📗🌘_session_new
 		elif [[ "$selected" == "n" ]]; then
 			⬚⬚⬚⬚_📗🌘_session_new
-			echo "SESSION_NUMBER = $SESSION_NUMBER"
+			display_SESSION_NUMBER
 			⬚⬚⬚⬚_📗🔢_session_old_with_answers $SESSION_NUMBER
 		elif [[ "$selected" == "n1" ]]; then
 			⬚⬚⬚⬚_📗🌘_session_new
-			echo "SESSION_NUMBER = $SESSION_NUMBER"
+			display_SESSION_NUMBER
 			⬚⬚⬚⬚_📗🔢_session_old $SESSION_NUMBER
 		elif [[ "$selected" == "in" ]]; then
 			while [ true ]; do
 				⬚⬚⬚⬚_📗🌘_session_new
-				echo "SESSION_NUMBER = $SESSION_NUMBER"
+				display_SESSION_NUMBER
 				⬚⬚⬚⬚_📗🔢_session_old_with_answers $SESSION_NUMBER || break
 			done
 		elif [[ "$selected" == "in2" ]]; then
 			while [ true ]; do
 				⬚⬚⬚⬚_📗🌘_session_new
-				echo "SESSION_NUMBER = $SESSION_NUMBER"
+				display_SESSION_NUMBER
 				⬚⬚⬚⬚_📗🔢_session_old $SESSION_NUMBER || break
 			done
 		elif [[ "$selected" == "l" ]]; then
@@ -693,7 +698,7 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 			#LAUNCH ONE SESSION AFTER THE OTHER
 			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
-				echo "----> SESSION_NUMBER=$SESSION_NUMBER"
+				display_SESSION_NUMBER
 				⬚⬚⬚⬚_📗🔢_session_learn $selected || break
 			done
 		elif [[ "$selected" == "L" ]]; then
@@ -708,7 +713,7 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 			#LAUNCH ONE SESSION AFTER THE OTHER
 			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
-				echo "----> SESSION_NUMBER=$SESSION_NUMBER"
+				display_SESSION_NUMBER
 				⬚⬚⬚⬚_📗🔢_session_learn_mistakes_only $selected || break
 			done
 		else
