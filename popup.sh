@@ -904,7 +904,7 @@ function ⬚⬚⬚⬚_📗🌘_session_new(){ 🔧 $FUNCNAME $@
 	⬚⬚⬚⬚⬚_🏗🌘_session_folder #Newsession only
 	⬚⬚⬚⬚⬚_🏗_session_specific_config
 	⬚⬚⬚⬚⬚_🏗🌘_session_content_pul
-	echo " --- NEW SESSION CREATED --- "
+	echo " --- NEW SESSION CREATED (SESSION_SIZE=$SESSION_SIZE) --- "
 	# ⬚⬚⬚⬚⬚_🏗_session_content_tmp
 	# ⬚⬚⬚⬚⬚_🔄_lines_in_session
 	# ⬚⬚⬚⬚⬚_🛑_lines_in_session
