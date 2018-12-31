@@ -83,7 +83,7 @@ function display(){ 🔧 $FUNCNAME $@
 	echo
 }
 function display_SESSION_NUMBER(){
-	echo -e "\n----> SESSION_NUMBER=$SESSION_NUMBER"
+	echo -e "\n$BG_DARK_MAGENTA ============ SESSION_NUMBER=$SESSION_NUMBER ============ $ENDO"
 }
 
 function ⬚_before_start(){
