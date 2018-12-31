@@ -769,7 +769,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 	  if [[ "$GOOD_TEST" != "" ]]; then
 			SESSION_SIZE=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/session_content.pul"|sort|uniq|wc -l|sed 's/ .*//'`
 			GOOD_SIZE=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good"|sort|uniq|wc -l|sed 's/ .*//'`
-			ALL_GOOD=$(expr $SESSION_SIZE - $GOOD_SIZE)
+			ALL_GOOD=$(expr $SESSION_SIZE \* 2 - $GOOD_SIZE)
 			# echo "==== $SESSION_SIZE - $GOOD_SIZE = $ALL_GOOD ===="
 			if [[ "$ALL_GOOD" != "0" ]]; then
 				cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good" 2> /dev/null > "$HOME/.PopUpLearn/tmp/list_correct.tmp"
