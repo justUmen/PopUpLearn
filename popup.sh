@@ -813,7 +813,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 	selected=99
 	# echo "____ $NB_SESSION"
 	if [ $NB_SESSION -ne 1 ]; then
-		echo "\t---- ALL SESSIONS ----"
+		echo -e "\t---- ALL SESSIONS ----"
 		echo -e "\t$COLOR_SELECTION b) $ENDO $COLOR_TITLE_SELECTED[Recommended]$ENDO Detect your knowledge by asking only blue questions. (session random order) - NOT SHOW ANSWER"
 		echo -e "\t$COLOR_SELECTION m) $ENDO All mistakes from all sessions (session random order) - NOT SHOW ANSWER"
 		echo -e "\t$COLOR_SELECTION M) $ENDO All mistakes from all sessions (session random order) - SHOW ANSWER FIRST"
@@ -822,13 +822,13 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 		echo -e "\t$COLOR_SELECTION s) $ENDO All questions from all current sessions (session random order) - NOT SHOW ANSWER"
 		echo -e "\t$COLOR_SELECTION S) $ENDO All questions from all current sessions (session random order) - SHOW ANSWER FIRST"
 	fi
-	echo "\t---- NEW SESSION ----"
+	echo -e "\t---- NEW SESSION ----"
 	echo -e "\t$COLOR_SELECTION n) $ENDO New session (SHOW ANSWER and quiz - no points for good, log mistakes)"
 	echo -e "\t$COLOR_SELECTION n2) $ENDO New session - NOT SHOW ANSWER"
 	echo -e "\t$COLOR_SELECTION N) $ENDO New session (just create a new session, ask nothing)"
 	echo -e "\t$COLOR_SELECTION in) $ENDO Infinite New sessions (SHOW ANSWER and quiz - no points for good, log mistakes)"
 	echo -e "\t$COLOR_SELECTION in2) $ENDO Infinite New sessions - NOT SHOW ANSWER"
-	echo "\t---- OTHER ----"
+	echo -e "\t---- OTHER ----"
 	echo -e "\t$COLOR_SELECTION e) $ENDO Return"
 	#~ echo -e "\t\$COLOR_SELECTION q) $ENDO All questions from the .pul file \\e[38;5;196m[ not yet implemented... :( ]$ENDO" #MAYBE NOT... TRIGGER ANOTHER LOG...
 	#~ echo -e "\t\$COLOR_SELECTION r) $ENDO All red mistakes from all sessions \\e[38;5;196m[ not yet implemented... :( ]$ENDO"
