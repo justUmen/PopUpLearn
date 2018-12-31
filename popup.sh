@@ -750,7 +750,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 		#If something exist in "session_$ARG/session_content.pul" but not in main file, do something... ??? (it was deleted from .pul file, maybe bad element)
 		while read LINE; do
 			LINE_1=`echo $LINE | sed 's#£# |=| #'`
-			if grep -Fxq "$LINE" $FILE ; then
+			if grep -Fxq "$LINE_1" $FILE ; then
 				break 2
 			fi
 		done < "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/session_content.pul"
