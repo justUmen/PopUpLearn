@@ -745,7 +745,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 	else
 		echo -e "\t- DO YOU WANT TO START A NEW SESSION ?"
 	fi
-	ARG=1
+	ARG=0
 	while [ $ARG -ne `expr $SESSION_NUMBER - 1` ]; do
 		#If something exist in "session_$ARG/session_content.pul" but not in main file, do something... ??? (it was deleted from .pul file, maybe bad element)
 		while read LINE; do
