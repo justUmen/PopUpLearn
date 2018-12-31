@@ -160,7 +160,7 @@ function ⬚_before_start(){
 function ⬚_🔄🔄_start(){ 🔧 $FUNCNAME $@
 	while [ 1 ]; do
 		source $HOME/.GameScript/config 2> /dev/null #LANGUAGE=fr used for quiz language
-		source $HOME/.PopUpLearn/MYDB/my.config #THis should be launched later agani to replace other specific configurations
+		source $HOME/.PopUpLearn/MYDB/my.config 2> /dev/null #THis should be launched later agani to replace other specific configurations
 		⬚⬚_📃_main
 		if [[ "$selected" == "g" ]]; then
 			if [ -d "$HOME/.GameScript" ];then
