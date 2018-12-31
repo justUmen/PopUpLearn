@@ -101,11 +101,9 @@ But you should use them to organize your .pul files the way you want.
 
 ## .pul files restrictions and syntax
 
-The format of each line is `question£answer`, "£" is used to separate the question from the answer.  
+The format of each line is `question |=| answer`, " |=| " is used to separate the question from the answer. (Notice the spaces.)  
 
-If presentation is an issue, you can also use " |=| " as a delimiter instead of "£". (Notice the spaces.)  
-
-Only lines with a " |=| " or a "£" will be considered as valid content by PopUpLearn. The others lines (except variable lines) will be considered as comments. (You can use this for writing comments about your .pul file, a work in progress, a question without answer, etc...)  
+Only lines with a " |=| " will be considered as valid content by PopUpLearn. The others lines (except variable lines) will be considered as comments. (You can use this for writing comments about your .pul file, a work in progress, a question without answer, etc...)  
 
 Tabulations and spaces at the beginning or end of the line can be used for presentation in the .pul file, they will be ignored by PopUpLearn.  
 
@@ -146,7 +144,7 @@ Argument 3 : 60 => Seconds to wait between each quiz
 
 - Force question if bad answer was X days ago and not followed by a recent good answer on the same question.  
 
-- Clean reverse system for `question£answer` into `answer£question`, and special tracking system.  
+- Clean reverse system for `question |=| answer` into `answer |=| question`, and special tracking system.  
 
 - One of the goal is to track down what you learned and create personalised .pul files for you. (Require community effort to link a piece of knowledge to a precise .pul file. For example a .pul file per wikipedia page, a .pul file per online teaching video, etc...)  
 
