@@ -88,9 +88,9 @@ function display_SESSION_NUMBER(){
 
 function ⬚_before_start(){
 	echo "..."
-	pkill -f "node ~/.PopUpLearn/node_server_popup.js" &>/dev/null
-	pkill -f "nodejs ~/.PopUpLearn/node_server_popup.js" &>/dev/null
-	pkill -f "php -S 127.0.0.1:9995 -t ~/.PopUpLearn" &>/dev/null
+	pkill -f "node $HOME/.PopUpLearn/node_server_popup.js" &>/dev/null
+	pkill -f "nodejs $HOME/.PopUpLearn/node_server_popup.js" &>/dev/null
+	pkill -f "php -S 127.0.0.1:9995 -t $HOME/.PopUpLearn" &>/dev/null
 
 	sleep 1
 
