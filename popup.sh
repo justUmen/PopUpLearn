@@ -747,6 +747,14 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 	fi
 	ARG=0
 	while [ $ARG -ne `expr $SESSION_NUMBER - 1` ]; do
+		#If something exist in "session_$ARG/session_content.pul" but not in main file, do something... ??? (it was deleted from .pul file, maybe bad element)
+		while read LINE; do
+			LINE_1=`echo $LINE | sed 's#£# |=| #'`
+			if grep -Fxq "$LINE" $FILE ; then
+				break 2
+			fi
+		done < "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/session_content.pul"
+
 	  ARG=`expr $ARG + 1`
 	  echo -en "\t$COLOR_SELECTION $ARG) $COLOR_TITLE_SELECTED Session $ARG $ENDO "
 	  #~ cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/session_content.pul" 2>/dev/null | sed 's/.*£//' | tr '\n' '|' | sed 's/^/|/' > "$HOME/.PopUpLearn/tmp/list_answers.tmp"
