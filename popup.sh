@@ -1040,8 +1040,8 @@ function ⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer(){ 🔧 $FUNCNAME $@
 		fi
 		if [ $SIGSTOP_MPV -eq 1 ]; then mpv_play &> /dev/null; fi
 		if [ "$TIME_DISPLAYED" == 0 ];then #DOES NOT WAIT EXTRA HERE (!= 0 is kinda like 'l' selection)
-			echo "Press any key to Exit, or wait $SEC_BEFORE_QUIZ SECONDS before the question."
-			if read -r -N 1 -t $SEC_BEFORE_QUIZ EXIT < /dev/tty; then
+			echo "Press any key to Exit, or wait $SEC_AFTER_QUIZ SECONDS before the question."
+			if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
 				return 2 #STOPPED MANUALLY, break loop
 			else
 				echo
@@ -1116,7 +1116,7 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
 			fi
 		fi
 		if [ $1 -ne $quizzed ]; then
-			sleep $SEC_BEFORE_QUIZ
+			sleep $SEC_AFTER_QUIZ
 		fi
 	done
 }
@@ -1154,14 +1154,13 @@ echo " - Warning : Do not close PopUpLearn with CTRL + C, the node and php serve
 echo " - Warning : Dates are logged for all answers, but are not yet used by the system to optimize the learning process. (But it will)"
 echo
 if [ $1 ]; then TIME_DISPLAYED="$1"; else TIME_DISPLAYED=0; fi #0 for infinite
-if [ $2 ]; then SEC_BEFORE_QUIZ="$2"; else SEC_BEFORE_QUIZ=30; fi
-if [ $3 ]; then SEC_AFTER_QUIZ="$3"; else SEC_AFTER_QUIZ=60; fi
-if [ $4 ]; then SIGSTOP_MPV="$4"; else SIGSTOP_MPV=1; fi
-if [ $5 ]; then LANGUAGE_1="$5"; else LANGUAGE_1="xx"; fi
-if [ $6 ]; then LANGUAGE_2="$6"; else LANGUAGE_2="xx"; fi
-if [ $7 ]; then SUBJECT="$7"; else SUBJECT="unknown"; fi
-if [ $8 ]; then NUMBER="$8"; else NUMBER="unknown"; fi
-if [ $9 ]; then TYPE="$9"; else TYPE="TEXT"; fi
-if [ $10 ]; then ANSWER_BEFORE_QUIZ="$10"; else ANSWER_BEFORE_QUIZ=1; fi
-if [ $11 ]; then LOOP_QUIZ="$11"; else LOOP_QUIZ=3; fi
+if [ $2 ]; then SEC_AFTER_QUIZ="$2"; else SEC_AFTER_QUIZ=60; fi
+if [ $3 ]; then SIGSTOP_MPV="$3"; else SIGSTOP_MPV=1; fi
+if [ $4 ]; then LANGUAGE_1="$4"; else LANGUAGE_1="xx"; fi
+if [ $5 ]; then LANGUAGE_2="$5"; else LANGUAGE_2="xx"; fi
+if [ $6 ]; then SUBJECT="$6"; else SUBJECT="unknown"; fi
+if [ $7 ]; then NUMBER="$7"; else NUMBER="unknown"; fi
+if [ $8 ]; then TYPE="$8"; else TYPE="TEXT"; fi
+if [ $9 ]; then ANSWER_BEFORE_QUIZ="$9"; else ANSWER_BEFORE_QUIZ=1; fi
+if [ $10 ]; then LOOP_QUIZ="$10"; else LOOP_QUIZ=3; fi
 ⬚_🔄🔄_start
