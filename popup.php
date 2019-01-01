@@ -32,6 +32,14 @@ $LANGUAGE_TAG_2=$e[5];
 //~ $e[6] not used in popup.php, only popup_quiz.php
 ?>
 <body>
+
+
+	<div id="left_arrow" onclick="document.getElementById('side_left').style.display='block';document.getElementById('left_arrow').style.display='none';">🡆</div>
+	<div id="right_arrow" onclick="document.getElementById('side_right').style.display='block';document.getElementById('right_arrow').style.display='none';">🡄</div>
+	<div id="side_left" class="hide"></div>
+	<div id="side_right" class="hide"></div>
+
+
 <div id="on_click_close" onclick="close_popup();return false;">
 	<div class='widget' id="content">
 		<div><img src='img/flags/<?php echo $LANGUAGE_TAG_1; ?>.jpeg' /> <span class="bigfont"><?php echo $LEFT; ?></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="bigfont"><?php echo $RIGHT; ?></span> <img src='img/flags/<?php echo $LANGUAGE_TAG_2; ?>.jpeg' /></div>
@@ -82,10 +90,5 @@ $LANGUAGE_TAG_2=$e[5];
 		close_popup();
 	});
 </script>
-
-<div id="left_arrow" onclick="document.getElementById('side_left').style.display='block';document.getElementById('left_arrow').style.display='none';">🡆</div>
-<div id="right_arrow" onclick="document.getElementById('side_right').style.display='block';document.getElementById('right_arrow').style.display='none';">🡄</div>
-<div id="side_left" class="hide"></div>
-<div id="side_right" class="hide"></div>
 
 </html>
