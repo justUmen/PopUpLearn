@@ -128,15 +128,14 @@ Of course put `run_im ibus` in the file `~/.xinputrc` to use it with your system
 Todo : Record all errors and successes in logs/ with dates to organize and try to guess what the user know well, don't know, probably forgot, etc...
 Simple first, then machine learning testing prediction system !?  
 
-# Optional : LAUNCH WITH ARGUMENTS (3 variables that control time)
+# Optional : LAUNCH WITH ARGUMENTS (2 variables that control time)
 
-     bash ~/.PopUpLearn/popup.sh 0 30 60
+     popuplearn 0 30
 
 Argument 1 : 0 => 0 means unlimited display of the answer (until user answer or close), otherwise the popup closes after X seconds. Useful if you can't or don't want to interact with PopUpLearn. (Not answering doesn't count as a wrong answer)  
-Argument 2 : 30 => Seconds to wait before displaying quiz after showing the answer  
-Argument 3 : 60 => Seconds to wait between each quiz  
+Argument 2 : 30 => Seconds to wait before the next popup  
 
-0, 30 and 60 are default variables so `bash ~/.PopUpLearn/popup.sh 0 30 60` and `bash ~/.PopUpLearn/popup.sh` are identical.
+0 and 30 are default variables, so `popuplearn 0 30` and `popuplearn` are identical.
 
 # Todo
 
