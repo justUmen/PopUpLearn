@@ -18,7 +18,6 @@ function 🔧(){
 	echo -e "$BG_DARK_GRAY$WHITE 🔧 $@ 🔧 $ENDO"
 }
 function close_PopUpLearn(){
-	echo "close_PopUpLearn"
 	pkill -f "node $HOME/.PopUpLearn/node_server_popup.js" &>/dev/null
 	sleep .5
 	pkill -f "node ~/.PopUpLearn/node_server_popup.js" &>/dev/null
@@ -28,7 +27,9 @@ function close_PopUpLearn(){
 	pkill -f "nodejs ~/.PopUpLearn/node_server_popup.js" &>/dev/null
 	sleep .5
 	pkill -f "php -S 127.0.0.1:9995 -t $HOME/.PopUpLearn" &>/dev/null
-	exit
+	if [[ "$1" == "" ]]; then
+		exit
+	fi
 }
 
 function 💻_keyboard_language_change(){ 🔧 $FUNCNAME $@
@@ -94,11 +95,7 @@ function display_SESSION_NUMBER(){
 
 function ⬚_before_start(){
 	echo "..."
-	pkill -f "node $HOME/.PopUpLearn/node_server_popup.js" &>/dev/null
-	sleep .5
-	pkill -f "nodejs $HOME/.PopUpLearn/node_server_popup.js" &>/dev/null
-	sleep .5
-	pkill -f "php -S 127.0.0.1:9995 -t $HOME/.PopUpLearn" &>/dev/null
+	close_PopUpLearn
 
 	sleep 1
 
@@ -160,7 +157,7 @@ function ⬚_before_start(){
 function ⬚_🔄🔄_start(){ 🔧 $FUNCNAME $@
 	while [ 1 ]; do
 		source $HOME/.GameScript/config 2> /dev/null #LANGUAGE=fr used for quiz language
-		source $HOME/.PopUpLearn/MYDB/my.config 2> /dev/null #THis should be launched later agani to replace other specific configurations
+		source $HOME/.PopUpLearn/MYDB/my.config 2> /dev/null #THis should be launched later again to replace other specific configurations
 		⬚⬚_📃_main
 		if [[ "$selected" == "g" ]]; then
 			if [ -d "$HOME/.GameScript" ];then
@@ -761,7 +758,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 		#If something exist in "session_$ARG/session_content.pul" but not in main file, do something... ??? (it was deleted from .pul file, maybe bad element)
 		while read LINE; do
 			if ! grep -Fxq "$LINE" $FILE ; then
-				echo "ERROR with $LINE"
+				echo "ERROR with $LINE, clean up logs..."
 				sed -i "/$LINE/d" "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/session_content.pul"
 				sed -i "/$LINE/d" "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good"
 				sed -i "/$LINE/d" "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date"
