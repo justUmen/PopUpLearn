@@ -75,3 +75,45 @@ left:50%;
 top:10px;
 left:50%;
 }
+
+
+
+#left_arrow{
+	font-size:44px;
+	height: 100%;
+	position: fixed;
+	z-index: 12;
+	left: 0;
+}
+#right_arrow{
+	font-size:44px;
+	height: 100%;
+	position: fixed;
+	z-index: 12;
+	right: 0;
+}
+#side_left{
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+#side_right{
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+.hide {
+  display: none;
+}

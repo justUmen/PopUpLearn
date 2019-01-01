@@ -83,5 +83,9 @@ $LANGUAGE_TAG_2=$e[5];
 	});
 </script>
 
+<div id="left_arrow" onclick="document.getElementById('side_left').style.display='block';document.getElementById('left_arrow').style.display='none';">🡆</div>
+<div id="right_arrow" onclick="document.getElementById('side_right').style.display='block';document.getElementById('right_arrow').style.display='none';">🡄</div>
+<div id="side_left" class="hide"></div>
+<div id="side_right" class="hide"></div>
 
 </html>
