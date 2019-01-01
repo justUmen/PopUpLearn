@@ -95,7 +95,7 @@ function display_SESSION_NUMBER(){
 
 function ⬚_before_start(){
 	echo "..."
-	close_PopUpLearn
+	close_PopUpLearn START
 
 	sleep 1
 
