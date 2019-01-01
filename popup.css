@@ -79,20 +79,24 @@ left:50%;
 
 
 #left_arrow{
+  top:20;
+  left:20;
 	font-size:44px;
 	height: 100%;
 	position: fixed;
 	z-index: 12;
 	left: 0;
-  color:yellow;
+  color:#CCC;
 }
 #right_arrow{
+  top:20;
+  right:20;
 	font-size:44px;
 	height: 100%;
 	position: fixed;
 	z-index: 12;
 	right: 0;
-  color:yellow;
+  color:#CCC;
 }
 #side_left{
   height: 100%;
