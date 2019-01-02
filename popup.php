@@ -170,15 +170,30 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 	//~ audio_play();
 //~ };
 
+function audio_play_1() {
+  var audio = new Audio("http://127.0.0.1/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3");
+  audio.type = 'audio/mp3';
+
+  var playPromise = audio.play();
+
+  if (playPromise !== undefined) {
+      playPromise.then(function () {
+          console.log('Playing....');
+      }).catch(function (error) {
+          console.log('Failed to play....' + error);
+      });
+  }
+}
+
 //for audio.play() :p
-//~ audio = new Audio("http://localhost/wikiface_new/soundDB/th/<?php echo $LEFT; ?>.mp3");
-//~ audio.volume=1;
-//~ function audio_play(arg){
-	//~ console.log(arg);
-	//~ var objReq = new XMLHttpRequest();
-	//~ objReq.open("GET", "http://localhost:8888" + "?type=" + "mplayer \"~/SyNc/Projects/wikiface_new/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3\" \"~/SyNc/Projects/wikiface_new/soundDB/<?php echo $LANGUAGE_TAG_2; ?>/<?php echo $RIGHT; ?>.mp3\"" , false);
-	//~ objReq.send(null);
-//~ }
+// audio_1 = new Audio("http://127.0.0.1/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3");
+// audio_1.volume=1;
+// function audio_play_1(arg){
+// 	console.log(arg);
+// 	var objReq = new XMLHttpRequest();
+// 	objReq.open("GET", "http://localhost:8888" + "?type=" + "mplayer \"~/SyNc/Projects/wikiface_new/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3\" \"~/SyNc/Projects/wikiface_new/soundDB/<?php echo $LANGUAGE_TAG_2; ?>/<?php echo $RIGHT; ?>.mp3\"" , false);
+// 	objReq.send(null);
+// }
 
 //~ window.onload = function(){
  //~ setTimeout(function(){
