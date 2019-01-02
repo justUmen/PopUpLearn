@@ -83,9 +83,17 @@ function 💻_keyboard_language_previous_one(){ 🔧 $FUNCNAME $@
 }
 function 💻_mpv_pause(){ 🔧 $FUNCNAME $@
 	echo "{ \"command\": [\"set_property\", \"pause\", true] }" | socat - /tmp/mpvsocket &> /dev/null
+	ps -elf|grep chrome|grep google-chrome-netflix | awk '{print $4}'>/tmp/netflix_to_kill
+	while read line; do
+		kill -SIGSTOP $line
+	done < /tmp/not_netflix_to_kill
 }
 function 💻_mpv_play(){ 🔧 $FUNCNAME $@
 	echo "{ \"command\": [\"set_property\", \"pause\", false] }" | socat - /tmp/mpvsocket &> /dev/null
+	ps -elf|grep chrome|grep google-chrome-netflix | awk '{print $4}'>/tmp/netflix_to_kill
+	while read line; do
+		kill -SIGCONT $line
+	done < /tmp/not_netflix_to_kill
 }
 function display(){ 🔧 $FUNCNAME $@
 	echo
@@ -237,6 +245,7 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 	done
 	echo -e "`cat $HOME/.PopUpLearn/tmp/color_menu.list 2> /dev/null`"
 	echo -e "$COLOR_SELECTION g) $ENDO GameScript Quizzes [for `cat ~/.GameScript/username`]"
+	echo -e "$COLOR_SELECTION i) $ENDO Infinite smart loop (learn / remember) \\e[38;5;196m[ not yet implemented... :( ]$ENDO" #NOT DISPLAY IF NOTHING ADDED YET ???
 	selected=99
 	echo -e "$COLOR_SELECTION e) $ENDO Close PopUpLearn"
 	while :; do
@@ -245,6 +254,7 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 		case $selected in
 			e) close_PopUpLearn ;;
 			d) break ;;
+			# i) break ;;
 			g) break ;;
 			[0-9]*) test "$selected" -le "`expr $arraylength - 1`" && break ;;
 		esac
