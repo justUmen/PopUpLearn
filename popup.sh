@@ -1063,7 +1063,7 @@ function ⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp(){ 🔧 $FUNCNAME $@
 }
 function ⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer(){ 🔧 $FUNCNAME $@
 	if [ $ANSWER_BEFORE_QUIZ -eq 1 ]; then
-		if [ $SIGSTOP_MPV -eq 1 ]; then sleep 5 && mpv_pause &> /dev/null & fi
+		if [ $SIGSTOP_MPV -eq 1 ]; then sleep 5 && 💻_mpv_pause &> /dev/null & fi
 		if [ "$TIME_DISPLAYED" == 0 ];then #LOCK, unlimited
 			if [[ "$XDG_CURRENT_DESKTOP" == "i3" ]]; then
 				CURRENT_DESKTOP=$(wmctrl -d | awk '/\*/{print $1}')
@@ -1087,7 +1087,7 @@ function ⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer(){ 🔧 $FUNCNAME $@
 				pkill -f "$WEB_BROWSER http://127.0.0.1:9995/popup.php" &> /dev/null
 			fi
 		fi
-		if [ $SIGSTOP_MPV -eq 1 ]; then mpv_play &> /dev/null; fi
+		if [ $SIGSTOP_MPV -eq 1 ]; then 💻_mpv_play &> /dev/null; fi
 		if [ $LOOP_QUIZ -ne 0 ];then #WAIT IF AFTER SHOW QUIZ
 			echo "Press any key to Exit, or wait $SEC_AFTER_QUIZ SECONDS before the question."
 			if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
