@@ -890,7 +890,7 @@ function ⬚⬚⬚⬚_📗🔢_session_learn_mistakes_only(){ 🔧 $FUNCNAME $@
 	SESSION_NUMBER=$1
 	LOOP_QUIZ=0 #LEARN ONLY NO QUIZ
 	⬚⬚⬚⬚⬚_🔄_lines_in_session "IGNORE_GOOD" || return 2
-	⬚⬚⬚⬚⬚_🛑_lines_in_session
+	# ⬚⬚⬚⬚⬚_🛑_lines_in_session
 }
 function ⬚⬚⬚⬚_📗🔢_session_old_with_answers(){ 🔧 $FUNCNAME $@
 	ANSWER_BEFORE_QUIZ=1
