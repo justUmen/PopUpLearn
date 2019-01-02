@@ -90,7 +90,7 @@ function display(){ 🔧 $FUNCNAME $@
 	echo
 }
 function display_SESSION_NUMBER(){
-	echo -e "\n$BG_DARK_MAGENTA ============ SESSION_NUMBER=$SESSION_NUMBER ============ $ENDO"
+	echo -e "\n$BG_DARK_MAGENTA ============ SESSION_NUMBER=$SESSION_NUMBER ============ $ENDO (`wc -l $HOME/.PopUpLearn/tmp/session_content.tmp` lines)"
 }
 
 function ⬚_before_start(){
