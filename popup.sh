@@ -86,14 +86,14 @@ function 💻_mpv_pause(){ 🔧 $FUNCNAME $@
 	ps -elf|grep chrome|grep google-chrome-netflix | awk '{print $4}'>/tmp/netflix_to_kill
 	while read line; do
 		kill -SIGSTOP $line
-	done < /tmp/not_netflix_to_kill
+	done < /tmp/netflix_to_kill
 }
 function 💻_mpv_play(){ 🔧 $FUNCNAME $@
 	echo "{ \"command\": [\"set_property\", \"pause\", false] }" | socat - /tmp/mpvsocket &> /dev/null
 	ps -elf|grep chrome|grep google-chrome-netflix | awk '{print $4}'>/tmp/netflix_to_kill
 	while read line; do
 		kill -SIGCONT $line
-	done < /tmp/not_netflix_to_kill
+	done < /tmp/netflix_to_kill
 }
 function display(){ 🔧 $FUNCNAME $@
 	echo
