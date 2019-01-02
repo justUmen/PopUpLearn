@@ -985,7 +985,6 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 		fi
 		⬚⬚⬚⬚⬚⬚_💣_remove_answer_from_session_tmp
 		⬚⬚⬚⬚⬚⬚_🛑_quiz || return 2
-	done < "$HOME/.PopUpLearn/tmp/session_content.tmp"
 	# if [ $LOOP_QUIZ -ne 0 ]; then
 		#IF session_content.tmp is empty do not wait, go directly new session
 		echo "wc -l $HOME/.PopUpLearn/tmp/session_content.tmp : `wc -l $HOME/.PopUpLearn/tmp/session_content.tmp`"
@@ -998,6 +997,7 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 				return 0
 			fi
 		fi
+	done < "$HOME/.PopUpLearn/tmp/session_content.tmp"
 	# fi
 }
 function ⬚⬚⬚⬚⬚⬚_🚧_session_answers(){ 🔧 $FUNCNAME $@
