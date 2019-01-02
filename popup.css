@@ -122,14 +122,14 @@ left:50%;
 }
 
 /* Style the tab */
-.tab {
+.tab_1 {
   overflow: hidden;
   border: 1px solid #ccc;
   background-color: #f1f1f1;
 }
 
 /* Style the buttons that are used to open the tab content */
-.tab button {
+.tab_1 button {
   background-color: inherit;
   float: left;
   border: none;
@@ -140,12 +140,12 @@ left:50%;
 }
 
 /* Change background color of buttons on hover */
-.tab button:hover {
+.tab_1 button:hover {
   background-color: #ddd;
 }
 
 /* Create an active/current tablink class */
-.tab button.active {
+.tab_1 button.active {
   background-color: #ccc;
 }
 
@@ -156,6 +156,36 @@ left:50%;
   border: 1px solid #ccc;
   border-top: none;
 }
+
+/* Style the tab */
+.tab_2 {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab_2 button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab_2 button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab_2 button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
 .tabcontent_2 {
   display: none;
   padding: 6px 12px;

@@ -70,10 +70,10 @@ $LANGUAGE_TAG_2=$e[5];
 	<div id="left_arrow" onclick="document.getElementById('side_left').style.display='block';document.getElementById('left_arrow').style.display='none';">🡆</div>
 	<div id="right_arrow" onclick="document.getElementById('side_right').style.display='block';document.getElementById('right_arrow').style.display='none';">🡄</div>
 	<div id="side_left">
-		<div class="tab">
-		  <button class="tablinks" onclick="openCity(event, 'wiktionary_1')">wiktionary</button>
-		  <button class="tablinks" onclick="openCity(event, 'wikipedia_1')">wikipedia</button>
-		  <button class="tablinks" onclick="openCity(event, 'wikipul_1')">wikipul</button>
+		<div class="tab_1">
+		  <button class="tablinks_1" onclick="openCity_1(event, 'wiktionary_1')">wiktionary</button>
+		  <button class="tablinks_1" onclick="openCity_1(event, 'wikipedia_1')">wikipedia</button>
+		  <button class="tablinks_1" onclick="openCity_1(event, 'wikipul_1')">wikipul</button>
 		</div>
 
 		<!-- Tab content -->
@@ -98,10 +98,10 @@ $LANGUAGE_TAG_2=$e[5];
 	</div>
 
 	<div id="side_right">
-		<div class="tab">
-		  <button class="tablinks" onclick="openCity(event, 'wiktionary_2')">wiktionary</button>
-		  <button class="tablinks" onclick="openCity(event, 'wikipedia_2')">wikipedia</button>
-		  <button class="tablinks" onclick="openCity(event, 'wikipul_2')">wikipul</button>
+		<div class="tab_2">
+		  <button class="tablinks_2" onclick="openCity_2(event, 'wiktionary_2')">wiktionary</button>
+		  <button class="tablinks_2" onclick="openCity_2(event, 'wikipedia_2')">wikipedia</button>
+		  <button class="tablinks_2" onclick="openCity_2(event, 'wikipul_2')">wikipul</button>
 		</div>
 
 		<!-- Tab content -->
