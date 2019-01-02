@@ -1063,7 +1063,7 @@ function ⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer(){ 🔧 $FUNCNAME $@
 			else
 				echo
 			fi
-		# fi
+		fi
 	fi
 }
 function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
