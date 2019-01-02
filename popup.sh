@@ -984,7 +984,7 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 	nbline=1
 	while read X; do
 		# if [[ "$X" == "" ]]; then break; fi
-		echo -e "\n---->Line number $nbline ($FILE) [$X]"
+		echo -e "\n---->Line number $nbline" # ($FILE) [$X]" #$X NOT EVEN ALWAYS THE SELECTED ONE....
 		nbline=`expr $nbline + 1`
 		⬚⬚⬚⬚⬚⬚_🚧_session_answers
 		⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp
