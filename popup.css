@@ -198,3 +198,7 @@ left:50%;
   border:1px solid #888 !important;
   margin:20px;
 }
+.glyphicon-remove{
+  color:red;
+  border:1px solid red !important;
+}

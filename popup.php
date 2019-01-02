@@ -131,17 +131,23 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 		</div>
 	</div>
 
-<div id="on_click_close" onclick="close_popup();return false;">
-	<div class='widget' id="content" onclick="function(e) { e.stopPropagation(); }">
+<div id="on_click_close">
+	<div class='widget' id="content">
 		<div>
-			<a class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_1();return false' href='#' title='Play sound'></a>
 			<img src='img/flags/<?php echo $LANGUAGE_TAG_1; ?>.jpeg' />
 			<span class="bigfont"><?php echo $LEFT; ?></span>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<span class="bigfont"><?php echo $RIGHT; ?></span>
 			<img src='img/flags/<?php echo $LANGUAGE_TAG_2; ?>.jpeg' />
+		</div>
+		<div>
+			<a class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_1();return false' href='#' title='Play sound'></a>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<a class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_2();return false' href='#' title='Play sound'></a>
 		</div>
+	</div>
+	<div>
+		<a class='btn glyphicon glyphicon-remove' onclick="close_popup();return false;" href='#' title='close popup'></a>
 	</div>
 	<?php
 	if(isset($_GET['img'])){
