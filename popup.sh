@@ -970,9 +970,6 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 	echo "Press any key to Exit, or wait $SEC_AFTER_QUIZ SECONDS before the first popup."
 	if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
 		return 2 #STOPPED MANUALLY, break loop
-	else
-		echo
-		return 0
 	fi
 	nbline=1
 	while read X; do
