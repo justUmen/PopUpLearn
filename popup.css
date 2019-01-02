@@ -201,4 +201,6 @@ left:50%;
 .glyphicon-remove{
   color:red;
   border:1px solid red !important;
+  background-color:black !important;
+  text-align: center;
 }
