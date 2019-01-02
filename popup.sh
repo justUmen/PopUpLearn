@@ -1155,6 +1155,7 @@ function ⬚⬚⬚⬚⬚⬚_💣_remove_answer_from_session_tmp(){ 🔧 $FUNCNAM
 	#~ rm $HOME/.PopUpLearn/tmp/session_content_2.tmp
 	LINE_TO_DELETE="$(<<< "$LINE_TO_DELETE" sed -e 's`[][\\/.*^$]`\\&`g')"
 	echo "Line $LINE_TO_DELETE removed from session_content_remove.tmp"
+	echo "sed -i \"0,/$LINE_TO_DELETE/{/$LINE_TO_DELETE/d;}\" $HOME/.PopUpLearn/tmp/session_content_remove.tmp"
 	sed -i "0,/$LINE_TO_DELETE/{/$LINE_TO_DELETE/d;}" $HOME/.PopUpLearn/tmp/session_content_remove.tmp
 }
 function ⬚⬚⬚⬚⬚_🛑_lines_in_session(){ 🔧 $FUNCNAME $@
