@@ -972,10 +972,12 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 		⬚⬚⬚⬚⬚⬚_🚧_session_answers
 		⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp
 		⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer || return 2
-		if [[ "$1" == "IGNORE_GOOD" ]];then
-			⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ "IGNORE_GOOD"
-		else
-			⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ
+		if [ $LOOP_QUIZ -ne 0 ]; then
+			if [[ "$1" == "IGNORE_GOOD" ]];then
+				⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ "IGNORE_GOOD"
+			else
+				⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ
+			fi
 		fi
 		⬚⬚⬚⬚⬚⬚_💣_remove_answer_from_session_tmp
 		⬚⬚⬚⬚⬚⬚_🛑_quiz || return 2
