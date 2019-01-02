@@ -192,3 +192,7 @@ left:50%;
   border: 1px solid #ccc;
   border-top: none;
 }
+
+.play-icon{
+  border:0px solid black !important;
+}

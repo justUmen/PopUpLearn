@@ -134,13 +134,13 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 <div id="on_click_close" onclick="close_popup();return false;">
 	<div class='widget' id="content">
 		<div>
-			<a class='btn glyphicon glyphicon-headphones' onclick='audio_play_1();return false' href='#' title='Play sound'></a>
+			<a class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_1();return false' href='#' title='Play sound'></a>
 			<img src='img/flags/<?php echo $LANGUAGE_TAG_1; ?>.jpeg' />
 			<span class="bigfont"><?php echo $LEFT; ?></span>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<span class="bigfont"><?php echo $RIGHT; ?></span>
 			<img src='img/flags/<?php echo $LANGUAGE_TAG_2; ?>.jpeg' />
-			<a class='btn glyphicon glyphicon-headphones' onclick='audio_play_2();return false' href='#' title='Play sound'></a>
+			<a class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_2();return false' href='#' title='Play sound'></a>
 		</div>
 	</div>
 	<?php
