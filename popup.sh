@@ -967,9 +967,11 @@ function ⬚⬚⬚⬚⬚_🏗_session_content_tmp_blue_only(){ 🔧 $FUNCNAME $@
 	cp "$HOME/.PopUpLearn/tmp/good_removed.tmp" "$HOME/.PopUpLearn/tmp/session_content_remove.tmp"
 }
 function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
-	echo "Press any key to Exit, or wait $SEC_AFTER_QUIZ SECONDS before the first popup."
-	if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
-		return 2 #STOPPED MANUALLY, break loop
+	if [[ "$(wc -l $HOME/.PopUpLearn/tmp/session_content.tmp|sed 's/ .*//')" != "0" ]]; then
+		echo "Press any key to Exit, or wait $SEC_AFTER_QUIZ SECONDS before the first popup."
+		if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
+			return 2 #STOPPED MANUALLY, break loop
+		fi
 	fi
 	nbline=1
 	while read X; do
