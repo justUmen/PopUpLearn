@@ -967,6 +967,13 @@ function ⬚⬚⬚⬚⬚_🏗_session_content_tmp_blue_only(){ 🔧 $FUNCNAME $@
 	cp "$HOME/.PopUpLearn/tmp/good_removed.tmp" "$HOME/.PopUpLearn/tmp/session_content_remove.tmp"
 }
 function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
+	echo "Press any key to Exit, or wait $SEC_AFTER_QUIZ SECONDS before the first popup."
+	if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
+		return 2 #STOPPED MANUALLY, break loop
+	else
+		echo
+		return 0
+	fi
 	nbline=1
 	while read X; do
 		# if [[ "$X" == "" ]]; then break; fi
@@ -994,9 +1001,9 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 			echo "Press any key to Exit, or wait $SEC_AFTER_QUIZ SECONDS before the next popup."
 			if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
 				return 2 #STOPPED MANUALLY, break loop
-			else
-				echo
-				return 0
+			# else
+			# 	echo
+			# 	return 0
 			fi
 		fi
 	done < "$HOME/.PopUpLearn/tmp/session_content.tmp"
@@ -1062,14 +1069,14 @@ function ⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer(){ 🔧 $FUNCNAME $@
 			fi
 		fi
 		if [ $SIGSTOP_MPV -eq 1 ]; then mpv_play &> /dev/null; fi
-		# if [ "$TIME_DISPLAYED" == 0 ];then #DOES NOT WAIT EXTRA HERE (!= 0 is kinda like 'l' selection)
-		# 	echo "Press any key to Exit, or wait $SEC_AFTER_QUIZ SECONDS before the question."
-		# 	if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
-		# 		return 2 #STOPPED MANUALLY, break loop
-		# 	else
-		# 		echo
-		# 	fi
-		# fi
+		if [ $LOOP_QUIZ -ne 0 ];then #WAIT IF AFTER SHOW QUIZ
+			echo "Press any key to Exit, or wait $SEC_AFTER_QUIZ SECONDS before the question."
+			if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
+				return 2 #STOPPED MANUALLY, break loop
+			else
+				echo
+			fi
+		fi
 	fi
 }
 function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
