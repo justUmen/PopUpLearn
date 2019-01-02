@@ -17,24 +17,38 @@ function close_popup(){
 	objReq.open("GET", "http://localhost:8899" + "?type=close_PopUpLearn", false);
 	objReq.send(null);
 }
-function openCity(evt, cityName) {
+function openCity_1(evt, tabName) {
   // Declare all variables
-  var i, tabcontent, tablinks;
-
+  var i, tabcontent_1, tablinks_1;
   // Get all elements with class="tabcontent" and hide them
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
+  tabcontent_1 = document.getElementsByClassName("tabcontent_1");
+  for (i = 0; i < tabcontent_1.length; i++) {
+    tabcontent_1[i].style.display = "none";
   }
-
   // Get all elements with class="tablinks" and remove the class "active"
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  tablinks_1 = document.getElementsByClassName("tablinks_1");
+  for (i = 0; i < tablinks_1.length; i++) {
+    tablinks_1[i].className = tablinks_1[i].className.replace(" active", "");
   }
-
   // Show the current tab, and add an "active" class to the button that opened the tab
-  document.getElementById(cityName).style.display = "block";
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+function openCity_2(evt, tabName) {
+  // Declare all variables
+  var i, tabcontent_2, tablinks_2;
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent_2 = document.getElementsByClassName("tabcontent_2");
+  for (i = 0; i < tabcontent_2.length; i++) {
+    tabcontent_2[i].style.display = "none";
+  }
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks_2 = document.getElementsByClassName("tablinks_2");
+  for (i = 0; i < tablinks_2.length; i++) {
+    tablinks_2[i].className = tablinks_2[i].className.replace(" active", "");
+  }
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(tabName).style.display = "block";
   evt.currentTarget.className += " active";
 }
 </script>
@@ -63,21 +77,21 @@ $LANGUAGE_TAG_2=$e[5];
 		</div>
 
 		<!-- Tab content -->
-		<div id="wiktionary_1" class="tabcontent">
+		<div id="wiktionary_1" class="tabcontent_1">
 			<object data="https://en.wiktionary.org/wiki/<?php echo $LEFT; ?>" width="100%" height="100%">
 	      <embed src="https://en.wiktionary.org/wiki/<?php echo $LEFT; ?>" width="100%" height="100%"> </embed>
 	      Error: Embedded data could not be displayed.
 	    </object>
 		</div>
 
-		<div id="wikipedia_1" class="tabcontent">
+		<div id="wikipedia_1" class="tabcontent_1">
 			<object data="https://<?php echo $LANGUAGE_TAG_1; ?>.wikipedia.org/wiki/<?php echo $LEFT; ?>" width="100%" height="100%">
 	      <embed src="https://<?php echo $LANGUAGE_TAG_1; ?>.wikipedia.org/wiki/<?php echo $LEFT; ?>" width="100%" height="100%"> </embed>
 	      Error: Embedded data could not be displayed.
 	    </object>
 		</div>
 
-		<div id="wikipul_1" class="tabcontent">
+		<div id="wikipul_1" class="tabcontent_1">
 		  <h3>wikipul</h3>
 		  <p>Not yet implemented.... :(</p>
 		</div>
@@ -91,21 +105,21 @@ $LANGUAGE_TAG_2=$e[5];
 		</div>
 
 		<!-- Tab content -->
-		<div id="wiktionary_2" class="tabcontent">
+		<div id="wiktionary_2" class="tabcontent_2">
 			<object data="https://en.wiktionary.org/wiki/<?php echo $RIGHT; ?>" width="100%" height="100%">
 	      <embed src="https://en.wiktionary.org/wiki/<?php echo $RIGHT; ?>" width="100%" height="100%"> </embed>
 	      Error: Embedded data could not be displayed.
 	    </object>
 		</div>
 
-		<div id="wikipedia_2" class="tabcontent">
+		<div id="wikipedia_2" class="tabcontent_2">
 			<object data="https://<?php echo $LANGUAGE_TAG_2; ?>.wikipedia.org/wiki/<?php echo $RIGHT; ?>" width="100%" height="100%">
 	      <embed src="https://<?php echo $LANGUAGE_TAG_2; ?>.wikipedia.org/wiki/<?php echo $RIGHT; ?>" width="100%" height="100%"> </embed>
 	      Error: Embedded data could not be displayed.
 	    </object>
 		</div>
 
-		<div id="wikipul_2" class="tabcontent">
+		<div id="wikipul_2" class="tabcontent_2">
 		  <h3>wikipul</h3>
 		  <p>Not yet implemented.... :(</p>
 		</div>
