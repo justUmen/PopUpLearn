@@ -36,14 +36,14 @@ $LANGUAGE_TAG_2=$e[5];
 	<div id="left_arrow" onclick="document.getElementById('side_left').style.display='block';document.getElementById('left_arrow').style.display='none';">🡆</div>
 	<div id="right_arrow" onclick="document.getElementById('side_right').style.display='block';document.getElementById('right_arrow').style.display='none';">🡄</div>
 	<div id="side_left">
-		<object data="https://en.wiktionary.org/wiki/<?php echo $LEFT; ?>" width="100%" height="100%">
-      <embed src="https://en.wiktionary.org/wiki/<?php echo $LEFT; ?>" width="100%" height="100%"> </embed>
+		<object data="https://<?php echo $LANGUAGE_TAG_1; ?>.wiktionary.org/wiki/<?php echo $LEFT; ?>" width="100%" height="100%">
+      <embed src="https://<?php echo $LANGUAGE_TAG_1; ?>.wiktionary.org/wiki/<?php echo $LEFT; ?>" width="100%" height="100%"> </embed>
       Error: Embedded data could not be displayed.
     </object>
 	</div>
 	<div id="side_right">
-		<object data="https://en.wiktionary.org/wiki/<?php echo $RIGHT; ?>" width="100%" height="100%">
-      <embed src="https://en.wiktionary.org/wiki/<?php echo $RIGHT; ?>" width="100%" height="100%"> </embed>
+		<object data="https://<?php echo $LANGUAGE_TAG_2; ?>.wiktionary.org/wiki/<?php echo $RIGHT; ?>" width="100%" height="100%">
+      <embed src="https://<?php echo $LANGUAGE_TAG_2; ?>.wiktionary.org/wiki/<?php echo $RIGHT; ?>" width="100%" height="100%"> </embed>
       Error: Embedded data could not be displayed.
     </object>
 	</div>
