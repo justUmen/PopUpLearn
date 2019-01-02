@@ -996,9 +996,9 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 			fi
 		fi
 		⬚⬚⬚⬚⬚⬚_💣_remove_answer_from_session_tmp
-		if [ $LOOP_QUIZ -ne 0 ]; then
-			⬚⬚⬚⬚⬚⬚_🛑_quiz || return 2
-		fi
+		# if [ $LOOP_QUIZ -ne 0 ]; then
+		# 	⬚⬚⬚⬚⬚⬚_🛑_quiz || return 2
+		# fi
 	# if [ $LOOP_QUIZ -ne 0 ]; then
 		#IF session_content.tmp is empty do not wait, go directly new session
 		echo "wc -l $HOME/.PopUpLearn/tmp/session_content_remove.tmp : `wc -l $HOME/.PopUpLearn/tmp/session_content_remove.tmp`"
