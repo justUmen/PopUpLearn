@@ -581,6 +581,7 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 	if [ $SESSION_SIZE -eq 0 ]; then
 		SESSION_SIZE=9995
 	fi
+	echo "========================================== $SESSION_SIZE"
 
 	echo "$HOME/.PopUpLearn/tmp/session_specific_config.tmp :"
 	cat $HOME/.PopUpLearn/tmp/session_specific_config.tmp
@@ -943,7 +944,7 @@ function ⬚⬚⬚⬚⬚_🏗🌘_session_content_pul(){ 🔧 $FUNCNAME $@
 	fi
 }
 function ⬚⬚⬚⬚⬚_🏗_session_specific_config(){ 🔧 $FUNCNAME $@
-	echo "create : $HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_specific_config.conf"
+	# echo "create : $HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_specific_config.conf"
 	#add identical configuration but without "ANSWER_BEFORE_QUIZ=1" because you are supposed to know this already...
 	sed 's/ANSWER_BEFORE_QUIZ=1/ANSWER_BEFORE_QUIZ=0/' $HOME/.PopUpLearn/tmp/session_specific_config.tmp > "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_specific_config.conf"
 }
