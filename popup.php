@@ -132,7 +132,7 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 	</div>
 
 <div id="on_click_close" onclick="close_popup();return false;">
-	<div class='widget' id="content" onclick="return false">
+	<div class='widget' id="content">
 		<div>
 			<a class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_1();return false' href='#' title='Play sound'></a>
 			<img src='img/flags/<?php echo $LANGUAGE_TAG_1; ?>.jpeg' />

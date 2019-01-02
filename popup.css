@@ -23,6 +23,7 @@ height:40px;
 /* font-size:1em !important; /* NEW */ */
 }
 #content{
+pointer-events:none; /* Disable onclick */
 font-size:1.5em; /* NEW */
 position:absolute;
 text-align:center;
