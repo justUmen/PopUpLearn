@@ -118,7 +118,7 @@ Avoid special characters in general when you can.
 - pause / unpause mpv during popup.  
 PUL is pausing/unpausing mpv with the socket `/tmp/mpvsocket`, so if you want to use this functionality, you need to add in your mpv configuration file : `input-ipc-server=/tmp/mpvsocket`)  
 
-- pause / unpause netflix, but it need to be launched with chrome and the following alias : `alias netflix="google-chrome-stable --app=\"http://netflix.com\" --user-data-dir=\"$HOME/.config/google-chrome-netflix\""` (Install google-chrome from https://www.google.com/chrome/ and install with `sudo dpkg -i google-chrome-stable_current_amd64.deb`)
+- pause / unpause netflix, but it need to be launched with chrome and the following alias : `alias netflix="google-chrome-stable --app=\"http://netflix.com\" --user-data-dir=\"$HOME/.config/google-chrome-netflix\""` (Download google-chrome from https://www.google.com/chrome/ and install with `sudo dpkg -i google-chrome-stable_current_amd64.deb`)
 
 - change keyboard layout automatically for different languages (uses `ibus` and variable `$LANGUAGE_2`). (The language need to be available in PopUpLearn, check source "popup.sh" for more details - or ask for another language support here.).  
 Available now => english: `xkb:us::eng`, thai: `libthai`, japanese: `anthy`, chinese: `pinyin`  
