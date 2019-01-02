@@ -95,7 +95,9 @@ $LANGUAGE_TAG_2=$e[5];
  //~ }, 1000);
 //~ };
 	document.addEventListener('keydown', function(evt) {
-		close_popup();
+		if(evt.keyCode == 32) {
+			close_popup();
+		}
 	});
 </script>
 
