@@ -982,7 +982,7 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 		⬚⬚⬚⬚⬚⬚_💣_remove_answer_from_session_tmp
 		⬚⬚⬚⬚⬚⬚_🛑_quiz || return 2
 	done < "$HOME/.PopUpLearn/tmp/session_content.tmp"
-	if [ $LOOP_QUIZ -ne 0 ]; then
+	# if [ $LOOP_QUIZ -ne 0 ]; then
 		#IF session_content.tmp is empty do not wait, go directly new session
 		echo "wc -l $HOME/.PopUpLearn/tmp/session_content.tmp : `wc -l $HOME/.PopUpLearn/tmp/session_content.tmp`"
 		if [[ "$(wc -l $HOME/.PopUpLearn/tmp/session_content.tmp|sed 's/ .*//')" != "0" ]]; then
@@ -994,7 +994,7 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 				return 0
 			fi
 		fi
-	fi
+	# fi
 }
 function ⬚⬚⬚⬚⬚⬚_🚧_session_answers(){ 🔧 $FUNCNAME $@
 	TODAY="$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))"
@@ -1004,7 +1004,7 @@ function ⬚⬚⬚⬚⬚⬚_🚧_session_answers(){ 🔧 $FUNCNAME $@
 	ANSWERED_BAD="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/answer.bad"
 	ANSWERED_BAD_DATE="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/answer.bad.date"
 
-	echo " -------> FILE = $FILE"
+	# echo " -------> FILE = $FILE"
 	cat $FILE | sed 's/^\t//g' | grep ' |=| ' > $HOME/.PopUpLearn/tmp/file_content_BAD_answers.tmp
 	cat $HOME/.PopUpLearn/tmp/session_content_remove.tmp | sort -R | tail -n 1 > $HOME/.PopUpLearn/tmp/current_line.tmp
 	LINE=`cat $HOME/.PopUpLearn/tmp/current_line.tmp`
@@ -1023,7 +1023,7 @@ function ⬚⬚⬚⬚⬚⬚_🚧_session_answers(){ 🔧 $FUNCNAME $@
 		done < "$HOME/.PopUpLearn/tmp/file_content_BAD_answers.tmp"
 		cat $HOME/.PopUpLearn/tmp/wrong_answers_BUTTON2.tmp | sort | uniq > $HOME/.PopUpLearn/tmp/wrong_answers_BUTTON.tmp
 	fi
-	🔧 "$FUNCNAME : \$LINE=$LINE (RIGHT / LEFT)"
+	🔧 "$FUNCNAME : \$LINE=$LINE (RIGHT / LEFT) - $FILE"
 }
 function ⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp(){ 🔧 $FUNCNAME $@
 	#~ echo "my_line.tmp : 0£${SUBJECT}_${NUMBER}£${LEFT}£${RIGHT}£${LANGUAGE_1}£${LANGUAGE_2}£${TYPE}"
@@ -1056,14 +1056,14 @@ function ⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer(){ 🔧 $FUNCNAME $@
 			fi
 		fi
 		if [ $SIGSTOP_MPV -eq 1 ]; then mpv_play &> /dev/null; fi
-		if [ "$TIME_DISPLAYED" == 0 ];then #DOES NOT WAIT EXTRA HERE (!= 0 is kinda like 'l' selection)
-			echo "Press any key to Exit, or wait $SEC_AFTER_QUIZ SECONDS before the question."
-			if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
-				return 2 #STOPPED MANUALLY, break loop
-			else
-				echo
-			fi
-		fi
+		# if [ "$TIME_DISPLAYED" == 0 ];then #DOES NOT WAIT EXTRA HERE (!= 0 is kinda like 'l' selection)
+		# 	echo "Press any key to Exit, or wait $SEC_AFTER_QUIZ SECONDS before the question."
+		# 	if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
+		# 		return 2 #STOPPED MANUALLY, break loop
+		# 	else
+		# 		echo
+		# 	fi
+		# fi
 	fi
 }
 function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
