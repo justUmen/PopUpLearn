@@ -194,5 +194,6 @@ left:50%;
 }
 
 .play-icon{
-  border:0px solid black !important;
+  /* border:0px solid black !important; */
+  padding:20px;
 }
