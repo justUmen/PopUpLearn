@@ -993,8 +993,8 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 		fi
 	# if [ $LOOP_QUIZ -ne 0 ]; then
 		#IF session_content.tmp is empty do not wait, go directly new session
-		echo "wc -l $HOME/.PopUpLearn/tmp/session_content.tmp : `wc -l $HOME/.PopUpLearn/tmp/session_content.tmp`"
-		if [[ "$(wc -l $HOME/.PopUpLearn/tmp/session_content.tmp|sed 's/ .*//')" != "0" ]] && [[ "$(wc -l $HOME/.PopUpLearn/tmp/session_content.tmp|sed 's/ .*//')" != "1" ]]; then
+		echo "wc -l $HOME/.PopUpLearn/tmp/session_content_remove.tmp : `wc -l $HOME/.PopUpLearn/tmp/session_content_remove.tmp`"
+		if [[ "$(wc -l $HOME/.PopUpLearn/tmp/session_content_remove.tmp|sed 's/ .*//')" != "0" ]]; then
 			echo "Press any key to Exit, or wait $SEC_AFTER_QUIZ SECONDS before the next popup."
 			if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
 				return 2 #STOPPED MANUALLY, break loop
@@ -1002,6 +1002,8 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 			# 	echo
 			# 	return 0
 			fi
+		else
+			echo "$HOME/.PopUpLearn/tmp/session_content_remove.tmp EMPTY"
 		fi
 	done < "$HOME/.PopUpLearn/tmp/session_content.tmp"
 	# fi
