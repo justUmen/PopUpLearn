@@ -56,37 +56,58 @@ $LANGUAGE_TAG_2=$e[5];
 	<div id="left_arrow" onclick="document.getElementById('side_left').style.display='block';document.getElementById('left_arrow').style.display='none';">🡆</div>
 	<div id="right_arrow" onclick="document.getElementById('side_right').style.display='block';document.getElementById('right_arrow').style.display='none';">🡄</div>
 	<div id="side_left">
-		<object data="https://en.wiktionary.org/wiki/<?php echo $LEFT; ?>" width="100%" height="100%">
-      <embed src="https://en.wiktionary.org/wiki/<?php echo $LEFT; ?>" width="100%" height="100%"> </embed>
-      Error: Embedded data could not be displayed.
-    </object>
+		<div class="tab">
+		  <button class="tablinks" onclick="openCity(event, 'wiktionary_1')">wiktionary</button>
+		  <button class="tablinks" onclick="openCity(event, 'wikipedia_1')">wikipedia</button>
+		  <button class="tablinks" onclick="openCity(event, 'wikipul_1')">wikipul</button>
+		</div>
+
+		<!-- Tab content -->
+		<div id="wiktionary_1" class="tabcontent">
+			<object data="https://en.wiktionary.org/wiki/<?php echo $LEFT; ?>" width="100%" height="100%">
+	      <embed src="https://en.wiktionary.org/wiki/<?php echo $LEFT; ?>" width="100%" height="100%"> </embed>
+	      Error: Embedded data could not be displayed.
+	    </object>
+		</div>
+
+		<div id="wikipedia_1" class="tabcontent">
+			<object data="https://<?php echo $LANGUAGE_TAG_1; ?>.wikipedia.org/wiki/<?php echo $LEFT; ?>" width="100%" height="100%">
+	      <embed src="https://<?php echo $LANGUAGE_TAG_1; ?>.wikipedia.org/wiki/<?php echo $LEFT; ?>" width="100%" height="100%"> </embed>
+	      Error: Embedded data could not be displayed.
+	    </object>
+		</div>
+
+		<div id="wikipul_1" class="tabcontent">
+		  <h3>wikipul</h3>
+		  <p>Not yet implemented.... :(</p>
+		</div>
 	</div>
 
 	<div id="side_right">
 		<div class="tab">
-		  <button class="tablinks" onclick="openCity(event, 'wiktionary')">wiktionary</button>
-		  <button class="tablinks" onclick="openCity(event, 'wikipedia')">wikipedia</button>
-		  <button class="tablinks" onclick="openCity(event, 'wikipul')">wikipul</button>
+		  <button class="tablinks" onclick="openCity(event, 'wiktionary_2')">wiktionary</button>
+		  <button class="tablinks" onclick="openCity(event, 'wikipedia_2')">wikipedia</button>
+		  <button class="tablinks" onclick="openCity(event, 'wikipul_2')">wikipul</button>
 		</div>
 
 		<!-- Tab content -->
-		<div id="wiktionary" class="tabcontent">
+		<div id="wiktionary_2" class="tabcontent">
 			<object data="https://en.wiktionary.org/wiki/<?php echo $RIGHT; ?>" width="100%" height="100%">
 	      <embed src="https://en.wiktionary.org/wiki/<?php echo $RIGHT; ?>" width="100%" height="100%"> </embed>
 	      Error: Embedded data could not be displayed.
 	    </object>
 		</div>
 
-		<div id="wikipedia" class="tabcontent">
+		<div id="wikipedia_2" class="tabcontent">
 			<object data="https://<?php echo $LANGUAGE_TAG_2; ?>.wikipedia.org/wiki/<?php echo $RIGHT; ?>" width="100%" height="100%">
 	      <embed src="https://<?php echo $LANGUAGE_TAG_2; ?>.wikipedia.org/wiki/<?php echo $RIGHT; ?>" width="100%" height="100%"> </embed>
 	      Error: Embedded data could not be displayed.
 	    </object>
 		</div>
 
-		<div id="wikipul" class="tabcontent">
-		  <h3>Tokyo</h3>
-		  <p>Tokyo is the capital of Japan.</p>
+		<div id="wikipul_2" class="tabcontent">
+		  <h3>wikipul</h3>
+		  <p>Not yet implemented.... :(</p>
 		</div>
 	</div>
 
