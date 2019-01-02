@@ -973,7 +973,7 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 			return 2 #STOPPED MANUALLY, break loop
 		fi
 	else
-		return 2
+		return 0
 	fi
 	nbline=1
 	while read X; do
