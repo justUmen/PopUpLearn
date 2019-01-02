@@ -838,7 +838,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 	fi
 	echo -e "\t---- NEW SESSION ----"
 	echo -e "\t$COLOR_SELECTION n) $ENDO New session (SHOW ANSWER and quiz - no points for good, log mistakes)"
-	echo -e "\t$COLOR_SELECTION n1) $ENDO New session - NOT SHOW ANSWER"
+	echo -e "\t$COLOR_SELECTION n2) $ENDO New session - NOT SHOW ANSWER"
 	echo -e "\t$COLOR_SELECTION N) $ENDO New session (just create a new session, ask nothing)"
 	echo -e "\t$COLOR_SELECTION in) $ENDO Infinite New sessions (SHOW ANSWER and quiz - no points for good, log mistakes)"
 	echo -e "\t$COLOR_SELECTION in2) $ENDO Infinite New sessions - NOT SHOW ANSWER"
@@ -853,7 +853,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 		case $selected in
 			e) return ;;
 			n) break ;;
-			n1) break ;;
+			n2) break ;;
 			N) break ;;
 			a) break ;;
 			m) break ;;
