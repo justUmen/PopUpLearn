@@ -588,7 +588,7 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 		if [ $SESSION_SIZE -eq 0 ]; then
 			SESSION_SIZE=9995
 		fi
-		echo "============================== $SESSION_SIZE"
+		# echo "============================== $SESSION_SIZE"
 
 		if [ "$1" != "NO_MENU" ]; then
 			⬚⬚⬚⬚_📃_session
