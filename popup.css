@@ -98,7 +98,7 @@ left:50%;
 }
 #side_left{
   height: 100%;
-  width: 200px;
+  width: 40%;
   position: fixed;
   z-index: 10;
   top: 0;
@@ -111,7 +111,7 @@ left:50%;
 }
 #side_right{
   height: 100%;
-  width: 200px;
+  width: 40%;
   position: fixed;
   z-index: 10;
   top: 0;
