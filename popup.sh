@@ -972,8 +972,8 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 		⬚⬚⬚⬚⬚⬚_🚧_session_answers
 		⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp
 		⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer || return 2
+		if [[ "$1" == "IGNORE_GOOD" ]];then
 		if [ $LOOP_QUIZ -ne 0 ]; then
-			if [[ "$1" == "IGNORE_GOOD" ]];then
 				⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ "IGNORE_GOOD"
 			else
 				⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ
@@ -982,15 +982,17 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 		⬚⬚⬚⬚⬚⬚_💣_remove_answer_from_session_tmp
 		⬚⬚⬚⬚⬚⬚_🛑_quiz || return 2
 	done < "$HOME/.PopUpLearn/tmp/session_content.tmp"
-	#IF session_content.tmp is empty do not wait, go directly new session
-	echo "wc -l $HOME/.PopUpLearn/tmp/session_content.tmp : `wc -l $HOME/.PopUpLearn/tmp/session_content.tmp`"
-	if [[ "$(wc -l $HOME/.PopUpLearn/tmp/session_content.tmp|sed 's/ .*//')" != "0" ]]; then
-		echo "Press any key to Exit, or wait $SEC_AFTER_QUIZ SECONDS before the next subject."
-		if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
-			return 2 #STOPPED MANUALLY, break loop
-		else
-			echo
-			return 0
+	if [ $LOOP_QUIZ -ne 0 ]; then
+		#IF session_content.tmp is empty do not wait, go directly new session
+		echo "wc -l $HOME/.PopUpLearn/tmp/session_content.tmp : `wc -l $HOME/.PopUpLearn/tmp/session_content.tmp`"
+		if [[ "$(wc -l $HOME/.PopUpLearn/tmp/session_content.tmp|sed 's/ .*//')" != "0" ]]; then
+			echo "Press any key to Exit, or wait $SEC_AFTER_QUIZ SECONDS before the next subject."
+			if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
+				return 2 #STOPPED MANUALLY, break loop
+			else
+				echo
+				return 0
+			fi
 		fi
 	fi
 }
@@ -1054,13 +1056,13 @@ function ⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer(){ 🔧 $FUNCNAME $@
 			fi
 		fi
 		if [ $SIGSTOP_MPV -eq 1 ]; then mpv_play &> /dev/null; fi
-		# if [ "$TIME_DISPLAYED" == 0 ];then #DOES NOT WAIT EXTRA HERE (!= 0 is kinda like 'l' selection)
-		# 	echo "Press any key to Exit, or wait $SEC_AFTER_QUIZ SECONDS before the question."
-		# 	if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
-		# 		return 2 #STOPPED MANUALLY, break loop
-		# 	else
-		# 		echo
-		# 	fi
+		if [ "$TIME_DISPLAYED" == 0 ];then #DOES NOT WAIT EXTRA HERE (!= 0 is kinda like 'l' selection)
+			echo "Press any key to Exit, or wait $SEC_AFTER_QUIZ SECONDS before the question."
+			if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
+				return 2 #STOPPED MANUALLY, break loop
+			else
+				echo
+			fi
 		# fi
 	fi
 }
