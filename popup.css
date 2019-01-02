@@ -103,7 +103,6 @@ left:50%;
   left: 0;
   background-color: #111;
   overflow-x: hidden;
-  padding-top: 20px;
   display: none;
   border-right:1px solid #CCC;
 }
@@ -116,7 +115,6 @@ left:50%;
   right: 0;
   background-color: #111;
   overflow-x: hidden;
-  padding-top: 20px;
   display: none;
   border-left:1px solid #CCC;
 }

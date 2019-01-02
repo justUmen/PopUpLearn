@@ -63,6 +63,12 @@ $LEFT=$e[2];
 $RIGHT=$e[3];
 $LANGUAGE_TAG_1=$e[4];
 $LANGUAGE_TAG_2=$e[5];
+
+$LANGUAGE_WIKIPEDIA_1=$LANGUAGE_TAG_1
+$LANGUAGE_WIKIPEDIA_2=$LANGUAGE_TAG_2
+//If chinese, use zh.wikipedia.org
+if("$LANGUAGE_WIKIPEDIA_1"=="cn"){$LANGUAGE_WIKIPEDIA_1="zh";}
+if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 //~ $e[6] not used in popup.php, only popup_quiz.php
 ?>
 <body>
@@ -85,8 +91,8 @@ $LANGUAGE_TAG_2=$e[5];
 		</div>
 
 		<div id="wikipedia_1" class="tabcontent_1">
-			<object data="https://<?php echo $LANGUAGE_TAG_1; ?>.wikipedia.org/wiki/<?php echo $LEFT; ?>" width="100%" height="100%">
-	      <embed src="https://<?php echo $LANGUAGE_TAG_1; ?>.wikipedia.org/wiki/<?php echo $LEFT; ?>" width="100%" height="100%"> </embed>
+			<object data="https://<?php echo $LANGUAGE_WIKIPEDIA_1; ?>.wikipedia.org/wiki/<?php echo $LEFT; ?>" width="100%" height="100%">
+	      <embed src="https://<?php echo $LANGUAGE_WIKIPEDIA_1; ?>.wikipedia.org/wiki/<?php echo $LEFT; ?>" width="100%" height="100%"> </embed>
 	      Error: Embedded data could not be displayed.
 	    </object>
 		</div>
@@ -113,8 +119,8 @@ $LANGUAGE_TAG_2=$e[5];
 		</div>
 
 		<div id="wikipedia_2" class="tabcontent_2">
-			<object data="https://<?php echo $LANGUAGE_TAG_2; ?>.wikipedia.org/wiki/<?php echo $RIGHT; ?>" width="100%" height="100%">
-	      <embed src="https://<?php echo $LANGUAGE_TAG_2; ?>.wikipedia.org/wiki/<?php echo $RIGHT; ?>" width="100%" height="100%"> </embed>
+			<object data="https://<?php echo $LANGUAGE_WIKIPEDIA_2; ?>.wikipedia.org/wiki/<?php echo $RIGHT; ?>" width="100%" height="100%">
+	      <embed src="https://<?php echo $LANGUAGE_WIKIPEDIA_2; ?>.wikipedia.org/wiki/<?php echo $RIGHT; ?>" width="100%" height="100%"> </embed>
 	      Error: Embedded data could not be displayed.
 	    </object>
 		</div>
