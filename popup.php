@@ -17,6 +17,26 @@ function close_popup(){
 	objReq.open("GET", "http://localhost:8899" + "?type=close_PopUpLearn", false);
 	objReq.send(null);
 }
+function openCity(evt, cityName) {
+  // Declare all variables
+  var i, tabcontent, tablinks;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
 </script>
 </head>
 <?php
@@ -41,11 +61,33 @@ $LANGUAGE_TAG_2=$e[5];
       Error: Embedded data could not be displayed.
     </object>
 	</div>
+
 	<div id="side_right">
-		<object data="https://en.wiktionary.org/wiki/<?php echo $RIGHT; ?>" width="100%" height="100%">
-      <embed src="https://en.wiktionary.org/wiki/<?php echo $RIGHT; ?>" width="100%" height="100%"> </embed>
-      Error: Embedded data could not be displayed.
-    </object>
+		<div class="tab">
+		  <button class="tablinks" onclick="openCity(event, 'wiktionary')">wiktionary</button>
+		  <button class="tablinks" onclick="openCity(event, 'wikipedia')">wikipedia</button>
+		  <button class="tablinks" onclick="openCity(event, 'wikipul')">wikipul</button>
+		</div>
+
+		<!-- Tab content -->
+		<div id="wiktionary" class="tabcontent">
+			<object data="https://en.wiktionary.org/wiki/<?php echo $RIGHT; ?>" width="100%" height="100%">
+	      <embed src="https://en.wiktionary.org/wiki/<?php echo $RIGHT; ?>" width="100%" height="100%"> </embed>
+	      Error: Embedded data could not be displayed.
+	    </object>
+		</div>
+
+		<div id="wikipedia" class="tabcontent">
+			<object data="https://<?php echo $LANGUAGE_TAG_2; ?>.wikipedia.org/wiki/<?php echo $RIGHT; ?>" width="100%" height="100%">
+	      <embed src="https://<?php echo $LANGUAGE_TAG_2; ?>.wikipedia.org/wiki/<?php echo $RIGHT; ?>" width="100%" height="100%"> </embed>
+	      Error: Embedded data could not be displayed.
+	    </object>
+		</div>
+
+		<div id="wikipul" class="tabcontent">
+		  <h3>Tokyo</h3>
+		  <p>Tokyo is the capital of Japan.</p>
+		</div>
 	</div>
 
 <div id="on_click_close" onclick="close_popup();return false;">

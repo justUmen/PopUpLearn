@@ -127,8 +127,8 @@ Of course put `run_im ibus` in the file `~/.xinputrc` to use it with your system
 
 # LOGS
 
-Todo : Record all errors and successes in logs/ with dates to organize and try to guess what the user know well, don't know, probably forgot, etc...
-Simple first, then machine learning testing prediction system !?  
+Todo : Using existing logs, PUL should try to guess what the user know well, don't know, probably forgot, etc...
+Simple first, then machine learning future prediction system !?  
 
 # Optional : LAUNCH WITH ARGUMENTS (2 variables that control time)
 
