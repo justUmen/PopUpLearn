@@ -583,10 +583,8 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 	SESSION_NUMBER=1
 	while [ 1 ]; do
 
+		SESSION_SIZE=5
 		source $HOME/.PopUpLearn/tmp/session_specific_config.tmp
-		if [ "$SESSION_SIZE" == "" ]; then
-			SESSION_SIZE=5
-		fi
 		if [ $SESSION_SIZE -eq 0 ]; then
 			SESSION_SIZE=9995
 		fi
