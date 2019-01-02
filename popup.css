@@ -150,7 +150,8 @@ left:50%;
 /* Style the tab content */
 .tabcontent_1 {
   display: none;
-  padding: 6px 12px;
+  padding: 0px;
+  maring: 0px;
   border: 1px solid #ccc;
   border-top: none;
 }
@@ -186,7 +187,8 @@ left:50%;
 /* Style the tab content */
 .tabcontent_2 {
   display: none;
-  padding: 6px 12px;
+  padding: 0px;
+  margin: 0px;
   border: 1px solid #ccc;
   border-top: none;
 }
