@@ -15,7 +15,8 @@
 #~ 🌘 : used for new session only
 
 function 🔧(){
-	echo -e "$BG_DARK_GRAY$WHITE 🔧 $@ 🔧 $ENDO"
+	echo > /dev/null
+	# echo -e "$BG_DARK_GRAY$WHITE 🔧 $@ 🔧 $ENDO"
 }
 function close_PopUpLearn(){
 	pkill -f "node $HOME/.PopUpLearn/node_server_popup.js" &>/dev/null
