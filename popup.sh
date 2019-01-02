@@ -727,6 +727,9 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 	done
 }
 function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
+
+	notify-send "PopUpLearn ready for duty."
+
 	echo
 	echo " - Warning : dates are recorded but are not yet used to organize and optimize your learning experience. (In future versions, the text will change colors depending of when it was answered.)"
 
@@ -973,6 +976,7 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 			return 2 #STOPPED MANUALLY, break loop
 		fi
 	else
+		echo "$HOME/.PopUpLearn/tmp/session_content.tmp EMPTY..."
 		return 0
 	fi
 	nbline=1
