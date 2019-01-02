@@ -987,8 +987,8 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 		nbline=`expr $nbline + 1`
 		⬚⬚⬚⬚⬚⬚_🚧_session_answers
 		⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp
-		# ⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer || return 2
-		⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer
+		⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer || return 2
+		# ⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer
 		if [ $LOOP_QUIZ -ne 0 ]; then
 			if [[ "$1" == "IGNORE_GOOD" ]];then
 				⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ "IGNORE_GOOD"
