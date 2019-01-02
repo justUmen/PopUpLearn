@@ -90,7 +90,7 @@ function display(){ 🔧 $FUNCNAME $@
 	echo
 }
 function display_SESSION_NUMBER(){
-	echo -e "\n$BG_DARK_MAGENTA ============ SESSION_NUMBER=$SESSION_NUMBER ============ $ENDO (`wc -l $HOME/.PopUpLearn/tmp/session_content.tmp` lines)"
+	echo -e "\n$BG_DARK_MAGENTA ============ SESSION_NUMBER=$SESSION_NUMBER ============ $ENDO"
 }
 
 function ⬚_before_start(){
@@ -971,6 +971,7 @@ function ⬚⬚⬚⬚⬚_🏗_session_content_tmp_blue_only(){ 🔧 $FUNCNAME $@
 }
 function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 	if [[ "$(wc -l $HOME/.PopUpLearn/tmp/session_content.tmp|sed 's/ .*//')" != "0" ]]; then
+		echo "LINES AVAILABLES : (`wc -l $HOME/.PopUpLearn/tmp/session_content.tmp`)"
 		echo "Press any key to Exit, or wait $SEC_AFTER_QUIZ SECONDS before the first popup."
 		if read -r -N 1 -t $SEC_AFTER_QUIZ EXIT < /dev/tty; then
 			return 2 #STOPPED MANUALLY, break loop
