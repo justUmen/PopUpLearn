@@ -171,7 +171,7 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 //~ };
 
 function audio_play_1() {
-  var audio = new Audio("http://127.0.0.1/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3");
+  var audio = new Audio("http://127.0.0.1:9092/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3");
   audio.type = 'audio/mp3';
 
   var playPromise = audio.play();
