@@ -676,7 +676,7 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 			⬚⬚⬚⬚_📗🌘_session_new
 			display_SESSION_NUMBER
 			⬚⬚⬚⬚_📗🔢_session_old_with_answers $SESSION_NUMBER
-		elif [[ "$selected" == "n1" ]]; then
+		elif [[ "$selected" == "n2" ]]; then
 			⬚⬚⬚⬚_📗🌘_session_new
 			display_SESSION_NUMBER
 			⬚⬚⬚⬚_📗🔢_session_old $SESSION_NUMBER
@@ -838,7 +838,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 	fi
 	echo -e "\t---- NEW SESSION ----"
 	echo -e "\t$COLOR_SELECTION n) $ENDO New session (SHOW ANSWER and quiz - no points for good, log mistakes)"
-	echo -e "\t$COLOR_SELECTION n2) $ENDO New session - NOT SHOW ANSWER"
+	echo -e "\t$COLOR_SELECTION n1) $ENDO New session - NOT SHOW ANSWER"
 	echo -e "\t$COLOR_SELECTION N) $ENDO New session (just create a new session, ask nothing)"
 	echo -e "\t$COLOR_SELECTION in) $ENDO Infinite New sessions (SHOW ANSWER and quiz - no points for good, log mistakes)"
 	echo -e "\t$COLOR_SELECTION in2) $ENDO Infinite New sessions - NOT SHOW ANSWER"
@@ -934,7 +934,7 @@ function ⬚⬚⬚⬚⬚_🏗🌘_session_folder(){ 🔧 $FUNCNAME $@
 	mkdir -p "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/" 2> /dev/null
 }
 function ⬚⬚⬚⬚⬚_🏗🌘_session_content_pul(){ 🔧 $FUNCNAME $@
-	echo "create : $HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul"
+	# echo "create : $HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul"
 	if [ $SESSION_NUMBER -eq 1 ]; then
 		cat $FILE | sed 's/^\t//g' | grep ' |=| ' | head -n $SESSION_SIZE > "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul"
 	else
@@ -984,7 +984,7 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 	nbline=1
 	while read X; do
 		# if [[ "$X" == "" ]]; then break; fi
-		echo -e "\n\n---->Line number $nbline ($FILE) [$X]"
+		echo -e "\n---->Line number $nbline ($FILE) [$X]"
 		nbline=`expr $nbline + 1`
 		⬚⬚⬚⬚⬚⬚_🚧_session_answers
 		⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp
