@@ -134,7 +134,7 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 <div id="on_click_close">
 	<div class='widget' id="content">
 		<div class="align-center">
-			<table><tr><td style="width:45%">
+			<table style="text-align: center;width: 100%;"><tr><td style="width:45%">
 			<img src='img/flags/<?php echo $LANGUAGE_TAG_1; ?>.jpeg' />
 			<span class="bigfont"><?php echo $LEFT; ?></span>
 		</td><td style="width:10%">
