@@ -62,8 +62,12 @@ $session = file("tmp/session_content.tmp", FILE_IGNORE_NEW_LINES);
 $line = fgets(fopen("tmp/my_line.tmp", 'r'));
 $e = explode("£", $line);
 $FAMILY=$e[1];
-$LEFT=$e[2];
-$RIGHT=$e[3];
+
+// $LEFT=$e[2];
+$LEFT = isset($_GET['LEFT']) ? $_GET['LEFT'] : $e[2];
+// $RIGHT=$e[3];
+$RIGHT = isset($_GET['RIGHT']) ? $_GET['RIGHT'] : $e[2];
+
 $LANGUAGE_TAG_1=$e[4];
 $LANGUAGE_TAG_2=$e[5];
 
@@ -166,7 +170,7 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 <!-- 0£hsk_1£méi£no£PI£en£BUTTON0£hsk_1£méi£no£PI£en£BUTTON -->
 	<div>
 		SESSION X :
-		<select>
+		<select onchange="if (this.value) window.location.href=this.value">
 <?php
 // $FAMILY=$e[1];
 // $LEFT=$e[2];
@@ -176,7 +180,7 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 foreach ($session as &$value) {
 	$lefti = preg_replace('/ \|=\| .*/', '', $value);
 	$righti = preg_replace('/.* \|=\| /', '', $value);
-	echo "<option value='$value'>$value : ($lefti / $righti)</option>";
+	echo "<option value=\"http://localhost:9995/popup.php?LEFT=$lefti&RIGHT=$righti\">$value</option>";
 }
 ?>
 		</select>
