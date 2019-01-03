@@ -137,7 +137,7 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 			<table style="text-align: center;width: 100%;"><tr><td style="width:45%;text-align:right;">
 			<img src='img/flags/<?php echo $LANGUAGE_TAG_1; ?>.jpeg' />
 			<span class="bigfont"><?php echo $LEFT; ?></span>
-		</td><td style="width:10%">
+		</td><td style="width:5%">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		</td><td style="width:45%;text-align:left;">
 			<span class="bigfont"><?php echo $RIGHT; ?></span>
