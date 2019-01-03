@@ -165,7 +165,7 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 		SESSION X :
 		<select>
 <?php
-foreach ($arr as &$value) {
+foreach ($session as &$value) {
 	echo "<option value='$value'>$value</option>";
 }
 ?>
