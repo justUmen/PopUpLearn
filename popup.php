@@ -168,7 +168,7 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 
 
 <!-- 0£hsk_1£méi£no£PI£en£BUTTON0£hsk_1£méi£no£PI£en£BUTTON -->
-	<div>
+	<div style="text-align:center;position:fixed;bottom:0;">
 		SESSION X :
 		<select onchange="if (this.value) window.location.href=this.value">
 <?php
