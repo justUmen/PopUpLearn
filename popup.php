@@ -73,11 +73,11 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 ?>
 <body>
 
-	<div id="left_arrow" onclick="document.getElementById('side_left').style.display='block'; document.getElementById('side_left_hide').style.display='block'; document.getElementById('left_arrow').style.display='none';">🡆</div>
-	<div id="right_arrow" onclick="document.getElementById('side_right').style.display='block'; document.getElementById('side_right_hide').style.display='block'; document.getElementById('right_arrow').style.display='none';">🡄</div>
+	<div id="left_arrow" onclick="document.getElementById('side_left').style.display='block'; document.getElementById('left_arrow_hide').style.display='block'; document.getElementById('left_arrow').style.display='none';">🡆</div>
+	<div id="right_arrow" onclick="document.getElementById('side_right').style.display='block'; document.getElementById('right_arrow_hide').style.display='block'; document.getElementById('right_arrow').style.display='none';">🡄</div>
 
-	<div id="left_arrow_hide" onclick="document.getElementById('side_left').style.display='none'; document.getElementById('left_arrow').style.display='block'; document.getElementById('side_left_hide').style.display='none';">🡄</div>
-	<div id="right_arrow_hide" onclick="document.getElementById('side_right').style.display='none'; document.getElementById('right_arrow').style.display='block'; document.getElementById('side_right_hide').style.display='none';">🡆</div>
+	<div id="left_arrow_hide" onclick="document.getElementById('side_left').style.display='none'; document.getElementById('left_arrow').style.display='block'; document.getElementById('left_arrow_hide').style.display='none';">🡄</div>
+	<div id="right_arrow_hide" onclick="document.getElementById('side_right').style.display='none'; document.getElementById('right_arrow').style.display='block'; document.getElementById('right_arrow_hide').style.display='none';">🡆</div>
 
 	<div id="side_left">
 		<div class="tab_1">
