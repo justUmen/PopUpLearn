@@ -54,7 +54,10 @@ function openCity_2(evt, tabName) {
 </script>
 </head>
 <?php
-//£ now
+
+$session = file("tmp/session_content.tmp", FILE_IGNORE_NEW_LINES);
+
+
 //$line example : 0:bash_1:Supprimer le fichier test dans le dossier /home:rm /home/test:fr:fr:BUTTON
 $line = fgets(fopen("tmp/my_line.tmp", 'r'));
 $e = explode("£", $line);
@@ -157,6 +160,18 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 	<div class="align-center">
 		<a class='btn glyphicon glyphicon-remove' onclick="close_popup();return false;" href='#' title='close popup'></a>
 	</div>
+
+	<div>
+		SESSION X :
+		<select>
+<?php
+foreach ($arr as &$value) {
+	echo "<option value='$value'>$value</option>";
+}
+?>
+		</select>
+	</div>
+
 	<?php
 	if(isset($_GET['img'])){
 		echo "<div id='Image1' class='widget'><img src='imgDB/{$LANG}/{$FAMILY}/{$LEFT}_{$RIGHT}.png' /></div>";
@@ -187,9 +202,7 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 function audio_play_1() {
   var audio = new Audio("http://127.0.0.1:9092/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3");
   audio.type = 'audio/mp3';
-
   var playPromise = audio.play();
-
   if (playPromise !== undefined) {
       playPromise.then(function () {
           console.log('Playing....');
@@ -203,9 +216,7 @@ function audio_play_1() {
 function audio_play_2() {
   var audio = new Audio("http://127.0.0.1:9092/soundDB/<?php echo $LANGUAGE_TAG_2; ?>/<?php echo $RIGHT; ?>.mp3");
   audio.type = 'audio/mp3';
-
   var playPromise = audio.play();
-
   if (playPromise !== undefined) {
       playPromise.then(function () {
           console.log('Playing....');
