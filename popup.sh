@@ -38,6 +38,15 @@ function 💻_keyboard_language_change(){ 🔧 $FUNCNAME $@
 	ibus engine > $HOME/.PopUpLearn/tmp/ibus.tmp
 	CURRENT_LANGUAGE=`cat $HOME/.PopUpLearn/tmp/ibus.tmp`
 	case $LANGUAGE_2 in
+		fr)
+		NEW_LANGUAGE="xkb:fr::fra"
+		echo $NEW_LANGUAGE > $HOME/.PopUpLearn/tmp/ibus_new.tmp
+		echo "$CURRENT_LANGUAGE != $NEW_LANGUAGE"
+		if [[ "$CURRENT_LANGUAGE" != "$NEW_LANGUAGE" ]]; then
+			ibus engine xkb:fr::fra
+			notify-send -i /home/umen/SyNc/Scripts/System/FLAGS/french.jpg "xkb:fr::fra" #??? put all flags in PUL instead
+		fi
+		;;
 		en)
 		NEW_LANGUAGE="xkb:us::eng"
 		echo $NEW_LANGUAGE > $HOME/.PopUpLearn/tmp/ibus_new.tmp
