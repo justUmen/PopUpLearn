@@ -79,6 +79,25 @@ left:50%;
 
 
 
+#left_arrow_hide{
+	font-size:44px;
+	height: 100%;
+	position: fixed;
+  left:45%;
+	z-index: 12;
+	left: 0;
+  color:#CCC;
+}
+#right_arrow_hide{
+	font-size:44px;
+	height: 100%;
+	position: fixed;
+  right:45%;
+	z-index: 12;
+	right: 0;
+  color:#CCC;
+}
+
 #left_arrow{
 	font-size:44px;
 	height: 100%;
