@@ -174,8 +174,8 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 // $LANGUAGE_TAG_1=$e[4];
 // $LANGUAGE_TAG_2=$e[5];
 foreach ($session as &$value) {
-	$s = preg_split('/ |=| /', $value);
-	echo "<option value='$value'>$value ($s[0] $s[1])</option>";
+	$s = preg_split("/ |=| /", $value);
+	echo "<option value='$value'>$value : ($s[0] / $s[1])</option>";
 }
 ?>
 		</select>
