@@ -161,12 +161,21 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 		<a class='btn glyphicon glyphicon-remove' onclick="close_popup();return false;" href='#' title='close popup'></a>
 	</div>
 
+
+
+<!-- 0£hsk_1£méi£no£PI£en£BUTTON0£hsk_1£méi£no£PI£en£BUTTON -->
 	<div>
 		SESSION X :
 		<select>
 <?php
+// $FAMILY=$e[1];
+// $LEFT=$e[2];
+// $RIGHT=$e[3];
+// $LANGUAGE_TAG_1=$e[4];
+// $LANGUAGE_TAG_2=$e[5];
 foreach ($session as &$value) {
-	echo "<option value='$value'>$value</option>";
+	$s = explode(" |=| ", $line);
+	echo "<option value='$value'>$value ($s[0] $s[1])</option>";
 }
 ?>
 		</select>
