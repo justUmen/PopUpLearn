@@ -84,22 +84,22 @@ left:50%;
 	height: 100%;
 	position: fixed;
   left:0;
-  margin-left:45%;
+  margin-left:42%;
 	z-index: 12;
 	left: 0;
   color:#CCC;
-  display: "none";
+  display:none;
 }
 #right_arrow_hide{
 	font-size:44px;
 	height: 100%;
 	position: fixed;
   right:0;
-  margin-right:45%;
+  margin-right:42%;
 	z-index: 12;
 	right: 0;
   color:#CCC;
-  display: "none";
+  display:none;
 }
 
 #left_arrow{
