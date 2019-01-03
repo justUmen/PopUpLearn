@@ -180,7 +180,12 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 foreach ($session as &$value) {
 	$lefti = preg_replace('/ \|=\| .*/', '', $value);
 	$righti = preg_replace('/.* \|=\| /', '', $value);
-	echo "<option value=\"http://localhost:9995/popup.php?LEFT=$lefti&RIGHT=$righti\">$value</option>";
+	if($lefti==$LEFT&&$righti==$RIGHT){
+		echo "<option value=\"http://localhost:9995/popup.php?LEFT=$lefti&RIGHT=$righti\" selected>$value</option>";
+	}
+	else{
+		echo "<option value=\"http://localhost:9995/popup.php?LEFT=$lefti&RIGHT=$righti\">$value</option>";
+	}
 }
 ?>
 		</select>
