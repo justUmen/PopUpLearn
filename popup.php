@@ -149,16 +149,20 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 			<img src='img/flags/<?php echo $LANGUAGE_TAG_1; ?>.jpeg' />
 			<span class="bigfont"><?php echo $LEFT; ?></span>
 		</td><td style="width:5%">
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		</td><td style="width:45%;text-align:left;">
 			<span class="bigfont"><?php echo $RIGHT; ?></span>
 			<img src='img/flags/<?php echo $LANGUAGE_TAG_2; ?>.jpeg' />
 		</td></tr></table>
 		</div>
 		<div class="align-center">
-			<a id="audio_1" class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_1();return false' href='#' title='Play sound'></a>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<a id="audio_2" class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_2();return false' href='#' title='Play sound'></a>
+			<table style="text-align: center;width: 100%;"><tr><td style="width:40%;text-align:right;">
+				<a id="audio_1" class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_1();return false' href='#' title='Play sound'></a>
+			</td><td style="width:10%">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</td><td style="width:40%;text-align:left;">
+				<a id="audio_2" class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_2();return false' href='#' title='Play sound'></a>
+			</td></tr></table>
 		</div>
 	</div>
 	<div class="align-center">
@@ -219,11 +223,12 @@ foreach ($session as &$value) {
 
 var audio_1 = new Audio();
 audio_1.type = 'audio/mp3';
-audio_1.onerror = function(){ document.getElementById('audio_1').display="none";};
+audio_1.onerror = function(){ document.getElementById('audio_1').style.display="none";};
 audio_1.src="http://127.0.0.1:9092/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3"
+
 var audio_2 = new Audio();
 audio_2.type = 'audio/mp3';
-audio_2.onerror = function(){ document.getElementById('audio_2').display="none";};
+audio_2.onerror = function(){ document.getElementById('audio_2').style.display="none";};
 audio_2.src="http://127.0.0.1:9092/soundDB/<?php echo $LANGUAGE_TAG_2; ?>/<?php echo $RIGHT; ?>.mp3"
 
 function audio_play_1() {
