@@ -165,14 +165,14 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 			</td></tr></table>
 		</div>
 	</div>
-	<div class="align-center" style="margin-bottom:10px;">
+	<div class="align-center">
 		<a class='btn glyphicon glyphicon-remove' onclick="close_popup();return false;" href='#' title='close popup'></a>
 	</div>
 
 
 
 <!-- 0£hsk_1£méi£no£PI£en£BUTTON0£hsk_1£méi£no£PI£en£BUTTON -->
-	<div style="text-align:center;position:fixed;bottom:0;width:100%;">
+	<div style="text-align:center;position:fixed;bottom:20;width:100%;">
 		<select class="form-control" style="display: inline;width:auto;" onchange="if (this.value) window.location.href=this.value">
 <?php
 // $FAMILY=$e[1];
