@@ -219,10 +219,10 @@ foreach ($session as &$value) {
 
 var audio_1 = new Audio("http://127.0.0.1:9092/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3");
 audio_1.type = 'audio/mp3';
-audio_1.onerror = function(){ document.getElementById('audio_1').display:none;};
+audio_1.onerror = function(){ document.getElementById('audio_1').display="none";};
 var audio_2 = new Audio("http://127.0.0.1:9092/soundDB/<?php echo $LANGUAGE_TAG_2; ?>/<?php echo $RIGHT; ?>.mp3");
 audio_2.type = 'audio/mp3';
-audio_2.onerror = function(){ document.getElementById('audio_2').display:none;};
+audio_2.onerror = function(){ document.getElementById('audio_2').display="none";};
 
 function audio_play_1() {
   var playPromise = audio_1.play();
