@@ -217,10 +217,13 @@ foreach ($session as &$value) {
 	//~ audio_play();
 //~ };
 
+var audio_1 = new Audio("http://127.0.0.1:9092/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3");
+audio_1.type = 'audio/mp3';
+var audio_2 = new Audio("http://127.0.0.1:9092/soundDB/<?php echo $LANGUAGE_TAG_2; ?>/<?php echo $RIGHT; ?>.mp3");
+audio_2.type = 'audio/mp3';
+
 function audio_play_1() {
-  var audio = new Audio("http://127.0.0.1:9092/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3");
-  audio.type = 'audio/mp3';
-  var playPromise = audio.play();
+  var playPromise = audio_1.play();
   if (playPromise !== undefined) {
       playPromise.then(function () {
           console.log('Playing....');
@@ -232,9 +235,7 @@ function audio_play_1() {
 
 
 function audio_play_2() {
-  var audio = new Audio("http://127.0.0.1:9092/soundDB/<?php echo $LANGUAGE_TAG_2; ?>/<?php echo $RIGHT; ?>.mp3");
-  audio.type = 'audio/mp3';
-  var playPromise = audio.play();
+  var playPromise = audio_2.play();
   if (playPromise !== undefined) {
       playPromise.then(function () {
           console.log('Playing....');
