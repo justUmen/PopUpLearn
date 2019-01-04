@@ -57,7 +57,6 @@ function openCity_2(evt, tabName) {
 
 $session = file("tmp/session_content.tmp", FILE_IGNORE_NEW_LINES);
 
-
 //$line example : 0:bash_1:Supprimer le fichier test dans le dossier /home:rm /home/test:fr:fr:BUTTON
 $line = fgets(fopen("tmp/my_line.tmp", 'r'));
 $e = explode("£", $line);
@@ -70,6 +69,8 @@ $RIGHT = isset($_GET['RIGHT']) ? $_GET['RIGHT'] : $e[3];
 
 $LANGUAGE_TAG_1=$e[4];
 $LANGUAGE_TAG_2=$e[5];
+
+$SESSION_NUMBER=$e[6];
 
 $LANGUAGE_WIKIPEDIA_1=$LANGUAGE_TAG_1;
 $LANGUAGE_WIKIPEDIA_2=$LANGUAGE_TAG_2;
@@ -173,6 +174,9 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 
 <!-- 0£hsk_1£méi£no£PI£en£BUTTON0£hsk_1£méi£no£PI£en£BUTTON -->
 	<div style="text-align:center;position:fixed;bottom:20;width:100%;">
+		<select class="form-control" style="display: inline;width:auto;">
+			<option><?php echo $SESSION_NUMBER; ?></option>
+		</select>
 		<select class="form-control" style="display: inline;width:auto;" onchange="if (this.value) window.location.href=this.value">
 <?php
 // $FAMILY=$e[1];
