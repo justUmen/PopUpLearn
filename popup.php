@@ -157,11 +157,11 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 		</td></tr></table>
 		</div>
 		<div class="align-center">
-			<table style="text-align: center;width: 100%;"><tr><td style="width:40%;text-align:right;">
+			<table style="text-align: center;width: 100%;"><tr><td style="width:45%;text-align:right;">
 				<a id="audio_1" class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_1();return false' href='#' title='Play sound'></a>
-			</td><td style="width:10%">
+			</td><td style="width:5%">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			</td><td style="width:40%;text-align:left;">
+			</td><td style="width:45%;text-align:left;">
 				<a id="audio_2" class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_2();return false' href='#' title='Play sound'></a>
 			</td></tr></table>
 		</div>
