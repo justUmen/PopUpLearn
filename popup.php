@@ -149,7 +149,7 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 			<img src='img/flags/<?php echo $LANGUAGE_TAG_1; ?>.jpeg' />
 			<span class="bigfont"><?php echo $LEFT; ?></span>
 		</td><td style="width:5%">
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		</td><td style="width:45%;text-align:left;">
 			<span class="bigfont"><?php echo $RIGHT; ?></span>
 			<img src='img/flags/<?php echo $LANGUAGE_TAG_2; ?>.jpeg' />
@@ -159,7 +159,7 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 			<table style="text-align: center;width: 100%;"><tr><td style="width:40%;text-align:right;">
 				<a id="audio_1" class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_1();return false' href='#' title='Play sound'></a>
 			</td><td style="width:10%">
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</td><td style="width:40%;text-align:left;">
 				<a id="audio_2" class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_2();return false' href='#' title='Play sound'></a>
 			</td></tr></table>
