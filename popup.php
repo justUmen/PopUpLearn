@@ -217,12 +217,14 @@ foreach ($session as &$value) {
 	//~ audio_play();
 //~ };
 
-var audio_1 = new Audio("http://127.0.0.1:9092/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3");
+var audio_1 = new Audio();
 audio_1.type = 'audio/mp3';
 audio_1.onerror = function(){ document.getElementById('audio_1').display="none";};
-var audio_2 = new Audio("http://127.0.0.1:9092/soundDB/<?php echo $LANGUAGE_TAG_2; ?>/<?php echo $RIGHT; ?>.mp3");
+audio_1.src="http://127.0.0.1:9092/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3"
+var audio_2 = new Audio();
 audio_2.type = 'audio/mp3';
 audio_2.onerror = function(){ document.getElementById('audio_2').display="none";};
+audio_2.src="http://127.0.0.1:9092/soundDB/<?php echo $LANGUAGE_TAG_2; ?>/<?php echo $RIGHT; ?>.mp3"
 
 function audio_play_1() {
   var playPromise = audio_1.play();
