@@ -32,6 +32,9 @@ function onRequest(request, response) {
 		case "close_PopUpLearn": log_and_run("POPUPLEARN","if [ -f ~/.PopUpLearn/MYDB/my.config ]; then source ~/.PopUpLearn/MYDB/my.config; pkill -f \"$WEB_BROWSER http://127.0.0.1:9995/popup.php\"; else pkill -f \"surf -F http://127.0.0.1:9995/popup.php\"; fi");response.end();break
 		case "close_PopUpLearn_good": log_and_run("POPUPLEARN","echo good > $HOME/.PopUpLearn/tmp/result.tmp;if [ -f ~/.PopUpLearn/MYDB/my.config ]; then source ~/.PopUpLearn/MYDB/my.config; pkill -f \"$WEB_BROWSER http://127.0.0.1:9995/popup_quiz.php\"; else pkill -f \"surf -F http://127.0.0.1:9995/popup_quiz.php\"; fi");response.end();break
 		case "close_PopUpLearn_bad": log_and_run("POPUPLEARN","echo bad > $HOME/.PopUpLearn/tmp/result.tmp;if [ -f ~/.PopUpLearn/MYDB/my.config ]; then source ~/.PopUpLearn/MYDB/my.config; pkill -f \"$WEB_BROWSER http://127.0.0.1:9995/popup_quiz.php\"; else pkill -f \"surf -F http://127.0.0.1:9995/popup_quiz.php\"; fi");response.end();break
+
+		case "PopUpLearn_bad": log_and_run("POPUPLEARN","echo bad > $HOME/.PopUpLearn/tmp/result.tmp;");response.end();break
+
 	}
 }
 http.createServer(onRequest).listen(8899,'localhost');

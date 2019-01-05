@@ -21,8 +21,9 @@ function close_popup_bad(){
 	//record more stuff, date and how many time click to close ???
 	//if click to close i saw it and need confirm + test + record :p
 	var objReq = new XMLHttpRequest();
-	objReq.open("GET", "http://localhost:8899" + "?type=close_PopUpLearn_bad", false);
+	objReq.open("GET", "http://localhost:8899" + "?type=PopUpLearn_bad", false);
 	objReq.send(null);
+	document.location.href = "popup.php";
 }
 </script>
 </head>
