@@ -17,8 +17,11 @@ function close_popup_good(){
 	objReq.open("GET", "http://localhost:8899" + "?type=close_PopUpLearn_good", false);
 	objReq.send(null);
 }
-function close_popup_bad(){
+function go_to_popup(){
 	window.location.href = "popup.php";
+}
+function close_popup_bad(){
+	setTimeout(go_to_popup, 2000);
 	//record more stuff, date and how many time click to close ???
 	//if click to close i saw it and need confirm + test + record :p
 	var objReq = new XMLHttpRequest();
