@@ -21,7 +21,7 @@ function go_to_popup(){
 	window.location.href = "popup.php";
 }
 function close_popup_bad(){
-	setTimeout(go_to_popup, 2000);
+	setTimeout(go_to_popup, 1000);
 	//record more stuff, date and how many time click to close ???
 	//if click to close i saw it and need confirm + test + record :p
 	var objReq = new XMLHttpRequest();
