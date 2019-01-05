@@ -18,6 +18,7 @@ function close_popup_good(){
 	objReq.send(null);
 }
 function close_popup_bad(){
+	window.location.href = "popup.php";
 	//record more stuff, date and how many time click to close ???
 	//if click to close i saw it and need confirm + test + record :p
 	var objReq = new XMLHttpRequest();
@@ -48,7 +49,6 @@ function bad_answer(){
 //~ console.log("<?php echo $RIGHT; ?>");
 //~ console.log("<?php echo $e[3]; ?>");
 	close_popup_bad();
-	window.location.href = "popup.php";
 	//1 - Disable launcher_html_popup.sh
 	//2 - kill html popup
 	//3 - start again another question
