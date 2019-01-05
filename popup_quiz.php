@@ -48,7 +48,7 @@ function bad_answer(){
 //~ console.log("<?php echo $RIGHT; ?>");
 //~ console.log("<?php echo $e[3]; ?>");
 	close_popup_bad();
-	document.location.href = "popup.php";
+	window.location.href = "popup.php";
 	//1 - Disable launcher_html_popup.sh
 	//2 - kill html popup
 	//3 - start again another question
