@@ -127,7 +127,7 @@ function ⬚_before_start(){
 	command -v $WEB_BROWSER &> /dev/null || { echo -e "WEB_BROWSER ($WEB_BROWSER) isn't a valid variable... Install this web browser or use a different one by changing the WEB_BROWSER variable in \e[38;5;33m$HOME/.PopUpLearn/MYDB/my.config\e[0m , for example : \e[38;5;33mWEB_BROWSER=\"surf -F\"\e[0m" && exit; }
 
 	# node ~/.PopUpLearn/node_server_popup.js &>/dev/null || nodejs ~/.PopUpLearn/node_server_popup.js &>/dev/null &
-	node ~/.PopUpLearn/node_server_popup.js &
+	node ~/.PopUpLearn/node_server_popup.js &>/dev/null &
 	php -S 127.0.0.1:9995 -t ~/.PopUpLearn &>/dev/null &
 
 	sleep 2
