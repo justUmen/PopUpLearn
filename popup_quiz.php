@@ -23,7 +23,6 @@ function close_popup_bad(){
 	var objReq = new XMLHttpRequest();
 	objReq.open("GET", "http://localhost:8899" + "?type=PopUpLearn_bad", false);
 	objReq.send(null);
-	document.location.href = "popup.php";
 }
 </script>
 </head>
@@ -49,6 +48,7 @@ function bad_answer(){
 //~ console.log("<?php echo $RIGHT; ?>");
 //~ console.log("<?php echo $e[3]; ?>");
 	close_popup_bad();
+	document.location.href = "popup.php";
 	//1 - Disable launcher_html_popup.sh
 	//2 - kill html popup
 	//3 - start again another question
