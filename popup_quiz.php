@@ -70,7 +70,7 @@ function bad_answer(){
 	</td><td style="width:5%">
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	</td><td style="width:45%;text-align:left;">
-		<span class="bigfont">_____</span>
+		<span class="bigfont">......</span>
 		<img src='img/flags/<?php echo $LANGUAGE_TAG_2; ?>.jpeg' />
 	</td></tr></table>
 	</div>
