@@ -223,6 +223,14 @@ foreach ($session as &$value) {
 	//~ audio_play();
 //~ };
 
+//Prepare popup bad, for redirections from popup_quiz.php
+function close_popup_bad(){
+	var objReq = new XMLHttpRequest();
+	objReq.open("GET", "http://localhost:8899" + "?type=PopUpLearn_bad_answer", false);
+	objReq.send(null);
+}
+close_popup_bad();
+
 var audio_1 = new Audio();
 audio_1.type = 'audio/mp3';
 audio_1.onerror = function(){ document.getElementById('audio_1').style.display="none";};
