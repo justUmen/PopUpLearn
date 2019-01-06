@@ -63,8 +63,17 @@ function bad_answer(){
 <body onload="document.getElementById('search-input').focus();">
 <div id="on_click_close">
 <div class='widget' id="content" style="top:10%;">
-<?php echo "<div id='left_right'><img src='img/flags/{$LANGUAGE_TAG_1}.jpeg' /> |=| <img src='img/flags/{$LANGUAGE_TAG_2}.jpeg' /></div>"; ?><br>
-<?php echo "<div class='bigfont'>{$LEFT} : _____</div>"; ?>
+	<div class="align-center">
+		<table style="text-align: center;width: 100%;"><tr><td style="width:45%;text-align:right;">
+		<img src='img/flags/<?php echo $LANGUAGE_TAG_1; ?>.jpeg' />
+		<span class="bigfont"><?php echo $LEFT; ?></span>
+	</td><td style="width:5%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	</td><td style="width:45%;text-align:left;">
+		<span class="bigfont">_____</span>
+		<img src='img/flags/<?php echo $LANGUAGE_TAG_2; ?>.jpeg' />
+	</td></tr></table>
+	</div>
 
 <?php
 //Array with 30 wrong answers (wrong_answers_BUTTON.tmp created by launcher_html_popup.sh)
