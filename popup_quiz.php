@@ -117,9 +117,9 @@ ONLY_GOOD_ANSWER=0;
 
 
 var App = React.createClass({
-	displayName: "App",
+	displayName: "Answers",
 	render: function render(){
-		var mails = [
+		var answers = [
 		<?php
 		if(!empty($b)) for ($i = 0; $i < count($b); $i++) {
 			$elem=$b[$i];
@@ -153,12 +153,12 @@ END;
 		];
 		if (this.refs.search) {
 			var filters = ['user.name'];
-			mails = mails.filter(this.refs.search.filter(filters));
-			//console.log(mails.length);
-			//console.log(mails[0].user.answer);
-			NB_OF_BUTTON=mails.length;
+			answers = answers.filter(this.refs.search.filter(filters));
+			//console.log(answers.length);
+			//console.log(answers[0].user.answer);
+			NB_OF_BUTTON=answers.length;
 			if(NB_OF_BUTTON == 1){
-				if(mails[0].user.answer == "good"){
+				if(answers[0].user.answer == "good"){
 					ONLY_GOOD_ANSWER=1;
 				}
 			}
@@ -167,7 +167,7 @@ END;
 			return (
 				React.createElement("div", null,
 					React.createElement(SearchInput, {id: 'focus_search',ref: "search", onChange: this.searchUpdated}),
-					mails.map(function(mail) {
+					answers.map(function(mail) {
 						if(<?php if("$LANGUAGE_TAG_2"=="IM"){echo "1";}else{echo "0";} ?>){ //IF image
 							if (mail.user.answer=="good") return (
 								React.createElement("div", { onClick : good_answer, className: "btn glyphicon bigfont",style: {margin: "3px", backgroundColor: "black"}}, "", React.createElement("img", { onClick : good_answer, src: mail.user.name, className: "btn glyphicon bigfont",style: {margin: "3px"}}))
