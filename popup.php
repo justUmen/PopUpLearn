@@ -13,7 +13,6 @@
 
 setTimeout(function(){
 	audio_play_1();
-	audio_play_2();
 }, 3000);
 
 
@@ -245,6 +244,9 @@ function audio_play_1() {
 	var audio_1 = new Audio();
 	audio_1.type = 'audio/mp3';
 	audio_1.src="http://127.0.0.1:9092/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3"
+	audio_1.addEventListener('ended',function(){
+		audio_play_2();
+	});
   var playPromise = audio_1.play();
   if (playPromise !== undefined) {
       playPromise.then(function () {
