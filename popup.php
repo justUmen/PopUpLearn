@@ -86,7 +86,7 @@ if("$LANGUAGE_WIKIPEDIA_1"=="cn"){$LANGUAGE_WIKIPEDIA_1="zh";}
 if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 //~ $e[6] not used in popup.php, only popup_quiz.php
 ?>
-<body onload="wait_n_play();">
+<body onload="audio_play_1();">
 
 	<div id="left_arrow" onclick="document.getElementById('side_left').style.display='block'; document.getElementById('left_arrow_hide').style.display='block'; document.getElementById('left_arrow').style.display='none';">🡆</div>
 	<div id="right_arrow" onclick="document.getElementById('side_right').style.display='block'; document.getElementById('right_arrow_hide').style.display='block'; document.getElementById('right_arrow').style.display='none';">🡄</div>
