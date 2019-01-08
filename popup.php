@@ -10,6 +10,13 @@
 </script>
 <style>#content { width:100%; }</style>
 <script>
+
+setTimeout(function(){
+	audio_play_1();
+	audio_play_2();
+}, 3000);
+
+
 function close_popup(){
 	//record more stuff, date and how many time click to close ???
 	//if click to close i saw it and need confirm + test + record :p
@@ -245,7 +252,7 @@ function audio_play_1() {
   var playPromise = audio_1.play();
   if (playPromise !== undefined) {
       playPromise.then(function () {
-					document.getElementById('audio_1').style.display="block";
+					document.getElementById('audio_1').style.display="inline";
           console.log('Playing....');
       }).catch(function (error) {
           console.log('Failed to play....' + error);
@@ -258,18 +265,13 @@ function audio_play_2() {
   var playPromise = audio_2.play();
   if (playPromise !== undefined) {
       playPromise.then(function () {
-					document.getElementById('audio_2').style.display="block";
+					document.getElementById('audio_2').style.display="inline";
           console.log('Playing....');
       }).catch(function (error) {
           console.log('Failed to play....' + error);
       });
   }
 }
-
-setTimeout(function(){
-	audio_play_1();
-	audio_play_2();
-}, 3000);
 
 
 
