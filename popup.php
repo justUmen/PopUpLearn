@@ -266,8 +266,12 @@ function audio_play_2() {
   }
 }
 
-audio_play_1();
-audio_play_2();
+setTimeout(function(){
+	audio_play_1();
+	audio_play_2();
+}, 3000);
+
+
 
 //for audio.play() :p
 // audio_1 = new Audio("http://127.0.0.1/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3");
