@@ -21,7 +21,7 @@ function close_popup(){
 	//record more stuff, date and how many time click to close ???
 	//if click to close i saw it and need confirm + test + record :p
 	var objReq = new XMLHttpRequest();
-	objReq.open("GET", "http://localhost:8899" + "?type=close_all_PopUpLearn", false);
+	objReq.open("GET", "http://127.0.0.1:8899" + "?type=close_all_PopUpLearn", false);
 	objReq.send(null);
 }
 function openCity_1(evt, tabName) {
@@ -193,10 +193,10 @@ foreach ($session as &$value) {
 	$lefti = preg_replace('/ \|=\| .*/', '', $value);
 	$righti = preg_replace('/.* \|=\| /', '', $value);
 	if($lefti==$LEFT&&$righti==$RIGHT){
-		echo "<option value=\"http://localhost:9995/popup.php?LEFT=$lefti&RIGHT=$righti\" selected>$value</option>";
+		echo "<option value=\"http://127.0.0.1:9995/popup.php?LEFT=$lefti&RIGHT=$righti\" selected>$value</option>";
 	}
 	else{
-		echo "<option value=\"http://localhost:9995/popup.php?LEFT=$lefti&RIGHT=$righti\">$value</option>";
+		echo "<option value=\"http://127.0.0.1:9995/popup.php?LEFT=$lefti&RIGHT=$righti\">$value</option>";
 	}
 }
 ?>
@@ -233,7 +233,7 @@ foreach ($session as &$value) {
 //Prepare popup bad, for redirections from popup_quiz.php
 function close_popup_bad(){
 	var objReq = new XMLHttpRequest();
-	objReq.open("GET", "http://localhost:8899" + "?type=PopUpLearn_bad_answer", false);
+	objReq.open("GET", "http://127.0.0.1:8899" + "?type=PopUpLearn_bad_answer", false);
 	objReq.send(null);
 }
 close_popup_bad();
@@ -283,7 +283,7 @@ function audio_play_2() {
 // function audio_play_1(arg){
 // 	console.log(arg);
 // 	var objReq = new XMLHttpRequest();
-// 	objReq.open("GET", "http://localhost:8888" + "?type=" + "mplayer \"~/SyNc/Projects/wikiface_new/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3\" \"~/SyNc/Projects/wikiface_new/soundDB/<?php echo $LANGUAGE_TAG_2; ?>/<?php echo $RIGHT; ?>.mp3\"" , false);
+// 	objReq.open("GET", "http://127.0.0.1:8888" + "?type=" + "mplayer \"~/SyNc/Projects/wikiface_new/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3\" \"~/SyNc/Projects/wikiface_new/soundDB/<?php echo $LANGUAGE_TAG_2; ?>/<?php echo $RIGHT; ?>.mp3\"" , false);
 // 	objReq.send(null);
 // }
 
