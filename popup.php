@@ -236,6 +236,16 @@ audio_1.type = 'audio/mp3';
 audio_1.src="http://127.0.0.1:9092/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3"
 audio_1.onerror = function(){ document.getElementById('audio_1').style.display="none";};
 
+UrlExists("http://127.0.0.1:9092/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3","1");
+function UrlExists(url,NUM){
+    var http = new XMLHttpRequest();
+    http.open('HEAD', url, false);
+    http.send();
+    if(http.status==404){
+			document.getElementById('audio_'+NUM).style.display="none";
+		}
+}
+
 var audio_2 = new Audio();
 audio_2.type = 'audio/mp3';
 audio_2.src="http://127.0.0.1:9092/soundDB/<?php echo $LANGUAGE_TAG_2; ?>/<?php echo $RIGHT; ?>.mp3"
