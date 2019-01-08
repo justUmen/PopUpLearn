@@ -241,8 +241,8 @@ function UrlExists(url,NUM){
     var http = new XMLHttpRequest();
     http.open('HEAD', url, false);
     http.send();
+		console.log(http.status);
     if(http.status==404){
-			console.log(http.status);
 			document.getElementById('audio_'+NUM).style.display="none";
 		}
 }
