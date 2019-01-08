@@ -152,7 +152,7 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 <div id="on_click_close">
 	<div class='widget' id="content">
 		<div class="align-center">
-			<table style="text-align: center;width: 100%;"><tr><td style="width:45%;text-align:right;">
+			<table style="text-align: center;width: 100%;margin:20px;"><tr><td style="width:45%;text-align:right;">
 			<img src='img/flags/<?php echo $LANGUAGE_TAG_1; ?>.jpeg' />
 			<span class="bigfont"><?php echo $LEFT; ?></span>
 		</td><td style="width:5%">
@@ -163,7 +163,7 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 		</td></tr></table>
 		</div>
 		<div class="align-center">
-			<table style="text-align: center;width: 100%;"><tr><td style="width:45%;text-align:right;">
+			<table style="text-align: center;width: 100%;margin:20px;"><tr><td style="width:45%;text-align:right;">
 				<a id="audio_1" class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_1();return false' href='#' title='Play sound'></a>
 			</td><td style="width:5%">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
