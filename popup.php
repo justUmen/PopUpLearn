@@ -11,6 +11,9 @@
 <style>#content { width:100%; }</style>
 <script>
 
+var AUDIO=new Audio("soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3");
+AUDIO.play();
+
 function wait_n_play(){
 	setTimeout(function(){
 		audio_play_1();
@@ -239,7 +242,6 @@ function close_popup_bad(){
 close_popup_bad();
 
 //audio_1.onerror = function(){ document.getElementById('audio_1').style.display="none";};
-
 
 function audio_play_1() {
 	var audio_1 = new Audio();
