@@ -242,6 +242,7 @@ function UrlExists(url,NUM){
     http.open('HEAD', url, false);
     http.send();
     if(http.status==404){
+			console.log(http.status);
 			document.getElementById('audio_'+NUM).style.display="none";
 		}
 }
