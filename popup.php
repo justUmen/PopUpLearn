@@ -11,15 +11,6 @@
 <style>#content { width:100%; }</style>
 <script>
 
-var AUDIO=new Audio("soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3");
-AUDIO.play();
-
-function wait_n_play(){
-	setTimeout(function(){
-		audio_play_1();
-	}, 3000);
-}
-
 function close_popup(){
 	//record more stuff, date and how many time click to close ???
 	//if click to close i saw it and need confirm + test + record :p
@@ -295,6 +286,7 @@ function audio_play_2() {
  //~ }, 1000);
 //~ };
 	document.addEventListener('keydown', function(evt) {
+		audio_play_1();
 		if(evt.keyCode == 32) {
 			close_popup();
 		}
