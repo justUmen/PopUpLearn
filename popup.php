@@ -10,6 +10,12 @@
 </script>
 <style>#content { width:100%; }</style>
 <script>
+window.addEventListener('keydown', function(evt) {
+	audio_play_1();
+	if(evt.keyCode == 32) {
+		close_popup();
+	}
+},true);
 
 function close_popup(){
 	//record more stuff, date and how many time click to close ???
@@ -285,12 +291,6 @@ function audio_play_2() {
    //~ audio_play();
  //~ }, 1000);
 //~ };
-	window.addEventListener('keydown', function(evt) {
-		audio_play_1();
-		if(evt.keyCode == 32) {
-			close_popup();
-		}
-	});
 </script>
 
 </html>
