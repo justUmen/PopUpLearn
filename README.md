@@ -132,12 +132,12 @@ Simple first, then machine learning future prediction system !?
 
 # Optional : LAUNCH WITH ARGUMENTS (2 variables that control time)
 
-     popuplearn 0 30
+     popuplearn 0 60
 
 Argument 1 : 0 => 0 means unlimited display of the answer (until user answer or close), otherwise the popup closes after X seconds. Useful if you can't or don't want to interact with PopUpLearn. (Not answering doesn't count as a wrong answer)  
-Argument 2 : 30 => Seconds to wait before the next popup  
+Argument 2 : 60 => Seconds to wait before the next popup  
 
-0 and 30 are default variables, so `popuplearn 0 30` and `popuplearn` are identical.
+0 and 30 are default variables, so `popuplearn 0 60` and `popuplearn` are identical.
 
 # Todo
 
