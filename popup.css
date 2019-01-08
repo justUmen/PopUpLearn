@@ -218,6 +218,7 @@ left:50%;
 }
 
 .play-icon{
+  display: none;
   border:1px solid #888 !important;
   margin:20px;
 }

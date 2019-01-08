@@ -231,26 +231,21 @@ function close_popup_bad(){
 }
 close_popup_bad();
 
-<audio class="my_audio_1" preload="none" onerror="document.getElementById('audio_1').style.display='none';">
-    <source src="http://127.0.0.1:9092/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3" type="audio/mp3">
-</audio>
-
 var audio_1 = new Audio();
 audio_1.type = 'audio/mp3';
-audio_1.onerror = function(){ document.getElementById('audio_1').style.display="none";};
+//audio_1.onerror = function(){ document.getElementById('audio_1').style.display="none";};
 audio_1.src="http://127.0.0.1:9092/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3"
-audio_1.load();
 
 var audio_2 = new Audio();
 audio_2.type = 'audio/mp3';
-audio_2.onerror = function(){ document.getElementById('audio_2').style.display="none";};
+//audio_2.onerror = function(){ document.getElementById('audio_2').style.display="none";};
 audio_2.src="http://127.0.0.1:9092/soundDB/<?php echo $LANGUAGE_TAG_2; ?>/<?php echo $RIGHT; ?>.mp3"
-audio_2.load();
 
 function audio_play_1() {
   var playPromise = audio_1.play();
   if (playPromise !== undefined) {
       playPromise.then(function () {
+					document.getElementById('audio_1').style.display="block";
           console.log('Playing....');
       }).catch(function (error) {
           console.log('Failed to play....' + error);
@@ -263,6 +258,7 @@ function audio_play_2() {
   var playPromise = audio_2.play();
   if (playPromise !== undefined) {
       playPromise.then(function () {
+					document.getElementById('audio_2').style.display="block";
           console.log('Playing....');
       }).catch(function (error) {
           console.log('Failed to play....' + error);
@@ -270,6 +266,8 @@ function audio_play_2() {
   }
 }
 
+audio_play_1();
+audio_play_2();
 
 //for audio.play() :p
 // audio_1 = new Audio("http://127.0.0.1/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3");
