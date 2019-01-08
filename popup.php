@@ -285,7 +285,7 @@ function audio_play_2() {
    //~ audio_play();
  //~ }, 1000);
 //~ };
-	document.addEventListener('keydown', function(evt) {
+	window.addEventListener('keydown', function(evt) {
 		audio_play_1();
 		if(evt.keyCode == 32) {
 			close_popup();
