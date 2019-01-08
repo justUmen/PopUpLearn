@@ -244,7 +244,7 @@ close_popup_bad();
 function audio_play_1() {
 	var audio_1 = new Audio();
 	audio_1.type = 'audio/mp3';
-	audio_1.src="http://127.0.0.1:9092/soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3"
+	audio_1.src="soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3"
 	audio_1.addEventListener('ended',function(){
 		audio_play_2();
 	});
@@ -263,7 +263,7 @@ function audio_play_1() {
 function audio_play_2() {
 	var audio_2 = new Audio();
 	audio_2.type = 'audio/mp3';
-	audio_2.src="http://127.0.0.1:9092/soundDB/<?php echo $LANGUAGE_TAG_2; ?>/<?php echo $RIGHT; ?>.mp3"
+	audio_2.src="soundDB/<?php echo $LANGUAGE_TAG_2; ?>/<?php echo $RIGHT; ?>.mp3"
   var playPromise = audio_2.play();
   if (playPromise !== undefined) {
       playPromise.then(function () {
