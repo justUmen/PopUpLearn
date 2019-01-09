@@ -11,9 +11,9 @@
 <style>#content { width:100%; }</style>
 <script>
 window.addEventListener('keydown', function(evt) {
-	audio_play_1();
-	setTimeout(function(){audio_play_2();},3000);
-	console.log(evt.keyCodeevt.keyCode);
+	audio_play_2();
+	// setTimeout(function(){audio_play_2();},3000);
+	console.log(evt.keyCode);
 	if(evt.keyCode == 32) {
 		close_popup();
 	}
@@ -246,9 +246,9 @@ function audio_play_1() {
 	var audio_1 = new Audio();
 	audio_1.type = 'audio/mp3';
 	audio_1.src="soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3"
-	audio_1.addEventListener('ended',function(){
-		audio_play_2();
-	});
+	// audio_1.addEventListener('ended',function(){
+	// 	audio_play_2();
+	// });
   var playPromise = audio_1.play();
   if (playPromise !== undefined) {
       playPromise.then(function () {
