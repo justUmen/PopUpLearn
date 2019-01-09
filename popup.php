@@ -173,22 +173,10 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 			<img src='img/flags/<?php echo $LANGUAGE_TAG_2; ?>.jpeg' />
 		</td></tr></table>
 		</div>
-		<div class="align-center">
-			<table style="text-align: center;width: 100%;height:30px;"><tr><td style="width:45%;text-align:right;">
-				<a id="audio_1" class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_1();return false' href='#' title='Play sound'></a>
-			</td><td style="width:5%">
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			</td><td style="width:45%;text-align:left;">
-				<a id="audio_2" class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_2();return false' href='#' title='Play sound'></a>
-			</td></tr></table>
-		</div>
 	</div>
 	<div class="align-center">
 		<a class='btn glyphicon glyphicon-remove' onclick="close_popup();return false;" href='#' title='close popup'></a>
 	</div>
-
-
-
 <!-- 0£hsk_1£méi£no£PI£en£BUTTON0£hsk_1£méi£no£PI£en£BUTTON -->
 	<div style="text-align:center;position:fixed;bottom:20;width:100%;">
 		<div>Session <?php echo $SESSION_NUMBER; ?></div>
@@ -220,6 +208,18 @@ foreach ($session as &$value) {
 	}
 	?>
 </div>
+
+
+<div id="sounds">
+	<table style="text-align: center;width: 100%;height:30px;"><tr><td style="width:45%;text-align:right;">
+		<a id="audio_1" class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_1();return false' href='#' title='Play sound'>spacebar</a>
+	</td><td style="width:5%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	</td><td style="width:45%;text-align:left;">
+		<a id="audio_2" class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_2();return false' href='#' title='Play sound'></a>
+	</td></tr></table>
+</div>
+
 <?php
 //MENU BAR : out of #on_click_close so onclick don't close ??? TODO
 // echo "<div id='bottom_bar'>";

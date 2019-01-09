@@ -227,6 +227,8 @@ left:50%;
   border:1px solid red !important;
   background-color:black !important;
 }
-.align-center{
+#sounds{
   text-align: center;
+  position:absolute;
+  top:50%;
 }
