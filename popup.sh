@@ -782,7 +782,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 	  ARG=`expr $ARG + 1`
 
 		#If something exist in "session_$ARG/session_content.pul" but not in main file, do something... ??? (it was deleted from .pul file, maybe bad element)
-		cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/session_content.pul" | sed 's/\[[^[]*\]//' > $HOME/.PopUpLearn/tmp/test_session_content.tmp
+		# cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/session_content.pul" | sed 's/\[[^[]*\]//' > $HOME/.PopUpLearn/tmp/test_session_content.tmp
 		while read LINE; do
 			if ! grep -Fxq "$LINE" $FILE ; then
 				mkdir "$HOME/.PopUpLearn/logs/BACKUP/" 2> /dev/null
@@ -805,7 +805,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 				cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" >> $BACKUP 2>/dev/null
 				sed -i "/$LINE/d" "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null
 			fi
-		done < $HOME/.PopUpLearn/tmp/test_session_content.tmp
+		done < "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/session_content.pul"
 
 	  echo -en "\t$COLOR_SELECTION $ARG) $COLOR_TITLE_SELECTED Session $ARG $ENDO "
 	  #~ cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/session_content.pul" 2>/dev/null | sed 's/.* |=| //' | tr '\n' '|' | sed 's/^/|/' > "$HOME/.PopUpLearn/tmp/list_answers.tmp"
