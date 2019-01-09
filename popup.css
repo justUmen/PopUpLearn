@@ -52,11 +52,11 @@ padding:0px;
 margin:0px;
 }
 .widget{
-margin-bottom:150px;
 color:orange;
 position:absolute;
 border-radius:30px;
 padding:12px;
+padding-bottom:100px !important;
 background-color:rgba(0, 0, 0, 0.7); /* NEW */
 text-shadow:0px 0px 1px black,1px 0px 1px black,0px 1px 1px black,1px 1px 1px black,
   0px 0px 1px black,-1px 0px 1px black,0px -1px 1px black,-1px -1px 1px black; /* NEW */
