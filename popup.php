@@ -82,7 +82,7 @@ $FAMILY=$e[1];
 // $LEFT=$e[2];
 $LEFT = isset($_GET['LEFT']) ? $_GET['LEFT'] : $e[2];
 $LEFT_SOUND = explode("[", $LEFT);
-if(isset($LEFT_SOUND[1]){
+if(isset($LEFT_SOUND[1])){
 	$LEFT_SOUND[1]=substr($LEFT_SOUND[1], 0, -1);
 	echo "<h3> $LEFT_SOUND[1] </h3>";
 }
