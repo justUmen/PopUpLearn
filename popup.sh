@@ -585,8 +585,8 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 	FILE=${FILES[selected]}
 	#SPLIT CONTENT FROM .pul FILE AND CONFIG + source
 	cat $FILE | grep "^#!#" | sed 's/^#!#//' > $HOME/.PopUpLearn/tmp/session_specific_config.tmp
-	
-	cat $FILE | sed 's/\[[^[]*\]//' > "$HOME/.PopUpLearn/tmp/session_content_no_bracket.tmp"
+
+	# cat $FILE | sed 's/\[[^[]*\]//' > "$HOME/.PopUpLearn/tmp/session_content_no_bracket.tmp"
 
 	#TEST IF CONTAINS AT LEAST THE MAIN 4 VARIABLES
 	if [ ! `grep 'LANGUAGE_1=' $HOME/.PopUpLearn/tmp/session_specific_config.tmp` ] || [ ! `grep 'LANGUAGE_2=' $HOME/.PopUpLearn/tmp/session_specific_config.tmp` ] || [ ! `grep 'NUMBER=' $HOME/.PopUpLearn/tmp/session_specific_config.tmp` ] || [ ! `grep 'SUBJECT=' $HOME/.PopUpLearn/tmp/session_specific_config.tmp` ]; then
@@ -784,7 +784,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 		#If something exist in "session_$ARG/session_content.pul" but not in main file, do something... ??? (it was deleted from .pul file, maybe bad element)
 		cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/session_content.pul" | sed 's/\[[^[]*\]//' > $HOME/.PopUpLearn/tmp/test_session_content.tmp
 		while read LINE; do
-			if ! grep -Fxq "$LINE" $HOME/.PopUpLearn/tmp/session_content_no_bracket.tmp ; then
+			if ! grep -Fxq "$LINE" $FILE ; then
 				mkdir "$HOME/.PopUpLearn/logs/BACKUP/" 2> /dev/null
 				BACKUP="$HOME/.PopUpLearn/logs/BACKUP/${LANGUAGE_1}_${LANGUAGE_2}_${SUBJECT}_${NUMBER}_${FILENAME}_session_${ARG}.txt"
 				echo "ERROR with $LINE, clean up logs... (backup details in $BACKUP)"
