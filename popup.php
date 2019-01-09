@@ -12,6 +12,8 @@
 <script>
 window.addEventListener('keydown', function(evt) {
 	audio_play_1();
+	setTimeout(function(){audio_play_2();},3000);
+	console.log(evt.keyCodeevt.keyCode);
 	if(evt.keyCode == 32) {
 		close_popup();
 	}
