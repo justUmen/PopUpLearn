@@ -64,7 +64,7 @@ function openCity_2(evt, tabName) {
   for (i = 0; i < tablinks_2.length; i++) {
     tablinks_2[i].className = tablinks_2[i].className.replace(" active", "");
   }
-  // Show the current tab, and add an "active" class to the button that opened the tab
+  // Show the current tab, a7nd add an "active" class to the button that opened the tab
   document.getElementById(tabName).style.display = "block";
   evt.currentTarget.className += " active";
 }
@@ -81,6 +81,9 @@ $FAMILY=$e[1];
 
 // $LEFT=$e[2];
 $LEFT = isset($_GET['LEFT']) ? $_GET['LEFT'] : $e[2];
+$LEFT_SOUND = explode("[", $LEFT);
+echo "<h3> $LEFT_SOUND[1] </h3>";
+
 // $RIGHT=$e[3];
 $RIGHT = isset($_GET['RIGHT']) ? $_GET['RIGHT'] : $e[3];
 
