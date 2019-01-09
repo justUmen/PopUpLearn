@@ -11,11 +11,17 @@
 <style>#content { width:100%; }</style>
 <script>
 window.addEventListener('keydown', function(evt) {
-	audio_play_2();
+
 	// setTimeout(function(){audio_play_2();},3000);
 	console.log(evt.keyCode);
-	if(evt.keyCode == 32) {
+	if(evt.keyCode==27) {
+		audio_play_2();
+	}
+	else if(evt.keyCode==32) {
 		close_popup();
+	}
+	else{
+		audio_play_1();
 	}
 },true);
 
