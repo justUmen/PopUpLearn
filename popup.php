@@ -212,11 +212,11 @@ foreach ($session as &$value) {
 
 <div id="sounds">
 	<table style="text-align: center;width: 100%;height:30px;"><tr><td style="width:45%;text-align:right;">
-		<a id="audio_1" class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_1();return false' href='#' title='Play sound'> Space</a>
+		<a id="audio_1" style="vertical-align:middle" class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_1();return false' href='#' title='Play sound'> Space</a>
 	</td><td style="width:5%">
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	</td><td style="width:45%;text-align:left;">
-		<a id="audio_2" class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_2();return false' href='#' title='Play sound'> Enter</a>
+		<a id="audio_2" style="vertical-align:middle" class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_2();return false' href='#' title='Play sound'> Enter</a>
 	</td></tr></table>
 </div>
 
