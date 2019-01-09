@@ -258,7 +258,7 @@ function audio_play_1() {
   var playPromise = audio_1.play();
   if (playPromise !== undefined) {
       playPromise.then(function () {
-					document.getElementById('audio_1').style.display="inline";
+					// document.getElementById('audio_1').style.display="inline";
           console.log('Playing....');
       }).catch(function (error) {
           console.log('Failed to play....' + error);
@@ -274,7 +274,7 @@ function audio_play_2() {
   var playPromise = audio_2.play();
   if (playPromise !== undefined) {
       playPromise.then(function () {
-					document.getElementById('audio_2').style.display="inline";
+					// document.getElementById('audio_2').style.display="inline";
           console.log('Playing....');
       }).catch(function (error) {
           console.log('Failed to play....' + error);
