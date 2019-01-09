@@ -472,8 +472,6 @@ function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME $@
 				cp $FILE "$HOME/.PopUpLearn/tmp/session_content.tmp"
 				cp $FILE "$HOME/.PopUpLearn/tmp/session_content_remove.tmp"
 
-				cat $FILE | sed 's/\[[^[]*\]//' > "$HOME/.PopUpLearn/tmp/session_content_no_bracket.tmp"
-
 				LANGUAGE_1=$LANGUAGE
 				LANGUAGE_2=$LANGUAGE
 				SUBJECT=GameScript
@@ -587,6 +585,8 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 	FILE=${FILES[selected]}
 	#SPLIT CONTENT FROM .pul FILE AND CONFIG + source
 	cat $FILE | grep "^#!#" | sed 's/^#!#//' > $HOME/.PopUpLearn/tmp/session_specific_config.tmp
+	
+	cat $FILE | sed 's/\[[^[]*\]//' > "$HOME/.PopUpLearn/tmp/session_content_no_bracket.tmp"
 
 	#TEST IF CONTAINS AT LEAST THE MAIN 4 VARIABLES
 	if [ ! `grep 'LANGUAGE_1=' $HOME/.PopUpLearn/tmp/session_specific_config.tmp` ] || [ ! `grep 'LANGUAGE_2=' $HOME/.PopUpLearn/tmp/session_specific_config.tmp` ] || [ ! `grep 'NUMBER=' $HOME/.PopUpLearn/tmp/session_specific_config.tmp` ] || [ ! `grep 'SUBJECT=' $HOME/.PopUpLearn/tmp/session_specific_config.tmp` ]; then
