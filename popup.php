@@ -10,20 +10,6 @@
 </script>
 <style>#content { width:100%; }</style>
 <script>
-window.addEventListener('keydown', function(evt) {
-
-	// setTimeout(function(){audio_play_2();},3000);
-	console.log(evt.keyCode);
-	if(evt.keyCode==32) {
-		audio_play_1();
-	}
-	else if(evt.keyCode==27) {
-		close_popup();
-	}
-	else{
-		audio_play_2();
-	}
-},true);
 
 function close_popup(){
 	//record more stuff, date and how many time click to close ???
@@ -32,6 +18,22 @@ function close_popup(){
 	objReq.open("GET", "http://localhost:8899" + "?type=close_all_PopUpLearn", false);
 	objReq.send(null);
 }
+
+window.addEventListener('keydown', function(evt) {
+
+	// setTimeout(function(){audio_play_2();},3000);
+	console.log(evt.keyCode);
+	if(evt.keyCode==32) {
+		audio_play_2();
+	}
+	else if(evt.keyCode==27) {
+		close_popup();
+	}
+	else{
+		audio_play_1();
+	}
+},true);
+
 function openCity_1(evt, tabName) {
   // Declare all variables
   var i, tabcontent_1, tablinks_1;
@@ -94,7 +96,7 @@ if("$LANGUAGE_WIKIPEDIA_1"=="cn"){$LANGUAGE_WIKIPEDIA_1="zh";}
 if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 //~ $e[6] not used in popup.php, only popup_quiz.php
 ?>
-<body onload="audio_play_1();">
+<body>
 
 	<div id="left_arrow" onclick="document.getElementById('side_left').style.display='block'; document.getElementById('left_arrow_hide').style.display='block'; document.getElementById('left_arrow').style.display='none';">🡆</div>
 	<div id="right_arrow" onclick="document.getElementById('side_right').style.display='block'; document.getElementById('right_arrow_hide').style.display='block'; document.getElementById('right_arrow').style.display='none';">🡄</div>
