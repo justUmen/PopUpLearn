@@ -174,9 +174,9 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 		</td></tr></table>
 		</div>
 	</div>
-	<div class="align-center">
+	<!-- <div class="align-center">
 		<a class='btn glyphicon glyphicon-remove' onclick="close_popup();return false;" href='#' title='close popup'></a>
-	</div>
+	</div> -->
 <!-- 0£hsk_1£méi£no£PI£en£BUTTON0£hsk_1£méi£no£PI£en£BUTTON -->
 	<div style="text-align:center;position:fixed;bottom:20;width:100%;">
 		<div>Session <?php echo $SESSION_NUMBER; ?></div>
