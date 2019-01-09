@@ -82,13 +82,20 @@ $FAMILY=$e[1];
 // $LEFT=$e[2];
 $LEFT = isset($_GET['LEFT']) ? $_GET['LEFT'] : $e[2];
 $LEFT_SOUND = explode("[", $LEFT);
+$LEFT_AUDIO=$LEFT;
 if(isset($LEFT_SOUND[1])){
 	$LEFT_SOUND[1]=substr($LEFT_SOUND[1], 0, -1);
-	echo "<h3> $LEFT_SOUND[1] </h3>";
+	$LEFT_AUDIO=$LEFT_SOUND[1];
 }
 
 // $RIGHT=$e[3];
 $RIGHT = isset($_GET['RIGHT']) ? $_GET['RIGHT'] : $e[3];
+$RIGHT_SOUND = explode("[", $RIGHT);
+$RIGHT_AUDIO=$RIGHT;
+if(isset($RIGHT_SOUND[1])){
+	$RIGHT_SOUND[1]=substr($RIGHT_SOUND[1], 0, -1);
+	$RIGHT_AUDIO=$RIGHT_SOUND[1];
+}
 
 $LANGUAGE_TAG_1=$e[4];
 $LANGUAGE_TAG_2=$e[5];
@@ -259,7 +266,7 @@ close_popup_bad();
 function audio_play_1() {
 	var audio_1 = new Audio();
 	audio_1.type = 'audio/mp3';
-	audio_1.src="soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT; ?>.mp3"
+	audio_1.src="soundDB/<?php echo $LANGUAGE_TAG_1; ?>/<?php echo $LEFT_AUDIO; ?>.mp3"
 	// audio_1.addEventListener('ended',function(){
 	// 	audio_play_2();
 	// });
@@ -278,7 +285,7 @@ function audio_play_1() {
 function audio_play_2() {
 	var audio_2 = new Audio();
 	audio_2.type = 'audio/mp3';
-	audio_2.src="soundDB/<?php echo $LANGUAGE_TAG_2; ?>/<?php echo $RIGHT; ?>.mp3"
+	audio_2.src="soundDB/<?php echo $LANGUAGE_TAG_2; ?>/<?php echo $RIGHT_AUDIO; ?>.mp3"
   var playPromise = audio_2.play();
   if (playPromise !== undefined) {
       playPromise.then(function () {
