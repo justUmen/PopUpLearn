@@ -211,7 +211,7 @@ foreach ($session as &$value) {
 
 
 <div id="sounds">
-	<table style="text-align: center;"><tr><td style="width:45%;text-align:right;">
+	<table style="text-align: center;width:100%;"><tr><td style="width:45%;text-align:right;">
 		<a id="audio_1" style="height:53px;line-height: 40px;font-size:30px;vertical-align:middle" class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_1();return false' href='#' title='Play sound'> Space</a>
 	</td><td style="width:5%">
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
