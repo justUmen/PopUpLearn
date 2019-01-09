@@ -160,7 +160,7 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 		</div>
 	</div>
 
-<div id="on_click_close">
+<div id="on_click_close" onclick="close_popup()">
 	<div class='widget' id="content">
 		<div class="align-center">
 			<table style="text-align: center;width: 100%;"><tr><td style="width:45%;text-align:right;">
