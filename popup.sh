@@ -472,6 +472,8 @@ function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME $@
 				cp $FILE "$HOME/.PopUpLearn/tmp/session_content.tmp"
 				cp $FILE "$HOME/.PopUpLearn/tmp/session_content_remove.tmp"
 
+				cat $FILE | sed 's/\[[^[]*\]//' > "$HOME/.PopUpLearn/tmp/session_content_no_bracket.tmp"
+
 				LANGUAGE_1=$LANGUAGE
 				LANGUAGE_2=$LANGUAGE
 				SUBJECT=GameScript
@@ -780,9 +782,9 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 	  ARG=`expr $ARG + 1`
 
 		#If something exist in "session_$ARG/session_content.pul" but not in main file, do something... ??? (it was deleted from .pul file, maybe bad element)
-		cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/session_content.pul"|sed 's/\[.*\]//' > $HOME/.PopUpLearn/tmp/test_session_content.tmp
+		cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/session_content.pul" | sed 's/\[[^[]*\]//' > $HOME/.PopUpLearn/tmp/test_session_content.tmp
 		while read LINE; do
-			if ! grep -Fxq "$LINE" $FILE ; then
+			if ! grep -Fxq "$LINE" $HOME/.PopUpLearn/tmp/session_content_no_bracket.tmp ; then
 				mkdir "$HOME/.PopUpLearn/logs/BACKUP/" 2> /dev/null
 				BACKUP="$HOME/.PopUpLearn/logs/BACKUP/${LANGUAGE_1}_${LANGUAGE_2}_${SUBJECT}_${NUMBER}_${FILENAME}_session_${ARG}.txt"
 				echo "ERROR with $LINE, clean up logs... (backup details in $BACKUP)"
