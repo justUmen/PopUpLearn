@@ -14,14 +14,14 @@ window.addEventListener('keydown', function(evt) {
 
 	// setTimeout(function(){audio_play_2();},3000);
 	console.log(evt.keyCode);
-	if(evt.keyCode==27) {
-		audio_play_2();
+	if(evt.keyCode==32) {
+		audio_play_1();
 	}
-	else if(evt.keyCode==32) {
+	else if(evt.keyCode==27) {
 		close_popup();
 	}
 	else{
-		audio_play_1();
+		audio_play_2();
 	}
 },true);
 
