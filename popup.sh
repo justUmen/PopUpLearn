@@ -810,8 +810,8 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 	  echo -en "\t$COLOR_SELECTION $ARG) $COLOR_TITLE_SELECTED Session $ARG $ENDO "
 	  #~ cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/session_content.pul" 2>/dev/null | sed 's/.* |=| //' | tr '\n' '|' | sed 's/^/|/' > "$HOME/.PopUpLearn/tmp/list_answers.tmp"
 
-		# cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/session_content.pul" | sort 2>/dev/null > "$HOME/.PopUpLearn/tmp/list_lines.tmp"
-		cat $HOME/.PopUpLearn/tmp/test_session_content.tmp | sort 2>/dev/null > "$HOME/.PopUpLearn/tmp/list_lines.tmp"
+		cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/session_content.pul" | sort 2>/dev/null > "$HOME/.PopUpLearn/tmp/list_lines.tmp"
+		# cat $HOME/.PopUpLearn/tmp/test_session_content.tmp | sort 2>/dev/null > "$HOME/.PopUpLearn/tmp/list_lines.tmp"
 
 	  LAST_DAY=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | sed 's/.*€//' | sort -n | tail -n 1`
 	  TODAY=$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))
