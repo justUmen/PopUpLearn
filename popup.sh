@@ -1124,7 +1124,11 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
 		quizzed=`expr $quizzed + 1`
 		waited=1
 		if [ $SIGSTOP_MPV -eq 1 ]; then
-			sleep 5 && 💻_mpv_pause &> /dev/null &
+			if [[ "$XDG_CURRENT_DESKTOP" == "i3" ]]; then
+				sleep 5 && 💻_mpv_pause &> /dev/null &
+			else
+				💻_mpv_pause &> /dev/null &
+			fi
 		fi
 		#Unknown if python3 is closed without answering
 		echo unknown > $HOME/.PopUpLearn/tmp/result.tmp
