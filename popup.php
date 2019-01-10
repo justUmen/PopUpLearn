@@ -128,15 +128,15 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 
 		<!-- Tab content -->
 		<div id="wiktionary_1" class="tabcontent_1">
-			<object data="https://en.wiktionary.org/wiki/<?php echo $LEFT; ?>" width="100%" height="100%">
-	      <embed src="https://en.wiktionary.org/wiki/<?php echo $LEFT; ?>" width="100%" height="100%"> </embed>
+			<object data="https://en.wiktionary.org/wiki/<?php echo preg_replace('/].*/','',$LEFT); ?>" width="100%" height="100%">
+	      <embed src="https://en.wiktionary.org/wiki/<?php echo preg_replace('/].*/','',$LEFT); ?>" width="100%" height="100%"> </embed>
 	      Error: Embedded data could not be displayed.
 	    </object>
 		</div>
 
 		<div id="wikipedia_1" class="tabcontent_1">
-			<object data="https://<?php echo $LANGUAGE_WIKIPEDIA_1; ?>.wikipedia.org/wiki/<?php echo $LEFT; ?>" width="100%" height="100%">
-	      <embed src="https://<?php echo $LANGUAGE_WIKIPEDIA_1; ?>.wikipedia.org/wiki/<?php echo $LEFT; ?>" width="100%" height="100%"> </embed>
+			<object data="https://<?php echo $LANGUAGE_WIKIPEDIA_1; ?>.wikipedia.org/wiki/<?php echo preg_replace('/].*/','',$LEFT); ?>" width="100%" height="100%">
+	      <embed src="https://<?php echo $LANGUAGE_WIKIPEDIA_1; ?>.wikipedia.org/wiki/<?php echo preg_replace('/].*/','',$LEFT);; ?>" width="100%" height="100%"> </embed>
 	      Error: Embedded data could not be displayed.
 	    </object>
 		</div>
