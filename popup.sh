@@ -1079,18 +1079,20 @@ function ⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp(){ 🔧 $FUNCNAME $@
 }
 function ⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer(){ 🔧 $FUNCNAME $@
 	if [ $ANSWER_BEFORE_QUIZ -eq 1 ]; then
-		if [ $SIGSTOP_MPV -eq 1 ]; then sleep 5 && 💻_mpv_pause &> /dev/null & fi
 		if [ "$TIME_DISPLAYED" == 0 ];then #LOCK, unlimited
 			if [[ "$XDG_CURRENT_DESKTOP" == "i3" ]]; then
+				if [ $SIGSTOP_MPV -eq 1 ]; then sleep 5 && 💻_mpv_pause &> /dev/null & fi
 				CURRENT_DESKTOP=$(wmctrl -d | awk '/\*/{print $1}')
 				sleep 5 && i3-msg workspace "Learn"  &
 				$WEB_BROWSER http://127.0.0.1:9995/popup.php &> /dev/null
 				wmctrl -s $CURRENT_DESKTOP
 			else
+				if [ $SIGSTOP_MPV -eq 1 ]; then 💻_mpv_pause &> /dev/null & fi
 				$WEB_BROWSER http://127.0.0.1:9995/popup.php &> /dev/null
 			fi
 		else
 			if [[ "$XDG_CURRENT_DESKTOP" == "i3" ]]; then
+				if [ $SIGSTOP_MPV -eq 1 ]; then sleep 5 && 💻_mpv_pause &> /dev/null & fi
 				CURRENT_DESKTOP=$(wmctrl -d | awk '/\*/{print $1}')
 				sleep 5 && i3-msg workspace "Learn" &
 				$WEB_BROWSER http://127.0.0.1:9995/popup.php &> /dev/null &
@@ -1098,6 +1100,7 @@ function ⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer(){ 🔧 $FUNCNAME $@
 				pkill -f "$WEB_BROWSER http://127.0.0.1:9995/popup.php" &> /dev/null
 				wmctrl -s $CURRENT_DESKTOP
 			else
+				if [ $SIGSTOP_MPV -eq 1 ]; then 💻_mpv_pause &> /dev/null & fi
 				$WEB_BROWSER http://127.0.0.1:9995/popup.php &> /dev/null
 				sleep `expr $TIME_DISPLAYED + 1`
 				pkill -f "$WEB_BROWSER http://127.0.0.1:9995/popup.php" &> /dev/null
