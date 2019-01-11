@@ -347,7 +347,7 @@ function ⬚⬚⬚⬚_📃_gamescript(){ 🔧 $FUNCNAME $@
 		echo -en "\t$COLOR_SELECTION $i) $COLOR_TITLE_SELECTED ${SUBJECTS[i]} $ENDO"
 		LIST_CHAPTERS=`ls $HOME/.GameScript/passwords/${SUBJECTS[i]}* 2>/dev/null | sed "s#.*${SUBJECTS[i]}##" | tr '\n' ',' | sed 's/,$//'`
 		mkdir -p $HOME/.PopUpLearn/logs/GameScript/${SUBJECTS[i]} 2> /dev/null
-		LAST_DAY=`cat $HOME/.PopUpLearn/logs/${LANGUAGE}/${LANGUAGE}/GameScript/1/${SUBJECTS[i]}/session_*/answer.good.date 2>/dev/null | sed 's/.*€//' | sort -n | tail -n 1`
+		LAST_DAY=`cat $HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${SUBJECTS[i]}/session_*/answer.good.date 2>/dev/null | sed 's/.*€//' | sort -n | tail -n 1`
 		TODAY=$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))
 		DAYS=`expr $TODAY - $LAST_DAY 2>/dev/null`
 		if [ "$LIST_CHAPTERS" ]; then
