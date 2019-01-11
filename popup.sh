@@ -265,7 +265,7 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 			NB_OF_5PERCENT=`expr $NB_OF_5PERCENT - 1`
 			NB_OF_PERCENT=`expr $NB_OF_PERCENT - 1`
 		done
-		echo -n "$BG_WHITE" >> $HOME/.PopUpLearn/tmp/color_menu.list
+		echo -n "$BG_DARK_GRAY" >> $HOME/.PopUpLearn/tmp/color_menu.list
 		while [ $NB_OF_PERCENT -ne 0 ]; do
 			echo -n " " >> $HOME/.PopUpLearn/tmp/color_menu.list
 			NB_OF_PERCENT=`expr $NB_OF_PERCENT - 1`
