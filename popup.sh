@@ -400,11 +400,11 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME $@
 	#STRANGE WHY USE fr/fr/GameScript.... ???
 	SESSION_NUMBER=1
 	while [ -f "$HOME/.GameScript/passwords/$FILENAME$SESSION_NUMBER" ]; do #
-		SESSION_NUMBER=`expr $SESSION_NUMBER + 1`
 		mkdir -p "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/"
 		cat $HOME/.PopUpLearn/DB/GameScript/$LANGUAGE/$FILENAME/_$SESSION_NUMBER > "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul"
+		SESSION_NUMBER=`expr $SESSION_NUMBER + 1`
 	done
-	echo "===== $SESSION_NUMBER ====="
+	# echo "===== $SESSION_NUMBER ====="
 
 	NB_SESSION=$SESSION_NUMBER
 	ARG=1
