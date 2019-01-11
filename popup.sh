@@ -397,7 +397,7 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME $@
 		\e[38;5;196mRED$ENDO : Bad 3+ times (user need to focus on this)
 	"
 
-	SESSION_NUMBER=1
+	SESSION_NUMBER=0
 	while [ -f "$HOME/.GameScript/passwords/$FILENAME$SESSION_NUMBER" ]; do #
 		SESSION_NUMBER=`expr $SESSION_NUMBER + 1`
 		mkdir -p "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/"
