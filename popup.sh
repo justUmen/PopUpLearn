@@ -365,24 +365,24 @@ function ⬚⬚⬚⬚_📃_gamescript(){ 🔧 $FUNCNAME $@
 	echo -e "\t$COLOR_SELECTION e) $ENDO Return"
 	while :; do
 		echo -en "\t\e[97;45m # $ENDO"
-		read selected < /dev/tty
-		case $selected in
+		read selected_1 < /dev/tty
+		case $selected_1 in
 			e) return 2 ;;
 			0) ;;
 			[0-9]*) break ;;
 		esac
 	done
-	🔧 "$FUNCNAME : \$selected=$selected, \${SUBJECTS[i]}=${SUBJECTS[i]}"
+	🔧 "$FUNCNAME : \$selected_1=$selected_1, \${SUBJECTS[i]}=${SUBJECTS[i]}"
 }
 function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME $@
-while [ 1 ]; do
+	while [ 1 ]; do
 	LANGUAGE_1=$LANGUAGE
 	LANGUAGE_2=$LANGUAGE
 	SUBJECT=GameScript
-	FILENAME=${SUBJECTS[selected]}
-	GSSUBJECT=${SUBJECTS[selected]}
+	FILENAME=${SUBJECTS[selected_1]}
+	GSSUBJECT=${SUBJECTS[selected_1]}
 	NUMBER=1
-	SESSION_NUMBER=${selected}
+	SESSION_NUMBER=${selected_1}
 	echo
 	echo " - Warning : here sessions are chapters (unlock chapter's password on GameScript to use them here)"
 	echo " - Warning : dates are recorded but are not yet used to organize and optimize your learning experience. (In future versions, the text will change colors depending of when it was answered.)"
@@ -472,7 +472,7 @@ while [ 1 ]; do
 		esac
 	done
 	⬚⬚⬚⬚⬚_📗_gamescript
-done
+	done
 }
 function ⬚⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME $@
 	SESSION_SIZE=999 #For gs, always 999
