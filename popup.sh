@@ -584,6 +584,7 @@ function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME $@
 	fi
 }
 function ⬚⬚⬚⬚⬚_🔄_lines_in_gamescript_chapter(){ 🔧 $FUNCNAME $@
+	TYPE="TEXT"
 	while read X; do
 		⬚⬚⬚⬚⬚⬚_🚧_session_answers
 		⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp
