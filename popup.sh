@@ -593,6 +593,10 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_gamescript_chapter(){ 🔧 $FUNCNAME $@
 	ANSWERED_BAD_DATE="$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${GSSUBJECT}/session_$SESSION_NUMBER/answer.bad.date"
 	while read X; do
 		# ⬚⬚⬚⬚⬚⬚_🚧_session_answers
+			cat $HOME/.PopUpLearn/tmp/session_content_remove.tmp | sort -R | tail -n 1 > $HOME/.PopUpLearn/tmp/current_line.tmp
+			LINE=`cat $HOME/.PopUpLearn/tmp/current_line.tmp`
+			LEFT=`echo "$LINE" | sed 's/ |=| .*//'`
+			RIGHT=`echo "$LINE" | sed 's/.* |=| //'`
 		⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp
 		⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ
 		⬚⬚⬚⬚⬚⬚_💣_remove_answer_from_session_tmp
