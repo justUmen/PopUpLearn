@@ -583,6 +583,7 @@ function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME $@
 		LOOP_QUIZ=1
 		⬚⬚⬚⬚⬚_🔄_lines_in_gamescript_chapter || return 2
 	fi
+	⬚⬚⬚⬚_📃_gamescript_chapters
 }
 function ⬚⬚⬚⬚⬚_🔄_lines_in_gamescript_chapter(){ 🔧 $FUNCNAME $@
 	TYPE="TEXT"
