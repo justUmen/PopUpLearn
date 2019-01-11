@@ -328,12 +328,10 @@ function ⬚⬚⬚⬚_🏗_add_to_MYDB(){ 🔧 $FUNCNAME $@
 	ln -s "$1" "$MYDB_PATH" && echo "$DB_NAME was added to your personal list."
 }
 function ⬚⬚⬚_🔄🔄_gamescript(){ 🔧 $FUNCNAME $@
-	while [ 1 ]; do
-		⬚⬚⬚⬚_📃_gamescript || return 2
+	⬚⬚⬚⬚_📃_gamescript || return 2
 		while [ 1 ]; do
-			⬚⬚⬚⬚_📃_gamescript_chapters || return 2
-			⬚⬚⬚⬚_📗_gamescript || return 2
-		done
+		⬚⬚⬚⬚_📃_gamescript_chapters || return 2
+		⬚⬚⬚⬚_📗_gamescript || return 2
 	done
 }
 function ⬚⬚⬚⬚_📃_gamescript(){ 🔧 $FUNCNAME $@
