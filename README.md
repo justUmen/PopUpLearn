@@ -166,9 +166,9 @@ Language table for `LANGUAGE_1` and `LANGUAGE_2` variables.
 
 If the language is uppercase, it means the language is not a "normal" one, like here "RO" for romaji and "PI" for pinyin.  
 
-|french|english|chinese|chinese(pinyin)|thai|japanese|japanese(romaji)|IMAGE|
-|------|-------|-------|---------------|----|--------|----------------|-----|
-|fr|en|cn|PI|th|jp|RO|IM|
+|french|english|chinese|chinese[pinyin]|chinese(pinyin only)|thai|japanese|japanese[romaji]|japanese(romaji only)|IMAGE|
+|------|-------|-------|---------------|--------------------|----|--------|----------------|---------------------|-----|
+|fr|en|cn|cnPI|PI|th|jp|jpRO|RO|IM|
 
 In PopUpLearn, an answer can also be an image. In this case, you should use the special value "IM". For example if the answer is an image `LANGUAGE_2="IM"`
 
