@@ -624,7 +624,7 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 	SESSION_NUMBER=1
 	while [ 1 ]; do
 
-		SESSION_SIZE=5
+		SESSION_SIZE=$SESSION_SIZE_START;
 		source $HOME/.PopUpLearn/tmp/session_specific_config.tmp
 		if [ $SESSION_SIZE -eq 0 ]; then
 			SESSION_SIZE=9995
@@ -1247,7 +1247,7 @@ echo " - Warning : Dates are logged for all answers, but are not yet used by the
 echo
 if [ $1 ]; then TIME_DISPLAYED="$1"; else TIME_DISPLAYED=0; fi #0 for infinite
 if [ $2 ]; then SEC_AFTER_QUIZ="$2"; else SEC_AFTER_QUIZ=60; fi
-if [ $3 ]; then SIGSTOP_MPV="$3"; else SIGSTOP_MPV=1; fi
+if [ $3 ]; then SESSION_SIZE="$3"; SESSION_SIZE_START="$3"; else SESSION_SIZE=5; SESSION_SIZE_START=5; fi
 if [ $4 ]; then LANGUAGE_1="$4"; else LANGUAGE_1="xx"; fi
 if [ $5 ]; then LANGUAGE_2="$5"; else LANGUAGE_2="xx"; fi
 if [ $6 ]; then SUBJECT="$6"; else SUBJECT="unknown"; fi
@@ -1255,4 +1255,5 @@ if [ $7 ]; then NUMBER="$7"; else NUMBER="unknown"; fi
 if [ $8 ]; then TYPE="$8"; else TYPE="TEXT"; fi
 if [ $9 ]; then ANSWER_BEFORE_QUIZ="$9"; else ANSWER_BEFORE_QUIZ=1; fi
 if [ $10 ]; then LOOP_QUIZ="$10"; else LOOP_QUIZ=3; fi
+if [ $11 ]; then SIGSTOP_MPV="$11"; else SIGSTOP_MPV=1; fi
 ⬚_🔄🔄_start
