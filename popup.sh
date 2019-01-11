@@ -236,20 +236,20 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 		case $LANGUAGE_1 in
 			"en") L1="english" ;;
 			"fr") L1="french" ;;
-			"PI") L1="chinese (pinyin)" ;;
+			"cnPI") L1="chinese (pinyin)" ;;
 			"cn") L1="chinese" ;;
 			"th") L1="thai" ;;
 			"jp") L1="japanese" ;;
-			"RO") L1="japanese (romaji)" ;;
+			"jpRO") L1="japanese (romaji)" ;;
 		esac
 		case $LANGUAGE_2 in
 			"en") L2="english" ;;
 			"fr") L2="french" ;;
-			"PI") L2="chinese (pinyin)" ;;
+			"cnPI") L2="chinese (pinyin)" ;;
 			"cn") L2="chinese" ;;
 			"th") L2="thai" ;;
 			"jp") L2="japanese" ;;
-			"RO") L2="japanese (romaji)" ;;
+			"jpRO") L2="japanese (romaji)" ;;
 		esac
 		echo " => $COLOR_PERCENT $PERCENT% done ($NB_GOOD / $NB_LINES) $ENDO $COLOR_SELECTION $L1 / $L2 $ENDO" >> $HOME/.PopUpLearn/tmp/color_menu.list
 	done
