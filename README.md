@@ -99,6 +99,17 @@ But you should use them to organize your .pul files the way you want.
 
 `KEYBOARD_AUTO_CHANGE=1` automatically change keyboard layout to type the answer in another language. (more details in "Options" below)  
 
+## .pul files options
+
+- If a question or answer has an additional text between `[]`, this one will be used to play the audio file.
+
+Example with :  
+
+    #!#LANGUAGE_1="PI"
+    hǎo[好] |=| good
+
+Here, the audio file will be `好.mp3` and the language spoken will change to `cn`.  
+
 ## .pul files restrictions and syntax
 
 The format of each line is `question |=| answer`, " |=| " is used to separate the question from the answer. (Notice the spaces.)  
@@ -137,7 +148,7 @@ Simple first, then machine learning future prediction system !?
 Argument 1 : 0 => 0 means unlimited display of the answer (until user answer or close), otherwise the popup closes after X seconds. Useful if you can't or don't want to interact with PopUpLearn. (Not answering doesn't count as a wrong answer)  
 Argument 2 : 60 => Seconds to wait before the next popup  
 
-0 and 30 are default variables, so `popuplearn 0 60` and `popuplearn` are identical.
+0 and 60 are default variables, so `popuplearn 0 60` and `popuplearn` are identical.
 
 # Todo
 
@@ -160,3 +171,7 @@ If the language is uppercase, it means the language is not a "normal" one, like 
 |fr|en|cn|PI|th|jp|RO|IM|
 
 In PopUpLearn, an answer can also be an image. In this case, you should use the special value "IM". For example if the answer is an image `LANGUAGE_2="IM"`
+
+# Details :
+
+PopUpLearn is for now just a Proof Of Concept.  
