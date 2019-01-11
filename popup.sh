@@ -329,10 +329,7 @@ function ⬚⬚⬚⬚_🏗_add_to_MYDB(){ 🔧 $FUNCNAME $@
 }
 function ⬚⬚⬚_🔄🔄_gamescript(){ 🔧 $FUNCNAME $@
 	⬚⬚⬚⬚_📃_gamescript || return 2
-	while [ 1 ]; do
-		⬚⬚⬚⬚_📃_gamescript_chapters # || return 2
-		⬚⬚⬚⬚_📗_gamescript || return 2
-	done
+	⬚⬚⬚⬚_📃_gamescript_chapters # || return 2
 }
 function ⬚⬚⬚⬚_📃_gamescript(){ 🔧 $FUNCNAME $@
 	SUBJECTS=();
@@ -378,6 +375,7 @@ function ⬚⬚⬚⬚_📃_gamescript(){ 🔧 $FUNCNAME $@
 	🔧 "$FUNCNAME : \$selected=$selected, \${SUBJECTS[i]}=${SUBJECTS[i]}"
 }
 function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME $@
+while [ 1 ]; do
 	LANGUAGE_1=$LANGUAGE
 	LANGUAGE_2=$LANGUAGE
 	SUBJECT=GameScript
@@ -473,8 +471,10 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME $@
 			[0-9]*) SESSION_NUMBER=$selected; test "$selected" -le "`expr $NB_SESSION - 1`" && break ;;
 		esac
 	done
+	⬚⬚⬚⬚⬚_📗_gamescript
+done
 }
-function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME $@
+function ⬚⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME $@
 	SESSION_SIZE=999 #For gs, always 999
 	# echo "====== $ANSWERED_BAD"
 	if [[ "$selected" == "e" ]];then
