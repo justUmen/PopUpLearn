@@ -331,7 +331,7 @@ function ⬚⬚⬚_🔄🔄_gamescript(){ 🔧 $FUNCNAME $@
 	⬚⬚⬚⬚_📃_gamescript || return 2
 	while [ 1 ]; do
 		⬚⬚⬚⬚_📃_gamescript_chapters # || return 2
-		⬚⬚⬚⬚_📗_gamescript #|| return 2
+		⬚⬚⬚⬚_📗_gamescript || return 2
 	done
 }
 function ⬚⬚⬚⬚_📃_gamescript(){ 🔧 $FUNCNAME $@
@@ -397,6 +397,8 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME $@
 		\e[38;5;202mORANGE$ENDO : Bad 2 times
 		\e[38;5;196mRED$ENDO : Bad 3+ times (user need to focus on this)
 	"
+
+	echo "SELECTED = $selected"
 
 	#STRANGE WHY USE fr/fr/GameScript.... ???
 	SESSION_NUMBER=1
