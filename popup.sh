@@ -213,7 +213,7 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 	arraylength=${#FILES[@]}
 	rm "$HOME/.PopUpLearn/tmp/color_menu.list" 2> /dev/null
 	for (( i=1; i<${arraylength}; i++ )); do
-		echo -n "$COLOR_SELECTION $i) $COLOR_TITLE_SELECTED `echo \"${FILES[i]}\" | sed \"s#$HOME/.PopUpLearn/##\"` $ENDO|"  >> $HOME/.PopUpLearn/tmp/color_menu.list
+		echo -n "$COLOR_SELECTION $i) $COLOR_TITLE_SELECTED `echo \"${FILES[i]}\" | sed \"s#$HOME/.PopUpLearn/##\"` |$ENDO"  >> $HOME/.PopUpLearn/tmp/color_menu.list
 		cat ${FILES[i]} | grep '^#!#' | sed 's/^#!#//' > $HOME/.PopUpLearn/tmp/menu.config
 		source $HOME/.PopUpLearn/tmp/menu.config
 		FILE_NAME=`echo ${FILES[i]} | sed 's#.*/##'`
@@ -255,7 +255,7 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 			"jpRO") L2="japanese[romaji]" ;;
 			"RO") L2="japanese (romaji only)" ;;
 		esac
-		echo " => $COLOR_PERCENT $PERCENT% done ($NB_GOOD / $NB_LINES) $ENDO| $COLOR_SELECTION $L1 / $L2 $ENDO" >> $HOME/.PopUpLearn/tmp/color_menu.list
+		echo " => $COLOR_PERCENT $PERCENT% done ($NB_GOOD / $NB_LINES) |$ENDO $COLOR_SELECTION $L1 / $L2 $ENDO" >> $HOME/.PopUpLearn/tmp/color_menu.list
 	done
 	echo -e "`cat $HOME/.PopUpLearn/tmp/color_menu.list 2> /dev/null`" | column -t -s '|'
 	echo -e "$COLOR_SELECTION g) $ENDO GameScript Quizzes [for `cat ~/.GameScript/username`]"
