@@ -256,7 +256,7 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 			"RO") L2="japanese (romaji only)" ;;
 		esac
 		NB_OF_5PERCENT=`expr $PERCENT / 5`
-		NB_OF_PERCENT=10
+		NB_OF_PERCENT=20
 		echo -n "$COLOR_SELECTION" >> $HOME/.PopUpLearn/tmp/color_menu.list
 		while [ $NB_OF_5PERCENT -ne 0 ]; do
 			echo -n " " >> $HOME/.PopUpLearn/tmp/color_menu.list
@@ -264,10 +264,11 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 			NB_OF_PERCENT=`expr $NB_OF_PERCENT - 1`
 		done
 		echo -n "$COLOR_TITLE_SELECTED" >> $HOME/.PopUpLearn/tmp/color_menu.list
-		while [ $NB_OF_5PERCENT -ne 0 ]; do
+		while [ $NB_OF_PERCENT -ne 0 ]; do
 			echo -n " " >> $HOME/.PopUpLearn/tmp/color_menu.list
+			NB_OF_PERCENT=`expr $NB_OF_PERCENT - 1`
 		done
-		echo " => $COLOR_PERCENT $PERCENT% done ($NB_GOOD / $NB_LINES) |$ENDO $COLOR_SELECTION $L1 / $L2 $ENDO" >> $HOME/.PopUpLearn/tmp/color_menu.list
+		echo "$ENDO => $COLOR_PERCENT $PERCENT% done ($NB_GOOD / $NB_LINES) |$ENDO $COLOR_SELECTION $L1 / $L2 $ENDO" >> $HOME/.PopUpLearn/tmp/color_menu.list
 	done
 	echo -e "`cat $HOME/.PopUpLearn/tmp/color_menu.list 2> /dev/null`" | column -t -s '|'
 	echo -e "$COLOR_SELECTION g) $ENDO GameScript Quizzes [for `cat ~/.GameScript/username`]"
