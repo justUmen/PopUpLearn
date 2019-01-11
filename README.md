@@ -101,14 +101,14 @@ But you should use them to organize your .pul files the way you want.
 
 ## .pul files options
 
-- If a question or answer has an additional text between `[]`, this one will be used to play the audio file.
+- If a question or answer has an additional text between `[]`, this one will be ignored to play the audio file.
 
 Example with :  
 
-    #!#LANGUAGE_1="PI"
-    hǎo[好] |=| good
+    #!#LANGUAGE_1="cnPI"
+    好[hǎo] |=| good
 
-Here, the audio file will be `好.mp3` and the language spoken will change to `cn`.  
+Here, the audio file will be `好.mp3` and the language spoken will change to `cn`. (`PI` is the language for the text between `[]`).  
 
 ## .pul files restrictions and syntax
 

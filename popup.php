@@ -86,20 +86,20 @@ $LANGUAGE_TAG_2=$e[5];
 $LEFT = isset($_GET['LEFT']) ? $_GET['LEFT'] : $e[2];
 $LEFT_SOUND = explode("[", $LEFT);
 $LEFT_AUDIO=$LEFT;
-if(isset($LEFT_SOUND[1])){
-	$LEFT_SOUND[1]=substr($LEFT_SOUND[1], 0, -1);
-	$LEFT_AUDIO=$LEFT_SOUND[1];
-	if($LANGUAGE_TAG_1=="PI") $LANGUAGE_TAG_1="cn";
+if(isset($LEFT_SOUND[0])){
+	// $LEFT_SOUND[1]=substr($LEFT_SOUND[1], 0, -1);
+	$LEFT_AUDIO=$LEFT_SOUND[0];
+	if($LANGUAGE_TAG_1=="cnPI") $LANGUAGE_TAG_1="cn";
 }
 
 // $RIGHT=$e[3];
 $RIGHT = isset($_GET['RIGHT']) ? $_GET['RIGHT'] : $e[3];
 $RIGHT_SOUND = explode("[", $RIGHT);
 $RIGHT_AUDIO=$RIGHT;
-if(isset($RIGHT_SOUND[1])){
-	$RIGHT_SOUND[1]=substr($RIGHT_SOUND[1], 0, -1);
-	$RIGHT_AUDIO=$RIGHT_SOUND[1];
-	if($LANGUAGE_TAG_2=="PI") $LANGUAGE_TAG_2="cn";
+if(isset($RIGHT_SOUND[0])){
+	// $RIGHT_SOUND[1]=substr($RIGHT_SOUND[1], 0, -1);
+	$RIGHT_AUDIO=$RIGHT_SOUND[0];
+	if($LANGUAGE_TAG_2=="cnPI") $LANGUAGE_TAG_2="cn";
 }
 
 $SESSION_NUMBER=$e[7];
