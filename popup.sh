@@ -151,6 +151,8 @@ function ⬚_before_start(){
 	#PREPARE BACKGROUND COLORS
 	ENDO="\e[0m"
 	BG_BLUE="\e[44m"
+	BG_WHITE="\e[107m"
+	BG_CYAN="\e[106m"
 	BG_BLACK="\e[40m"
 	BG_DARK_GRAY="\e[100m"
 	BG_LIGHT_MAGENTA="\e[105m"
@@ -257,7 +259,7 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 		esac
 		NB_OF_5PERCENT=`expr $PERCENT / 5`
 		NB_OF_PERCENT=20
-		echo -n "$BG_BLUE" >> $HOME/.PopUpLearn/tmp/color_menu.list
+		echo -n "$BG_CYAN" >> $HOME/.PopUpLearn/tmp/color_menu.list
 		while [ $NB_OF_5PERCENT -ne 0 ]; do
 			echo -n " " >> $HOME/.PopUpLearn/tmp/color_menu.list
 			NB_OF_5PERCENT=`expr $NB_OF_5PERCENT - 1`
