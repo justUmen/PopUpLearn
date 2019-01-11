@@ -330,8 +330,10 @@ function ⬚⬚⬚⬚_🏗_add_to_MYDB(){ 🔧 $FUNCNAME $@
 function ⬚⬚⬚_🔄🔄_gamescript(){ 🔧 $FUNCNAME $@
 	while [ 1 ]; do
 		⬚⬚⬚⬚_📃_gamescript || return 2
-		⬚⬚⬚⬚_📃_gamescript_chapters || return 2
-		⬚⬚⬚⬚_📗_gamescript || return 2
+		while [ 1 ]; do
+			⬚⬚⬚⬚_📃_gamescript_chapters || return 2
+			⬚⬚⬚⬚_📗_gamescript || return 2
+		done
 	done
 }
 function ⬚⬚⬚⬚_📃_gamescript(){ 🔧 $FUNCNAME $@
