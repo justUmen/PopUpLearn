@@ -406,7 +406,7 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME $@
 
 	NB_SESSION=$SESSION_NUMBER
 	ARG=0
-	while [ $ARG -ne `expr $SESSION_NUMBER - 1` ]; do
+	while [ $ARG -ne $SESSION_NUMBER ]; do
 	  ARG=`expr $ARG + 1`
 	  echo -en "\t$COLOR_SELECTION $ARG) $COLOR_TITLE_SELECTED Chapter $ARG $ENDO "
 	  cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/session_content.pul" 2>/dev/null > "$HOME/.PopUpLearn/tmp/list_lines.tmp"
