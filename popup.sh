@@ -474,13 +474,7 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME $@
 }
 function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME $@
 	SESSION_SIZE=999 #For gs, always 999
-	ANSWERED_GOOD="$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${GSSUBJECT}/session_$SESSION_NUMBER/answer.good"
-	ANSWERED_GOOD_DATE="$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${GSSUBJECT}/session_$SESSION_NUMBER/answer.good.date"
-	TODAY="$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))"
-	ANSWERED_BAD="$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${GSSUBJECT}/session_$SESSION_NUMBER/answer.bad"
-	ANSWERED_BAD_DATE="$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${GSSUBJECT}/session_$SESSION_NUMBER/answer.bad.date"
-
-	echo "====== $ANSWERED_BAD"
+	# echo "====== $ANSWERED_BAD"
 	if [[ "$selected" == "m" ]];then
 			ANSWER_BEFORE_QUIZ=0 #USE 'M' INSTEAD TO DISPLAY ANSWER
 			ARRAY=()
@@ -592,8 +586,13 @@ function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME $@
 }
 function ⬚⬚⬚⬚⬚_🔄_lines_in_gamescript_chapter(){ 🔧 $FUNCNAME $@
 	TYPE="TEXT"
+	ANSWERED_GOOD="$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${GSSUBJECT}/session_$SESSION_NUMBER/answer.good"
+	ANSWERED_GOOD_DATE="$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${GSSUBJECT}/session_$SESSION_NUMBER/answer.good.date"
+	TODAY="$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))"
+	ANSWERED_BAD="$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${GSSUBJECT}/session_$SESSION_NUMBER/answer.bad"
+	ANSWERED_BAD_DATE="$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${GSSUBJECT}/session_$SESSION_NUMBER/answer.bad.date"
 	while read X; do
-		⬚⬚⬚⬚⬚⬚_🚧_session_answers
+		# ⬚⬚⬚⬚⬚⬚_🚧_session_answers
 		⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp
 		⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ
 		⬚⬚⬚⬚⬚⬚_💣_remove_answer_from_session_tmp
