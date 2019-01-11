@@ -331,7 +331,7 @@ function ⬚⬚⬚_🔄🔄_gamescript(){ 🔧 $FUNCNAME $@
 	⬚⬚⬚⬚_📃_gamescript || return 2
 	while [ 1 ]; do
 		⬚⬚⬚⬚_📃_gamescript_chapters # || return 2
-		⬚⬚⬚⬚_📗_gamescript # || return 2
+		⬚⬚⬚⬚_📗_gamescript #|| return 2
 	done
 }
 function ⬚⬚⬚⬚_📃_gamescript(){ 🔧 $FUNCNAME $@
@@ -475,7 +475,9 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME $@
 function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME $@
 	SESSION_SIZE=999 #For gs, always 999
 	# echo "====== $ANSWERED_BAD"
-	if [[ "$selected" == "m" ]];then
+	if [[ "$selected" == "e" ]];then
+		return 2
+	elif [[ "$selected" == "m" ]];then
 			ANSWER_BEFORE_QUIZ=0 #USE 'M' INSTEAD TO DISPLAY ANSWER
 			ARRAY=()
 			NB_SESSIONS=$SESSION_NUMBER
