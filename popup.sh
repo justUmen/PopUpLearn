@@ -213,7 +213,7 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 	arraylength=${#FILES[@]}
 	rm "$HOME/.PopUpLearn/tmp/color_menu.list" 2> /dev/null
 	for (( i=1; i<${arraylength}; i++ )); do
-		echo -n "$COLOR_SELECTION $i) $COLOR_TITLE_SELECTED `echo \"${FILES[i]}\" | sed \"s#$HOME/.PopUpLearn/##\"` $ENDO"  >> $HOME/.PopUpLearn/tmp/color_menu.list
+		echo -n "$COLOR_SELECTION $i) $COLOR_TITLE_SELECTED `echo \"${FILES[i]}\" | sed \"s#$HOME/.PopUpLearn/##\"` $ENDO|"  >> $HOME/.PopUpLearn/tmp/color_menu.list
 		cat ${FILES[i]} | grep '^#!#' | sed 's/^#!#//' > $HOME/.PopUpLearn/tmp/menu.config
 		source $HOME/.PopUpLearn/tmp/menu.config
 		FILE_NAME=`echo ${FILES[i]} | sed 's#.*/##'`
@@ -222,13 +222,13 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 		TODAY=$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))
 		DAYS=`expr $TODAY - $LAST_DAY 2>/dev/null`
 		if [[ "$DAYS" == "" ]]; then
-			echo -n " never used" >> $HOME/.PopUpLearn/tmp/color_menu.list
+			echo -n " never used|" >> $HOME/.PopUpLearn/tmp/color_menu.list
 		elif [ $DAYS -eq 0 ]; then
-			echo -n " used today" >> $HOME/.PopUpLearn/tmp/color_menu.list
+			echo -n " used today|" >> $HOME/.PopUpLearn/tmp/color_menu.list
 		elif [ $DAYS -eq 1 ]; then
-			echo -n " used yesterday" >> $HOME/.PopUpLearn/tmp/color_menu.list
+			echo -n " used yesterday|" >> $HOME/.PopUpLearn/tmp/color_menu.list
 		else
-			echo -n " used $DAYS days ago" >> $HOME/.PopUpLearn/tmp/color_menu.list
+			echo -n " used $DAYS days ago|" >> $HOME/.PopUpLearn/tmp/color_menu.list
 		fi
 		NB_GOOD=`cat $FILE_PATH/session_*/answer.good 2>/dev/null|sort|uniq -d|wc -l` #GOOD two times (-d)
 		NB_LINES=`cat ${FILES[i]}|grep -v "^#"|wc -l`
@@ -255,9 +255,9 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 			"jpRO") L2="japanese[romaji]" ;;
 			"RO") L2="japanese (romaji only)" ;;
 		esac
-		echo " => $COLOR_PERCENT $PERCENT% done ($NB_GOOD / $NB_LINES) $ENDO $COLOR_SELECTION $L1 / $L2 $ENDO" >> $HOME/.PopUpLearn/tmp/color_menu.list
+		echo " => $COLOR_PERCENT $PERCENT% done ($NB_GOOD / $NB_LINES) $ENDO $COLOR_SELECTION $L1 / $L2 $ENDO|" >> $HOME/.PopUpLearn/tmp/color_menu.list
 	done
-	echo -e "`cat $HOME/.PopUpLearn/tmp/color_menu.list 2> /dev/null`"
+	echo -e "`cat $HOME/.PopUpLearn/tmp/color_menu.list 2> /dev/null`" | column -t -s '|'
 	echo -e "$COLOR_SELECTION g) $ENDO GameScript Quizzes [for `cat ~/.GameScript/username`]"
 	echo -e "$COLOR_SELECTION i) $ENDO Infinite smart loop (learn / remember) \\e[38;5;196m[ not yet implemented... :( ]$ENDO" #NOT DISPLAY IF NOTHING ADDED YET ???
 	selected=99
