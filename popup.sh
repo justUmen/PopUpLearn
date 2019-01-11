@@ -397,6 +397,7 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME $@
 		\e[38;5;196mRED$ENDO : Bad 3+ times (user need to focus on this)
 	"
 
+	#STRANGE WHY USE fr/fr/GameScript.... ???
 	SESSION_NUMBER=1
 	while [ -f "$HOME/.GameScript/passwords/$FILENAME$SESSION_NUMBER" ]; do #
 		SESSION_NUMBER=`expr $SESSION_NUMBER + 1`
@@ -406,9 +407,8 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME $@
 	echo "===== $SESSION_NUMBER ====="
 
 	NB_SESSION=$SESSION_NUMBER
-	ARG=0
+	ARG=1
 	while [ $ARG -ne $SESSION_NUMBER ]; do
-	  ARG=`expr $ARG + 1`
 	  echo -en "\t$COLOR_SELECTION $ARG) $COLOR_TITLE_SELECTED Chapter $ARG $ENDO "
 	  cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/session_content.pul" 2>/dev/null > "$HOME/.PopUpLearn/tmp/list_lines.tmp"
 	  LAST_DAY=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | sed 's/.*€//' | sort -n | tail -n 1`
@@ -440,6 +440,7 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME $@
 			echo -en "\t\t GooD : "
 			echo -e $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" | sed "s#^\(.*\)#$BLUE[\1]$END#" | sed 's/ |=| / :: /')
 	  fi
+		ARG=`expr $ARG + 1`
 	done
 	selected=99
 	#~ echo -e "\t$COLOR_SELECTION n) $ENDO New session"
