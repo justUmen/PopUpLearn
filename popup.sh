@@ -981,7 +981,7 @@ function ⬚⬚⬚⬚⬚_🏗_session_content_tmp(){ 🔧 $FUNCNAME $@
 }
 function ⬚⬚⬚⬚⬚_🏗_session_content_tmp_mistakes_only(){ 🔧 $FUNCNAME $@
 	#proportional to the number of mistakes i guess...
-	cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/answer.bad" > $HOME/.PopUpLearn/tmp/session_content.tmp
+	cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/answer.bad" > $HOME/.PopUpLearn/tmp/session_content.tmp 2> /dev/null
 	cat $HOME/.PopUpLearn/tmp/session_content.tmp > $HOME/.PopUpLearn/tmp/session_content_remove.tmp
 }
 function ⬚⬚⬚⬚⬚_🏗_session_content_tmp_blue_only(){ 🔧 $FUNCNAME $@
