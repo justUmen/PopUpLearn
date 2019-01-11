@@ -382,6 +382,7 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME $@
 	LANGUAGE_2=$LANGUAGE
 	SUBJECT=GameScript
 	FILENAME=${SUBJECTS[selected]}
+	GSSUBJECT=${SUBJECTS[selected]}
 	NUMBER=1
 	SESSION_NUMBER=${selected}
 	echo
@@ -400,8 +401,8 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME $@
 	#STRANGE WHY USE fr/fr/GameScript.... ???
 	SESSION_NUMBER=1
 	while [ -f "$HOME/.GameScript/passwords/$FILENAME$SESSION_NUMBER" ]; do #
-		mkdir -p "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/"
-		cat $HOME/.PopUpLearn/DB/GameScript/$LANGUAGE/$FILENAME/_$SESSION_NUMBER > "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul"
+		mkdir -p "$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${SUBJECT}/session_$SESSION_NUMBER/"
+		cat $HOME/.PopUpLearn/DB/GameScript/$LANGUAGE/$FILENAME/_$SESSION_NUMBER > "$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${SUBJECT}/session_$SESSION_NUMBER/session_content.pul"
 		SESSION_NUMBER=`expr $SESSION_NUMBER + 1`
 	done
 	# echo "===== $SESSION_NUMBER ====="
@@ -410,28 +411,28 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME $@
 	ARG=1
 	while [ $ARG -ne $SESSION_NUMBER ]; do
 	  echo -en "\t$COLOR_SELECTION $ARG) $COLOR_TITLE_SELECTED Chapter $ARG $ENDO "
-	  cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/session_content.pul" 2>/dev/null > "$HOME/.PopUpLearn/tmp/list_lines.tmp"
-	  LAST_DAY=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | sed 's/.*€//' | sort -n | tail -n 1`
+	  cat "$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${SUBJECT}/session_$ARG/session_content.pul" 2>/dev/null > "$HOME/.PopUpLearn/tmp/list_lines.tmp"
+	  LAST_DAY=`cat "$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${SUBJECT}/session_$ARG/answer.good.date" 2>/dev/null | sed 's/.*€//' | sort -n | tail -n 1`
 	  TODAY=$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))
 	  LAST_GOOD_ANSWER=""
 	  if [[ "$LAST_DAY" != "" ]]; then
-			LAST_GOOD_ANSWER="last good answer was `expr $TODAY - $LAST_DAY ` days ago (`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null|wc -l` bad, `cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null|wc -l` good)"
+			LAST_GOOD_ANSWER="last good answer was `expr $TODAY - $LAST_DAY ` days ago (`cat "$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${SUBJECT}/session_$ARG/answer.bad.date" 2>/dev/null|wc -l` bad, `cat "$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${SUBJECT}/session_$ARG/answer.good.date" 2>/dev/null|wc -l` good)"
 	  fi
 	  echo -e $LAST_GOOD_ANSWER
 		#BAD (Not print if nothing bad)
-	  ERROR_TEST=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null | tail -n 1`
+	  ERROR_TEST=`cat "$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${SUBJECT}/session_$ARG/answer.bad.date" 2>/dev/null | tail -n 1`
 	  if [[ "$ERROR_TEST" != "" ]]; then
-			cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad" 2> /dev/null > "$HOME/.PopUpLearn/tmp/list_mistakes.tmp"
+			cat "$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${SUBJECT}/session_$ARG/answer.bad" 2> /dev/null > "$HOME/.PopUpLearn/tmp/list_mistakes.tmp"
 			cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" "$HOME/.PopUpLearn/tmp/list_mistakes.tmp" | sort | uniq -c | sed "s#^ \+1 \+\(.*\)#$GREY[\1]$END#" | sed "s#^ \+2 \+\(.*\)#$YELLOW[\1]$END#" | sed "s#^ \+3 \+\(.*\)#$ORANGE[\1]$END#" | sed "s#^ \+[0-9]\+ \+\(.*\)#$RED[\1]$END#" > "$HOME/.PopUpLearn/tmp/display_mistakes.tmp"
 			echo -en "\t\t  BAD : "
 			echo -e $(cat "$HOME/.PopUpLearn/tmp/display_mistakes.tmp" | sed 's/ |=| / :: /')
 	  fi
 		#GOOD (Not print if all good : ALL_GOOD=0)
-	  GOOD_TEST=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | tail -n 1`
+	  GOOD_TEST=`cat "$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${SUBJECT}/session_$ARG/answer.good.date" 2>/dev/null | tail -n 1`
 	  if [[ "$GOOD_TEST" != "" ]]; then
-			ALL_GOOD=$(expr `wc -l "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date"|sed 's/ .*//'` - `wc -l "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/session_content.pul"|sed 's/ .*//'`)
+			ALL_GOOD=$(expr `wc -l "$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${SUBJECT}/session_$ARG/answer.good.date"|sed 's/ .*//'` - `wc -l "$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${SUBJECT}/session_$ARG/session_content.pul"|sed 's/ .*//'`)
 			if [[ "$ALL_GOOD" == "0" ]]; then
-				cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good" 2> /dev/null > "$HOME/.PopUpLearn/tmp/list_correct.tmp"
+				cat "$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${SUBJECT}/session_$ARG/answer.good" 2> /dev/null > "$HOME/.PopUpLearn/tmp/list_correct.tmp"
 				cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" "$HOME/.PopUpLearn/tmp/list_correct.tmp" | sort | uniq -c | sed "s#^ \+1 \+\(.*\)#$BLUE[\1]$END#" | sed "s#^ \+2 \+\(.*\)#$DARK_BLUE[\1]$END#" | sed "s#^ \+[0-9]\+ \+\(.*\)#$GREY[\1]$END#" > "$HOME/.PopUpLearn/tmp/display_correct.tmp"
 				echo -en "\t\t GOOD : "
 				echo -e $(cat "$HOME/.PopUpLearn/tmp/display_correct.tmp" | sed 's/ |=| / :: /')
@@ -487,8 +488,8 @@ function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME $@
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
 				display_SESSION_NUMBER
 
-				mkdir -p "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/"
-				FILE="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul"
+				mkdir -p "$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${SUBJECT}/session_$SESSION_NUMBER/"
+				FILE="$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${SUBJECT}/session_$SESSION_NUMBER/session_content.pul"
 
 				cp $FILE "$HOME/.PopUpLearn/tmp/session_content.tmp"
 				cp $FILE "$HOME/.PopUpLearn/tmp/session_content_remove.tmp"
@@ -514,8 +515,8 @@ function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME $@
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
 				display_SESSION_NUMBER
 
-				mkdir -p "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/"
-				FILE="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul"
+				mkdir -p "$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${SUBJECT}/session_$SESSION_NUMBER/"
+				FILE="$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${SUBJECT}/session_$SESSION_NUMBER/session_content.pul"
 				echo " === $FILE === "
 				cp $FILE "$HOME/.PopUpLearn/tmp/session_content.tmp"
 				cp $FILE "$HOME/.PopUpLearn/tmp/session_content_remove.tmp"
@@ -541,15 +542,15 @@ function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME $@
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
 				display_SESSION_NUMBER
 
-				mkdir -p "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/"
+				mkdir -p "$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${SUBJECT}/session_$SESSION_NUMBER/"
 
 				#b -> 2 TIMES IF 0 GOOD, 1 TIME IF 1 GOOD, 0 TIME IF 2 GOOD (Technique to get rid of blue color quickly)
 				#identical with ⬚⬚⬚⬚⬚_🏗_session_content_tmp_blue_only (change ?)
-				cat $HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/answer.good | sort | uniq -d > "$HOME/.PopUpLearn/tmp/answer_good_at_least_2.tmp"
-				cat $HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/answer.good | sort | uniq -u > "$HOME/.PopUpLearn/tmp/answer_good_only_1.tmp"
+				cat $HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${SUBJECT}/session_$SESSION_NUMBER/answer.good | sort | uniq -d > "$HOME/.PopUpLearn/tmp/answer_good_at_least_2.tmp"
+				cat $HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${SUBJECT}/session_$SESSION_NUMBER/answer.good | sort | uniq -u > "$HOME/.PopUpLearn/tmp/answer_good_only_1.tmp"
 
-				cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul" "$HOME/.PopUpLearn/tmp/answer_good_at_least_2.tmp" | sort | uniq -u > "$HOME/.PopUpLearn/tmp/good_removed_2_times.tmp"
-				cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul" "$HOME/.PopUpLearn/tmp/answer_good_at_least_2.tmp" "$HOME/.PopUpLearn/tmp/answer_good_only_1.tmp" | sort | uniq -u > "$HOME/.PopUpLearn/tmp/good_removed_1_time.tmp"
+				cat "$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${SUBJECT}/session_$SESSION_NUMBER/session_content.pul" "$HOME/.PopUpLearn/tmp/answer_good_at_least_2.tmp" | sort | uniq -u > "$HOME/.PopUpLearn/tmp/good_removed_2_times.tmp"
+				cat "$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${SUBJECT}/session_$SESSION_NUMBER/session_content.pul" "$HOME/.PopUpLearn/tmp/answer_good_at_least_2.tmp" "$HOME/.PopUpLearn/tmp/answer_good_only_1.tmp" | sort | uniq -u > "$HOME/.PopUpLearn/tmp/good_removed_1_time.tmp"
 
 				cat "$HOME/.PopUpLearn/tmp/good_removed_1_time.tmp" "$HOME/.PopUpLearn/tmp/good_removed_2_times.tmp" > "$HOME/.PopUpLearn/tmp/good_removed.tmp"
 
@@ -568,8 +569,8 @@ function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME $@
 		SESSION_NUMBER=$selected
 		display_SESSION_NUMBER
 
-		mkdir -p "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/"
-		FILE="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/session_content.pul"
+		mkdir -p "$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${SUBJECT}/session_$SESSION_NUMBER/"
+		FILE="$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${SUBJECT}/session_$SESSION_NUMBER/session_content.pul"
 		echo " === $FILE === "
 		cp $FILE "$HOME/.PopUpLearn/tmp/session_content.tmp"
 		cp $FILE "$HOME/.PopUpLearn/tmp/session_content_remove.tmp"
