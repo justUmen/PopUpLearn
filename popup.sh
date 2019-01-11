@@ -479,6 +479,8 @@ function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME $@
 	TODAY="$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))"
 	ANSWERED_BAD="$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${GSSUBJECT}/session_$SESSION_NUMBER/answer.bad"
 	ANSWERED_BAD_DATE="$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${GSSUBJECT}/session_$SESSION_NUMBER/answer.bad.date"
+
+	echo "====== $ANSWERED_BAD"
 	if [[ "$selected" == "m" ]];then
 			ANSWER_BEFORE_QUIZ=0 #USE 'M' INSTEAD TO DISPLAY ANSWER
 			ARRAY=()
