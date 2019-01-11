@@ -346,7 +346,7 @@ function ⬚⬚⬚⬚_📃_gamescript(){ 🔧 $FUNCNAME $@
 	for (( i=1; i<${arraylength}; i++ )); do
 		echo -en "\t$COLOR_SELECTION $i) $COLOR_TITLE_SELECTED ${SUBJECTS[i]} $ENDO"
 		LIST_CHAPTERS=`ls $HOME/.GameScript/passwords/${SUBJECTS[i]}* 2>/dev/null | sed "s#.*${SUBJECTS[i]}##" | tr '\n' ',' | sed 's/,$//'`
-		mkdir -p $HOME/.PopUpLearn/logs/GameScript/${SUBJECTS[i]} 2> /dev/null
+		mkdir -p $HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${SUBJECTS[i]} 2> /dev/null
 		LAST_DAY=`cat $HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${SUBJECTS[i]}/session_*/answer.good.date 2>/dev/null | sed 's/.*€//' | sort -n | tail -n 1`
 		TODAY=$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))
 		DAYS=`expr $TODAY - $LAST_DAY 2>/dev/null`
@@ -474,6 +474,11 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME $@
 }
 function ⬚⬚⬚⬚_📗_gamescript(){ 🔧 $FUNCNAME $@
 	SESSION_SIZE=999 #For gs, always 999
+	ANSWERED_GOOD="$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${GSSUBJECT}/session_$SESSION_NUMBER/answer.good"
+	ANSWERED_GOOD_DATE="$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${GSSUBJECT}/session_$SESSION_NUMBER/answer.good.date"
+	TODAY="$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))"
+	ANSWERED_BAD="$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${GSSUBJECT}/session_$SESSION_NUMBER/answer.bad"
+	ANSWERED_BAD_DATE="$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${GSSUBJECT}/session_$SESSION_NUMBER/answer.bad.date"
 	if [[ "$selected" == "m" ]];then
 			ANSWER_BEFORE_QUIZ=0 #USE 'M' INSTEAD TO DISPLAY ANSWER
 			ARRAY=()
