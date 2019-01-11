@@ -224,14 +224,25 @@ foreach ($session as &$value) {
 	?>
 </div>
 
-
 <div id="sounds">
 	<table style="text-align: center;width:100%;"><tr><td style="width:45%;text-align:right;">
+	<?php
+	if (file_exists("soundDB/$LANGUAGE_TAG_1/$LEFT_AUDIO.mp3")) {
+	echo<<<END
 		<a id="audio_1" style="height:53px;line-height: 40px;font-size:30px;vertical-align:middle" class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_1();return false' href='#' title='Play sound'> Enter</a>
+END;
+	}
+	?>
 	</td><td style="width:5%">
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	</td><td style="width:45%;text-align:left;">
+		<?php
+		if (file_exists("soundDB/$LANGUAGE_TAG_1/$RIGHT_AUDIO.mp3")) {
+		echo<<<END
 		<a id="audio_2" style="height:53px;line-height: 40px;font-size:30px;vertical-align:middle" class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_2();return false' href='#' title='Play sound'> Space</a>
+END;
+	}
+	?>
 	</td></tr></table>
 </div>
 
