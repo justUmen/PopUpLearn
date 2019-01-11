@@ -39,7 +39,8 @@ function 💻_keyboard_language_change(){ 🔧 $FUNCNAME $@
 	CURRENT_LANGUAGE=`cat $HOME/.PopUpLearn/tmp/ibus.tmp`
 	case $LANGUAGE_2 in
 		fr)
-		NEW_LANGUAGE="xkb:fr::fra"
+		# NEW_LANGUAGE="xkb:fr::fra"
+		NEW_LANGUAGE="xkb:us::eng"
 		echo $NEW_LANGUAGE > $HOME/.PopUpLearn/tmp/ibus_new.tmp
 		echo "$CURRENT_LANGUAGE != $NEW_LANGUAGE"
 		if [[ "$CURRENT_LANGUAGE" != "$NEW_LANGUAGE" ]]; then
