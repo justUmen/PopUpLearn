@@ -229,8 +229,7 @@ foreach ($session as &$value) {
 	<?php
 	if (file_exists("soundDB/$LANGUAGE_TAG_1/$LEFT_AUDIO.mp3")) {
 	echo<<<END
-		<a id="audio_1" class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_1();return false' href='#' title='Play sound'> </a><br>
-		<a onclick='audio_play_1();return false' href='#' title='Play sound'>Enter</a>
+		<a style="font-size:1.5em;" onclick='audio_play_1();return false' href='#' title='Play sound'>Enter</a><a style="font-size:1.5em;" id="audio_1" class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_1();return false' href='#' title='Play sound'> </a>
 END;
 	}
 	?>
@@ -240,8 +239,7 @@ END;
 		<?php
 		if (file_exists("soundDB/$LANGUAGE_TAG_2/$RIGHT_AUDIO.mp3")) {
 		echo<<<END
-		<a id="audio_2" class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_2();return false' href='#' title='Play sound'> </a><br>
-		<a onclick='audio_play_1();return false' href='#' title='Play sound'>Space</a>
+		<a style="font-size:1.5em;" id="audio_2" class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_2();return false' href='#' title='Play sound'> </a><a style="font-size:1.5em;" onclick='audio_play_1();return false' href='#' title='Play sound'>Space</a>
 END;
 	}
 	?>
