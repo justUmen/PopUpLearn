@@ -229,6 +229,7 @@ foreach ($session as &$value) {
 	<?php
 	if (file_exists("soundDB/$LANGUAGE_TAG_1/$LEFT_AUDIO.mp3")) {
 	echo<<<END
+	<style>.widget{padding-bottom:60px !important;}</style>
 		<a id="audio_1" style="height:53px;line-height: 40px;font-size:30px;vertical-align:middle" class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_1();return false' href='#' title='Play sound'> Enter</a>
 END;
 	}
@@ -239,6 +240,7 @@ END;
 		<?php
 		if (file_exists("soundDB/$LANGUAGE_TAG_1/$RIGHT_AUDIO.mp3")) {
 		echo<<<END
+		<style>.widget{padding-bottom:60px !important;}</style>
 		<a id="audio_2" style="height:53px;line-height: 40px;font-size:30px;vertical-align:middle" class='play-icon btn glyphicon glyphicon-volume-up' onclick='audio_play_2();return false' href='#' title='Play sound'> Space</a>
 END;
 	}
