@@ -224,6 +224,7 @@ left:50%;
 .play-icon{
   /* display: none; */
   border:1px solid #888 !important;
+  background-color:black;
   margin:20px;
 }
 .glyphicon-remove{
