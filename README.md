@@ -110,6 +110,8 @@ Example with :
 
 Here, the audio file will be `好.mp3` and the language spoken will change to `cn`. (`PI` is the language for the text between `[]`).  
 
+`[]` can also be used to comment or add informations.  
+
 ## .pul files restrictions and syntax
 
 The format of each line is `question |=| answer`, " |=| " is used to separate the question from the answer. (Notice the spaces.)  
