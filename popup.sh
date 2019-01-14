@@ -782,6 +782,21 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 				display_SESSION_NUMBER
 				⬚⬚⬚⬚_📗🔢_session_learn_mistakes_only $selected || break
 			done
+		elif [[ "$selected" == "r" ]]; then
+			ANSWER_BEFORE_QUIZ=0
+			ARRAY=()
+			NB_SESSIONS=$SESSION_NUMBER
+			#Prepare array with sessions numbers inside
+			for (( i=1; i<$NB_SESSIONS; i++ )); do ARRAY+=($i); done
+			#Shuffle the sessions numbers or a random result
+			readarray -d '' SHUFFLED_SESSION_NUMBERS < <(printf "%s\0" "${ARRAY[@]}" | shuf -z)
+			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do echo " -- ${SHUFFLED_SESSION_NUMBERS[i]} -- "; done
+			#LAUNCH ONE SESSION AFTER THE OTHER
+			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
+				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
+				display_SESSION_NUMBER
+				⬚⬚⬚⬚_📗🔢_session_old_mistakes_reverse $SESSION_NUMBER || break
+			done
 		else
 			⬚⬚⬚⬚_📗🔢_session_old $selected
 		fi
@@ -972,6 +987,20 @@ function ⬚⬚⬚⬚_📗🔢_session_old_with_answers(){ 🔧 $FUNCNAME $@
 function ⬚⬚⬚⬚_📗🔢_session_old_mistakes_only(){ 🔧 $FUNCNAME $@
 	⬚⬚⬚⬚⬚_🏗_session_specific_config
 	⬚⬚⬚⬚⬚_🏗_session_content_tmp_mistakes_only
+	SESSION_NUMBER=$1
+	LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
+	⬚⬚⬚⬚⬚_🔄_lines_in_session || return 2
+	#~ ⬚⬚⬚⬚⬚_🛑_lines_in_session #Don't display end of session, not useful to know, useless spam
+}
+function ⬚⬚⬚⬚_📗🔢_session_old_mistakes_reverse(){ 🔧 $FUNCNAME $@
+	⬚⬚⬚⬚⬚_🏗_session_specific_config
+	⬚⬚⬚⬚⬚_🏗_session_content_tmp_mistakes_only
+	#REVERSE
+	TMP_LANGUAGE=$LANGUAGE_TAG_1
+	LANGUAGE_TAG_1=$LANGUAGE_TAG_2
+	LANGUAGE_TAG_2=$TMP_LANGUAGE
+	sed -i 's/\(.*\) |=| \(.*\)/\2 |=| \1/' $HOME/.PopUpLearn/tmp/session_content.tmp
+	sed -i 's/\(.*\) |=| \(.*\)/\2 |=| \1/' $HOME/.PopUpLearn/tmp/session_content_reverse.tmp
 	SESSION_NUMBER=$1
 	LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
 	⬚⬚⬚⬚⬚_🔄_lines_in_session || return 2
