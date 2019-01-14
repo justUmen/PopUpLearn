@@ -784,6 +784,7 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 			done
 		elif [[ "$selected" == "r" ]]; then
 			ANSWER_BEFORE_QUIZ=0
+			TYPE="TEXT"
 			ARRAY=()
 			NB_SESSIONS=$SESSION_NUMBER
 			#Prepare array with sessions numbers inside
@@ -910,7 +911,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 		echo -e "\t$COLOR_SELECTION b) $ENDO $COLOR_TITLE_SELECTED[Recommended]$ENDO Detect your knowledge by asking only blue questions. (session random order) - NOT SHOW ANSWER"
 		echo -e "\t$COLOR_SELECTION m) $ENDO All mistakes from all sessions (session random order) - NOT SHOW ANSWER"
 		echo -e "\t$COLOR_SELECTION M) $ENDO All mistakes from all sessions (session random order) - SHOW ANSWER FIRST"
-		echo -e "\t$COLOR_SELECTION r) $ENDO All mistakes from all sessions in reverse (session random order) - NOT SHOW ANSWER"
+		echo -e "\t$COLOR_SELECTION r) $ENDO All mistakes from all sessions in reverse (session random order) - NOT SHOW ANSWER (no points for good)"
 		echo -e "\t$COLOR_SELECTION l) $ENDO Learn about all sessions - ANSWER ONLY NO QUIZ (better with arguments, like : popuplearn 5 60)"
 		echo -e "\t$COLOR_SELECTION L) $ENDO Learn about all mistakes in sessions - ANSWER ONLY NO QUIZ (better with arguments, like : popuplearn 5 60)"
 		echo -e "\t$COLOR_SELECTION s) $ENDO All questions from all current sessions (session random order) - NOT SHOW ANSWER"
