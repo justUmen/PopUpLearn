@@ -1005,7 +1005,7 @@ function ⬚⬚⬚⬚_📗🔢_session_old_mistakes_reverse(){ 🔧 $FUNCNAME $@
 	sed -i 's/\(.*\) |=| \(.*\)/\2 |=| \1/' $HOME/.PopUpLearn/tmp/session_content_remove.tmp
 	SESSION_NUMBER=$1
 	LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
-	⬚⬚⬚⬚⬚_🔄_lines_in_session || return 2
+	⬚⬚⬚⬚⬚_🔄_lines_in_session "IGNORE_GOOD" || return 2
 	#~ ⬚⬚⬚⬚⬚_🛑_lines_in_session #Don't display end of session, not useful to know, useless spam
 }
 function ⬚⬚⬚⬚_📗🔢_session_old_blue_only(){ 🔧 $FUNCNAME $@
