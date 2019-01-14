@@ -1088,6 +1088,8 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 		# ⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer
 		if [ $LOOP_QUIZ -ne 0 ]; then
 			if [[ "$1" == "IGNORE_GOOD" ]];then
+				⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ "IGNORE_GOOD_BAD"
+			elif [[ "$1" == "IGNORE_GOOD" ]];then
 				⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ "IGNORE_GOOD"
 			else
 				⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ
@@ -1243,14 +1245,16 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
 			#??? UGLY
 			notify-send -i $HOME/.PopUpLearn/img/good.png "$LEFT : `echo "$RIGHT"|sed 's/\\\\\\\\/\\\/'|sed 's/\\\\\\\\/\\\/'|sed 's/\\\\\\\\/\\\/'|sed "s/</𝈶/g"` ($quizzed/$LOOP_QUIZ)"
 			#IF CALLED ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ IGNORE_GOOD, DO NOT RECORD GOOD ANSWER
-			if [[ "$2" != "IGNORE_GOOD" ]];then
+			if [[ "$2" != "IGNORE_GOOD" ]] && [[ "$2" != "IGNORE_GOOD_BAD" ]];then
 				echo "$LINE" >> $ANSWERED_GOOD
 				echo "$LINE€$TODAY" >> $ANSWERED_GOOD_DATE
 			fi
 		elif [[ "`cat $HOME/.PopUpLearn/tmp/result.tmp`" == "bad" ]]; then
 			notify-send -i $HOME/.PopUpLearn/img/bad.png "$LEFT : `echo "$RIGHT"|sed 's/\\\\\\\\/\\\/'|sed 's/\\\\\\\\/\\\/'|sed 's/\\\\\\\\/\\\/'|sed "s/</𝈶/g"` ($quizzed/$LOOP_QUIZ)"
-			echo "$LINE" >> $ANSWERED_BAD
-			echo "$LINE€$TODAY" >> $ANSWERED_BAD_DATE
+			if [[ "$2" != "IGNORE_GOOD_BAD" ]];then
+				echo "$LINE" >> $ANSWERED_BAD
+				echo "$LINE€$TODAY" >> $ANSWERED_BAD_DATE
+			fi
 		else
 			#~ notify-send -i $HOME/.PopUpLearn/img/unknown.png "$LEFT : $RIGHT ($quizzed/$LOOP_QUIZ)"
 			if [ "$TIME_DISPLAYED" == 0 ];then
