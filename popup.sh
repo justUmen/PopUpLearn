@@ -1002,7 +1002,7 @@ function ⬚⬚⬚⬚_📗🔢_session_old_mistakes_reverse(){ 🔧 $FUNCNAME $@
 	LANGUAGE_TAG_1=$LANGUAGE_TAG_2
 	LANGUAGE_TAG_2=$TMP_LANGUAGE
 	sed -i 's/\(.*\) |=| \(.*\)/\2 |=| \1/' $HOME/.PopUpLearn/tmp/session_content.tmp
-	sed -i 's/\(.*\) |=| \(.*\)/\2 |=| \1/' $HOME/.PopUpLearn/tmp/session_content_reverse.tmp
+	sed -i 's/\(.*\) |=| \(.*\)/\2 |=| \1/' $HOME/.PopUpLearn/tmp/session_content_remove.tmp
 	SESSION_NUMBER=$1
 	LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
 	⬚⬚⬚⬚⬚_🔄_lines_in_session || return 2
