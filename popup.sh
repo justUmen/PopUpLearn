@@ -1148,7 +1148,7 @@ function ⬚⬚⬚⬚⬚⬚_🚧_session_answers(){ 🔧 $FUNCNAME $@
 	if [[ "$1" == "REVERSE" ]];then
 		TmP=$LEFT
 		LEFT=$RIGHT
-		RIGHT=TmP
+		RIGHT=$TmP
 	fi
 	if [[ "$TYPE" == "BUTTON" ]];then
 		rm $HOME/.PopUpLearn/tmp/wrong_answers_BUTTON2.tmp 2> /dev/null
@@ -1158,7 +1158,7 @@ function ⬚⬚⬚⬚⬚⬚_🚧_session_answers(){ 🔧 $FUNCNAME $@
 			if [[ "$1" == "REVERSE" ]];then
 				TmP=$left
 				left=$right
-				right=TmP
+				right=$TmP
 			fi
 			#~ if [[ "$left" != "$LEFT" ]] : BETTER FOR MULTIPLE ANSWERS POSSIBLE ???
 			# if [[ "$line" != "`cat $HOME/.PopUpLearn/tmp/current_line.tmp`" ]]; then
