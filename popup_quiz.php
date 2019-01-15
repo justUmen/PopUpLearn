@@ -127,11 +127,12 @@ var App = React.createClass({
 //~ $elem=preg_replace('/\\\\/','_',$elem);
 //~ $elem=preg_replace('/\\\\\\/','_',$elem);
 //~ $elem_CLEAN=$elem;
+$elem_NO_BRACKET=preg_replace("/\[[^[]*\]/","",$elem);
 			if($elem==$RIGHT){
 			echo <<<END
 				{
 				  user: {
-					name: `$elem`,
+					name: `$elem_NO_BRACKET`,
 					LEFT: `$LEFT`,
 					answer: 'good'
 				  },
@@ -142,7 +143,7 @@ END;
 			echo <<<END
 				{
 				  user: {
-					name: `$elem`,
+					name: `$elem_NO_BRACKET`,
 					answer: 'bad'
 				  },
 				},
