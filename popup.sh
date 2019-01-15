@@ -1087,7 +1087,7 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 		# if [[ "$X" == "" ]]; then break; fi
 		echo -e "\n---->Line number $nbline" # ($FILE) [$X]" #$X NOT EVEN ALWAYS THE SELECTED ONE....
 		nbline=`expr $nbline + 1`
-		if [[ "$1" == "REVERSE" ]];then
+		if [[ "$2" == "REVERSE" ]];then
 			⬚⬚⬚⬚⬚⬚_🚧_session_answers "REVERSE"
 		else
 			⬚⬚⬚⬚⬚⬚_🚧_session_answers
