@@ -1145,24 +1145,15 @@ function ⬚⬚⬚⬚⬚⬚_🚧_session_answers(){ 🔧 $FUNCNAME $@
 	LINE=`cat $HOME/.PopUpLearn/tmp/current_line.tmp`
 	LEFT=`echo "$LINE" | sed 's/ |=| .*//'`
 	RIGHT=`echo "$LINE" | sed 's/.* |=| //'`
-	# if [[ "$1" == "REVERSE" ]];then
-	# 	TmP=$LEFT
-	# 	LEFT=$RIGHT
-	# 	RIGHT=$TmP
 	# fi
 	if [[ "$TYPE" == "BUTTON" ]];then
 		rm $HOME/.PopUpLearn/tmp/wrong_answers_BUTTON2.tmp 2> /dev/null
 		while read line; do
 			left=`echo $line | sed 's/ |=| .*//'`
 			right=`echo $line | sed 's/.* |=| //'`
-			# if [[ "$1" == "REVERSE" ]];then
-			# 	TmP=$left
-			# 	left=$right
-			# 	right=$TmP
-			# fi
 			#~ if [[ "$left" != "$LEFT" ]] : BETTER FOR MULTIPLE ANSWERS POSSIBLE ???
 			# if [[ "$line" != "`cat $HOME/.PopUpLearn/tmp/current_line.tmp`" ]]; then
-			echo " =====> RIGHT=$RIGHT right=$right LEFT=$LEFT left=$left"
+			# echo " =====> RIGHT=$RIGHT right=$right LEFT=$LEFT left=$left"
 			if [[ "$1" == "REVERSE" ]];then
 				if [[ "$left" != "$RIGHT" ]]; then
 					echo "$left" >> $HOME/.PopUpLearn/tmp/wrong_answers_BUTTON2.tmp
@@ -1173,6 +1164,7 @@ function ⬚⬚⬚⬚⬚⬚_🚧_session_answers(){ 🔧 $FUNCNAME $@
 				fi
 			fi
 		done < "$HOME/.PopUpLearn/tmp/file_content_BAD_answers.tmp"
+		#??? why so many lines ? :P Limit 30 ?
 		cat $HOME/.PopUpLearn/tmp/wrong_answers_BUTTON2.tmp | sort | uniq > $HOME/.PopUpLearn/tmp/wrong_answers_BUTTON.tmp
 	fi
 	🔧 "$FUNCNAME : \$LINE=$LINE (RIGHT / LEFT) - $FILE"
