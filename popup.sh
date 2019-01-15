@@ -37,8 +37,8 @@ function 💻_keyboard_language_change(){ 🔧 $FUNCNAME $@
 	command -v ibus >/dev/null 2>&1 || return
 	ibus engine > $HOME/.PopUpLearn/tmp/ibus.tmp
 	CURRENT_LANGUAGE=`cat $HOME/.PopUpLearn/tmp/ibus.tmp`
-	echo "LANGUAGE_TAG_2 = $LANGUAGE_TAG_2, LANGUAGE_2 = $LANGUAGE_2"
-	case $LANGUAGE_TAG_2 in
+	# echo "LANGUAGE_TAG_2 = $LANGUAGE_TAG_2, LANGUAGE_2 = $LANGUAGE_2"
+	case $LANGUAGE_2 in
 		fr)
 		# NEW_LANGUAGE="xkb:fr::fra"
 		NEW_LANGUAGE="xkb:us::eng"
@@ -1003,17 +1003,21 @@ function ⬚⬚⬚⬚_📗🔢_session_old_mistakes_reverse(){ 🔧 $FUNCNAME $@
 	TMP_LANGUAGE=$LANGUAGE_TAG_1
 	LANGUAGE_TAG_1=$LANGUAGE_TAG_2
 	LANGUAGE_TAG_2=$TMP_LANGUAGE
-	# TMP_LANGUAGE=$LANGUAGE_1
-	# LANGUAGE_1=$LANGUAGE_2
-	# LANGUAGE_2=$TMP_LANGUAGE
+
+	TMP_LANGUAGE=$LANGUAGE_1
+	LANGUAGE_1=$LANGUAGE_2
+	LANGUAGE_2=$TMP_LANGUAGE
 	sed -i 's/\(.*\) |=| \(.*\)/\2 |=| \1/' $HOME/.PopUpLearn/tmp/session_content.tmp
 	sed -i 's/\(.*\) |=| \(.*\)/\2 |=| \1/' $HOME/.PopUpLearn/tmp/session_content_remove.tmp
 	# sed -i 's/\[[^[]*\]//g' $HOME/.PopUpLearn/tmp/session_content.tmp #in php instead
 	# sed -i 's/\[[^[]*\]//g' $HOME/.PopUpLearn/tmp/session_content_remove.tmp
 	SESSION_NUMBER=$1
 	LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
-	⬚⬚⬚⬚⬚_🔄_lines_in_session "IGNORE_GOOD" "REVERSE" || return 2
+	⬚⬚⬚⬚⬚_🔄_lines_in_session "IGNORE_GOOD_BAD" "REVERSE" || return 2
 	#~ ⬚⬚⬚⬚⬚_🛑_lines_in_session #Don't display end of session, not useful to know, useless spam
+	TMP_LANGUAGE=$LANGUAGE_1
+	LANGUAGE_1=$LANGUAGE_2
+	LANGUAGE_2=$TMP_LANGUAGE
 }
 function ⬚⬚⬚⬚_📗🔢_session_old_blue_only(){ 🔧 $FUNCNAME $@
 	⬚⬚⬚⬚⬚_🏗_session_specific_config
@@ -1097,7 +1101,7 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 		⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer || return 2
 		# ⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer
 		if [ $LOOP_QUIZ -ne 0 ]; then
-			if [[ "$1" == "IGNORE_GOOD" ]];then
+			if [[ "$1" == "IGNORE_GOOD_BAD" ]];then
 				⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ "IGNORE_GOOD_BAD"
 			elif [[ "$1" == "IGNORE_GOOD" ]];then
 				⬚⬚⬚⬚⬚⬚_🔄🌐_quiz $LOOP_QUIZ "IGNORE_GOOD"
