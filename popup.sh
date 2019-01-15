@@ -1152,7 +1152,7 @@ function ⬚⬚⬚⬚⬚⬚_🚧_session_answers(){ 🔧 $FUNCNAME $@
 			#~ if [[ "$left" != "$LEFT" ]] : BETTER FOR MULTIPLE ANSWERS POSSIBLE ???
 			# if [[ "$line" != "`cat $HOME/.PopUpLearn/tmp/current_line.tmp`" ]]; then
 			if [[ "$1" == "REVERSE" ]];then
-				if [[ "$left" != "$LEFT" ]]; then
+				if [[ "$right" != "$RIGHT" ]]; then
 					echo "$left" >> $HOME/.PopUpLearn/tmp/wrong_answers_BUTTON2.tmp
 				fi
 			else
