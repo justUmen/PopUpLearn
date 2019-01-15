@@ -37,7 +37,7 @@ function 💻_keyboard_language_change(){ 🔧 $FUNCNAME $@
 	command -v ibus >/dev/null 2>&1 || return
 	ibus engine > $HOME/.PopUpLearn/tmp/ibus.tmp
 	CURRENT_LANGUAGE=`cat $HOME/.PopUpLearn/tmp/ibus.tmp`
-	case $LANGUAGE_2_TAG in
+	case $LANGUAGE_2 in
 		fr)
 		# NEW_LANGUAGE="xkb:fr::fra"
 		NEW_LANGUAGE="xkb:us::eng"
@@ -1001,7 +1001,9 @@ function ⬚⬚⬚⬚_📗🔢_session_old_mistakes_reverse(){ 🔧 $FUNCNAME $@
 	#REVERSE
 	TMP_LANGUAGE=$LANGUAGE_TAG_1
 	LANGUAGE_TAG_1=$LANGUAGE_TAG_2
+	LANGUAGE_1=$LANGUAGE_TAG_2
 	LANGUAGE_TAG_2=$TMP_LANGUAGE
+	LANGUAGE_2=$TMP_LANGUAGE
 	sed -i 's/\(.*\) |=| \(.*\)/\2 |=| \1/' $HOME/.PopUpLearn/tmp/session_content.tmp
 	# sed -i 's/\[[^[]*\]//g' $HOME/.PopUpLearn/tmp/session_content.tmp #in php instead
 	sed -i 's/\(.*\) |=| \(.*\)/\2 |=| \1/' $HOME/.PopUpLearn/tmp/session_content_remove.tmp
