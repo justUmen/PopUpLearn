@@ -1001,8 +1001,9 @@ function ⬚⬚⬚⬚_📗🔢_session_old_mistakes_reverse(){ 🔧 $FUNCNAME $@
 	#REVERSE
 	TMP_LANGUAGE=$LANGUAGE_TAG_1
 	LANGUAGE_TAG_1=$LANGUAGE_TAG_2
-	LANGUAGE_1=$LANGUAGE_TAG_2
 	LANGUAGE_TAG_2=$TMP_LANGUAGE
+	TMP_LANGUAGE=$LANGUAGE_1
+	LANGUAGE_1=$LANGUAGE_2
 	LANGUAGE_2=$TMP_LANGUAGE
 	sed -i 's/\(.*\) |=| \(.*\)/\2 |=| \1/' $HOME/.PopUpLearn/tmp/session_content.tmp
 	# sed -i 's/\[[^[]*\]//g' $HOME/.PopUpLearn/tmp/session_content.tmp #in php instead
