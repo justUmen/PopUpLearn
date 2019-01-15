@@ -65,7 +65,7 @@ function 💻_keyboard_language_change(){ 🔧 $FUNCNAME $@
 			notify-send -i /home/umen/SyNc/Scripts/System/FLAGS/thai.jpg "libthai"
 		fi
 		;;
-		jp)
+		jp|RO|jpRO)
 		NEW_LANGUAGE="anthy"
 		echo $NEW_LANGUAGE > $HOME/.PopUpLearn/tmp/ibus_new.tmp
 		if [[ "$CURRENT_LANGUAGE" != "$NEW_LANGUAGE" ]]; then
@@ -73,7 +73,7 @@ function 💻_keyboard_language_change(){ 🔧 $FUNCNAME $@
 			notify-send -i /home/umen/SyNc/Scripts/System/FLAGS/japan.jpg "anthy"
 		fi
 		;;
-		cn)
+		cn|PI|cnPI)
 		NEW_LANGUAGE="pinyin"
 		echo $NEW_LANGUAGE > $HOME/.PopUpLearn/tmp/ibus_new.tmp
 		if [[ "$CURRENT_LANGUAGE" != "$NEW_LANGUAGE" ]]; then
@@ -1206,7 +1206,6 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
 		fi
 		#Unknown if python3 is closed without answering
 		echo unknown > $HOME/.PopUpLearn/tmp/result.tmp
-
 
 		if [ "$TIME_DISPLAYED" == 0 ];then #LOCK, unlimited
 			if [[ "$XDG_CURRENT_DESKTOP" == "i3" ]]; then
