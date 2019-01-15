@@ -1152,6 +1152,7 @@ function ⬚⬚⬚⬚⬚⬚_🚧_session_answers(){ 🔧 $FUNCNAME $@
 			right=`echo $line | sed 's/.* |=| //'`
 			#~ if [[ "$left" != "$LEFT" ]] : BETTER FOR MULTIPLE ANSWERS POSSIBLE ???
 			# if [[ "$line" != "`cat $HOME/.PopUpLearn/tmp/current_line.tmp`" ]]; then
+			echo " =====> RIGHT=$RIGHT right=$right LEFT=$LEFT left=$left"
 			if [[ "$1" == "REVERSE" ]];then
 				if [[ "$right" != "$RIGHT" ]]; then
 					echo "$left" >> $HOME/.PopUpLearn/tmp/wrong_answers_BUTTON2.tmp
