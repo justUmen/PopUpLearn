@@ -1006,8 +1006,9 @@ function ⬚⬚⬚⬚_📗🔢_session_old_mistakes_reverse(){ 🔧 $FUNCNAME $@
 	LANGUAGE_1=$LANGUAGE_2
 	LANGUAGE_2=$TMP_LANGUAGE
 	sed -i 's/\(.*\) |=| \(.*\)/\2 |=| \1/' $HOME/.PopUpLearn/tmp/session_content.tmp
-	# sed -i 's/\[[^[]*\]//g' $HOME/.PopUpLearn/tmp/session_content.tmp #in php instead
 	sed -i 's/\(.*\) |=| \(.*\)/\2 |=| \1/' $HOME/.PopUpLearn/tmp/session_content_remove.tmp
+	sed -i 's/\(.*\) |=| \(.*\)/\2 |=| \1/' $HOME/.PopUpLearn/tmp/wrong_answers_BUTTON.tmp
+	# sed -i 's/\[[^[]*\]//g' $HOME/.PopUpLearn/tmp/session_content.tmp #in php instead
 	# sed -i 's/\[[^[]*\]//g' $HOME/.PopUpLearn/tmp/session_content_remove.tmp
 	SESSION_NUMBER=$1
 	LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
