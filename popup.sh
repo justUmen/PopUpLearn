@@ -37,6 +37,7 @@ function 💻_keyboard_language_change(){ 🔧 $FUNCNAME $@
 	command -v ibus >/dev/null 2>&1 || return
 	ibus engine > $HOME/.PopUpLearn/tmp/ibus.tmp
 	CURRENT_LANGUAGE=`cat $HOME/.PopUpLearn/tmp/ibus.tmp`
+	echo "LANGUAGE_TAG_2 = $LANGUAGE_TAG_2, LANGUAGE_2 = $LANGUAGE_2"
 	case $LANGUAGE_TAG_2 in
 		fr)
 		# NEW_LANGUAGE="xkb:fr::fra"
