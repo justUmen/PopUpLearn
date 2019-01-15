@@ -784,7 +784,7 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 			done
 		elif [[ "$selected" == "r" ]]; then
 			ANSWER_BEFORE_QUIZ=0
-			TYPE="TEXT"
+			# TYPE="TEXT"
 			ARRAY=()
 			NB_SESSIONS=$SESSION_NUMBER
 			#Prepare array with sessions numbers inside
