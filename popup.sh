@@ -37,7 +37,7 @@ function 💻_keyboard_language_change(){ 🔧 $FUNCNAME $@
 	command -v ibus >/dev/null 2>&1 || return
 	ibus engine > $HOME/.PopUpLearn/tmp/ibus.tmp
 	CURRENT_LANGUAGE=`cat $HOME/.PopUpLearn/tmp/ibus.tmp`
-	case $LANGUAGE_2 in
+	case $LANGUAGE_TAG_2 in
 		fr)
 		# NEW_LANGUAGE="xkb:fr::fra"
 		NEW_LANGUAGE="xkb:us::eng"
@@ -1002,9 +1002,9 @@ function ⬚⬚⬚⬚_📗🔢_session_old_mistakes_reverse(){ 🔧 $FUNCNAME $@
 	TMP_LANGUAGE=$LANGUAGE_TAG_1
 	LANGUAGE_TAG_1=$LANGUAGE_TAG_2
 	LANGUAGE_TAG_2=$TMP_LANGUAGE
-	TMP_LANGUAGE=$LANGUAGE_1
-	LANGUAGE_1=$LANGUAGE_2
-	LANGUAGE_2=$TMP_LANGUAGE
+	# TMP_LANGUAGE=$LANGUAGE_1
+	# LANGUAGE_1=$LANGUAGE_2
+	# LANGUAGE_2=$TMP_LANGUAGE
 	sed -i 's/\(.*\) |=| \(.*\)/\2 |=| \1/' $HOME/.PopUpLearn/tmp/session_content.tmp
 	sed -i 's/\(.*\) |=| \(.*\)/\2 |=| \1/' $HOME/.PopUpLearn/tmp/session_content_remove.tmp
 	# sed -i 's/\[[^[]*\]//g' $HOME/.PopUpLearn/tmp/session_content.tmp #in php instead
@@ -1105,12 +1105,6 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 			fi
 		fi
 		⬚⬚⬚⬚⬚⬚_💣_remove_answer_from_session_tmp
-
-		if [[ "$2" == "REVERSE" ]];then
-			TMP_LANGUAGE=$LANGUAGE_2
-			LANGUAGE_2=$LANGUAGE_1
-			LANGUAGE_1=$TMP_LANGUAGE
-		fi
 		# if [ $LOOP_QUIZ -ne 0 ]; then
 		# 	⬚⬚⬚⬚⬚⬚_🛑_quiz || return 2
 		# fi
