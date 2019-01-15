@@ -1163,8 +1163,14 @@ function ⬚⬚⬚⬚⬚⬚_🚧_session_answers(){ 🔧 $FUNCNAME $@
 			#~ if [[ "$left" != "$LEFT" ]] : BETTER FOR MULTIPLE ANSWERS POSSIBLE ???
 			# if [[ "$line" != "`cat $HOME/.PopUpLearn/tmp/current_line.tmp`" ]]; then
 			echo " =====> RIGHT=$RIGHT right=$right LEFT=$LEFT left=$left"
-			if [[ "$right" != "$RIGHT" ]]; then
-				echo "$right" >> $HOME/.PopUpLearn/tmp/wrong_answers_BUTTON2.tmp
+			if [[ "$1" == "REVERSE" ]];then
+				if [[ "$left" != "$RIGHT" ]]; then
+					echo "$left" >> $HOME/.PopUpLearn/tmp/wrong_answers_BUTTON2.tmp
+				fi
+			else
+				if [[ "$right" != "$RIGHT" ]]; then
+					echo "$right" >> $HOME/.PopUpLearn/tmp/wrong_answers_BUTTON2.tmp
+				fi
 			fi
 		done < "$HOME/.PopUpLearn/tmp/file_content_BAD_answers.tmp"
 		cat $HOME/.PopUpLearn/tmp/wrong_answers_BUTTON2.tmp | sort | uniq > $HOME/.PopUpLearn/tmp/wrong_answers_BUTTON.tmp
