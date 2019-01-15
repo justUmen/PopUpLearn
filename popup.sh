@@ -1089,6 +1089,9 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 		nbline=`expr $nbline + 1`
 		if [[ "$2" == "REVERSE" ]];then
 			⬚⬚⬚⬚⬚⬚_🚧_session_answers "REVERSE"
+			TMP_LANGUAGE=$LANGUAGE_2
+			LANGUAGE_2=$LANGUAGE_1
+			LANGUAGE_1=$TMP_LANGUAGE
 		else
 			⬚⬚⬚⬚⬚⬚_🚧_session_answers
 		fi
