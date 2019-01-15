@@ -1007,12 +1007,11 @@ function ⬚⬚⬚⬚_📗🔢_session_old_mistakes_reverse(){ 🔧 $FUNCNAME $@
 	LANGUAGE_2=$TMP_LANGUAGE
 	sed -i 's/\(.*\) |=| \(.*\)/\2 |=| \1/' $HOME/.PopUpLearn/tmp/session_content.tmp
 	sed -i 's/\(.*\) |=| \(.*\)/\2 |=| \1/' $HOME/.PopUpLearn/tmp/session_content_remove.tmp
-	sed -i 's/\(.*\) |=| \(.*\)/\2 |=| \1/' $HOME/.PopUpLearn/tmp/wrong_answers_BUTTON.tmp
 	# sed -i 's/\[[^[]*\]//g' $HOME/.PopUpLearn/tmp/session_content.tmp #in php instead
 	# sed -i 's/\[[^[]*\]//g' $HOME/.PopUpLearn/tmp/session_content_remove.tmp
 	SESSION_NUMBER=$1
 	LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
-	⬚⬚⬚⬚⬚_🔄_lines_in_session "IGNORE_GOOD" || return 2
+	⬚⬚⬚⬚⬚_🔄_lines_in_session "IGNORE_GOOD" "REVERSE" || return 2
 	#~ ⬚⬚⬚⬚⬚_🛑_lines_in_session #Don't display end of session, not useful to know, useless spam
 }
 function ⬚⬚⬚⬚_📗🔢_session_old_blue_only(){ 🔧 $FUNCNAME $@
@@ -1088,7 +1087,11 @@ function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 		# if [[ "$X" == "" ]]; then break; fi
 		echo -e "\n---->Line number $nbline" # ($FILE) [$X]" #$X NOT EVEN ALWAYS THE SELECTED ONE....
 		nbline=`expr $nbline + 1`
-		⬚⬚⬚⬚⬚⬚_🚧_session_answers
+		if [[ "$1" == "REVERSE" ]];then
+			⬚⬚⬚⬚⬚⬚_🚧_session_answers "REVERSE"
+		else
+			⬚⬚⬚⬚⬚⬚_🚧_session_answers
+		fi
 		⬚⬚⬚⬚⬚⬚_🏗_my_line_tmp
 		⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer || return 2
 		# ⬚⬚⬚⬚⬚⬚_🔀🌐_show_good_answer
@@ -1148,6 +1151,9 @@ function ⬚⬚⬚⬚⬚⬚_🚧_session_answers(){ 🔧 $FUNCNAME $@
 			fi
 		done < "$HOME/.PopUpLearn/tmp/file_content_BAD_answers.tmp"
 		cat $HOME/.PopUpLearn/tmp/wrong_answers_BUTTON2.tmp | sort | uniq > $HOME/.PopUpLearn/tmp/wrong_answers_BUTTON.tmp
+	fi
+	if [[ "$1" == "REVERSE" ]];then
+		sed -i 's/\(.*\) |=| \(.*\)/\2 |=| \1/' $HOME/.PopUpLearn/tmp/wrong_answers_BUTTON.tmp
 	fi
 	🔧 "$FUNCNAME : \$LINE=$LINE (RIGHT / LEFT) - $FILE"
 }
