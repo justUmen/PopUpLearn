@@ -275,7 +275,7 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 		echo "$ENDO $COLOR_PERCENT$PERCENT% done ($NB_GOOD / $NB_LINES) |$ENDO $COLOR_SELECTION $L1 / $L2 $ENDO" >> $HOME/.PopUpLearn/tmp/color_menu.list
 	done
 	echo -e "`cat $HOME/.PopUpLearn/tmp/color_menu.list 2> /dev/null`" | column -t -s '|'
-	echo -e "$COLOR_SELECTION g) $ENDO GameScript Quizzes [for `cat ~/.GameScript/username`]"
+	echo -e "$COLOR_SELECTION g) $ENDO GameScript Quizzes [for `cat $HOME/.GameScript/username 2>/dev/null`]"
 	echo -e "$COLOR_SELECTION i) $ENDO Infinite smart loop (learn / remember) \\e[38;5;196m[ not yet implemented... :( ]$ENDO" #NOT DISPLAY IF NOTHING ADDED YET ???
 	selected=99
 	echo -e "$COLOR_SELECTION e) $ENDO Close PopUpLearn"
