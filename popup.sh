@@ -953,7 +953,7 @@ function ⬚⬚⬚⬚_📃🔄_selected_session(){ 🔧 $FUNCNAME $@
 	while [ 1 ]; do
 		SESSION_NUMBER=$SESSION_NUMBER_OLD
 		echo -e "\n\t\t---- SESSION $SESSION_NUMBER ----"
-		echo -e `cat $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp |sed 's#\t\t#\t\t\t#'`
+		echo -e "\t\t`cat $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp`"
 		echo -e "\t\t$COLOR_SELECTION b) $ENDO $COLOR_TITLE_SELECTED[Recommended]$ENDO Detect your knowledge by asking only blue questions. - NOT SHOW ANSWER"
 		echo -e "\t\t$COLOR_SELECTION m) $ENDO All mistakes from this session - NOT SHOW ANSWER"
 		echo -e "\t\t$COLOR_SELECTION M) $ENDO All mistakes from this session - SHOW ANSWER FIRST"
