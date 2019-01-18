@@ -966,27 +966,33 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 # }
 function ⬚⬚⬚⬚_📗🔢_session_old(){ 🔧 $FUNCNAME $@
 	while [ 1 ]; do
-		echo -e "\n\t---- SESSION $SESSION_NUMBER ----"
-		echo -e "\t$COLOR_SELECTION b) $ENDO $COLOR_TITLE_SELECTED[Recommended]$ENDO Detect your knowledge by asking only blue questions. (session random order) - NOT SHOW ANSWER"
-		echo -e "\t$COLOR_SELECTION m) $ENDO All mistakes from all sessions (session random order) - NOT SHOW ANSWER"
-		echo -e "\t$COLOR_SELECTION M) $ENDO All mistakes from all sessions (session random order) - SHOW ANSWER FIRST"
-		echo -e "\t$COLOR_SELECTION l) $ENDO Learn about all sessions - ANSWER ONLY NO QUIZ (better with arguments, like : popuplearn 5 60)"
-		echo -e "\t$COLOR_SELECTION L) $ENDO Learn about all mistakes in sessions - ANSWER ONLY NO QUIZ (better with arguments, like : popuplearn 5 60)"
-		echo -e "\t$COLOR_SELECTION s) $ENDO All questions from all current sessions (session random order) - NOT SHOW ANSWER"
-		echo -e "\t$COLOR_SELECTION S) $ENDO All questions from all current sessions (session random order) - SHOW ANSWER FIRST"
-		echo -e "\t---- SESSION $SESSION_NUMBER (REVERSE) ----"
-		echo -e "\t$COLOR_SELECTION r) $ENDO All mistakes from all sessions in reverse (session random order) - NOT SHOW ANSWER (no points for good, not log mistakes)"
-		echo -e "\t$COLOR_SELECTION e) $ENDO Return"
+		echo -e "\n\t\t---- SESSION $SESSION_NUMBER ----"
+		echo -e "\t\t$COLOR_SELECTION b) $ENDO $COLOR_TITLE_SELECTED[Recommended]$ENDO Detect your knowledge by asking only blue questions. (session random order) - NOT SHOW ANSWER"
+		echo -e "\t\t$COLOR_SELECTION m) $ENDO All mistakes from all sessions (session random order) - NOT SHOW ANSWER"
+		echo -e "\t\t$COLOR_SELECTION M) $ENDO All mistakes from all sessions (session random order) - SHOW ANSWER FIRST"
+		echo -e "\t\t$COLOR_SELECTION l) $ENDO Learn about all sessions - ANSWER ONLY NO QUIZ (better with arguments, like : popuplearn 5 60)"
+		echo -e "\t\t$COLOR_SELECTION L) $ENDO Learn about all mistakes in sessions - ANSWER ONLY NO QUIZ (better with arguments, like : popuplearn 5 60)"
+		echo -e "\t\t$COLOR_SELECTION s) $ENDO All questions from all current sessions (session random order) - NOT SHOW ANSWER"
+		echo -e "\t\t$COLOR_SELECTION S) $ENDO All questions from all current sessions (session random order) - SHOW ANSWER FIRST"
+		echo -e "\t\t---- SESSION $SESSION_NUMBER (REVERSE) ----"
+		echo -e "\t\t$COLOR_SELECTION r) $ENDO All mistakes from all sessions in reverse (session random order) - NOT SHOW ANSWER (no points for good, not log mistakes)"
+		echo -e "\t\t$COLOR_SELECTION e) $ENDO Return"
 		while :; do
-			echo -en "\t\e[97;45m # $ENDO"
+			echo -en "\t\t\e[97;45m # $ENDO"
 			read selected_1 < /dev/tty
 			case $selected_1 in
 				e) return 2 ;;
 				0) ;;
 				r) ⬚⬚⬚⬚_📗🔢_session_old_mistakes_reverse ;;
-				b|m|M|l|L|s|S) ;;
-				[0-9]*) break ;;
+				b) ;;
+				m) ;;
+				M) ;;
+				l) ;;
+				L) ;;
+				s) ;;
+				S) ;;
 			esac
+			break #Go back in while (display menu)
 		done
 		# ANSWER_BEFORE_QUIZ=0
 		# ⬚⬚⬚⬚⬚_🏗_session_specific_config
