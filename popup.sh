@@ -965,7 +965,9 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 # 	⬚⬚⬚⬚⬚_🛑_lines_in_session
 # }
 function ⬚⬚⬚⬚_📗🔢_session_old(){ 🔧 $FUNCNAME $@
+	SESSION_NUMBER_OLD=$SESSION_NUMBER
 	while [ 1 ]; do
+		SESSION_NUMBER=$SESSION_NUMBER_OLD
 		echo -e "\n\t\t---- SESSION $SESSION_NUMBER ----"
 		echo -e "\t\t$COLOR_SELECTION b) $ENDO $COLOR_TITLE_SELECTED[Recommended]$ENDO Detect your knowledge by asking only blue questions. (session random order) - NOT SHOW ANSWER"
 		echo -e "\t\t$COLOR_SELECTION m) $ENDO All mistakes from all sessions (session random order) - NOT SHOW ANSWER"
