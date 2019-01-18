@@ -625,8 +625,6 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 	#SPLIT CONTENT FROM .pul FILE AND CONFIG + source
 	cat $FILE | grep "^#!#" | sed 's/^#!#//' > $HOME/.PopUpLearn/tmp/session_specific_config.tmp
 
-	# cat $FILE | sed 's/\[[^[]*\]//' > "$HOME/.PopUpLearn/tmp/session_content_no_bracket.tmp"
-
 	#TEST IF CONTAINS AT LEAST THE MAIN 4 VARIABLES
 	if [ ! `grep 'LANGUAGE_1=' $HOME/.PopUpLearn/tmp/session_specific_config.tmp` ] || [ ! `grep 'LANGUAGE_2=' $HOME/.PopUpLearn/tmp/session_specific_config.tmp` ] || [ ! `grep 'NUMBER=' $HOME/.PopUpLearn/tmp/session_specific_config.tmp` ] || [ ! `grep 'SUBJECT=' $HOME/.PopUpLearn/tmp/session_specific_config.tmp` ]; then
 		echo
@@ -657,7 +655,6 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 		if [[ "$selected" == "e" ]]; then
 			break
 		elif [[ "$selected" == "s" ]]; then
-			ANSWER_BEFORE_QUIZ=0 #USE 's' INSTEAD TO DISPLAY ANSWER
 			ARRAY=()
 			NB_SESSIONS=$SESSION_NUMBER
 			#Prepare array with sessions numbers inside
@@ -669,10 +666,9 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
 				display_SESSION_NUMBER
-				⬚⬚⬚⬚_📗🔢_session_old $SESSION_NUMBER || break
+				⬚⬚⬚⬚_📗🔢_session_old_basic $SESSION_NUMBER || break
 			done
 		elif [[ "$selected" == "m" ]]; then
-			ANSWER_BEFORE_QUIZ=0 #USE 'M' INSTEAD TO DISPLAY ANSWER
 			ARRAY=()
 			NB_SESSIONS=$SESSION_NUMBER
 			#Prepare array with sessions numbers inside
@@ -687,7 +683,6 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 				⬚⬚⬚⬚_📗🔢_session_old_mistakes_only $SESSION_NUMBER || break
 			done
 		elif [[ "$selected" == "S" ]]; then
-			ANSWER_BEFORE_QUIZ=1
 			ARRAY=()
 			NB_SESSIONS=$SESSION_NUMBER
 			#Prepare array with sessions numbers inside
@@ -699,10 +694,9 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
 				display_SESSION_NUMBER
-				⬚⬚⬚⬚_📗🔢_session_old $SESSION_NUMBER || break
+				⬚⬚⬚⬚_📗🔢_session_old_basic_with_answer $SESSION_NUMBER || break
 			done
 		elif [[ "$selected" == "M" ]]; then
-			ANSWER_BEFORE_QUIZ=1
 			ARRAY=()
 			NB_SESSIONS=$SESSION_NUMBER
 			#Prepare array with sessions numbers inside
@@ -714,10 +708,9 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
 				display_SESSION_NUMBER
-				⬚⬚⬚⬚_📗🔢_session_old_mistakes_only $SESSION_NUMBER || break
+				⬚⬚⬚⬚_📗🔢_session_old_mistakes_only_with_answer $SESSION_NUMBER || break
 			done
 		elif [[ "$selected" == "b" ]]; then
-			ANSWER_BEFORE_QUIZ=0
 			ARRAY=()
 			NB_SESSIONS=$SESSION_NUMBER
 			#Prepare array with sessions numbers inside
@@ -745,7 +738,7 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 			while [ true ]; do
 				⬚⬚⬚⬚_📗🌘_session_new
 				display_SESSION_NUMBER
-				⬚⬚⬚⬚_📗🔢_session_old_with_answers $SESSION_NUMBER || break
+				⬚⬚⬚⬚_📗🔢_session_old_with_answer $SESSION_NUMBER || break
 			done
 		elif [[ "$selected" == "in2" ]]; then
 			while [ true ]; do
@@ -754,7 +747,6 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 				⬚⬚⬚⬚_📗🔢_session_old $SESSION_NUMBER || break
 			done
 		elif [[ "$selected" == "l" ]]; then
-			ANSWER_BEFORE_QUIZ=1
 			ARRAY=()
 			NB_SESSIONS=$SESSION_NUMBER
 			#Prepare array with sessions numbers inside
@@ -766,10 +758,9 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
 				display_SESSION_NUMBER
-				⬚⬚⬚⬚_📗🔢_session_learn $selected || break
+				⬚⬚⬚⬚_📗🔢_session_old_learn $selected || break
 			done
 		elif [[ "$selected" == "L" ]]; then
-			ANSWER_BEFORE_QUIZ=1
 			ARRAY=()
 			NB_SESSIONS=$SESSION_NUMBER
 			#Prepare array with sessions numbers inside
@@ -781,10 +772,9 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
 				display_SESSION_NUMBER
-				⬚⬚⬚⬚_📗🔢_session_learn_mistakes_only $selected || break
+				⬚⬚⬚⬚_📗🔢_session_old_learn_mistakes_only $selected || break
 			done
 		elif [[ "$selected" == "r" ]]; then
-			ANSWER_BEFORE_QUIZ=0
 			# TYPE="TEXT"
 			ARRAY=()
 			NB_SESSIONS=$SESSION_NUMBER
@@ -800,7 +790,7 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 				⬚⬚⬚⬚_📗🔢_session_old_mistakes_reverse $SESSION_NUMBER || break
 			done
 		else
-			⬚⬚⬚⬚_📗🔢_session_old $selected
+			⬚⬚⬚⬚_📃🔄_selected_session $selected
 		fi
 	done
 }
@@ -955,57 +945,57 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 		esac
 	done
 }
-# function ⬚⬚⬚⬚_📗🔢_session_old(){ 🔧 $FUNCNAME $@
-# 	ANSWER_BEFORE_QUIZ=0
-# 	⬚⬚⬚⬚⬚_🏗_session_specific_config
-# 	⬚⬚⬚⬚⬚_🏗_session_content_tmp
-# 	SESSION_NUMBER=$1
-# 	LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
-# 	⬚⬚⬚⬚⬚_🔄_lines_in_session || return 2
-# 	⬚⬚⬚⬚⬚_🛑_lines_in_session
-# }
-function ⬚⬚⬚⬚_📗🔢_session_old(){ 🔧 $FUNCNAME $@
+function ⬚⬚⬚⬚_📃🔄_selected_session(){ 🔧 $FUNCNAME $@
 	SESSION_NUMBER_OLD=$SESSION_NUMBER
 	while [ 1 ]; do
 		SESSION_NUMBER=$SESSION_NUMBER_OLD
 		echo -e "\n\t\t---- SESSION $SESSION_NUMBER ----"
-		echo -e "\t\t$COLOR_SELECTION b) $ENDO $COLOR_TITLE_SELECTED[Recommended]$ENDO Detect your knowledge by asking only blue questions. (session random order) - NOT SHOW ANSWER"
-		echo -e "\t\t$COLOR_SELECTION m) $ENDO All mistakes from all sessions (session random order) - NOT SHOW ANSWER"
-		echo -e "\t\t$COLOR_SELECTION M) $ENDO All mistakes from all sessions (session random order) - SHOW ANSWER FIRST"
-		echo -e "\t\t$COLOR_SELECTION l) $ENDO Learn about all sessions - ANSWER ONLY NO QUIZ (better with arguments, like : popuplearn 5 60)"
-		echo -e "\t\t$COLOR_SELECTION L) $ENDO Learn about all mistakes in sessions - ANSWER ONLY NO QUIZ (better with arguments, like : popuplearn 5 60)"
-		echo -e "\t\t$COLOR_SELECTION s) $ENDO All questions from all current sessions (session random order) - NOT SHOW ANSWER"
-		echo -e "\t\t$COLOR_SELECTION S) $ENDO All questions from all current sessions (session random order) - SHOW ANSWER FIRST"
+		echo -e "\t\t$COLOR_SELECTION b) $ENDO $COLOR_TITLE_SELECTED[Recommended]$ENDO Detect your knowledge by asking only blue questions. - NOT SHOW ANSWER"
+		echo -e "\t\t$COLOR_SELECTION m) $ENDO All mistakes from this session - NOT SHOW ANSWER"
+		echo -e "\t\t$COLOR_SELECTION M) $ENDO All mistakes from this session - SHOW ANSWER FIRST"
+		echo -e "\t\t$COLOR_SELECTION l) $ENDO Learn about this session - ANSWER ONLY NO QUIZ (better with arguments, like : popuplearn 5 60)"
+		echo -e "\t\t$COLOR_SELECTION L) $ENDO Learn about all mistakes in this session - ANSWER ONLY NO QUIZ (better with arguments, like : popuplearn 5 60)"
+		echo -e "\t\t$COLOR_SELECTION s) $ENDO All questions from this session - NOT SHOW ANSWER"
+		echo -e "\t\t$COLOR_SELECTION S) $ENDO All questions from this session - SHOW ANSWER FIRST"
 		echo -e "\t\t---- SESSION $SESSION_NUMBER (REVERSE) ----"
-		echo -e "\t\t$COLOR_SELECTION r) $ENDO All mistakes from all sessions in reverse (session random order) - NOT SHOW ANSWER (no points for good, not log mistakes)"
+		echo -e "\t\t$COLOR_SELECTION r) $ENDO All mistakes from this session in reverse (session random order) - NOT SHOW ANSWER (no points for good, not log mistakes)"
 		echo -e "\t\t$COLOR_SELECTION e) $ENDO Return"
 		while :; do
 			echo -en "\t\t\e[97;45m # $ENDO"
 			read selected_1 < /dev/tty
 			case $selected_1 in
 				e) return 2 ;;
-				0) ;;
-				r) ⬚⬚⬚⬚_📗🔢_session_old_mistakes_reverse ;;
-				b) ;;
-				m) ;;
-				M) ;;
-				l) ;;
-				L) ;;
-				s) ;;
-				S) ;;
+				r) ⬚⬚⬚⬚_📗🔢_session_old_mistakes_reverse $SESSION_NUMBER; break ;;
+				b) ⬚⬚⬚⬚_📗🔢_session_old_blue_only $SESSION_NUMBER; break ;;
+				m) ⬚⬚⬚⬚_📗🔢_session_old_mistakes_only $SESSION_NUMBER; break;;
+				M) ⬚⬚⬚⬚_📗🔢_session_old_mistakes_only_with_answer $SESSION_NUMBER; break;;
+				l) ⬚⬚⬚⬚_📗🔢_session_old_learn $SESSION_NUMBER; break;;
+				L) ⬚⬚⬚⬚_📗🔢_session_old_learn_mistakes_only $SESSION_NUMBER; break;;
+				s) ⬚⬚⬚⬚_📗🔢_session_old_basic $SESSION_NUMBER; break ;;
+				S) ⬚⬚⬚⬚_📗🔢_session_old_basic_with_answer $SESSION_NUMBER; break;;
 			esac
-			break #Go back in while (display menu)
 		done
-		# ANSWER_BEFORE_QUIZ=0
-		# ⬚⬚⬚⬚⬚_🏗_session_specific_config
-		# ⬚⬚⬚⬚⬚_🏗_session_content_tmp
-		# SESSION_NUMBER=$1
-		# LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
-		# ⬚⬚⬚⬚⬚_🔄_lines_in_session || return 2
-		# ⬚⬚⬚⬚⬚_🛑_lines_in_session
 	done
 }
-function ⬚⬚⬚⬚_📗🔢_session_learn(){ 🔧 $FUNCNAME $@
+function ⬚⬚⬚⬚_📗🔢_session_old_basic(){ 🔧 $FUNCNAME $@
+	ANSWER_BEFORE_QUIZ=0
+	⬚⬚⬚⬚⬚_🏗_session_specific_config
+	⬚⬚⬚⬚⬚_🏗_session_content_tmp
+	SESSION_NUMBER=$1
+	LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
+	⬚⬚⬚⬚⬚_🔄_lines_in_session || return 2
+	⬚⬚⬚⬚⬚_🛑_lines_in_session
+}
+function ⬚⬚⬚⬚_📗🔢_session_old_basic_with_answer(){ 🔧 $FUNCNAME $@
+	ANSWER_BEFORE_QUIZ=1
+	⬚⬚⬚⬚⬚_🏗_session_specific_config
+	⬚⬚⬚⬚⬚_🏗_session_content_tmp
+	SESSION_NUMBER=$1
+	LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
+	⬚⬚⬚⬚⬚_🔄_lines_in_session || return 2
+	⬚⬚⬚⬚⬚_🛑_lines_in_session
+}
+function ⬚⬚⬚⬚_📗🔢_session_old_learn(){ 🔧 $FUNCNAME $@
 	ANSWER_BEFORE_QUIZ=1
 	⬚⬚⬚⬚⬚_🏗_session_specific_config
 	⬚⬚⬚⬚⬚_🏗_session_content_tmp
@@ -1014,7 +1004,7 @@ function ⬚⬚⬚⬚_📗🔢_session_learn(){ 🔧 $FUNCNAME $@
 	⬚⬚⬚⬚⬚_🔄_lines_in_session "IGNORE_GOOD" || return 2
 	⬚⬚⬚⬚⬚_🛑_lines_in_session
 }
-function ⬚⬚⬚⬚_📗🔢_session_learn_mistakes_only(){ 🔧 $FUNCNAME $@
+function ⬚⬚⬚⬚_📗🔢_session_old_learn_mistakes_only(){ 🔧 $FUNCNAME $@
 	ANSWER_BEFORE_QUIZ=1
 	⬚⬚⬚⬚⬚_🏗_session_specific_config
 	⬚⬚⬚⬚⬚_🏗_session_content_tmp_mistakes_only
@@ -1033,6 +1023,16 @@ function ⬚⬚⬚⬚_📗🔢_session_old_with_answers(){ 🔧 $FUNCNAME $@
 	⬚⬚⬚⬚⬚_🛑_lines_in_session
 }
 function ⬚⬚⬚⬚_📗🔢_session_old_mistakes_only(){ 🔧 $FUNCNAME $@
+	ANSWER_BEFORE_QUIZ=0
+	⬚⬚⬚⬚⬚_🏗_session_specific_config
+	⬚⬚⬚⬚⬚_🏗_session_content_tmp_mistakes_only
+	SESSION_NUMBER=$1
+	LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
+	⬚⬚⬚⬚⬚_🔄_lines_in_session || return 2
+	#~ ⬚⬚⬚⬚⬚_🛑_lines_in_session #Don't display end of session, not useful to know, useless spam
+}
+function ⬚⬚⬚⬚_📗🔢_session_old_mistakes_only_with_answer(){ 🔧 $FUNCNAME $@
+	ANSWER_BEFORE_QUIZ=1
 	⬚⬚⬚⬚⬚_🏗_session_specific_config
 	⬚⬚⬚⬚⬚_🏗_session_content_tmp_mistakes_only
 	SESSION_NUMBER=$1
@@ -1041,6 +1041,7 @@ function ⬚⬚⬚⬚_📗🔢_session_old_mistakes_only(){ 🔧 $FUNCNAME $@
 	#~ ⬚⬚⬚⬚⬚_🛑_lines_in_session #Don't display end of session, not useful to know, useless spam
 }
 function ⬚⬚⬚⬚_📗🔢_session_old_mistakes_reverse(){ 🔧 $FUNCNAME $@
+	ANSWER_BEFORE_QUIZ=0
 	⬚⬚⬚⬚⬚_🏗_session_specific_config
 	⬚⬚⬚⬚⬚_🏗_session_content_tmp_mistakes_only
 	#REVERSE
@@ -1064,6 +1065,7 @@ function ⬚⬚⬚⬚_📗🔢_session_old_mistakes_reverse(){ 🔧 $FUNCNAME $@
 	LANGUAGE_2=$TMP_LANGUAGE
 }
 function ⬚⬚⬚⬚_📗🔢_session_old_blue_only(){ 🔧 $FUNCNAME $@
+	ANSWER_BEFORE_QUIZ=0
 	⬚⬚⬚⬚⬚_🏗_session_specific_config
 	⬚⬚⬚⬚⬚_🏗_session_content_tmp_blue_only
 	SESSION_NUMBER=$1
