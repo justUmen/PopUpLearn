@@ -917,7 +917,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 		echo -e "\t$COLOR_SELECTION s) $ENDO All questions from all current sessions (session random order) - NOT SHOW ANSWER"
 		echo -e "\t$COLOR_SELECTION S) $ENDO All questions from all current sessions (session random order) - SHOW ANSWER FIRST"
 		echo -e "\t---- ALL SESSIONS (REVERSE) ----"
-		echo -e "\t$COLOR_SELECTION r) $ENDO All mistakes from all sessions in reverse (session random order) - NOT SHOW ANSWER (no points for good)"
+		echo -e "\t$COLOR_SELECTION r) $ENDO All mistakes from all sessions in reverse (session random order) - NOT SHOW ANSWER (no points for good, not log mistakes)"
 	fi
 	echo -e "\t---- NEW SESSION ----"
 	echo -e "\t$COLOR_SELECTION n) $ENDO New session (SHOW ANSWER and quiz - no points for good, log mistakes)"
@@ -926,6 +926,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 	echo -e "\t$COLOR_SELECTION in) $ENDO Infinite New sessions (SHOW ANSWER and quiz - no points for good, log mistakes)"
 	echo -e "\t$COLOR_SELECTION in2) $ENDO Infinite New sessions - NOT SHOW ANSWER"
 	echo -e "\t---- OTHER ----"
+	echo -e "\t$COLOR_SELECTION w) $ENDO web browser \\e[38;5;196m[ not yet implemented... :( ]$ENDO"
 	echo -e "\t$COLOR_SELECTION e) $ENDO Return"
 	#~ echo -e "\t\$COLOR_SELECTION q) $ENDO All questions from the .pul file \\e[38;5;196m[ not yet implemented... :( ]$ENDO" #MAYBE NOT... TRIGGER ANOTHER LOG...
 	#~ echo -e "\t\$COLOR_SELECTION r) $ENDO All red mistakes from all sessions \\e[38;5;196m[ not yet implemented... :( ]$ENDO"
@@ -942,6 +943,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 			m) break ;;
 			s) break ;;
 			M) break ;;
+			w) break ;;
 			S) break ;;
 			b) break ;;
 			l) break ;;
@@ -953,14 +955,47 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 		esac
 	done
 }
+# function ⬚⬚⬚⬚_📗🔢_session_old(){ 🔧 $FUNCNAME $@
+# 	ANSWER_BEFORE_QUIZ=0
+# 	⬚⬚⬚⬚⬚_🏗_session_specific_config
+# 	⬚⬚⬚⬚⬚_🏗_session_content_tmp
+# 	SESSION_NUMBER=$1
+# 	LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
+# 	⬚⬚⬚⬚⬚_🔄_lines_in_session || return 2
+# 	⬚⬚⬚⬚⬚_🛑_lines_in_session
+# }
 function ⬚⬚⬚⬚_📗🔢_session_old(){ 🔧 $FUNCNAME $@
-	ANSWER_BEFORE_QUIZ=0
-	⬚⬚⬚⬚⬚_🏗_session_specific_config
-	⬚⬚⬚⬚⬚_🏗_session_content_tmp
-	SESSION_NUMBER=$1
-	LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
-	⬚⬚⬚⬚⬚_🔄_lines_in_session || return 2
-	⬚⬚⬚⬚⬚_🛑_lines_in_session
+	while [ 1 ]; do
+		echo -e "\n\t---- SESSION $SESSION_NUMBER ----"
+		echo -e "\t$COLOR_SELECTION b) $ENDO $COLOR_TITLE_SELECTED[Recommended]$ENDO Detect your knowledge by asking only blue questions. (session random order) - NOT SHOW ANSWER"
+		echo -e "\t$COLOR_SELECTION m) $ENDO All mistakes from all sessions (session random order) - NOT SHOW ANSWER"
+		echo -e "\t$COLOR_SELECTION M) $ENDO All mistakes from all sessions (session random order) - SHOW ANSWER FIRST"
+		echo -e "\t$COLOR_SELECTION l) $ENDO Learn about all sessions - ANSWER ONLY NO QUIZ (better with arguments, like : popuplearn 5 60)"
+		echo -e "\t$COLOR_SELECTION L) $ENDO Learn about all mistakes in sessions - ANSWER ONLY NO QUIZ (better with arguments, like : popuplearn 5 60)"
+		echo -e "\t$COLOR_SELECTION s) $ENDO All questions from all current sessions (session random order) - NOT SHOW ANSWER"
+		echo -e "\t$COLOR_SELECTION S) $ENDO All questions from all current sessions (session random order) - SHOW ANSWER FIRST"
+		echo -e "\t---- SESSION $SESSION_NUMBER (REVERSE) ----"
+		echo -e "\t$COLOR_SELECTION r) $ENDO All mistakes from all sessions in reverse (session random order) - NOT SHOW ANSWER (no points for good, not log mistakes)"
+		echo -e "\t$COLOR_SELECTION e) $ENDO Return"
+		while :; do
+			echo -en "\t\e[97;45m # $ENDO"
+			read selected_1 < /dev/tty
+			case $selected_1 in
+				e) return 2 ;;
+				0) ;;
+				r) ⬚⬚⬚⬚_📗🔢_session_old_mistakes_reverse ;;
+				b|m|M|l|L|s|S) ;;
+				[0-9]*) break ;;
+			esac
+		done
+		# ANSWER_BEFORE_QUIZ=0
+		# ⬚⬚⬚⬚⬚_🏗_session_specific_config
+		# ⬚⬚⬚⬚⬚_🏗_session_content_tmp
+		# SESSION_NUMBER=$1
+		# LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
+		# ⬚⬚⬚⬚⬚_🔄_lines_in_session || return 2
+		# ⬚⬚⬚⬚⬚_🛑_lines_in_session
+	done
 }
 function ⬚⬚⬚⬚_📗🔢_session_learn(){ 🔧 $FUNCNAME $@
 	ANSWER_BEFORE_QUIZ=1

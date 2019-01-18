@@ -174,6 +174,16 @@ If the language is uppercase, it means the language is not a "normal" one, like 
 
 In PopUpLearn, an answer can also be an image. In this case, you should use the special value "IM". For example if the answer is an image `LANGUAGE_2="IM"`
 
-# Details :
+# Details and recommandations :
 
-PopUpLearn is for now just a Proof Of Concept.  
+PopUpLearn is for now just a Proof Of Concept of constantly changing principles, not yet a perfect system. (I probably need your advices and opinions.)  
+
+PopUpLearn is created as a PASSIVE learning system, use time and repetition intelligently !  
+
+DO NOT avoid making mistakes. Making mistakes is necessary for PUL to learn more about you. The goal is NOT to avoid mistakes.  
+
+There is nothing wrong about being wrong 20 times in a row. Do not waste your time in the quiz, you should know the answer in seconds or you don't. If so, just move on and let the system record your "mistake".  
+
+Do NOT let your brain use an elimination system to come up with the correct answer. The goal is for your brain to remember the answer, being "correct" is not always useful and can sometimes be counter-productive.  
+
+I do NOT recommend you to try to remember the same thing over and over again the same day, just read the answer, try to rememeber it but don't force yourself. Have a good night of sleep and come back to your session, your brain will remember it. If not, try again the day after.  
