@@ -864,17 +864,17 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 	  if [[ "$LAST_DAY" != "" ]]; then
 		LAST_GOOD_ANSWER="last good answer was `expr $TODAY - $LAST_DAY ` days ago (`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null|wc -l` bad, `cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null|wc -l` good)"
 	  fi
-	  echo -e $LAST_GOOD_ANSWER
+	  echo -e $LAST_GOOD_ANSWER >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 
 	  ERROR_TEST=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null | tail -n 1`
 	  if [[ "$ERROR_TEST" != "" ]]; then
 			cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad" 2> /dev/null > "$HOME/.PopUpLearn/tmp/list_mistakes.tmp"
 			cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" "$HOME/.PopUpLearn/tmp/list_mistakes.tmp" | sort | uniq -c | sed "s#^ \+1 \+\(.*\)#$GREY[\1]$END#" | sed "s#^ \+2 \+\(.*\)#$YELLOW[\1]$END#" | sed "s#^ \+3 \+\(.*\)#$ORANGE[\1]$END#" | sed "s#^ \+[0-9]\+ \+\(.*\)#$RED[\1]$END#" > "$HOME/.PopUpLearn/tmp/display_mistakes.tmp"
-			echo -en "\t\t  BAD : "
-			echo -e $(cat "$HOME/.PopUpLearn/tmp/display_mistakes.tmp" | sed 's/ |=| / :: /')
+			echo -en "\t\t  BAD : " >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+			echo -e $(cat "$HOME/.PopUpLearn/tmp/display_mistakes.tmp" | sed 's/ |=| / :: /') >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 	  else
-			echo -en "\t\t  BaD : "
-			echo -e $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" | sed "s#^\(.*\)#$GREY[\1]$END#" | sed 's/ |=| / :: /')
+			echo -en "\t\t  BaD : " >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+			echo -e $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" | sed "s#^\(.*\)#$GREY[\1]$END#" | sed 's/ |=| / :: /') >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 	  fi
 
 	  GOOD_TEST=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | tail -n 1`
@@ -887,13 +887,14 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 			if [[ "$ALL_GOOD" != "0" ]]; then
 				cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good" 2> /dev/null > "$HOME/.PopUpLearn/tmp/list_correct.tmp"
 				cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" "$HOME/.PopUpLearn/tmp/list_correct.tmp" | sort | uniq -c | sed "s#^ \+1 \+\(.*\)#$BLUE[\1]$END#" | sed "s#^ \+2 \+\(.*\)#$DARK_BLUE[\1]$END#" | sed "s#^ \+[0-9]\+ \+\(.*\)#$GREY[\1]$END#" > "$HOME/.PopUpLearn/tmp/display_correct.tmp"
-				echo -en "\t\t GOOD : "
-				echo -e $(cat "$HOME/.PopUpLearn/tmp/display_correct.tmp" | sed 's/ |=| / :: /')
+				echo -en "\t\t GOOD : " >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+				echo -e $(cat "$HOME/.PopUpLearn/tmp/display_correct.tmp" | sed 's/ |=| / :: /') >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 			fi
 	  else
-			echo -en "\t\t GooD : "
-			echo -e $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" | sed "s#^\(.*\)#$BLUE[\1]$END#" | sed 's/ |=| / :: /')
+			echo -en "\t\t GooD : " >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+			echo -e $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" | sed "s#^\(.*\)#$BLUE[\1]$END#" | sed 's/ |=| / :: /') >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 	  fi
+		echo -e `cat $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp`
 	done
 	selected=99
 	# echo "____ $NB_SESSION"
