@@ -872,10 +872,10 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 	  if [[ "$ERROR_TEST" != "" ]]; then
 			cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad" 2> /dev/null > "$HOME/.PopUpLearn/tmp/list_mistakes.tmp"
 			cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" "$HOME/.PopUpLearn/tmp/list_mistakes.tmp" | sort | uniq -c | sed "s#^ \+1 \+\(.*\)#$GREY[\1]$END#" | sed "s#^ \+2 \+\(.*\)#$YELLOW[\1]$END#" | sed "s#^ \+3 \+\(.*\)#$ORANGE[\1]$END#" | sed "s#^ \+[0-9]\+ \+\(.*\)#$RED[\1]$END#" > "$HOME/.PopUpLearn/tmp/display_mistakes.tmp"
-			echo -en "\t\t  BAD : " >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+			echo -en "\\\t\\\t  BAD : " >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 			echo -e $(cat "$HOME/.PopUpLearn/tmp/display_mistakes.tmp" | sed 's/ |=| / :: /') >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 	  else
-			echo -en "\t\t  BaD : " >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+			echo -en "\\\t\\\t  BaD : " >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 			echo -e $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" | sed "s#^\(.*\)#$GREY[\1]$END#" | sed 's/ |=| / :: /') >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 	  fi
 
@@ -889,11 +889,11 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 			if [[ "$ALL_GOOD" != "0" ]]; then
 				cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good" 2> /dev/null > "$HOME/.PopUpLearn/tmp/list_correct.tmp"
 				cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" "$HOME/.PopUpLearn/tmp/list_correct.tmp" | sort | uniq -c | sed "s#^ \+1 \+\(.*\)#$BLUE[\1]$END#" | sed "s#^ \+2 \+\(.*\)#$DARK_BLUE[\1]$END#" | sed "s#^ \+[0-9]\+ \+\(.*\)#$GREY[\1]$END#" > "$HOME/.PopUpLearn/tmp/display_correct.tmp"
-				echo -en "\n\t\t GOOD : " >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+				echo -en "\\\n\\\t\\\t GOOD : " >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 				echo -e $(cat "$HOME/.PopUpLearn/tmp/display_correct.tmp" | sed 's/ |=| / :: /') >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 			fi
 	  else
-			echo -en "\n\t\t GooD : " >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+			echo -en "\\\n\\\t\\\t GooD : " >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 			echo -e $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" | sed "s#^\(.*\)#$BLUE[\1]$END#" | sed 's/ |=| / :: /') >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 	  fi
 		echo -e `cat $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp`
