@@ -866,7 +866,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 	  fi
 
 		rm $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
-	  echo -e "$LAST_GOOD_ANSWER\n\n" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+	  echo -e "$LAST_GOOD_ANSWER\\\n" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 
 	  ERROR_TEST=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null | tail -n 1`
 	  if [[ "$ERROR_TEST" != "" ]]; then
