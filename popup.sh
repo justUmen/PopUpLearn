@@ -865,7 +865,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 		LAST_GOOD_ANSWER="last good answer was `expr $TODAY - $LAST_DAY ` days ago (`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null|wc -l` bad, `cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null|wc -l` good)"
 	  fi
 
-		rm $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+		rm $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp 2> /dev/null
 	  echo -e "$LAST_GOOD_ANSWER\\\n" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 
 	  ERROR_TEST=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null | tail -n 1`
