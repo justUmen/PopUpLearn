@@ -901,7 +901,10 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 					DAYS_AGO_GOOD_LINE2=`cat $HOME/.PopUpLearn/tmp/line2_good_answers_days.tmp | head -n 1`
 					DAYS_AGO_BAD_LINE2=`cat $HOME/.PopUpLearn/tmp/line2_bad_answers_days.tmp | head -n 1`
 					LEVEL_LINE2=3
-					if [ "$DAYS_AGO_GOOD_LINE2" ] && [ "$DAYS_AGO_BAD_LINE2" ]; then
+					if [ "$DAYS_AGO_GOOD_LINE2" ]; then
+						if [ ! "$DAYS_AGO_BAD_LINE2" ];then
+							DAYS_AGO_BAD_LINE2=99999
+						fi
 						if [ $DAYS_AGO_GOOD_LINE2 -lt $DAYS_AGO_BAD_LINE2 ]; then
 							echo -e "\\\nPINK_1 $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2)" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 						else
