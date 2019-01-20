@@ -895,7 +895,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 			else
 				#NO MORE BLUE, SO WON'T DISPLAY GOOD, BUT CHECK IF ANSWERED LONG TIME AGO :P - use another color than blue ??? Maybe pink
 				while read line2; do
-					cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | fgrep "$line2" | sed 's/.*€//' | sort -n | sed "s/$/ - $TODAY/" | bc > $HOME/.PopUpLearn/tmp/line2_good_answers_days.tmp
+					cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | fgrep "$line2" | sed 's/.*€//' | sort -n | sed "s/^/$TODAY - /" | bc > $HOME/.PopUpLearn/tmp/line2_good_answers_days.tmp
 					LAST_DAY_LINE2=`cat $HOME/.PopUpLearn/tmp/line2_good_answers_days.tmp | tail -n 1`
 					echo -e "$line2 - $DAYS_AGO_LINE2\\\n" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 				done < "$HOME/.PopUpLearn/tmp/list_lines.tmp" #Based on session_$ARG/session_content.pul (See up)
