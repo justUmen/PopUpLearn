@@ -862,7 +862,8 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 	  TODAY=$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))
 	  LAST_GOOD_ANSWER=""
 	  if [[ "$LAST_DAY" != "" ]]; then
-		LAST_GOOD_ANSWER="last good answer was `expr $TODAY - $LAST_DAY ` days ago (`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null|wc -l` bad, `cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null|wc -l` good)"
+			GOOD_ANSWER_DAYS_AGO=`expr $TODAY - $LAST_DAY`
+			LAST_GOOD_ANSWER="last good answer was $GOOD_ANSWER_DAYS_AGO days ago (`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null|wc -l` bad, `cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null|wc -l` good)"
 	  fi
 
 		rm $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp 2> /dev/null
@@ -891,6 +892,13 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 				cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" "$HOME/.PopUpLearn/tmp/list_correct.tmp" | sort | uniq -c | sed "s#^ \+1 \+\(.*\)#$BLUE[\1]$END#" | sed "s#^ \+2 \+\(.*\)#$DARK_BLUE[\1]$END#" | sed "s#^ \+[0-9]\+ \+\(.*\)#$GREY[\1]$END#" > "$HOME/.PopUpLearn/tmp/display_correct.tmp"
 				echo -en "\\\n\\\t\\\t GOOD : " >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 				echo -e $(cat "$HOME/.PopUpLearn/tmp/display_correct.tmp" | sed 's/ |=| / :: /') >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+			else
+				#NO MORE BLUE, SO WON'T DISPLAY GOOD, BUT CHECK IF ANSWERED LONG TIME AGO :P - use another color than blue ??? Maybe pink
+				while read line2; do
+					LAST_DAY_LINE2=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | grep "$line2" | sed 's/.*€//' | sort -n | tail -n 1`
+					DAYS_AGO_LINE2=`expr $TODAY - $LAST_DAY_LINE2`
+					echo -e "$line2 - $LAST_DAY_LINE2\\\n" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+				done < "$HOME/.PopUpLearn/tmp/list_lines.tmp" #Based on session_$ARG/session_content.pul (See up)
 			fi
 	  else
 			echo -en "\\\n\\\t\\\t GooD : " >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
