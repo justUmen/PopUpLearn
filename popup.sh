@@ -903,10 +903,10 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 					LEVEL_LINE2=3
 					if [ "$DAYS_AGO_GOOD_LINE2" ] && [ "$DAYS_AGO_BAD_LINE2" ]; then
 						if [ $DAYS_AGO_GOOD_LINE2 -lt $DAYS_AGO_BAD_LINE2 ]; then
-							echo -e "\nPINK_1 $line2" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+							echo -e "\\\nPINK_1 $line2" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 						else
 							if [ $DAYS_AGO_GOOD_LINE2 -gt $LEVEL_LINE2 ]; then
-								echo -e "\nPINK_2 $line2" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+								echo -e "\\\nPINK_2 $line2" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 							fi
 						fi
 					fi
