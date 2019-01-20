@@ -897,7 +897,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 				while read line2; do
 					LAST_DAY_LINE2=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | grep "$line2" | sed 's/.*€//' | sort -n | tail -n 1`
 					DAYS_AGO_LINE2=`expr $TODAY - $LAST_DAY_LINE2`
-					echo -e "$line2 - $LAST_DAY_LINE2\\\n" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+					echo -e "($HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date) $line2 - $LAST_DAY_LINE2\\\n" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 				done < "$HOME/.PopUpLearn/tmp/list_lines.tmp" #Based on session_$ARG/session_content.pul (See up)
 			fi
 	  else
