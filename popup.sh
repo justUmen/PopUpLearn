@@ -905,7 +905,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 						if [ ! "$DAYS_AGO_BAD_LINE2" ];then
 							DAYS_AGO_BAD_LINE2=99999
 						fi
-						if [ $DAYS_AGO_GOOD_LINE2 -lt $DAYS_AGO_BAD_LINE2 ]; then
+						if [ $DAYS_AGO_GOOD_LINE2 -le $DAYS_AGO_BAD_LINE2 ]; then
 							echo -e "\\\nPINK_1 $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2)" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 						else
 							LINE2_A=`expr $DAYS_AGO_GOOD_LINE2 - $DAYS_AGO_BAD_LINE2`
