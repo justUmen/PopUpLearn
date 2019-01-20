@@ -1,4 +1,4 @@
-p#!/bin/bash
+#!/bin/bash
 #~ 🔧 : debug information
 #~ 📃 : interactive menu
 #~ 💻 : change something on the system
@@ -899,7 +899,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 					cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | fgrep "$line2" | sed 's/.*€//' | sort -n | sed "s/^/$TODAY - /" | bc > $HOME/.PopUpLearn/tmp/line2_good_answers_days.tmp
 					cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null | fgrep "$line2" | sed 's/.*€//' | sort -n | sed "s/^/$TODAY - /" | bc > $HOME/.PopUpLearn/tmp/line2_bad_answers_days.tmp
 					DAYS_AGO_GOOD_LINE2=`cat $HOME/.PopUpLearn/tmp/line2_good_answers_days.tmp | tail -n 1`
-					DAYS_AGO_BAD_LINE2=`cat $HOME/.PopUpLearn/tmp/line2_bad_answers_days.tmp | tail -n 1`
+					DAYS_AGO_BAD_LINE2=`cat $HOME/.PopUpLearn/tmp/line2_bad_answers_days.tmp | t -n 1`
 					LEVEL_LINE2=3
 					if [ "$DAYS_AGO_GOOD_LINE2" ]; then
 						if [ ! "$DAYS_AGO_BAD_LINE2" ];then
@@ -981,7 +981,7 @@ function ⬚⬚⬚⬚_📃🔄_selected_session(){ 🔧 $FUNCNAME $@
 	while [ 1 ]; do
 		SESSION_NUMBER=$SESSION_NUMBER_OLD
 		echo -e "\n\t\t---- SESSION $SESSION_NUMBER ----"
-		echo -e "\t\t"`cat $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp`
+		echo -e "\t\t"`cat $HOME/.PopUpLearn/tmp/colors_session_$SESSION_NUMBER.tmp`
 		echo -e "\t\t$COLOR_SELECTION b) $ENDO $COLOR_TITLE_SELECTED[Recommended]$ENDO Detect your knowledge by asking only blue questions. - NOT SHOW ANSWER"
 		echo -e "\t\t$COLOR_SELECTION m) $ENDO All mistakes from this session - NOT SHOW ANSWER"
 		echo -e "\t\t$COLOR_SELECTION M) $ENDO All mistakes from this session - SHOW ANSWER FIRST"
