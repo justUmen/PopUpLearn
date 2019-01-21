@@ -1146,9 +1146,11 @@ function ⬚⬚⬚⬚_📗🔢_session_old_pink_only(){ 🔧 $FUNCNAME $@
 	ANSWER_BEFORE_QUIZ=0
 	⬚⬚⬚⬚⬚_🏗_session_specific_config
 	SESSION_NUMBER=$1
-	⬚⬚⬚⬚⬚_🏗_session_content_tmp_pink_only
 	LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
-	⬚⬚⬚⬚⬚_🔄_lines_in_session || return 2
+	if [ -f "$HOME/.PopUpLearn/tmp/need_prepare_session_content_$SESSION_NUMBER.tmp" ]; then
+		⬚⬚⬚⬚⬚_🏗_session_content_tmp_pink_only
+		⬚⬚⬚⬚⬚_🔄_lines_in_session || return 2
+	fi
 }
 function ⬚⬚⬚⬚_📗🌘_session_new(){ 🔧 $FUNCNAME $@
 	⬚⬚⬚⬚⬚_🏗🌘_session_folder #Newsession only
