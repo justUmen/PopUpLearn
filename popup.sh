@@ -1036,7 +1036,7 @@ function ⬚⬚⬚⬚_📃🔄_selected_session(){ 🔧 $FUNCNAME $@
 				e) return 2 ;;
 				r) ⬚⬚⬚⬚_📗🔢_session_old_mistakes_reverse $SESSION_NUMBER; break ;;
 				b) ⬚⬚⬚⬚_📗🔢_session_old_blue_only $SESSION_NUMBER; break ;;
-				b) ⬚⬚⬚⬚_📗🔢_session_old_pink_only $SESSION_NUMBER; break ;;
+				p) ⬚⬚⬚⬚_📗🔢_session_old_pink_only $SESSION_NUMBER; break ;;
 				m) ⬚⬚⬚⬚_📗🔢_session_old_mistakes_only $SESSION_NUMBER; break;;
 				M) ⬚⬚⬚⬚_📗🔢_session_old_mistakes_only_with_answer $SESSION_NUMBER; break;;
 				l) ⬚⬚⬚⬚_📗🔢_session_old_learn $SESSION_NUMBER; break;;
