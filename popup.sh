@@ -905,12 +905,12 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 							DAYS_AGO_BAD_LINE2=`cat $HOME/.PopUpLearn/tmp/line2_good_answers_days.tmp | head -n 1` #BAD is the date of the first good answer ??? Strange but maybe working...
 						fi
 						# END="\\\e\[0m"
-						PINK="\e[38;5;164"
+						PINK="\\\e\[38;5;164"
 						if [ $DAYS_AGO_GOOD_LINE2 -gt 3 ]; then
 							LINE2_A=`expr $DAYS_AGO_BAD_LINE2 - $DAYS_AGO_GOOD_LINE2`
 							if [ $DAYS_AGO_GOOD_LINE2 -gt $DAYS_AGO_BAD_LINE2 ] || [ $DAYS_AGO_GOOD_LINE2 -gt $LINE2_A ]; then
 								# echo -e "\\\nPINK $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2) TODAY=$TODAY" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
-								echo -en " \\\e\[38;5;164[$line2]\\\e\[0m" | sed 's/ |=| / :: /' >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+								echo -en " $PINK[$line2]$END" | sed 's/ |=| / :: /' >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 							else
 								echo -e "\\\nNOTT $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2) TODAY=$TODAY" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 							fi
