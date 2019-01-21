@@ -906,12 +906,10 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 						fi
 						# END="\\\e\[0m"
 						PINK="\\\e\[38;5;164m"
-						echo $line2 > $HOME/.PopUpLearn/tmp/line2.tmp
 						if [ $DAYS_AGO_GOOD_LINE2 -gt 3 ]; then
 							LINE2_A=`expr $DAYS_AGO_BAD_LINE2 - $DAYS_AGO_GOOD_LINE2`
 							if [ $DAYS_AGO_GOOD_LINE2 -gt $DAYS_AGO_BAD_LINE2 ] || [ $DAYS_AGO_GOOD_LINE2 -gt $LINE2_A ]; then
-								# echo -e "\\\nPINK $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2) TODAY=$TODAY" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
-								echo -e $(echo "$line2" | sed "s#^\(.*\)#$PINK[\1]$END#" | sed 's/ |=| / :: /') >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+								echo -e $(echo " $PINK[$line2]$END " | sed 's/ |=| / :: /') >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 							else
 								echo -e "\\\nNOTT $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2) TODAY=$TODAY" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 							fi
