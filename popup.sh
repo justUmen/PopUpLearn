@@ -900,21 +900,30 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 					cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null | fgrep "$line2" | sed 's/.*€//' | sort -n | sed "s/^/$TODAY - /" | bc > $HOME/.PopUpLearn/tmp/line2_bad_answers_days.tmp
 					DAYS_AGO_GOOD_LINE2=`cat $HOME/.PopUpLearn/tmp/line2_good_answers_days.tmp | tail -n 1`
 					DAYS_AGO_BAD_LINE2=`cat $HOME/.PopUpLearn/tmp/line2_bad_answers_days.tmp | tail -n 1`
-					LEVEL_LINE2=3
 					if [ "$DAYS_AGO_GOOD_LINE2" ]; then
 						if [ ! "$DAYS_AGO_BAD_LINE2" ];then
 							DAYS_AGO_BAD_LINE2=99999
 						fi
-						if [ $DAYS_AGO_GOOD_LINE2 -le $DAYS_AGO_BAD_LINE2 ] && [ $DAYS_AGO_GOOD_LINE2 -gt 3 ]; then
-							echo -e "\\\nPINK_1 $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2) TODAY=$TODAY" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
-						else
+						if [ $DAYS_AGO_GOOD_LINE2 -gt 3 ]; then
 							LINE2_A=`expr $DAYS_AGO_GOOD_LINE2 - $DAYS_AGO_BAD_LINE2`
-							if [ $DAYS_AGO_GOOD_LINE2 -lt $LEVEL_LINE2 ]; then
-								echo -e "\\\nNOTYYY $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2) TODAY=$TODAY" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+							if [ $DAYS_AGO_GOOD_LINE2 -gt $DAYS_AGO_BAD_LINE2 ] || [ $DAYS_AGO_GOOD_LINE2 -gt $LINE2_A ]; then
+								echo -e "\\\nPINK $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2) TODAY=$TODAY" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 							else
-								echo -e "\\\nPINK_2 $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2) TODAY=$TODAY" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+								echo -e "\\\nNOTT $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2) TODAY=$TODAY" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 							fi
+						else
+							echo -e "\\\nNOTT $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2) TODAY=$TODAY (< 3)" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 						fi
+						# if [ $DAYS_AGO_GOOD_LINE2 -le $DAYS_AGO_BAD_LINE2 ] && [ $DAYS_AGO_GOOD_LINE2 -gt 3 ]; then
+						# 	echo -e "\\\nPINK_1 $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2) TODAY=$TODAY" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+						# else
+						# 	LINE2_A=`expr $DAYS_AGO_GOOD_LINE2 - $DAYS_AGO_BAD_LINE2`
+						# 	if [ $DAYS_AGO_GOOD_LINE2 -lt $LINE2_A ]; then
+						# 		echo -e "\\\nNOTYYY $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2) TODAY=$TODAY" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+						# 	else
+						# 		echo -e "\\\nPINK_2 $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2) TODAY=$TODAY" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+						# 	fi
+						# fi
 					fi
 					LINE2_LEVEL="0" #3, 6, 14, 28...
 					# echo -e "$line2 - $DAYS_AGO_LINE2\\\n" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
