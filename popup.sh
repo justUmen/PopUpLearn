@@ -894,6 +894,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 				echo -e $(cat "$HOME/.PopUpLearn/tmp/display_correct.tmp" | sed 's/ |=| / :: /') >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 			else
 				#NO MORE BLUE, SO WON'T DISPLAY GOOD, BUT CHECK IF ANSWERED LONG TIME AGO :P - use another color than blue ??? Maybe pink
+				echo -en "\\\n\\\t\\\t NeeD :" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 				while read line2; do
 					#REVERSE THE FILE SO CAN READ FROM FIRST LINE IN WHILE (ex if today is 384, 381:381:384 becomes 0:3:3)
 					cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | fgrep "$line2" | sed 's/.*€//' | sort -n | sed "s/^/$TODAY - /" | bc > $HOME/.PopUpLearn/tmp/line2_good_answers_days.tmp
@@ -905,7 +906,6 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 							DAYS_AGO_BAD_LINE2=`cat $HOME/.PopUpLearn/tmp/line2_good_answers_days.tmp | head -n 1` #BAD is the date of the first good answer ??? Strange but maybe working...
 						fi
 						# END="\\\e\[0m"
-						echo -en "\\\n\\\t\\\t NeeD :" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 						PINK="\\\e\[38;5;164m"
 						if [ $DAYS_AGO_GOOD_LINE2 -gt 3 ]; then
 							LINE2_A=`expr $DAYS_AGO_BAD_LINE2 - $DAYS_AGO_GOOD_LINE2`
