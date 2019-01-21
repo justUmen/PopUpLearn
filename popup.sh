@@ -724,6 +724,20 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 				display_SESSION_NUMBER
 				⬚⬚⬚⬚_📗🔢_session_old_blue_only $SESSION_NUMBER || break
 			done
+		elif [[ "$selected" == "p" ]]; then
+			ARRAY=()
+			NB_SESSIONS=$SESSION_NUMBER
+			#Prepare array with sessions numbers inside
+			for (( i=1; i<$NB_SESSIONS; i++ )); do ARRAY+=($i); done
+			#Shuffle the sessions numbers or a random result
+			readarray -d '' SHUFFLED_SESSION_NUMBERS < <(printf "%s\0" "${ARRAY[@]}" | shuf -z)
+			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do echo " -- ${SHUFFLED_SESSION_NUMBERS[i]} -- "; done
+			#LAUNCH ONE SESSION AFTER THE OTHER
+			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
+				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
+				display_SESSION_NUMBER
+				⬚⬚⬚⬚_📗🔢_session_old_pink_only $SESSION_NUMBER || break
+			done
 		elif [[ "$selected" == "N" ]]; then
 			⬚⬚⬚⬚_📗🌘_session_new
 		elif [[ "$selected" == "n" ]]; then
@@ -896,6 +910,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 				#NO MORE BLUE, SO WON'T DISPLAY GOOD, BUT CHECK IF ANSWERED LONG TIME AGO :P - use another color than blue ??? Maybe pink
 				echo -en "\\\n\\\t\\\t NeeD :" > $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
 				DISPLAY_NEED=0
+				rm $HOME/.PopUpLearn/tmp/need_prepare_session_content.tmp
 				while read line2; do
 					#REVERSE THE FILE SO CAN READ FROM FIRST LINE IN WHILE (ex if today is 384, 381:381:384 becomes 0:3:3)
 					cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | fgrep "$line2" | sed 's/.*€//' | sort -n | sed "s/^/$TODAY - /" | bc > $HOME/.PopUpLearn/tmp/line2_good_answers_days.tmp
@@ -913,6 +928,8 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 							if [ $DAYS_AGO_GOOD_LINE2 -gt $DAYS_AGO_BAD_LINE2 ] || [ $DAYS_AGO_GOOD_LINE2 -gt $LINE2_A ]; then
 								echo -e $(echo "$line2" | sed "s#^\(.*\)# $PINK[\1]$END ($DAYS_AGO_GOOD_LINE2/$DAYS_AGO_BAD_LINE2) #" | sed 's/ |=| / :: /') >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
 								DISPLAY_NEED=1
+								#PREPARE FOR SELECTION :P
+								echo "$line2" >> $HOME/.PopUpLearn/tmp/need_prepare_session_content.tmp
 							else
 								echo -e $(echo "$line2" | sed "s#^\(.*\)# $GREY[\1]$END ($DAYS_AGO_GOOD_LINE2/$DAYS_AGO_BAD_LINE2) #" | sed 's/ |=| / :: /') >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
 								# echo -e "\\\nNOTT $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2) TODAY=$TODAY" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
@@ -948,6 +965,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 	if [ $NB_SESSION -ne 1 ]; then
 		echo -e "\t---- ALL SESSIONS ----"
 		echo -e "\t$COLOR_SELECTION b) $ENDO $COLOR_TITLE_SELECTED[Recommended]$ENDO Detect your knowledge by asking only blue questions. (session random order) - NOT SHOW ANSWER"
+		echo -e "\t$COLOR_SELECTION p) $ENDO $COLOR_TITLE_SELECTED[Recommended]$ENDO Detect your knowledge by asking only pink questions. (session random order) - NOT SHOW ANSWER"
 		echo -e "\t$COLOR_SELECTION m) $ENDO All mistakes from all sessions (session random order) - NOT SHOW ANSWER"
 		echo -e "\t$COLOR_SELECTION M) $ENDO All mistakes from all sessions (session random order) - SHOW ANSWER FIRST"
 		echo -e "\t$COLOR_SELECTION l) $ENDO Learn about all sessions - ANSWER ONLY NO QUIZ (better with arguments, like : popuplearn 5 60)"
@@ -984,6 +1002,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 			w) break ;;
 			S) break ;;
 			b) break ;;
+			p) break ;;
 			l) break ;;
 			L) break ;;
 			r) break ;;
@@ -1000,6 +1019,7 @@ function ⬚⬚⬚⬚_📃🔄_selected_session(){ 🔧 $FUNCNAME $@
 		echo -e "\n\t\t---- SESSION $SESSION_NUMBER ----"
 		echo -e "\t\t"`cat $HOME/.PopUpLearn/tmp/colors_session_$SESSION_NUMBER.tmp`
 		echo -e "\t\t$COLOR_SELECTION b) $ENDO $COLOR_TITLE_SELECTED[Recommended]$ENDO Detect your knowledge by asking only blue questions. - NOT SHOW ANSWER"
+		echo -e "\t\t$COLOR_SELECTION p) $ENDO $COLOR_TITLE_SELECTED[Recommended]$ENDO Detect your knowledge by asking only pink questions. - NOT SHOW ANSWER"
 		echo -e "\t\t$COLOR_SELECTION m) $ENDO All mistakes from this session - NOT SHOW ANSWER"
 		echo -e "\t\t$COLOR_SELECTION M) $ENDO All mistakes from this session - SHOW ANSWER FIRST"
 		echo -e "\t\t$COLOR_SELECTION l) $ENDO Learn about this session - ANSWER ONLY NO QUIZ (better with arguments, like : popuplearn 5 60)"
@@ -1016,6 +1036,7 @@ function ⬚⬚⬚⬚_📃🔄_selected_session(){ 🔧 $FUNCNAME $@
 				e) return 2 ;;
 				r) ⬚⬚⬚⬚_📗🔢_session_old_mistakes_reverse $SESSION_NUMBER; break ;;
 				b) ⬚⬚⬚⬚_📗🔢_session_old_blue_only $SESSION_NUMBER; break ;;
+				b) ⬚⬚⬚⬚_📗🔢_session_old_pink_only $SESSION_NUMBER; break ;;
 				m) ⬚⬚⬚⬚_📗🔢_session_old_mistakes_only $SESSION_NUMBER; break;;
 				M) ⬚⬚⬚⬚_📗🔢_session_old_mistakes_only_with_answer $SESSION_NUMBER; break;;
 				l) ⬚⬚⬚⬚_📗🔢_session_old_learn $SESSION_NUMBER; break;;
@@ -1121,6 +1142,14 @@ function ⬚⬚⬚⬚_📗🔢_session_old_blue_only(){ 🔧 $FUNCNAME $@
 	LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
 	⬚⬚⬚⬚⬚_🔄_lines_in_session || return 2
 }
+function ⬚⬚⬚⬚_📗🔢_session_old_pink_only(){ 🔧 $FUNCNAME $@
+	ANSWER_BEFORE_QUIZ=0
+	⬚⬚⬚⬚⬚_🏗_session_specific_config
+	⬚⬚⬚⬚⬚_🏗_session_content_tmp_pink_only
+	SESSION_NUMBER=$1
+	LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
+	⬚⬚⬚⬚⬚_🔄_lines_in_session || return 2
+}
 function ⬚⬚⬚⬚_📗🌘_session_new(){ 🔧 $FUNCNAME $@
 	⬚⬚⬚⬚⬚_🏗🌘_session_folder #Newsession only
 	⬚⬚⬚⬚⬚_🏗_session_specific_config
@@ -1170,6 +1199,11 @@ function ⬚⬚⬚⬚⬚_🏗_session_content_tmp_blue_only(){ 🔧 $FUNCNAME $@
 
 	cp "$HOME/.PopUpLearn/tmp/good_removed.tmp" "$HOME/.PopUpLearn/tmp/session_content.tmp" 2> /dev/null
 	cp "$HOME/.PopUpLearn/tmp/good_removed.tmp" "$HOME/.PopUpLearn/tmp/session_content_remove.tmp" 2> /dev/null
+}
+function ⬚⬚⬚⬚⬚_🏗_session_content_tmp_pink_only(){ 🔧 $FUNCNAME $@
+	#FILE ALREADY PREPARED IN PINK MENU
+	cp "$HOME/.PopUpLearn/tmp/need_prepare_session_content.tmp" "$HOME/.PopUpLearn/tmp/session_content.tmp" 2> /dev/null
+	cp "$HOME/.PopUpLearn/tmp/need_prepare_session_content.tmp" "$HOME/.PopUpLearn/tmp/session_content_remove.tmp" 2> /dev/null
 }
 function ⬚⬚⬚⬚⬚_🔄_lines_in_session(){ 🔧 $FUNCNAME $@
 	if [[ "$(wc -l $HOME/.PopUpLearn/tmp/session_content.tmp|sed 's/ .*//')" != "0" ]]; then
