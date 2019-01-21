@@ -894,7 +894,8 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 				echo -e $(cat "$HOME/.PopUpLearn/tmp/display_correct.tmp" | sed 's/ |=| / :: /') >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 			else
 				#NO MORE BLUE, SO WON'T DISPLAY GOOD, BUT CHECK IF ANSWERED LONG TIME AGO :P - use another color than blue ??? Maybe pink
-				echo -en "\\\n\\\t\\\t NeeD :" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+				echo -en "\\\n\\\t\\\t NeeD :" > $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
+				DISLAY_NEED=0
 				while read line2; do
 					#REVERSE THE FILE SO CAN READ FROM FIRST LINE IN WHILE (ex if today is 384, 381:381:384 becomes 0:3:3)
 					cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | fgrep "$line2" | sed 's/.*€//' | sort -n | sed "s/^/$TODAY - /" | bc > $HOME/.PopUpLearn/tmp/line2_good_answers_days.tmp
@@ -910,13 +911,14 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 						if [ $DAYS_AGO_GOOD_LINE2 -gt 3 ]; then
 							LINE2_A=`expr $DAYS_AGO_BAD_LINE2 - $DAYS_AGO_GOOD_LINE2`
 							if [ $DAYS_AGO_GOOD_LINE2 -gt $DAYS_AGO_BAD_LINE2 ] || [ $DAYS_AGO_GOOD_LINE2 -gt $LINE2_A ]; then
-								echo -e $(echo "$line2" | sed "s#^\(.*\)# $PINK[\1]$END ($DAYS_AGO_GOOD_LINE2/$DAYS_AGO_BAD_LINE2) #" | sed 's/ |=| / :: /') >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+								echo -e $(echo "$line2" | sed "s#^\(.*\)# $PINK[\1]$END ($DAYS_AGO_GOOD_LINE2/$DAYS_AGO_BAD_LINE2) #" | sed 's/ |=| / :: /') >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
+								DISPLAY_NEED=1
 							else
-								echo -e $(echo "$line2" | sed "s#^\(.*\)# $GREY[\1]$END ($DAYS_AGO_GOOD_LINE2/$DAYS_AGO_BAD_LINE2) #" | sed 's/ |=| / :: /') >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+								echo -e $(echo "$line2" | sed "s#^\(.*\)# $GREY[\1]$END ($DAYS_AGO_GOOD_LINE2/$DAYS_AGO_BAD_LINE2) #" | sed 's/ |=| / :: /') >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
 								# echo -e "\\\nNOTT $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2) TODAY=$TODAY" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 							fi
 						else
-							echo -e $(echo "$line2" | sed "s#^\(.*\)# $GREY[\1]$END ($DAYS_AGO_GOOD_LINE2/$DAYS_AGO_BAD_LINE2) #" | sed 's/ |=| / :: /') >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+							echo -e $(echo "$line2" | sed "s#^\(.*\)# $GREY[\1]$END ($DAYS_AGO_GOOD_LINE2/$DAYS_AGO_BAD_LINE2) #" | sed 's/ |=| / :: /') >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
 							# echo -e "\\\nNOTT $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2) TODAY=$TODAY (< 3)" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 						fi
 						# if [ $DAYS_AGO_GOOD_LINE2 -le $DAYS_AGO_BAD_LINE2 ] && [ $DAYS_AGO_GOOD_LINE2 -gt 3 ]; then
@@ -929,6 +931,9 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 						# 		echo -e "\\\nPINK_2 $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2) TODAY=$TODAY" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 						# 	fi
 						# fi
+						if [ $DISPLAY_NEED-eq 1 ];then
+							cat $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+						fi
 					fi
 				done < "$HOME/.PopUpLearn/tmp/list_lines.tmp" #Based on session_$ARG/session_content.pul (See up)
 			fi
