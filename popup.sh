@@ -1413,7 +1413,7 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
 					# if [ "$lLAST_ANSWERED_GOOD_DATE" ];then
 					cat $ANSWERED_GOOD_DATE | fgrep "$LINE" | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc | sort -r > $HOME/.PopUpLearn/tmp/list_good_dates.tmp
 					LAST_BAD=`cat $ANSWERED_BAD_DATE | fgrep "$LINE" | tail -n 1 | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc`
-					CURRENT_LEVEL=`cat $ANSWERED_LEVEL | fgrep "$LINE" | sed 's/.*€//'`
+					CURRENT_LEVEL=`cat $ANSWERED_LEVEL | fgrep "$LINE" | tail -n 1 | sed 's/.*€//'`
 
 					#IF NEVER BAD TAKE THE OLDEST GOOD, OTHERWISE FIND THE OLDEST GOOD BEFORE THE LAST BAD
 					if [ ! "$LAST_BAD" ]; then
@@ -1433,7 +1433,7 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
 					NEXT_LEVEL=`expr $CURRENT_LEVEL \* 2`
 					if [ $LAST_GOOD_SMALLER_THAN_BAD -gt $NEXT_LEVEL ];then
 						echo " $LAST_GOOD_SMALLER_THAN_BAD > $NEXT_LEVEL"
-						LINE_v2=`echo $LINE | sed 's/\[/\\\[/' | sed 's/\]/\\\]/'`
+						LINE_v2=`echo $LINE | sed 's/\[/\\\[/g' | sed 's/\]/\\\]/g'`
 						sed -i "/^$LINE_v2€/d" $ANSWERED_LEVEL
 						echo "$LINE€`expr $CURRENT_LEVEL \* 2`" >> $ANSWERED_LEVEL
 					fi
