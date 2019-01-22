@@ -387,7 +387,6 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME $@
 	SESSION_NUMBER=${selected_1}
 	echo
 	echo " - Warning : here sessions are chapters (unlock chapter's password on GameScript to use them here)"
-	echo " - Warning : dates are recorded but are not yet used to organize and optimize your learning experience. (In future versions, the text will change colors depending of when it was answered.)"
 	echo -e "
 	\e[4mCOLORS LEGEND :$ENDO
 		\e[38;5;59mGREY$ENDO : Good 2+ times or Bad 0 (user can ignore knowledge in grey)
@@ -396,6 +395,7 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME $@
 		\e[38;5;226mYELLOW$ENDO : Bad 1 time
 		\e[38;5;202mORANGE$ENDO : Bad 2 times
 		\e[38;5;196mRED$ENDO : Bad 3+ times (user need to focus on this)
+		\e[38;5;164mPINK$ENDO : Ratio Good/Bad/Time reached (user need to practice)
 	"
 
 	# echo "SELECTED = $selected"
@@ -813,7 +813,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 	notify-send "PopUpLearn ready for duty."
 
 	echo
-	echo " - Warning : dates are recorded but are not yet used to organize and optimize your learning experience. (In future versions, the text will change colors depending of when it was answered.)"
+	# echo " - Warning : dates are recorded but are not yet used to organize and optimize your learning experience. (In future versions, the text will change colors depending of when it was answered.)"
 
 	echo -e "
 	\e[4mCOLORS LEGEND :$ENDO
@@ -823,6 +823,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 		\e[38;5;184mYELLOW$ENDO : Bad 1 time
 		\e[38;5;202mORANGE$ENDO : Bad 2 times
 		\e[38;5;196mRED$ENDO : Bad 3+ times (user need to focus on this)
+		\e[38;5;164mPINK$ENDO : Ratio Good/Bad/Time reached (user need to practice)
 	"
 	SESSION_NUMBER=1 #ADDED???
 	while [ -d "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/" ]; do
