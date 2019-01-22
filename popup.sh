@@ -1406,7 +1406,7 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
 
 				touch $ANSWERED_LEVEL
 				#IF LINE EXIST
-				if grep --quiet "$LINE" "$ANSWERED_LEVEL"; then
+				if fgrep --quiet "$LINE" "$ANSWERED_LEVEL"; then
 					#DOUBLE THE CURRENT LEVEL IF LAST GOOD IS BIGGER THAN CURRENT_LEVEL (Avoid triggering new level when answering questions the same day...)
 					$lLAST_ANSWERED_GOOD_DATE=`cat $ANSWERED_GOOD_DATE 2>/dev/null | fgrep "$LINE" | sed 's/.*€//' | sort -n | sed "s/^/$TODAY - /" | bc`
 					echo " lLAST_ANSWERED_GOOD_DATE = $lLAST_ANSWERED_GOOD_DATE"
@@ -1418,7 +1418,7 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
 						fi
 					fi
 				else
-					echo "grep --quiet \"$LINE\" \"$ANSWERED_LEVEL\""
+					# echo "fgrep --quiet \"$LINE\" \"$ANSWERED_LEVEL\""
 					echo "$LINE€3" >> $ANSWERED_LEVEL
 				fi
 			fi
