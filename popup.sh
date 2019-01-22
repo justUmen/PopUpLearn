@@ -889,10 +889,10 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 	  if [[ "$ERROR_TEST" != "" ]]; then
 			cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad" 2> /dev/null > "$HOME/.PopUpLearn/tmp/list_mistakes.tmp"
 			cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" "$HOME/.PopUpLearn/tmp/list_mistakes.tmp" | sort | uniq -c | sed "s#^ \+1 \+\(.*\)#$GREY[\1]$END#" | sed "s#^ \+2 \+\(.*\)#$YELLOW[\1]$END#" | sed "s#^ \+3 \+\(.*\)#$ORANGE[\1]$END#" | sed "s#^ \+[0-9]\+ \+\(.*\)#$RED[\1]$END#" > "$HOME/.PopUpLearn/tmp/display_mistakes.tmp"
-			echo -en "\\\t\\\t  BAD : " >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+			echo -en "\\\t\\\t  BAD  : " >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 			echo -e $(cat "$HOME/.PopUpLearn/tmp/display_mistakes.tmp") >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 	  else
-			echo -en "\\\t\\\t  BaD : " >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+			echo -en "\\\t\\\t  BaD  : " >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 			echo -e $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" | sed "s#^\(.*\)#$GREY[\1]$END#") >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 	  fi
 
@@ -937,7 +937,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 							LAST_GOOD_SMALLER_THAN_BAD=$line3
 						done < $HOME/.PopUpLearn/tmp/list_good_dates.tmp
 					fi
-					echo "LAST_BAD = $LAST_BAD, CURRENT_LEVEL = $CURRENT_LEVEL, LAST_GOOD_SMALLER_THAN_BAD = $LAST_GOOD_SMALLER_THAN_BAD"
+					# echo "LAST_BAD = $LAST_BAD, CURRENT_LEVEL = $CURRENT_LEVEL, LAST_GOOD_SMALLER_THAN_BAD = $LAST_GOOD_SMALLER_THAN_BAD"
 					NEXT_LEVEL=`expr $CURRENT_LEVEL \* 2`
 					if [ $LAST_GOOD_SMALLER_THAN_BAD -gt $NEXT_LEVEL ];then
 						# echo " $LAST_GOOD_SMALLER_THAN_BAD > $NEXT_LEVEL"
@@ -945,9 +945,9 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 						# sed -i "/^$LINE_v2€/d" $ANSWERED_LEVEL
 						# echo "$LINE€`expr $CURRENT_LEVEL \* 2`" >> $ANSWERED_LEVEL
 						DISPLAY_NEED=1
-						echo -e $(echo "$line2" | sed "s#^\(.*\)# $PINK[\1]$END ($DAYS_AGO_GOOD_LINE2/$DAYS_AGO_BAD_LINE2) #") >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
+						echo -e $(echo "$line2" | sed "s#^\(.*\)# $PINK[\1]$END (LVL=$CURRENT_LEVEL) #") >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
 					else
-						echo -e $(echo "$line2" | sed "s#^\(.*\)# $GREY[\1]$END ($DAYS_AGO_GOOD_LINE2/$DAYS_AGO_BAD_LINE2) #") >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
+						echo -e $(echo "$line2" | sed "s#^\(.*\)# $GREY[\1]$END (LVL=$CURRENT_LEVEL) #") >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
 					fi # fi
 				# else
 				# 	echo -e $(echo "$line2" | sed "s#^\(.*\)# $GREY[\1]$END ($DAYS_AGO_GOOD_LINE2/$DAYS_AGO_BAD_LINE2) #") >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
