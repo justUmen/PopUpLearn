@@ -914,6 +914,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 				DISPLAY_NEED=0
 				rm $HOME/.PopUpLearn/tmp/need_prepare_session_content_$ARG.tmp 2> /dev/null
 				while read line2; do
+					touch "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.level"
 					if fgrep --quiet "$line2" "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.level"; then
 						tac $ANSWERED_GOOD_DATE | fgrep "$LINE" | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc > $HOME/.PopUpLearn/tmp/list_good_dates.tmp
 						LAST_BAD=`cat $ANSWERED_BAD_DATE | fgrep "$line2" | tail -n 1 | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc`
