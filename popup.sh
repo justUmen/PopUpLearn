@@ -427,7 +427,7 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME $@
 			cat "$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${GSSUBJECT}/session_$ARG/answer.bad" 2> /dev/null > "$HOME/.PopUpLearn/tmp/list_mistakes.tmp"
 			cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" "$HOME/.PopUpLearn/tmp/list_mistakes.tmp" | sort | uniq -c | sed "s#^ \+1 \+\(.*\)#$GREY[\1]$END#" | sed "s#^ \+2 \+\(.*\)#$YELLOW[\1]$END#" | sed "s#^ \+3 \+\(.*\)#$ORANGE[\1]$END#" | sed "s#^ \+[0-9]\+ \+\(.*\)#$RED[\1]$END#" > "$HOME/.PopUpLearn/tmp/display_mistakes.tmp"
 			echo -en "\t\t  BAD : "
-			echo -e $(cat "$HOME/.PopUpLearn/tmp/display_mistakes.tmp"')
+			echo -e $(cat "$HOME/.PopUpLearn/tmp/display_mistakes.tmp" | sed 's/ |=| / :: /')
 	  fi
 		#GOOD (Not print if all good : ALL_GOOD=0)
 	  GOOD_TEST=`cat "$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${GSSUBJECT}/session_$ARG/answer.good.date" 2>/dev/null | tail -n 1`
@@ -437,11 +437,11 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME $@
 				cat "$HOME/.PopUpLearn/logs/GameScript/${LANGUAGE}/${GSSUBJECT}/session_$ARG/answer.good" 2> /dev/null > "$HOME/.PopUpLearn/tmp/list_correct.tmp"
 				cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" "$HOME/.PopUpLearn/tmp/list_correct.tmp" | sort | uniq -c | sed "s#^ \+1 \+\(.*\)#$BLUE[\1]$END#" | sed "s#^ \+2 \+\(.*\)#$DARK_BLUE[\1]$END#" | sed "s#^ \+[0-9]\+ \+\(.*\)#$GREY[\1]$END#" > "$HOME/.PopUpLearn/tmp/display_correct.tmp"
 				echo -en "\t\t GOOD : "
-				echo -e $(cat "$HOME/.PopUpLearn/tmp/display_correct.tmp"')
+				echo -e $(cat "$HOME/.PopUpLearn/tmp/display_correct.tmp" | sed 's/ |=| / :: /')
 			fi
 	  else
 			echo -en "\t\t GooD : "
-			echo -e $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" | sed "s#^\(.*\)#$BLUE[\1]$END#"')
+			echo -e $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" | sed "s#^\(.*\)#$BLUE[\1]$END#" | sed 's/ |=| / :: /')
 	  fi
 		ARG=`expr $ARG + 1`
 	done
@@ -890,10 +890,10 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 			cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad" 2> /dev/null > "$HOME/.PopUpLearn/tmp/list_mistakes.tmp"
 			cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" "$HOME/.PopUpLearn/tmp/list_mistakes.tmp" | sort | uniq -c | sed "s#^ \+1 \+\(.*\)#$GREY[\1]$END#" | sed "s#^ \+2 \+\(.*\)#$YELLOW[\1]$END#" | sed "s#^ \+3 \+\(.*\)#$ORANGE[\1]$END#" | sed "s#^ \+[0-9]\+ \+\(.*\)#$RED[\1]$END#" > "$HOME/.PopUpLearn/tmp/display_mistakes.tmp"
 			echo -en "\\\t\\\t  BAD : " >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
-			echo -e $(cat "$HOME/.PopUpLearn/tmp/display_mistakes.tmp"') >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+			echo -e $(cat "$HOME/.PopUpLearn/tmp/display_mistakes.tmp" | sed 's/ |=| / :: /') >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 	  else
 			echo -en "\\\t\\\t  BaD : " >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
-			echo -e $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" | sed "s#^\(.*\)#$GREY[\1]$END#"') >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+			echo -e $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" | sed "s#^\(.*\)#$GREY[\1]$END#" | sed 's/ |=| / :: /') >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 	  fi
 
 	  GOOD_TEST=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | tail -n 1`
@@ -907,7 +907,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 				cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good" 2> /dev/null > "$HOME/.PopUpLearn/tmp/list_correct.tmp"
 				cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" "$HOME/.PopUpLearn/tmp/list_correct.tmp" | sort | uniq -c | sed "s#^ \+1 \+\(.*\)#$BLUE[\1]$END#" | sed "s#^ \+2 \+\(.*\)#$DARK_BLUE[\1]$END#" | sed "s#^ \+[0-9]\+ \+\(.*\)#$GREY[\1]$END#" > "$HOME/.PopUpLearn/tmp/display_correct.tmp"
 				echo -en "\\\n\\\t\\\t GOOD : " >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
-				echo -e $(cat "$HOME/.PopUpLearn/tmp/display_correct.tmp"') >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+				echo -e $(cat "$HOME/.PopUpLearn/tmp/display_correct.tmp" | sed 's/ |=| / :: /') >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 			else
 				#NO MORE BLUE, SO WON'T DISPLAY GOOD, BUT CHECK IF ANSWERED LONG TIME AGO :P - use another color than blue ??? Maybe pink
 				echo -en "\\\n\\\t\\\t NeeD :" > $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
@@ -928,16 +928,16 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 						if [ $DAYS_AGO_GOOD_LINE2 -gt 3 ]; then
 							LINE2_A=`expr $DAYS_AGO_BAD_LINE2 - $DAYS_AGO_GOOD_LINE2`
 							if [ $DAYS_AGO_GOOD_LINE2 -gt $DAYS_AGO_BAD_LINE2 ] || [ $DAYS_AGO_GOOD_LINE2 -gt $LINE2_A ]; then
-								echo -e $(echo "$line2" | sed "s#^\(.*\)# $PINK[\1]$END ($DAYS_AGO_GOOD_LINE2/$DAYS_AGO_BAD_LINE2) #"') >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
+								echo -e $(echo "$line2" | sed "s#^\(.*\)# $PINK[\1]$END ($DAYS_AGO_GOOD_LINE2/$DAYS_AGO_BAD_LINE2) #" | sed 's/ |=| / :: /') >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
 								DISPLAY_NEED=1
 								#PREPARE FOR SELECTION :P
 								echo "$line2" >> $HOME/.PopUpLearn/tmp/need_prepare_session_content_$ARG.tmp
 							else
-								echo -e $(echo "$line2" | sed "s#^\(.*\)# $GREY[\1]$END ($DAYS_AGO_GOOD_LINE2/$DAYS_AGO_BAD_LINE2) #"') >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
+								echo -e $(echo "$line2" | sed "s#^\(.*\)# $GREY[\1]$END ($DAYS_AGO_GOOD_LINE2/$DAYS_AGO_BAD_LINE2) #" | sed 's/ |=| / :: /') >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
 								# echo -e "\\\nNOTT $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2) TODAY=$TODAY" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 							fi
 						else
-							echo -e $(echo "$line2" | sed "s#^\(.*\)# $GREY[\1]$END ($DAYS_AGO_GOOD_LINE2/$DAYS_AGO_BAD_LINE2) #"') >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
+							echo -e $(echo "$line2" | sed "s#^\(.*\)# $GREY[\1]$END ($DAYS_AGO_GOOD_LINE2/$DAYS_AGO_BAD_LINE2) #" | sed 's/ |=| / :: /') >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
 							# echo -e "\\\nNOTT $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2) TODAY=$TODAY (< 3)" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 						fi
 						# if [ $DAYS_AGO_GOOD_LINE2 -le $DAYS_AGO_BAD_LINE2 ] && [ $DAYS_AGO_GOOD_LINE2 -gt 3 ]; then
@@ -958,7 +958,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 			fi
 	  else
 			echo -en "\\\n\\\t\\\t GooD : " >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
-			echo -e $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" | sed "s#^\(.*\)#$BLUE[\1]$END#"') >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+			echo -e $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" | sed "s#^\(.*\)#$BLUE[\1]$END#" | sed 's/ |=| / :: /') >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 	  fi
 		echo -e `cat $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp`
 	done
