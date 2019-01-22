@@ -395,7 +395,7 @@ function ⬚⬚⬚⬚_📃_gamescript_chapters(){ 🔧 $FUNCNAME $@
 		\e[38;5;226mYELLOW$ENDO : Bad 1 time
 		\e[38;5;202mORANGE$ENDO : Bad 2 times
 		\e[38;5;196mRED$ENDO : Bad 3+ times (user need to focus on this)
-		\e[38;5;164mPINK$ENDO : Ratio Good/Bad/Time reached (user need to practice)
+		\e[38;5;164mPINK$ENDO : Threshold reached, relationship Good/Bad/Time (user need to practice)
 	"
 
 	# echo "SELECTED = $selected"
@@ -823,7 +823,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 		\e[38;5;184mYELLOW$ENDO : Bad 1 time
 		\e[38;5;202mORANGE$ENDO : Bad 2 times
 		\e[38;5;196mRED$ENDO : Bad 3+ times (user need to focus on this)
-		\e[38;5;164mPINK$ENDO : Ratio Good/Bad/Time reached (user need to practice)
+		\e[38;5;164mPINK$ENDO : Threshold reached, relationship Good/Bad/Time (user need to practice)
 	"
 	SESSION_NUMBER=1 #ADDED???
 	while [ -d "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/" ]; do
