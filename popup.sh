@@ -1415,13 +1415,18 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
 					LAST_BAD=`cat $ANSWERED_BAD_DATE | fgrep "$LINE" | tail -n 1 | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc`
 					CURRENT_LEVEL=`cat $ANSWERED_LEVEL | grep "$LINE" | sed 's/.*€//'`
 
-					while read line3; do
-						if [ $line3 -gt $LAST_BAD ];then
-							echo "$line3 is TOO BIG"
-							break
-						fi
-						LAST_GOOD_SMALLER_THAN_BAD=$line3
-					done < $HOME/.PopUpLearn/tmp/list_good_dates.tmp
+					#IF NEVER BAD TAKE THE OLDEST GOOD, OTHERWISE FIND THE OLDEST GOOD BEFORE THE LAST BAD
+					if [ ! "$LAST_BAD" ]; then
+						LAST_GOOD_SMALLER_THAN_BAD=`cat $ANSWERED_GOOD_DATE | fgrep "$LINE" | head -n 1 | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc`
+					else
+						while read line3; do
+							if [ $line3 -gt $LAST_BAD ];then
+								echo "$line3 is TOO BIG"
+								break
+							fi
+							LAST_GOOD_SMALLER_THAN_BAD=$line3
+						done < $HOME/.PopUpLearn/tmp/list_good_dates.tmp
+					fi
 
 					echo "LAST_BAD = $LAST_BAD, CURRENT_LEVEL = $CURRENT_LEVEL, LAST_GOOD_SMALLER_THAN_BAD = $LAST_GOOD_SMALLER_THAN_BAD"
 
