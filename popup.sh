@@ -1413,7 +1413,7 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
 					# if [ "$lLAST_ANSWERED_GOOD_DATE" ];then
 					cat $ANSWERED_GOOD_DATE | fgrep "$LINE" | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc | sort -r > $HOME/.PopUpLearn/tmp/list_good_dates.tmp
 					LAST_BAD=`cat $ANSWERED_BAD_DATE | fgrep "$LINE" | tail -n 1 | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc`
-					CURRENT_LEVEL=`cat $ANSWERED_LEVEL | grep "$LINE" | sed 's/.*€//'`
+					CURRENT_LEVEL=`cat $ANSWERED_LEVEL | fgrep "$LINE" | sed 's/.*€//'`
 
 					#IF NEVER BAD TAKE THE OLDEST GOOD, OTHERWISE FIND THE OLDEST GOOD BEFORE THE LAST BAD
 					if [ ! "$LAST_BAD" ]; then
