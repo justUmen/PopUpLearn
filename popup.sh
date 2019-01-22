@@ -169,6 +169,7 @@ function ⬚_before_start(){
 	COLOR_TITLE_SELECTED="$BG_DARK_GREEN$WHITE"
 	#PREPARE COLORS QUESTIONS / ANSWERS ONLY !!! DIFFERENT FORMAT
 	END="\\\e\[0m"
+	PINK="\\\e\[38;5;164m"
 	GREY="\\\e\[38;5;59m" #GOOD 2+ / BAD 0
 	BLUE="\\\e\[38;5;33m" #GOOD 0
 	DARK_BLUE="\\\e\[38;5;25m" #GOOD 1
