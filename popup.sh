@@ -947,6 +947,8 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 						# echo "$LINE€`expr $CURRENT_LEVEL \* 2`" >> $ANSWERED_LEVEL
 						DISPLAY_NEED=1
 						echo -e $(echo "$line2" | sed "s#^\(.*\)# $PINK[\1]$END (LVL=$CURRENT_LEVEL) #") >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
+						#PREPARE FOR QUESTION "p"
+						echo "$line2" >> $HOME/.PopUpLearn/tmp/need_prepare_session_content_$ARG.tmp
 					else
 						echo -e $(echo "$line2" | sed "s#^\(.*\)# $GREY[\1]$END (LVL=$CURRENT_LEVEL) #") >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
 					fi # fi
