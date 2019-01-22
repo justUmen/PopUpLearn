@@ -1409,7 +1409,7 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
 				if fgrep --quiet "$LINE" "$ANSWERED_LEVEL"; then
 					#DOUBLE THE CURRENT LEVEL IF LAST GOOD IS BIGGER THAN CURRENT_LEVEL (Avoid triggering new level when answering questions the same day...)
 					$lLAST_ANSWERED_GOOD_DATE=`cat $ANSWERED_GOOD_DATE 2>/dev/null | fgrep "$LINE" | sed 's/.*€//' | sort -n | sed "s/^/$TODAY - /" | bc`
-					echo " lLAST_ANSWERED_GOOD_DATE = $lLAST_ANSWERED_GOOD_DATE"
+					echo " lLAST_ANSWERED_GOOD_DATE = $lLAST_ANSWERED_GOOD_DATE (TODAY = $TODAY)"
 					if [ "$lLAST_ANSWERED_GOOD_DATE" ];then
 						CURRENT_LEVEL=`cat $ANSWERED_LEVEL | grep "$LINE" | sed 's/.*€//'`
 						if [ $lLAST_ANSWERED_GOOD_DATE -gt $CURRENT_LEVEL ];then
