@@ -925,16 +925,16 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 							LAST_GOOD_SMALLER_THAN_BAD=`cat $ANSWERED_GOOD_DATE | fgrep "$line2" | head -n 1 | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc`
 						else
 							while read line3; do
-								# echo "... $line3 ..."
+								echo "... $line3 ..."
 								if [ $line3 -gt $LAST_BAD ];then
-									# echo "$line3 is TOO BIG"
+									echo "$line3 is TOO BIG"
 									break
 								fi
 								LAST_GOOD_SMALLER_THAN_BAD=$line3
 							done < $HOME/.PopUpLearn/tmp/list_good_dates.tmp
 						fi
 
-						# echo "LAST_BAD = $LAST_BAD, CURRENT_LEVEL = $CURRENT_LEVEL, LAST_GOOD_SMALLER_THAN_BAD = $LAST_GOOD_SMALLER_THAN_BAD"
+						echo "LAST_BAD = $LAST_BAD, CURRENT_LEVEL = $CURRENT_LEVEL, LAST_GOOD_SMALLER_THAN_BAD = $LAST_GOOD_SMALLER_THAN_BAD"
 
 						NEXT_LEVEL=`expr $CURRENT_LEVEL \* 2`
 						if [ $LAST_GOOD_SMALLER_THAN_BAD -gt $NEXT_LEVEL ];then
