@@ -984,7 +984,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 	echo -e "\t$COLOR_SELECTION in) $ENDO Infinite New sessions (SHOW ANSWER and quiz - no points for good, log mistakes)"
 	echo -e "\t$COLOR_SELECTION in2) $ENDO Infinite New sessions - NOT SHOW ANSWER"
 	echo -e "\t---- OTHER ----"
-	echo -e "\t$COLOR_SELECTION w) $ENDO web browser \\e[38;5;196m[ not yet implemented... :( ]$ENDO"
+	echo -e "\t$COLOR_SELECTION w) $ENDO web interface \\e[38;5;196m[ not yet implemented... :( ]$ENDO"
 	echo -e "\t$COLOR_SELECTION e) $ENDO Return"
 	#~ echo -e "\t\$COLOR_SELECTION q) $ENDO All questions from the .pul file \\e[38;5;196m[ not yet implemented... :( ]$ENDO" #MAYBE NOT... TRIGGER ANOTHER LOG...
 	#~ echo -e "\t\$COLOR_SELECTION r) $ENDO All red mistakes from all sessions \\e[38;5;196m[ not yet implemented... :( ]$ENDO"
