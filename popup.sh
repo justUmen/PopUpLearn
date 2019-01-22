@@ -1408,17 +1408,31 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
 				#IF LINE EXIST
 				if fgrep --quiet "$LINE" "$ANSWERED_LEVEL"; then
 					#DOUBLE THE CURRENT LEVEL IF LAST GOOD IS BIGGER THAN CURRENT_LEVEL (Avoid triggering new level when answering questions the same day...)
-					$lLAST_ANSWERED_GOOD_DATE=`cat $ANSWERED_GOOD_DATE 2>/dev/null | fgrep "$LINE" | tail -n 1 | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc`
-					echo " lLAST_ANSWERED_GOOD_DATE = $lLAST_ANSWERED_GOOD_DATE (TODAY = $TODAY)"
-					if [ "$lLAST_ANSWERED_GOOD_DATE" ];then
-						CURRENT_LEVEL=`cat $ANSWERED_LEVEL | grep "$LINE" | sed 's/.*€//'`
-						if [ $lLAST_ANSWERED_GOOD_DATE -gt $CURRENT_LEVEL ];then
-							sed -i "/^$LINE€/d" $ANSWERED_LEVEL
-							echo "$LINE€`expr $CURRENT_LEVEL \* 2`" >> $ANSWERED_LEVEL
+					# $lLAST_ANSWERED_GOOD_DATE=`cat $ANSWERED_GOOD_DATE | fgrep "$LINE" | tail -n 1 | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc`
+					# echo " lLAST_ANSWERED_GOOD_DATE = $lLAST_ANSWERED_GOOD_DATE (TODAY = $TODAY)"
+					# if [ "$lLAST_ANSWERED_GOOD_DATE" ];then
+					cat $ANSWERED_GOOD_DATE | fgrep "$LINE" | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc | sort -r > $HOME/.PopUpLearn/tmp/list_good_dates.tmp
+					LAST_BAD=`cat $ANSWERED_BAD_DATE | fgrep "$LINE" | tail -n 1 | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc`
+					CURRENT_LEVEL=`cat $ANSWERED_LEVEL | grep "$LINE" | sed 's/.*€//'`
+
+					while read line3; do
+						if [ $line3 -gt $LAST_BAD ];then
+							echo "$line3 is TOO BIG"
+							break
 						fi
+						LAST_GOOD_SMALLER_THAN_BAD=$line3
+					done < $HOME/.PopUpLearn/tmp/list_good_dates.tmp
+
+					echo "LAST_BAD = $LAST_BAD, CURRENT_LEVEL = $CURRENT_LEVEL, LAST_GOOD_SMALLER_THAN_BAD = $LAST_GOOD_SMALLER_THAN_BAD"
+
+					NEXT_LEVEL=`expr $CURRENT_LEVEL \* 2`
+					if [ $LAST_GOOD_SMALLER_THAN_BAD -gt $NEXT_LEVEL ];then
+						echo " $LAST_GOOD_SMALLER_THAN_BAD > $NEXT_LEVEL"
+						sed -i "/^$LINE€/d" $ANSWERED_LEVEL
+						echo "$LINE€`expr $CURRENT_LEVEL \* 2`" >> $ANSWERED_LEVEL
 					fi
+					# fi
 				else
-					# echo "fgrep --quiet \"$LINE\" \"$ANSWERED_LEVEL\""
 					echo "$LINE€3" >> $ANSWERED_LEVEL
 				fi
 			fi
@@ -1430,7 +1444,7 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
 
 				touch $ANSWERED_LEVEL
 				#IF LINE EXIST
-				if grep --quiet "$LINE" "$ANSWERED_LEVEL"; then
+				if fgrep --quiet "$LINE" "$ANSWERED_LEVEL"; then
 					#BACK TO LEVEL 3
 					sed -i "/^$LINE€/d" $ANSWERED_LEVEL
 					echo "$LINE€3" >> $ANSWERED_LEVEL
