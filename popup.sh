@@ -1418,6 +1418,7 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
 						fi
 					fi
 				else
+					echo "grep --quiet \"$LINE\" \"$ANSWERED_LEVEL\""
 					echo "$LINE€3" >> $ANSWERED_LEVEL
 				fi
 			fi
