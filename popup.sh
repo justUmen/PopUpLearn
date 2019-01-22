@@ -911,12 +911,14 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 			else
 				#NO MORE BLUE, SO WON'T DISPLAY GOOD, BUT CHECK IF ANSWERED LONG TIME AGO :P - use another color than blue ??? Maybe pink
 				echo -en "\\\n\\\t\\\t NeeD :" > $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
-				DISPLAY_NEED=1
+				DISPLAY_NEED=0
 				rm $HOME/.PopUpLearn/tmp/need_prepare_session_content_$ARG.tmp 2> /dev/null
 				touch "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.level"
 
 				while read line2; do
 					if fgrep --quiet "$line2" "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.level"; then
+						echo "$line2€3" >> "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.level"
+					fi
 						tac "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | fgrep "$LINE" | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc > $HOME/.PopUpLearn/tmp/list_good_dates.tmp
 						LAST_BAD=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null | fgrep "$line2" | tail -n 1 | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc`
 						CURRENT_LEVEL=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.level" | fgrep "$line2" | tail -n 1 | sed 's/.*€//'`
@@ -956,7 +958,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 				if [ $DISPLAY_NEED -eq 1 ];then
 					cat $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 				fi
-			fi
+			# fi
 		else
 			echo -en "\\\n\\\t\\\t GooD : " >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 			echo -e $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" | sed "s#^\(.*\)#$BLUE[\1]$END#") >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
