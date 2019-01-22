@@ -1417,6 +1417,8 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
 							echo -n "$LINE€`expr $CURRENT_LEVEL \* 2`" >> $ANSWERED_LEVEL
 						fi
 					fi
+				else
+					echo -n "$LINE€3" >> $ANSWERED_LEVEL
 				fi
 			fi
 		elif [[ "`cat $HOME/.PopUpLearn/tmp/result.tmp`" == "bad" ]]; then
