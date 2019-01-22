@@ -1433,7 +1433,8 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
 					NEXT_LEVEL=`expr $CURRENT_LEVEL \* 2`
 					if [ $LAST_GOOD_SMALLER_THAN_BAD -gt $NEXT_LEVEL ];then
 						echo " $LAST_GOOD_SMALLER_THAN_BAD > $NEXT_LEVEL"
-						sed -i "/^$LINE€/d" $ANSWERED_LEVEL
+						LINE_v2=`echo $LINE | sed 's/\[/\\\[/' | sed 's/\]/\\\]/'`
+						sed -i "/^$LINE_v2€/d" $ANSWERED_LEVEL
 						echo "$LINE€`expr $CURRENT_LEVEL \* 2`" >> $ANSWERED_LEVEL
 					fi
 					# fi
@@ -1451,7 +1452,8 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
 				#IF LINE EXIST
 				if fgrep --quiet "$LINE" "$ANSWERED_LEVEL"; then
 					#BACK TO LEVEL 3
-					sed -i "/^$LINE€/d" $ANSWERED_LEVEL
+					LINE_v2=`echo $LINE | sed 's/\[/\\\[/' | sed 's/\]/\\\]/'`
+					sed -i "/^$LINE_v2€/d" $ANSWERED_LEVEL
 					echo "$LINE€3" >> $ANSWERED_LEVEL
 				else
 					echo "$LINE€3" >> $ANSWERED_LEVEL
