@@ -1267,9 +1267,9 @@ function ⬚⬚⬚⬚⬚⬚_🚧_session_answers(){ 🔧 $FUNCNAME $@
 	TODAY="$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))"
 	ANSWERED_GOOD="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/answer.good"
 	ANSWERED_GOOD_DATE="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/answer.good.date"
-	TODAY="$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))"
 	ANSWERED_BAD="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/answer.bad"
 	ANSWERED_BAD_DATE="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/answer.bad.date"
+	ANSWERED_LEVEL="$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/answer.level"
 
 	# echo " -------> FILE = $FILE"
 	cat $FILE | sed 's/^\t//g' | grep ' |=| ' > $HOME/.PopUpLearn/tmp/file_content_BAD_answers.tmp
@@ -1403,12 +1403,33 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
 			if [[ "$2" != "IGNORE_GOOD" ]] && [[ "$2" != "IGNORE_GOOD_BAD" ]];then
 				echo "$LINE" >> $ANSWERED_GOOD
 				echo "$LINE€$TODAY" >> $ANSWERED_GOOD_DATE
+
+				touch $ANSWERED_LEVEL
+				#IF LINE DOES NOT EXIST YET
+				if grep --quiet "$LINE" "$ANSWERED_LEVEL"; then
+					#DOUBLE THE CURRENT LEVEL
+					CURRENT_LEVEL=`cat $ANSWERED_LEVEL | grep "$LINE" | sed 's/.*€//'`
+					sed -i "/^$LINE€/d" $ANSWERED_LEVEL
+					echo -n "$LINE€`expr $CURRENT_LEVEL \* 2`" >> $ANSWERED_LEVEL
+				else
+					echo -n "$LINE€3" >> $ANSWERED_LEVEL
+				fi
 			fi
 		elif [[ "`cat $HOME/.PopUpLearn/tmp/result.tmp`" == "bad" ]]; then
 			notify-send -i $HOME/.PopUpLearn/img/bad.png "$LEFT : `echo "$RIGHT"|sed 's/\\\\\\\\/\\\/'|sed 's/\\\\\\\\/\\\/'|sed 's/\\\\\\\\/\\\/'|sed "s/</𝈶/g"` ($quizzed/$LOOP_QUIZ)"
 			if [[ "$2" != "IGNORE_GOOD_BAD" ]];then
 				echo "$LINE" >> $ANSWERED_BAD
 				echo "$LINE€$TODAY" >> $ANSWERED_BAD_DATE
+
+				touch $ANSWERED_LEVEL
+				#IF LINE DOES NOT EXIST YET
+				if grep --quiet "$LINE" "$ANSWERED_LEVEL"; then
+					#BACK TO LEVEL 3
+					sed -i "/^$LINE€/d" $ANSWERED_LEVEL
+					echo -n "$LINE€3" >> $ANSWERED_LEVEL
+				else
+					echo -n "$LINE€3" >> $ANSWERED_LEVEL
+				fi
 			fi
 		else
 			#~ notify-send -i $HOME/.PopUpLearn/img/unknown.png "$LEFT : $RIGHT ($quizzed/$LOOP_QUIZ)"
