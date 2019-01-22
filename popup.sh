@@ -1414,11 +1414,11 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
 						CURRENT_LEVEL=`cat $ANSWERED_LEVEL | grep "$LINE" | sed 's/.*€//'`
 						if [ $lLAST_ANSWERED_GOOD_DATE -gt $CURRENT_LEVEL ];then
 							sed -i "/^$LINE€/d" $ANSWERED_LEVEL
-							echo -n "$LINE€`expr $CURRENT_LEVEL \* 2`" >> $ANSWERED_LEVEL
+							echo "$LINE€`expr $CURRENT_LEVEL \* 2`" >> $ANSWERED_LEVEL
 						fi
 					fi
 				else
-					echo -n "$LINE€3" >> $ANSWERED_LEVEL
+					echo "$LINE€3" >> $ANSWERED_LEVEL
 				fi
 			fi
 		elif [[ "`cat $HOME/.PopUpLearn/tmp/result.tmp`" == "bad" ]]; then
@@ -1432,9 +1432,9 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
 				if grep --quiet "$LINE" "$ANSWERED_LEVEL"; then
 					#BACK TO LEVEL 3
 					sed -i "/^$LINE€/d" $ANSWERED_LEVEL
-					echo -n "$LINE€3" >> $ANSWERED_LEVEL
+					echo "$LINE€3" >> $ANSWERED_LEVEL
 				else
-					echo -n "$LINE€3" >> $ANSWERED_LEVEL
+					echo "$LINE€3" >> $ANSWERED_LEVEL
 				fi
 			fi
 		else
