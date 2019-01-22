@@ -914,15 +914,16 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 				DISPLAY_NEED=0
 				rm $HOME/.PopUpLearn/tmp/need_prepare_session_content_$ARG.tmp 2> /dev/null
 				touch "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.level"
+
 				while read line2; do
 					if fgrep --quiet "$line2" "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.level"; then
-						tac $ANSWERED_GOOD_DATE | fgrep "$LINE" | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc > $HOME/.PopUpLearn/tmp/list_good_dates.tmp
-						LAST_BAD=`cat $ANSWERED_BAD_DATE | fgrep "$line2" | tail -n 1 | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc`
-						CURRENT_LEVEL=`cat $ANSWERED_LEVEL | fgrep "$line2" | tail -n 1 | sed 's/.*€//'`
+						tac "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" | fgrep "$LINE" | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc > $HOME/.PopUpLearn/tmp/list_good_dates.tmp
+						LAST_BAD=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" | fgrep "$line2" | tail -n 1 | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc`
+						CURRENT_LEVEL=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.answer" | fgrep "$line2" | tail -n 1 | sed 's/.*€//'`
 
 						#IF NEVER BAD TAKE THE OLDEST GOOD, OTHERWISE FIND THE OLDEST GOOD BEFORE THE LAST BAD
 						if [ ! "$LAST_BAD" ]; then
-							LAST_GOOD_SMALLER_THAN_BAD=`cat $ANSWERED_GOOD_DATE | fgrep "$line2" | head -n 1 | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc`
+							LAST_GOOD_SMALLER_THAN_BAD=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" | fgrep "$line2" | head -n 1 | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc`
 						else
 							while read line3; do
 								echo "... $line3 ..."
