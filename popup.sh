@@ -946,11 +946,11 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 						# sed -i "/^$LINE_v2€/d" $ANSWERED_LEVEL
 						# echo "$LINE€`expr $CURRENT_LEVEL \* 2`" >> $ANSWERED_LEVEL
 						DISPLAY_NEED=1
-						echo -e $(echo "$line2" | sed "s#^\(.*\)# $PINK[\1]$END (LVL=$CURRENT_LEVEL) #") >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
-						#PREPARE FOR QUESTION "p"
+						echo -e $(echo "$line2" | sed "s#^\(.*\)# $PINK[\1]$END #") >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
+						#PREPARE FOR QUESTION "p"  (LVL=$CURRENT_LEVEL)
 						echo "$line2" >> $HOME/.PopUpLearn/tmp/need_prepare_session_content_$ARG.tmp
 					else
-						echo -e $(echo "$line2" | sed "s#^\(.*\)# $GREY[\1]$END (LVL=$CURRENT_LEVEL) #") >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
+						echo -e $(echo "$line2" | sed "s#^\(.*\)# $GREY[\1]$END #") >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
 					fi # fi
 				# else
 				# 	echo -e $(echo "$line2" | sed "s#^\(.*\)# $GREY[\1]$END ($DAYS_AGO_GOOD_LINE2/$DAYS_AGO_BAD_LINE2) #") >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
