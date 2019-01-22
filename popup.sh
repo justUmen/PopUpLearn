@@ -950,51 +950,13 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 						# fi
 					else
 						echo -e $(echo "$line2" | sed "s#^\(.*\)# $GREY[\1]$END ($DAYS_AGO_GOOD_LINE2/$DAYS_AGO_BAD_LINE2) #") >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
-					fi
-
-					#REVERSE THE FILE SO CAN READ FROM FIRST LINE IN WHILE (ex if today is 384, 381:381:384 becomes 0:3:3)
-					# cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | fgrep "$line2" | sed 's/.*€//' | sort -n | sed "s/^/$TODAY - /" | bc > $HOME/.PopUpLearn/tmp/line2_good_answers_days.tmp
-					# cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null | fgrep "$line2" | sed 's/.*€//' | sort -n | sed "s/^/$TODAY - /" | bc > $HOME/.PopUpLearn/tmp/line2_bad_answers_days.tmp
-					# DAYS_AGO_GOOD_LINE2=`cat $HOME/.PopUpLearn/tmp/line2_good_answers_days.tmp | tail -n 1`
-					# DAYS_AGO_BAD_LINE2=`cat $HOME/.PopUpLearn/tmp/line2_bad_answers_days.tmp | tail -n 1`
-					# if [ "$DAYS_AGO_GOOD_LINE2" ]; then
-					# 	if [ ! "$DAYS_AGO_BAD_LINE2" ];then
-					# 		DAYS_AGO_BAD_LINE2=`cat $HOME/.PopUpLearn/tmp/line2_good_answers_days.tmp | head -n 1` #BAD is the date of the first good answer ??? Strange but maybe working...
-					# 	fi
-					# 	# END="\\\e\[0m"
-					# 	PINK="\\\e\[38;5;164m"
-					# 	if [ $DAYS_AGO_GOOD_LINE2 -gt 3 ]; then
-					# 		LINE2_A=`expr $DAYS_AGO_BAD_LINE2 - $DAYS_AGO_GOOD_LINE2`
-					# 		if [ $DAYS_AGO_GOOD_LINE2 -gt $DAYS_AGO_BAD_LINE2 ] || [ $DAYS_AGO_GOOD_LINE2 -gt $LINE2_A ]; then
-					# 			echo -e $(echo "$line2" | sed "s#^\(.*\)# $PINK[\1]$END ($DAYS_AGO_GOOD_LINE2/$DAYS_AGO_BAD_LINE2) #") >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
-					# 			DISPLAY_NEED=1
-					# 			#PREPARE FOR SELECTION :P
-					# 			echo "$line2" >> $HOME/.PopUpLearn/tmp/need_prepare_session_content_$ARG.tmp
-					# 		else
-					# 			echo -e $(echo "$line2" | sed "s#^\(.*\)# $GREY[\1]$END ($DAYS_AGO_GOOD_LINE2/$DAYS_AGO_BAD_LINE2) #") >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
-					# 			# echo -e "\\\nNOTT $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2) TODAY=$TODAY" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
-					# 		fi
-					# 	else
-					# 		echo -e $(echo "$line2" | sed "s#^\(.*\)# $GREY[\1]$END ($DAYS_AGO_GOOD_LINE2/$DAYS_AGO_BAD_LINE2) #") >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
-					# 		# echo -e "\\\nNOTT $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2) TODAY=$TODAY (< 3)" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
-					# 	fi
-						# if [ $DAYS_AGO_GOOD_LINE2 -le $DAYS_AGO_BAD_LINE2 ] && [ $DAYS_AGO_GOOD_LINE2 -gt 3 ]; then
-						# 	echo -e "\\\nPINK_1 $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2) TODAY=$TODAY" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
-						# else
-						# 	LINE2_A=`expr $DAYS_AGO_GOOD_LINE2 - $DAYS_AGO_BAD_LINE2`
-						# 	if [ $DAYS_AGO_GOOD_LINE2 -lt $LINE2_A ]; then
-						# 		echo -e "\\\nNOTYYY $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2) TODAY=$TODAY" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
-						# 	else
-						# 		echo -e "\\\nPINK_2 $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2) TODAY=$TODAY" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
-						# 	fi
-						# fi
-					# fi
+					f
 				done < "$HOME/.PopUpLearn/tmp/list_lines.tmp" #Based on session_$ARG/session_content.pul (See up)
 				if [ $DISPLAY_NEED -eq 1 ];then
 					cat $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 				fi
 			fi
-	  else
+		else
 			echo -en "\\\n\\\t\\\t GooD : " >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 			echo -e $(cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" | sed "s#^\(.*\)#$BLUE[\1]$END#") >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 	  fi
@@ -1555,3 +1517,43 @@ if [ $9 ]; then ANSWER_BEFORE_QUIZ="$9"; else ANSWER_BEFORE_QUIZ=1; fi
 if [ $10 ]; then LOOP_QUIZ="$10"; else LOOP_QUIZ=3; fi
 if [ $11 ]; then SIGSTOP_MPV="$11"; else SIGSTOP_MPV=1; fi
 ⬚_🔄🔄_start
+
+
+
+		#REVERSE THE FILE SO CAN READ FROM FIRST LINE IN WHILE (ex if today is 384, 381:381:384 becomes 0:3:3)
+		# cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | fgrep "$line2" | sed 's/.*€//' | sort -n | sed "s/^/$TODAY - /" | bc > $HOME/.PopUpLearn/tmp/line2_good_answers_days.tmp
+		# cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null | fgrep "$line2" | sed 's/.*€//' | sort -n | sed "s/^/$TODAY - /" | bc > $HOME/.PopUpLearn/tmp/line2_bad_answers_days.tmp
+		# DAYS_AGO_GOOD_LINE2=`cat $HOME/.PopUpLearn/tmp/line2_good_answers_days.tmp | tail -n 1`
+		# DAYS_AGO_BAD_LINE2=`cat $HOME/.PopUpLearn/tmp/line2_bad_answers_days.tmp | tail -n 1`
+		# if [ "$DAYS_AGO_GOOD_LINE2" ]; then
+		# 	if [ ! "$DAYS_AGO_BAD_LINE2" ];then
+		# 		DAYS_AGO_BAD_LINE2=`cat $HOME/.PopUpLearn/tmp/line2_good_answers_days.tmp | head -n 1` #BAD is the date of the first good answer ??? Strange but maybe working...
+		# 	fi
+		# 	# END="\\\e\[0m"
+		# 	PINK="\\\e\[38;5;164m"
+		# 	if [ $DAYS_AGO_GOOD_LINE2 -gt 3 ]; then
+		# 		LINE2_A=`expr $DAYS_AGO_BAD_LINE2 - $DAYS_AGO_GOOD_LINE2`
+		# 		if [ $DAYS_AGO_GOOD_LINE2 -gt $DAYS_AGO_BAD_LINE2 ] || [ $DAYS_AGO_GOOD_LINE2 -gt $LINE2_A ]; then
+		# 			echo -e $(echo "$line2" | sed "s#^\(.*\)# $PINK[\1]$END ($DAYS_AGO_GOOD_LINE2/$DAYS_AGO_BAD_LINE2) #") >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
+		# 			DISPLAY_NEED=1
+		# 			#PREPARE FOR SELECTION :P
+		# 			echo "$line2" >> $HOME/.PopUpLearn/tmp/need_prepare_session_content_$ARG.tmp
+		# 		else
+		# 			echo -e $(echo "$line2" | sed "s#^\(.*\)# $GREY[\1]$END ($DAYS_AGO_GOOD_LINE2/$DAYS_AGO_BAD_LINE2) #") >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
+		# 			# echo -e "\\\nNOTT $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2) TODAY=$TODAY" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+		# 		fi
+		# 	else
+		# 		echo -e $(echo "$line2" | sed "s#^\(.*\)# $GREY[\1]$END ($DAYS_AGO_GOOD_LINE2/$DAYS_AGO_BAD_LINE2) #") >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
+		# 		# echo -e "\\\nNOTT $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2) TODAY=$TODAY (< 3)" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+		# 	fi
+			# if [ $DAYS_AGO_GOOD_LINE2 -le $DAYS_AGO_BAD_LINE2 ] && [ $DAYS_AGO_GOOD_LINE2 -gt 3 ]; then
+			# 	echo -e "\\\nPINK_1 $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2) TODAY=$TODAY" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+			# else
+			# 	LINE2_A=`expr $DAYS_AGO_GOOD_LINE2 - $DAYS_AGO_BAD_LINE2`
+			# 	if [ $DAYS_AGO_GOOD_LINE2 -lt $LINE2_A ]; then
+			# 		echo -e "\\\nNOTYYY $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2) TODAY=$TODAY" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+			# 	else
+			# 		echo -e "\\\nPINK_2 $line2 ($DAYS_AGO_GOOD_LINE2 , $DAYS_AGO_BAD_LINE2) TODAY=$TODAY" >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
+			# 	fi
+			# fi
+		# fi
