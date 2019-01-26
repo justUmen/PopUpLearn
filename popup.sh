@@ -193,6 +193,8 @@ function ⬚_🔄🔄_start(){ 🔧 $FUNCNAME $@
 			fi
 		elif [[ "$selected" == "d" ]]; then
 			⬚⬚⬚_📃🔄🔄_add_to_MYDB || continue
+		# elif [[ "$selected" == "i" ]]; then
+		# 	⬚⬚⬚_📃🔄🔄_smart_infinite_loop
 		else
 			⬚⬚⬚_🔄🔄_session
 		fi
@@ -286,7 +288,7 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 		case $selected in
 			e) close_PopUpLearn ;;
 			d) break ;;
-			# i) break ;;
+			i) break ;;
 			g) break ;;
 			[0-9]*) test "$selected" -le "`expr $arraylength - 1`" && break ;;
 		esac
@@ -322,6 +324,14 @@ function ⬚⬚⬚_📃🔄🔄_add_to_MYDB(){ 🔧 $FUNCNAME $@
 		done
 		⬚⬚⬚⬚_🏗_add_to_MYDB "${FILES[selected]}"
 	done
+}
+function ⬚⬚⬚_📃🔄🔄_smart_infinite_loop(){ 🔧 $FUNCNAME $@
+	echo
+	# 1 - take random subject from list
+	# 2 - do blue until no blue
+	# 3 - do pink until no pink
+	# 4 - create 1 new session
+	# 5 - do blue until no blue
 }
 function ⬚⬚⬚⬚_🏗_add_to_MYDB(){ 🔧 $FUNCNAME $@
 	DB_NAME=`echo "$1" | sed 's#.*/##'`
@@ -804,6 +814,32 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 				display_SESSION_NUMBER
 				⬚⬚⬚⬚_📗🔢_session_old_mistakes_reverse $SESSION_NUMBER || break
 			done
+		elif [[ "$selected" == "i" ]]; then
+			# 1 - take random subject from list
+			# 2 - do blue until no blue
+			# 3 - do pink until no pink
+			# 4 - create 1 new session
+			# 5 - do blue until no blue
+			while [ 1 ]; do
+				# TYPE="TEXT"
+				ARRAY=()
+				NB_SESSIONS=$SESSION_NUMBER
+				#Prepare array with sessions numbers inside
+				for (( i=1; i<$NB_SESSIONS; i++ )); do ARRAY+=($i); done
+				#Shuffle the sessions numbers or a random result
+				readarray -d '' SHUFFLED_SESSION_NUMBERS < <(printf "%s\0" "${ARRAY[@]}" | shuf -z)
+				for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do echo " -- ${SHUFFLED_SESSION_NUMBERS[i]} -- "; done
+				#LAUNCH ONE SESSION AFTER THE OTHER
+				for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
+					SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
+					display_SESSION_NUMBER
+					⬚⬚⬚⬚_📗🔢_session_old_blue_only $SESSION_NUMBER || break 2
+					⬚⬚⬚⬚_📗🔢_session_old_pink_only $SESSION_NUMBER || break 2
+					⬚⬚⬚⬚_📗🌘_session_new
+					display_SESSION_NUMBER
+					⬚⬚⬚⬚_📗🔢_session_old_with_answers $SESSION_NUMBER || break 2
+				done
+			done
 		else
 			⬚⬚⬚⬚_📃🔄_selected_session $selected
 		fi
@@ -988,6 +1024,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 	echo -e "\t$COLOR_SELECTION in) $ENDO Infinite New sessions (SHOW ANSWER and quiz - no points for good, log mistakes)"
 	echo -e "\t$COLOR_SELECTION in2) $ENDO Infinite New sessions - NOT SHOW ANSWER"
 	echo -e "\t---- OTHER ----"
+	echo -e "\t$COLOR_SELECTION i) $ENDO $COLOR_TITLE_SELECTED[Recommended]$ENDO Infinite smart loop (learn / remember)"
 	echo -e "\t$COLOR_SELECTION w) $ENDO web interface \\e[38;5;196m[ not yet implemented... :( ]$ENDO"
 	echo -e "\t$COLOR_SELECTION e) $ENDO Return"
 	#~ echo -e "\t\$COLOR_SELECTION q) $ENDO All questions from the .pul file \\e[38;5;196m[ not yet implemented... :( ]$ENDO" #MAYBE NOT... TRIGGER ANOTHER LOG...
@@ -1012,6 +1049,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 			l) break ;;
 			L) break ;;
 			r) break ;;
+			i) break ;;
 			in) break ;;
 			in2) break ;;
 			[0-9]*) SESSION_NUMBER=$selected; test "$selected" -le "`expr $NB_SESSION - 1`" && break ;;
