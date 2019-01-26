@@ -976,6 +976,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 					fi
 					# echo "LAST_BAD = $LAST_BAD, CURRENT_LEVEL = $CURRENT_LEVEL, LAST_GOOD_SMALLER_THAN_BAD = $LAST_GOOD_SMALLER_THAN_BAD"
 					NEXT_LEVEL=`expr $CURRENT_LEVEL \* 2`
+					echo "$LAST_GOOD_SMALLER_THAN_BAD -gt $NEXT_LEVEL"
 					if [ $LAST_GOOD_SMALLER_THAN_BAD -gt $NEXT_LEVEL ];then
 						# echo " $LAST_GOOD_SMALLER_THAN_BAD > $NEXT_LEVEL"
 						# LINE_v2=`echo $LINE | sed 's/\[/\\\[/g' | sed 's/\]/\\\]/g'`
