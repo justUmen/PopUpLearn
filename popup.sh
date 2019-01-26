@@ -961,11 +961,13 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 					LAST_BAD=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null | fgrep "$line2" | tail -n 1 | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc`
 					CURRENT_LEVEL=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.level" | fgrep "$line2" | tail -n 1 | sed 's/.*€//'`
 
-					LAST_GOOD_SMALLER_THAN_BAD=3 #??? new ? need ?
+					# LAST_GOOD_SMALLER_THAN_BAD=3 #??? new ? need ?
 					#IF NEVER BAD TAKE THE OLDEST GOOD, OTHERWISE FIND THE OLDEST GOOD BEFORE THE LAST BAD
 					if [ ! "$LAST_BAD" ]; then
+						echo "IF"
 						LAST_GOOD_SMALLER_THAN_BAD=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" | fgrep "$line2" | head -n 1 | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc`
 					else
+						echo "ELSE"
 						while read line3; do
 							# echo "... $line3 ..."
 							if [ $line3 -gt $LAST_BAD ];then
