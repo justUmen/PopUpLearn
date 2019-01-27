@@ -840,18 +840,16 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 					display_SESSION_NUMBER
 					⬚⬚⬚⬚_📗🔢_session_old_pink_only $SESSION_NUMBER || break 2
 				done
-				for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
-					SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
-					display_SESSION_NUMBER
-					SESSION_NUMBER=1 #ADDED???
-					while [ -d "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/" ]; do
-						SESSION_NUMBER=`expr $SESSION_NUMBER + 1`
-					done
-					# ⬚⬚⬚⬚_📗🌘_session_new
-					display_SESSION_NUMBER
-					# ⬚⬚⬚⬚_📗🔢_session_old_with_answers $SESSION_NUMBER || break 2
 
+				display_SESSION_NUMBER
+				SESSION_NUMBER=1 #ADDED???
+				while [ -d "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/" ]; do
+					SESSION_NUMBER=`expr $SESSION_NUMBER + 1`
 				done
+				⬚⬚⬚⬚_📗🌘_session_new
+				display_SESSION_NUMBER
+				⬚⬚⬚⬚_📗🔢_session_old_with_answers $SESSION_NUMBER || break 2
+
 			done
 		else
 			⬚⬚⬚⬚_📃🔄_selected_session $selected
