@@ -974,7 +974,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 								break
 							fi
 							LAST_GOOD_SMALLER_THAN_BAD=$line3
-						# done < $HOME/.PopUpLearn/tmp/list_good_dates.tmp
+						done < $HOME/.PopUpLearn/tmp/list_good_dates.tmp
 					fi
 					# echo "LAST_BAD = $LAST_BAD, CURRENT_LEVEL = $CURRENT_LEVEL, LAST_GOOD_SMALLER_THAN_BAD = $LAST_GOOD_SMALLER_THAN_BAD"
 					NEXT_LEVEL=`expr $CURRENT_LEVEL \* 2`
