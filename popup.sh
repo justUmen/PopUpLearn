@@ -835,9 +835,14 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 					display_SESSION_NUMBER
 					⬚⬚⬚⬚_📗🔢_session_old_blue_only $SESSION_NUMBER || break 2
 					⬚⬚⬚⬚_📗🔢_session_old_pink_only $SESSION_NUMBER || break 2
-					⬚⬚⬚⬚_📗🌘_session_new
+
+					SESSION_NUMBER=1 #ADDED???
+					while [ -d "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/" ]; do
+						SESSION_NUMBER=`expr $SESSION_NUMBER + 1`
+					done
+					# ⬚⬚⬚⬚_📗🌘_session_new
 					display_SESSION_NUMBER
-					⬚⬚⬚⬚_📗🔢_session_old_with_answers $SESSION_NUMBER || break 2
+					# ⬚⬚⬚⬚_📗🔢_session_old_with_answers $SESSION_NUMBER || break 2
 				done
 			done
 		else
