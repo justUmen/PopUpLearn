@@ -858,6 +858,51 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 		fi
 	done
 }
+function prepare_answer_level(){
+	while read line2; do
+		if ! fgrep --quiet "$line2" "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.level"; then
+			echo "$line2€3" >> "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.level"
+		fi
+
+		tac "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | fgrep "$LINE" | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc > $HOME/.PopUpLearn/tmp/list_good_dates.tmp
+		LAST_BAD=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null | fgrep "$line2" | tail -n 1 | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc`
+		CURRENT_LEVEL=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.level" | fgrep "$line2" | tail -n 1 | sed 's/.*€//'`
+
+		# LAST_GOOD_SMALLER_THAN_BAD=3 #??? new ? need ?
+		#IF NEVER BAD TAKE THE OLDEST GOOD, OTHERWISE FIND THE OLDEST GOOD BEFORE THE LAST BAD
+		if [ ! "$LAST_BAD" ]; then
+			# echo "IF ($line2)"
+			LAST_GOOD_SMALLER_THAN_BAD=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" | fgrep "$line2" | head -n 1 | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc`
+		else
+			while read line3; do
+				# echo "... $line3 ..."
+				if [ $line3 -gt $LAST_BAD ];then
+					# echo "$line3 is TOO BIG"
+					break
+				fi
+				LAST_GOOD_SMALLER_THAN_BAD=$line3
+			done < $HOME/.PopUpLearn/tmp/list_good_dates.tmp
+		fi
+		# echo "LAST_BAD = $LAST_BAD, CURRENT_LEVEL = $CURRENT_LEVEL, LAST_GOOD_SMALLER_THAN_BAD = $LAST_GOOD_SMALLER_THAN_BAD"
+		NEXT_LEVEL=`expr $CURRENT_LEVEL \* 2`
+		# echo "$LAST_GOOD_SMALLER_THAN_BAD -gt $NEXT_LEVEL"
+		if [ $LAST_GOOD_SMALLER_THAN_BAD -gt $NEXT_LEVEL ];then
+			# echo " $LAST_GOOD_SMALLER_THAN_BAD > $NEXT_LEVEL"
+			# LINE_v2=`echo $LINE | sed 's/\[/\\\[/g' | sed 's/\]/\\\]/g'`
+			# sed -i "/^$LINE_v2€/d" $ANSWERED_LEVEL
+			# echo "$LINE€`expr $CURRENT_LEVEL \* 2`" >> $ANSWERED_LEVEL
+			DISPLAY_NEED=1
+			echo -e $(echo "$line2" | sed "s#^\(.*\)# $PINK[\1]$END #") >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
+			#PREPARE FOR QUESTION "p"  (LVL=$CURRENT_LEVEL)
+			echo "$line2" >> $HOME/.PopUpLearn/tmp/need_prepare_session_content_$ARG.tmp
+		else
+			echo -e $(echo "$line2" | sed "s#^\(.*\)# $GREY[\1]$END #") >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
+		fi # fi
+	# else
+	# 	echo -e $(echo "$line2" | sed "s#^\(.*\)# $GREY[\1]$END ($DAYS_AGO_GOOD_LINE2/$DAYS_AGO_BAD_LINE2) #") >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
+	# fi
+	done < "$HOME/.PopUpLearn/tmp/list_lines.tmp" #Based on session_$ARG/session_content.pul (See up)
+}
 function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 
 	notify-send "PopUpLearn ready for duty."
@@ -965,49 +1010,8 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 				rm $HOME/.PopUpLearn/tmp/need_prepare_session_content_$ARG.tmp 2> /dev/null
 				touch "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.level"
 
-				while read line2; do
-					if ! fgrep --quiet "$line2" "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.level"; then
-						echo "$line2€3" >> "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.level"
-					fi
+				prepare_answer_level
 
-					tac "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | fgrep "$LINE" | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc > $HOME/.PopUpLearn/tmp/list_good_dates.tmp
-					LAST_BAD=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null | fgrep "$line2" | tail -n 1 | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc`
-					CURRENT_LEVEL=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.level" | fgrep "$line2" | tail -n 1 | sed 's/.*€//'`
-
-					# LAST_GOOD_SMALLER_THAN_BAD=3 #??? new ? need ?
-					#IF NEVER BAD TAKE THE OLDEST GOOD, OTHERWISE FIND THE OLDEST GOOD BEFORE THE LAST BAD
-					if [ ! "$LAST_BAD" ]; then
-						# echo "IF ($line2)"
-						LAST_GOOD_SMALLER_THAN_BAD=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" | fgrep "$line2" | head -n 1 | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc`
-					else
-						while read line3; do
-							# echo "... $line3 ..."
-							if [ $line3 -gt $LAST_BAD ];then
-								# echo "$line3 is TOO BIG"
-								break
-							fi
-							LAST_GOOD_SMALLER_THAN_BAD=$line3
-						done < $HOME/.PopUpLearn/tmp/list_good_dates.tmp
-					fi
-					# echo "LAST_BAD = $LAST_BAD, CURRENT_LEVEL = $CURRENT_LEVEL, LAST_GOOD_SMALLER_THAN_BAD = $LAST_GOOD_SMALLER_THAN_BAD"
-					NEXT_LEVEL=`expr $CURRENT_LEVEL \* 2`
-					# echo "$LAST_GOOD_SMALLER_THAN_BAD -gt $NEXT_LEVEL"
-					if [ $LAST_GOOD_SMALLER_THAN_BAD -gt $NEXT_LEVEL ];then
-						# echo " $LAST_GOOD_SMALLER_THAN_BAD > $NEXT_LEVEL"
-						# LINE_v2=`echo $LINE | sed 's/\[/\\\[/g' | sed 's/\]/\\\]/g'`
-						# sed -i "/^$LINE_v2€/d" $ANSWERED_LEVEL
-						# echo "$LINE€`expr $CURRENT_LEVEL \* 2`" >> $ANSWERED_LEVEL
-						DISPLAY_NEED=1
-						echo -e $(echo "$line2" | sed "s#^\(.*\)# $PINK[\1]$END #") >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
-						#PREPARE FOR QUESTION "p"  (LVL=$CURRENT_LEVEL)
-						echo "$line2" >> $HOME/.PopUpLearn/tmp/need_prepare_session_content_$ARG.tmp
-					else
-						echo -e $(echo "$line2" | sed "s#^\(.*\)# $GREY[\1]$END #") >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
-					fi # fi
-				# else
-				# 	echo -e $(echo "$line2" | sed "s#^\(.*\)# $GREY[\1]$END ($DAYS_AGO_GOOD_LINE2/$DAYS_AGO_BAD_LINE2) #") >> $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp
-				# fi
-				done < "$HOME/.PopUpLearn/tmp/list_lines.tmp" #Based on session_$ARG/session_content.pul (See up)
 				if [ $DISPLAY_NEED -eq 1 ];then
 					cat $HOME/.PopUpLearn/tmp/need_colors_session_$ARG.tmp >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 				fi
@@ -1204,6 +1208,7 @@ function ⬚⬚⬚⬚_📗🔢_session_old_blue_only(){ 🔧 $FUNCNAME $@
 }
 function ⬚⬚⬚⬚_📗🔢_session_old_pink_only(){ 🔧 $FUNCNAME $@
 	ANSWER_BEFORE_QUIZ=0
+	prepare_answer_level
 	⬚⬚⬚⬚⬚_🏗_session_specific_config
 	SESSION_NUMBER=$1
 	LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
