@@ -814,6 +814,7 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 				display_SESSION_NUMBER
 				⬚⬚⬚⬚_📗🔢_session_old_mistakes_reverse $SESSION_NUMBER || break
 			done
+		elif [[ "$selected" == "ii" ]]; then
 		elif [[ "$selected" == "i" ]]; then
 			# 1 - take random subject from list
 			# 2 - do blue until no blue
