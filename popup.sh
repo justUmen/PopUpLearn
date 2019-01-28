@@ -817,6 +817,7 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 		elif [[ "$selected" == "ii" ]]; then
 			echo
 		elif [[ "$selected" == "i" ]]; then
+			# b -> p -> m -> r
 			# 1 - take random subject from list
 			# 2 - do blue until no blue
 			# 3 - do pink until no pink
@@ -842,14 +843,24 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 					display_SESSION_NUMBER
 					⬚⬚⬚⬚_📗🔢_session_old_pink_only $SESSION_NUMBER || break 2
 				done
-
-				SESSION_NUMBER=1 #ADDED???
-				while [ -d "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/" ]; do
-					SESSION_NUMBER=`expr $SESSION_NUMBER + 1`
+				for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
+					SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
+					display_SESSION_NUMBER
+					⬚⬚⬚⬚_📗🔢_session_old_mistakes_only $SESSION_NUMBER || break 2
 				done
-				display_SESSION_NUMBER
-				⬚⬚⬚⬚_📗🌘_session_new
-				⬚⬚⬚⬚_📗🔢_session_old_with_answers $SESSION_NUMBER || break
+				for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
+					SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
+					display_SESSION_NUMBER
+					⬚⬚⬚⬚_📗🔢_session_old_mistakes_reverse $SESSION_NUMBER || break 2
+				done
+
+				# SESSION_NUMBER=1 #ADDED???
+				# while [ -d "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/" ]; do
+				# 	SESSION_NUMBER=`expr $SESSION_NUMBER + 1`
+				# done
+				# display_SESSION_NUMBER
+				# ⬚⬚⬚⬚_📗🌘_session_new
+				# ⬚⬚⬚⬚_📗🔢_session_old_with_answers $SESSION_NUMBER || break
 
 			done
 		else
