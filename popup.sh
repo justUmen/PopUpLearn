@@ -849,7 +849,7 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 				done
 				display_SESSION_NUMBER
 				⬚⬚⬚⬚_📗🌘_session_new
-				⬚⬚⬚⬚_📗🔢_session_old_with_answers $SESSION_NUMBER || break 2
+				⬚⬚⬚⬚_📗🔢_session_old_with_answers $SESSION_NUMBER || break
 
 			done
 		else
