@@ -998,7 +998,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 	  ERROR_TEST=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null | tail -n 1`
 	  if [[ "$ERROR_TEST" != "" ]]; then
 			#ERRORS : LIMIT THE ERRORS IN THE LAST 14 DAYS
-			rm "$HOME/.PopUpLearn/tmp/list_mistakes.tmp"
+			rm "$HOME/.PopUpLearn/tmp/list_mistakes.tmp" 2> /dev/null
 			while read this_line; do
 				if [ `echo $this_line | awk -F "€" '{print $2}'` -lt $TODAY_MINUS_X ]; then
 					echo $this_line | sed 's/€.*//' >> "$HOME/.PopUpLearn/tmp/list_mistakes.tmp"
