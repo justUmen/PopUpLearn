@@ -982,7 +982,11 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 
 	  LAST_DAY=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | sed 's/.*€//' | sort -n | tail -n 1`
 	  TODAY=$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))
-	  LAST_GOOD_ANSWER=""
+
+		X=14
+		TODAY_MINUS_X=`expr $TODAY - $X`
+
+		LAST_GOOD_ANSWER=""
 	  if [[ "$LAST_DAY" != "" ]]; then
 			GOOD_ANSWER_DAYS_AGO=`expr $TODAY - $LAST_DAY`
 			LAST_GOOD_ANSWER="last good answer was $GOOD_ANSWER_DAYS_AGO days ago (`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null|wc -l` bad, `cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null|wc -l` good)"
@@ -993,7 +997,14 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 
 	  ERROR_TEST=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null | tail -n 1`
 	  if [[ "$ERROR_TEST" != "" ]]; then
-			cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad" 2> /dev/null > "$HOME/.PopUpLearn/tmp/list_mistakes.tmp"
+			#ERRORS : LIMIT THE ERRORS IN THE LAST 14 DAYS
+			rm "$HOME/.PopUpLearn/tmp/list_mistakes.tmp"
+			while read this_line; do
+				if [ `echo $this_line | awk -F "€" '{print $2}'` -lt $TODAY_MINUS_X ]; then
+					echo $this_line | sed 's/€.*//' >> "$HOME/.PopUpLearn/tmp/list_mistakes.tmp"
+				fi
+			done < "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date"
+			# cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad" 2> /dev/null > "$HOME/.PopUpLearn/tmp/list_mistakes.tmp"
 			cat "$HOME/.PopUpLearn/tmp/list_lines.tmp" "$HOME/.PopUpLearn/tmp/list_mistakes.tmp" | sort | uniq -c | sed "s#^ \+1 \+\(.*\)#$GREY[\1]$END#" | sed "s#^ \+2 \+\(.*\)#$YELLOW[\1]$END#" | sed "s#^ \+3 \+\(.*\)#$ORANGE[\1]$END#" | sed "s#^ \+[0-9]\+ \+\(.*\)#$RED[\1]$END#" > "$HOME/.PopUpLearn/tmp/display_mistakes.tmp"
 			echo -en "\\\t\\\t  BAD  : " >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
 			echo -e $(cat "$HOME/.PopUpLearn/tmp/display_mistakes.tmp") >> $HOME/.PopUpLearn/tmp/colors_session_$ARG.tmp
