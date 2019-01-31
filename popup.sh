@@ -150,6 +150,9 @@ function ⬚_before_start(){
 	mkdir $HOME/.PopUpLearn/MYDB 2> /dev/null
 	touch $HOME/.PopUpLearn/MYDB/my.list
 	mkdir $HOME/.PopUpLearn/tmp 2> /dev/null
+
+	X_DAYS_RECORD_ERRORS=7
+
 	#PREPARE BACKGROUND COLORS
 	ENDO="\e[0m"
 	BG_BLUE="\e[44m"
@@ -983,9 +986,6 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 	  LAST_DAY=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | sed 's/.*€//' | sort -n | tail -n 1`
 	  TODAY=$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))
 
-		X=7
-		TODAY_MINUS_X=`expr $TODAY - $X`
-
 		LAST_GOOD_ANSWER=""
 	  if [[ "$LAST_DAY" != "" ]]; then
 			GOOD_ANSWER_DAYS_AGO=`expr $TODAY - $LAST_DAY`
@@ -998,6 +998,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 	  ERROR_TEST=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null | tail -n 1`
 	  if [[ "$ERROR_TEST" != "" ]]; then
 			#ERRORS : LIMIT THE ERRORS IN THE LAST 14 DAYS
+			TODAY_MINUS_X=`expr $TODAY - $X_DAYS_RECORD_ERRORS`
 			rm "$HOME/.PopUpLearn/tmp/list_mistakes.tmp" 2> /dev/null
 			while read this_line; do
 				if [ `echo $this_line | awk -F "€" '{print $2}'` -gt $TODAY_MINUS_X ]; then
@@ -1275,7 +1276,18 @@ function ⬚⬚⬚⬚⬚_🏗_session_content_tmp(){ 🔧 $FUNCNAME $@
 }
 function ⬚⬚⬚⬚⬚_🏗_session_content_tmp_mistakes_only(){ 🔧 $FUNCNAME $@
 	#proportional to the number of mistakes i guess...
-	cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/answer.bad" > $HOME/.PopUpLearn/tmp/session_content.tmp 2> /dev/null
+
+	#OLD : cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/answer.bad" > $HOME/.PopUpLearn/tmp/session_content.tmp 2> /dev/null
+	#ERRORS : LIMIT THE ERRORS IN THE LAST 14 DAYS
+	TODAY=$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))
+	TODAY_MINUS_X=`expr $TODAY - $X_DAYS_RECORD_ERRORS`
+	rm "$HOME/.PopUpLearn/tmp/session_content.tmp" 2> /dev/null
+	while read this_line; do
+		if [ `echo $this_line | awk -F "€" '{print $2}'` -gt $TODAY_MINUS_X ]; then
+			echo $this_line | sed 's/€.*//' >> "$HOME/.PopUpLearn/tmp/session_content.tmp"
+		fi
+	done < "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date"
+
 	cat $HOME/.PopUpLearn/tmp/session_content.tmp > $HOME/.PopUpLearn/tmp/session_content_remove.tmp 2> /dev/null
 }
 function ⬚⬚⬚⬚⬚_🏗_session_content_tmp_blue_only(){ 🔧 $FUNCNAME $@
