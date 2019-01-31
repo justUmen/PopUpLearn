@@ -817,7 +817,7 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 		elif [[ "$selected" == "ii" ]]; then
 			echo
 		elif [[ "$selected" == "i" ]]; then
-			# b -> p -> m -> r
+			# b -> p -> m -> r (go back)
 			# 1 - take random subject from list
 			# 2 - do blue until no blue
 			# 3 - do pink until no pink
@@ -868,7 +868,7 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 		fi
 	done
 }
-function prepare_answer_level(){
+function prepare_answer_level(){ 🔧 $FUNCNAME $@
 	while read line2; do
 		if ! fgrep --quiet "$line2" "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.level"; then
 			echo "$line2€3" >> "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.level"
