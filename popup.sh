@@ -16,7 +16,7 @@
 
 function 🔧(){
 	echo > /dev/null
-	# echo -e "$BG_DARK_GRAY$WHITE 🔧 $@ 🔧 $ENDO"
+	echo -e "$BG_DARK_GRAY$WHITE 🔧 $@ 🔧 $ENDO"
 }
 function close_PopUpLearn(){
 	pkill -f "node $HOME/.PopUpLearn/node_server_popup.js" &>/dev/null
@@ -874,7 +874,7 @@ function prepare_answer_level(){ 🔧 $FUNCNAME $@
 			echo "$line2€3" >> "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.level"
 		fi
 
-		tac "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | fgrep "$LINE" | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc > $HOME/.PopUpLearn/tmp/list_good_dates.tmp
+		tac "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | fgrep "$line2" | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc > $HOME/.PopUpLearn/tmp/list_good_dates.tmp
 		LAST_BAD=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date" 2>/dev/null | fgrep "$line2" | tail -n 1 | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc`
 		CURRENT_LEVEL=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.level" | fgrep "$line2" | tail -n 1 | sed 's/.*€//'`
 
@@ -1480,6 +1480,7 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
 
 				touch $ANSWERED_LEVEL
 				#IF LINE EXIST
+				echo "TEST : fgrep --quiet \"$LINE\" \"$ANSWERED_LEVEL\" "
 				if fgrep --quiet "$LINE" "$ANSWERED_LEVEL"; then
 					#DOUBLE THE CURRENT LEVEL IF LAST GOOD IS BIGGER THAN CURRENT_LEVEL (Avoid triggering new level when answering questions the same day...)
 					# $lLAST_ANSWERED_GOOD_DATE=`cat $ANSWERED_GOOD_DATE | fgrep "$LINE" | tail -n 1 | sed 's/.*€//' | sed "s/^/$TODAY - /" | bc`
@@ -1503,7 +1504,7 @@ function ⬚⬚⬚⬚⬚⬚_🔄🌐_quiz(){ 🔧 $FUNCNAME $@
 						done < $HOME/.PopUpLearn/tmp/list_good_dates.tmp
 					fi
 
-					echo "LAST_BAD = $LAST_BAD, CURRENT_LEVEL = $CURRENT_LEVEL, LAST_GOOD_SMALLER_THAN_BAD = $LAST_GOOD_SMALLER_THAN_BAD"
+					echo "TEST OK : LAST_BAD = $LAST_BAD, CURRENT_LEVEL = $CURRENT_LEVEL, LAST_GOOD_SMALLER_THAN_BAD = $LAST_GOOD_SMALLER_THAN_BAD"
 
 					NEXT_LEVEL=`expr $CURRENT_LEVEL \* 2`
 					if [ $LAST_GOOD_SMALLER_THAN_BAD -gt $NEXT_LEVEL ];then
