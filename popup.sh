@@ -983,7 +983,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 	  LAST_DAY=`cat "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.good.date" 2>/dev/null | sed 's/.*€//' | sort -n | tail -n 1`
 	  TODAY=$((($(date +%s)-$(date +%s --date '2018-01-01'))/(3600*24)))
 
-		X=14
+		X=7
 		TODAY_MINUS_X=`expr $TODAY - $X`
 
 		LAST_GOOD_ANSWER=""
@@ -1000,7 +1000,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 			#ERRORS : LIMIT THE ERRORS IN THE LAST 14 DAYS
 			rm "$HOME/.PopUpLearn/tmp/list_mistakes.tmp" 2> /dev/null
 			while read this_line; do
-				if [ `echo $this_line | awk -F "€" '{print $2}'` -lt $TODAY_MINUS_X ]; then
+				if [ `echo $this_line | awk -F "€" '{print $2}'` -gt $TODAY_MINUS_X ]; then
 					echo $this_line | sed 's/€.*//' >> "$HOME/.PopUpLearn/tmp/list_mistakes.tmp"
 				fi
 			done < "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date"
