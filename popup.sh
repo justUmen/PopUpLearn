@@ -1285,7 +1285,7 @@ function ⬚⬚⬚⬚⬚_🏗_session_content_tmp_mistakes_only(){ 🔧 $FUNCNAM
 		if [ `echo $this_line | awk -F "€" '{print $2}'` -gt $TODAY_MINUS_X ]; then
 			echo $this_line | sed 's/€.*//' >> "$HOME/.PopUpLearn/tmp/session_content.tmp"
 		fi
-	done < "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date"
+	done < "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$1/answer.bad.date"
 
 	cat $HOME/.PopUpLearn/tmp/session_content.tmp > $HOME/.PopUpLearn/tmp/session_content_remove.tmp 2> /dev/null
 }
