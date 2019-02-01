@@ -1182,8 +1182,8 @@ function ⬚⬚⬚⬚_📗🔢_session_old_with_answers(){ 🔧 $FUNCNAME $@
 function ⬚⬚⬚⬚_📗🔢_session_old_mistakes_only(){ 🔧 $FUNCNAME $@
 	ANSWER_BEFORE_QUIZ=0
 	⬚⬚⬚⬚⬚_🏗_session_specific_config
-	⬚⬚⬚⬚⬚_🏗_session_content_tmp_mistakes_only
 	SESSION_NUMBER=$1
+	⬚⬚⬚⬚⬚_🏗_session_content_tmp_mistakes_only
 	LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
 	⬚⬚⬚⬚⬚_🔄_lines_in_session || return 2
 	#~ ⬚⬚⬚⬚⬚_🛑_lines_in_session #Don't display end of session, not useful to know, useless spam
@@ -1285,7 +1285,7 @@ function ⬚⬚⬚⬚⬚_🏗_session_content_tmp_mistakes_only(){ 🔧 $FUNCNAM
 		if [ `echo $this_line | awk -F "€" '{print $2}'` -gt $TODAY_MINUS_X ]; then
 			echo $this_line | sed 's/€.*//' >> "$HOME/.PopUpLearn/tmp/session_content.tmp"
 		fi
-	done < "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$ARG/answer.bad.date"
+	done < "$HOME/.PopUpLearn/logs/${LANGUAGE_1}/${LANGUAGE_2}/${SUBJECT}/${NUMBER}/$FILENAME/session_$SESSION_NUMBER/answer.bad.date"
 	touch "$HOME/.PopUpLearn/tmp/session_content.tmp"
 
 	cat $HOME/.PopUpLearn/tmp/session_content.tmp > $HOME/.PopUpLearn/tmp/session_content_remove.tmp 2> /dev/null
