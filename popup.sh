@@ -1164,8 +1164,8 @@ function ⬚⬚⬚⬚_📗🔢_session_old_learn(){ 🔧 $FUNCNAME $@
 function ⬚⬚⬚⬚_📗🔢_session_old_learn_mistakes_only(){ 🔧 $FUNCNAME $@
 	ANSWER_BEFORE_QUIZ=1
 	⬚⬚⬚⬚⬚_🏗_session_specific_config
-	⬚⬚⬚⬚⬚_🏗_session_content_tmp_mistakes_only
 	SESSION_NUMBER=$1
+	⬚⬚⬚⬚⬚_🏗_session_content_tmp_mistakes_only
 	LOOP_QUIZ=0 #LEARN ONLY NO QUIZ
 	⬚⬚⬚⬚⬚_🔄_lines_in_session "IGNORE_GOOD" || return 2
 	# ⬚⬚⬚⬚⬚_🛑_lines_in_session
@@ -1191,8 +1191,8 @@ function ⬚⬚⬚⬚_📗🔢_session_old_mistakes_only(){ 🔧 $FUNCNAME $@
 function ⬚⬚⬚⬚_📗🔢_session_old_mistakes_only_with_answer(){ 🔧 $FUNCNAME $@
 	ANSWER_BEFORE_QUIZ=1
 	⬚⬚⬚⬚⬚_🏗_session_specific_config
-	⬚⬚⬚⬚⬚_🏗_session_content_tmp_mistakes_only
 	SESSION_NUMBER=$1
+	⬚⬚⬚⬚⬚_🏗_session_content_tmp_mistakes_only
 	LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
 	⬚⬚⬚⬚⬚_🔄_lines_in_session || return 2
 	#~ ⬚⬚⬚⬚⬚_🛑_lines_in_session #Don't display end of session, not useful to know, useless spam
@@ -1200,6 +1200,7 @@ function ⬚⬚⬚⬚_📗🔢_session_old_mistakes_only_with_answer(){ 🔧 $FU
 function ⬚⬚⬚⬚_📗🔢_session_old_mistakes_reverse(){ 🔧 $FUNCNAME $@
 	ANSWER_BEFORE_QUIZ=0
 	⬚⬚⬚⬚⬚_🏗_session_specific_config
+	SESSION_NUMBER=$1
 	⬚⬚⬚⬚⬚_🏗_session_content_tmp_mistakes_only
 	#REVERSE
 	TMP_LANGUAGE=$LANGUAGE_TAG_1
@@ -1213,7 +1214,6 @@ function ⬚⬚⬚⬚_📗🔢_session_old_mistakes_reverse(){ 🔧 $FUNCNAME $@
 	sed -i 's/\(.*\) |=| \(.*\)/\2 |=| \1/' $HOME/.PopUpLearn/tmp/session_content_remove.tmp
 	# sed -i 's/\[[^[]*\]//g' $HOME/.PopUpLearn/tmp/session_content.tmp #in php instead
 	# sed -i 's/\[[^[]*\]//g' $HOME/.PopUpLearn/tmp/session_content_remove.tmp
-	SESSION_NUMBER=$1
 	LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
 	⬚⬚⬚⬚⬚_🔄_lines_in_session "IGNORE_GOOD_BAD" "REVERSE" || return 2
 	#~ ⬚⬚⬚⬚⬚_🛑_lines_in_session #Don't display end of session, not useful to know, useless spam
