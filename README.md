@@ -39,7 +39,7 @@ PopUpLearn tested with `dunst` (https://github.com/dunst-project/dunst) for noti
 
 Download and use my personal `dunstrc` configuration with :  
 
-    mkdir -p ~/.config/dunst/;wget https://github.com/justUmen/PopUpLearn/blob/master/config/dunstrc -O ~/.config/dunst/dunstrc
+    mkdir -p ~/.config/dunst/;wget https://raw.githubusercontent.com/justUmen/PopUpLearn/master/config/dunstrc -O ~/.config/dunst/dunstrc
 
 # INSTALL
 
