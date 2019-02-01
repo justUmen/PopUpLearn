@@ -125,6 +125,7 @@ function ⬚_before_start(){
 	# echo "..."
 
 	WEB_BROWSER="surf -F"
+	X_DAYS_RECORD_ERRORS=14
 	source $HOME/.PopUpLearn/MYDB/my.config &> /dev/null #Use the WEB_BROWSER here instead
 	command -v $WEB_BROWSER &> /dev/null || { echo -e "WEB_BROWSER ($WEB_BROWSER) isn't a valid variable... Install this web browser or use a different one by changing the WEB_BROWSER variable in \e[38;5;33m$HOME/.PopUpLearn/MYDB/my.config\e[0m , for example : \e[38;5;33mWEB_BROWSER=\"surf -F\"\e[0m" && exit; }
 
@@ -150,8 +151,6 @@ function ⬚_before_start(){
 	mkdir $HOME/.PopUpLearn/MYDB 2> /dev/null
 	touch $HOME/.PopUpLearn/MYDB/my.list
 	mkdir $HOME/.PopUpLearn/tmp 2> /dev/null
-
-	X_DAYS_RECORD_ERRORS=7
 
 	#PREPARE BACKGROUND COLORS
 	ENDO="\e[0m"

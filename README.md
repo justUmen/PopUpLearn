@@ -59,6 +59,7 @@ System configuration will overwrite ALL specific configurations and should be st
     WEB_BROWSER="surf -F"
     SEC_AFTER_QUIZ=10
     SEC_BEFORE_QUIZ=10
+    X_DAYS_RECORD_ERRORS=7
 
 # structure of .pul files
 
@@ -98,6 +99,8 @@ But you should use them to organize your .pul files the way you want.
 `SESSION_SIZE=0`, set number of element in a session. 0 for unlimited number of elements. Result : the file is only one big session. (Default value `SESSION_SIZE=6`)  
 
 `KEYBOARD_AUTO_CHANGE=1` automatically change keyboard layout to type the answer in another language. (more details in "Options" below)  
+
+`X_DAYS_RECORD_ERRORS=7` just ignore the errors if they happened more than 7 days ago. (Colors and 'm', 'M' and 'r' menu selection) (Default value `X_DAYS_RECORD_ERRORS=14`)  
 
 ## .pul files options
 
