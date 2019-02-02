@@ -222,7 +222,8 @@ function ⬚⬚_📃_main(){ 🔧 $FUNCNAME $@
 	arraylength=${#FILES[@]}
 	rm "$HOME/.PopUpLearn/tmp/color_menu.list" 2> /dev/null
 	for (( i=1; i<${arraylength}; i++ )); do
-		echo -n "$COLOR_SELECTION $i) $COLOR_TITLE_SELECTED `echo \"${FILES[i]}\" | sed \"s#$HOME/.PopUpLearn/##\"` |$ENDO"  >> $HOME/.PopUpLearn/tmp/color_menu.list
+		THIS_TITLE=`echo "${FILES[i]}" | sed "s#$HOME/.PopUpLearn/##"`
+		echo -n "$COLOR_SELECTION $i) $COLOR_TITLE_SELECTED $THIS_TITLE |$ENDO"  >> $HOME/.PopUpLearn/tmp/color_menu.list
 		cat ${FILES[i]} | grep '^#!#' | sed 's/^#!#//' > $HOME/.PopUpLearn/tmp/menu.config
 		source $HOME/.PopUpLearn/tmp/menu.config
 		FILE_NAME=`echo ${FILES[i]} | sed 's#.*/##'`
