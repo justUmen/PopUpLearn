@@ -815,6 +815,21 @@ function ⬚⬚⬚_🔄🔄_session(){ 🔧 $FUNCNAME $@
 			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
 				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
 				display_SESSION_NUMBER
+				⬚⬚⬚⬚_📗🔢_session_old_reverse $SESSION_NUMBER || break
+			done
+		elif [[ "$selected" == "rm" ]]; then
+			# TYPE="TEXT"
+			ARRAY=()
+			NB_SESSIONS=$SESSION_NUMBER
+			#Prepare array with sessions numbers inside
+			for (( i=1; i<$NB_SESSIONS; i++ )); do ARRAY+=($i); done
+			#Shuffle the sessions numbers or a random result
+			readarray -d '' SHUFFLED_SESSION_NUMBERS < <(printf "%s\0" "${ARRAY[@]}" | shuf -z)
+			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do echo " -- ${SHUFFLED_SESSION_NUMBERS[i]} -- "; done
+			#LAUNCH ONE SESSION AFTER THE OTHER
+			for (( i=0; i<`expr $NB_SESSIONS - 1`; i++ )); do
+				SESSION_NUMBER=${SHUFFLED_SESSION_NUMBERS[i]}
+				display_SESSION_NUMBER
 				⬚⬚⬚⬚_📗🔢_session_old_mistakes_reverse $SESSION_NUMBER || break
 			done
 		elif [[ "$selected" == "ii" ]]; then
@@ -1058,7 +1073,8 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 		echo -e "\t$COLOR_SELECTION s) $ENDO All questions from all current sessions (session random order) - NOT SHOW ANSWER"
 		echo -e "\t$COLOR_SELECTION S) $ENDO All questions from all current sessions (session random order) - SHOW ANSWER FIRST"
 		echo -e "\t---- ALL SESSIONS (REVERSE) ----"
-		echo -e "\t$COLOR_SELECTION r) $ENDO All mistakes from all sessions in reverse (session random order) - NOT SHOW ANSWER (no points for good, not log mistakes)"
+		echo -e "\t$COLOR_SELECTION r) $ENDO All questions from all sessions in reverse (session random order) - NOT SHOW ANSWER (no points for good, not log mistakes)"
+		echo -e "\t$COLOR_SELECTION rm) $ENDO All mistakes from all sessions in reverse (session random order) - NOT SHOW ANSWER (no points for good, not log mistakes)"
 	fi
 	echo -e "\t---- NEW SESSION ----"
 	echo -e "\t$COLOR_SELECTION n) $ENDO New session (SHOW ANSWER and quiz - no points for good, log mistakes)"
@@ -1068,7 +1084,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 	echo -e "\t$COLOR_SELECTION in2) $ENDO Infinite New sessions - NOT SHOW ANSWER"
 	echo -e "\t---- OTHER ----"
 	echo -e "\t$COLOR_SELECTION i) $ENDO $COLOR_TITLE_SELECTED[Recommended]$ENDO Intelligent loop (learn / remember)"
-	echo -e "\t$COLOR_SELECTION ii) $ENDO $COLOR_TITLE_SELECTED[Recommended]$ENDO Intelligent infinite loop (learn / remember) + new session"
+	# echo -e "\t$COLOR_SELECTION ii) $ENDO $COLOR_TITLE_SELECTED[Recommended]$ENDO Intelligent infinite loop (learn / remember) + new session"
 	echo -e "\t$COLOR_SELECTION w) $ENDO web interface \\e[38;5;196m[ not yet implemented... :( ]$ENDO"
 	echo -e "\t$COLOR_SELECTION e) $ENDO Return"
 	#~ echo -e "\t\$COLOR_SELECTION q) $ENDO All questions from the .pul file \\e[38;5;196m[ not yet implemented... :( ]$ENDO" #MAYBE NOT... TRIGGER ANOTHER LOG...
@@ -1093,6 +1109,7 @@ function ⬚⬚⬚⬚_📃_session(){ 🔧 $FUNCNAME $@
 			l) break ;;
 			L) break ;;
 			r) break ;;
+			rm) break ;;
 			i) break ;;
 			in) break ;;
 			in2) break ;;
@@ -1115,14 +1132,16 @@ function ⬚⬚⬚⬚_📃🔄_selected_session(){ 🔧 $FUNCNAME $@
 		echo -e "\t\t$COLOR_SELECTION s) $ENDO All questions from this session - NOT SHOW ANSWER"
 		echo -e "\t\t$COLOR_SELECTION S) $ENDO All questions from this session - SHOW ANSWER FIRST"
 		echo -e "\t\t---- SESSION $SESSION_NUMBER (REVERSE) ----"
-		echo -e "\t\t$COLOR_SELECTION r) $ENDO All mistakes from this session in reverse (session random order) - NOT SHOW ANSWER (no points for good, not log mistakes)"
+		echo -e "\t\t$COLOR_SELECTION r) $ENDO All questions from this session in reverse (session random order) - NOT SHOW ANSWER (no points for good, not log mistakes)"
+		echo -e "\t\t$COLOR_SELECTION rm) $ENDO All mistakes from this session in reverse (session random order) - NOT SHOW ANSWER (no points for good, not log mistakes)"
 		echo -e "\t\t$COLOR_SELECTION e) $ENDO Return"
 		while :; do
 			echo -en "\t\t\e[97;45m # $ENDO"
 			read selected_1 < /dev/tty
 			case $selected_1 in
 				e) return 2 ;;
-				r) ⬚⬚⬚⬚_📗🔢_session_old_mistakes_reverse $SESSION_NUMBER; break ;;
+				r) ⬚⬚⬚⬚_📗🔢_session_old_reverse $SESSION_NUMBER; break ;;
+				rm) ⬚⬚⬚⬚_📗🔢_session_old_mistakes_reverse $SESSION_NUMBER; break ;;
 				b) ⬚⬚⬚⬚_📗🔢_session_old_blue_only $SESSION_NUMBER; break ;;
 				p) ⬚⬚⬚⬚_📗🔢_session_old_pink_only $SESSION_NUMBER; break ;;
 				m) ⬚⬚⬚⬚_📗🔢_session_old_mistakes_only $SESSION_NUMBER; break;;
@@ -1197,6 +1216,30 @@ function ⬚⬚⬚⬚_📗🔢_session_old_mistakes_only_with_answer(){ 🔧 $FU
 	LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
 	⬚⬚⬚⬚⬚_🔄_lines_in_session || return 2
 	#~ ⬚⬚⬚⬚⬚_🛑_lines_in_session #Don't display end of session, not useful to know, useless spam
+}
+function ⬚⬚⬚⬚_📗🔢_session_old_reverse(){ 🔧 $FUNCNAME $@
+	ANSWER_BEFORE_QUIZ=0
+	⬚⬚⬚⬚⬚_🏗_session_specific_config
+	SESSION_NUMBER=$1
+	⬚⬚⬚⬚⬚_🏗_session_content_tmp
+	#REVERSE
+	TMP_LANGUAGE=$LANGUAGE_TAG_1
+	LANGUAGE_TAG_1=$LANGUAGE_TAG_2
+	LANGUAGE_TAG_2=$TMP_LANGUAGE
+
+	TMP_LANGUAGE=$LANGUAGE_1
+	LANGUAGE_1=$LANGUAGE_2
+	LANGUAGE_2=$TMP_LANGUAGE
+	sed -i 's/\(.*\) |=| \(.*\)/\2 |=| \1/' $HOME/.PopUpLearn/tmp/session_content.tmp
+	sed -i 's/\(.*\) |=| \(.*\)/\2 |=| \1/' $HOME/.PopUpLearn/tmp/session_content_remove.tmp
+	# sed -i 's/\[[^[]*\]//g' $HOME/.PopUpLearn/tmp/session_content.tmp #in php instead
+	# sed -i 's/\[[^[]*\]//g' $HOME/.PopUpLearn/tmp/session_content_remove.tmp
+	LOOP_QUIZ=1 #IF OLD SESSION, ONLY ONE QUESTION ??? :P
+	⬚⬚⬚⬚⬚_🔄_lines_in_session "IGNORE_GOOD_BAD" "REVERSE" || return 2
+	#~ ⬚⬚⬚⬚⬚_🛑_lines_in_session #Don't display end of session, not useful to know, useless spam
+	TMP_LANGUAGE=$LANGUAGE_1
+	LANGUAGE_1=$LANGUAGE_2
+	LANGUAGE_2=$TMP_LANGUAGE
 }
 function ⬚⬚⬚⬚_📗🔢_session_old_mistakes_reverse(){ 🔧 $FUNCNAME $@
 	ANSWER_BEFORE_QUIZ=0
