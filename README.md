@@ -1,6 +1,6 @@
 # PopUpLearn
 
-Learn / memorize with popups + track down your knowledge and mistakes with PopUpLearn.  
+Learn / memorize with popups and track down your knowledge with PopUpLearn.  
 
 Built and tested for linux desktop users, using `bash`. But it might eventually be transfered for compatibility with smartphones, AR glasses, VR headset...  
 
@@ -155,16 +155,6 @@ Argument 2 : 60 => Seconds to wait before the next popup
 
 0 and 60 are default variables, so `popuplearn 0 60` and `popuplearn` are identical.
 
-# Todo
-
-- Stats : give an overall idea (visual graph) of how good you are with a specific .pul file, your progress, your work per day...  
-
-- Force question if bad answer was X days ago and not followed by a recent good answer on the same question.  
-
-- Clean reverse system for `question |=| answer` into `answer |=| question`, and special tracking system.  
-
-- One of the goal is to track down what you learned and create personalised .pul files for you. (Require community effort to link a piece of knowledge to a precise .pul file. For example a .pul file per wikipedia page, a .pul file per online teaching video, etc...)  
-
 # Language table
 
 Language table for `LANGUAGE_1` and `LANGUAGE_2` variables.  
@@ -189,4 +179,40 @@ There is nothing wrong about being wrong 20 times in a row. Do not waste your ti
 
 Do NOT let your brain use an elimination system to come up with the correct answer. The goal is for your brain to remember the answer, being "correct" is not always useful and can sometimes be counter-productive.  
 
-I do NOT recommend you to try to remember the same thing over and over again the same day, just read the answer, try to rememeber it but don't force yourself. Have a good night of sleep and come back to your session, your brain will remember it. If not, try again the day after.  
+I do NOT recommend you to try to remember the same thing over and over again the same day, just read the answer, try to rememeber it but don't force it on yourself. Have a good night of sleep and come back to PopUpLearn, your brain will remember it. If not, try again the day after.  
+
+# Todo
+
+- Stats : give an overall idea (visual graph) of how good you are with a specific .pul file, your progress, your work per day...  
+
+- Force question if bad answer was X days ago and not followed by a recent good answer on the same question.  
+
+- Clean reverse system for `question |=| answer` into `answer |=| question`, and special tracking system.  
+
+- One of the goal is to track down what you learned and create personalised .pul files for you. (Require community effort to link a piece of knowledge to a precise .pul file. For example a .pul file per wikipedia page, a .pul file per online teaching video, etc...)  
+
+- video content generation based on your knowledge. (Find material online automatically.)  
+
+- where to store logs ? local machine for now. Server ? Github repo ? ...  
+
+- implement a way for instant personal recall of information (paraphrasing, multiple meanings if possible... in the user's head ?)  
+
+- should all information have different level ? All information have quality / level ?  
+
+- implement a way to put every piece of knowledge into another context for a better understanding.  
+
+# Todo (Language learning specifc)
+
+- use .srt files as a way to learn with movies. (automatic conversion from an .srt to a valid .pul)  
+
+- colorize subtitles of the new language with the words you know. (With .srt file, the system will be able to tell you how many words you know from the movie/file with your current knowledge.)  
+
+- find a way to create automatically a list of knowledge based on what the user is doing. (chatting, browsing, watching movie...)  
+
+- find a way to quickly make a word into context. (sentence, video, ...)  
+
+- prepare a script than can extract a sentence from subtitles file from movie and create a very short video with the word in a context. (+ translation) - several if possible (use tv show for multiple videos or specific theme)   how many different words in a movie ?...  
+
+- take a movie/video + subtitles to generate a .pul file. (At least a draft, words + sentences) - same for website, article, book, manga...
+
+- take a movie / video / text and predict the level of difficulty (points based on hsk level type for chinese, or % used in list)    
