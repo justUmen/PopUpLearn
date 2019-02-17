@@ -681,7 +681,7 @@ for($i=18;$i!=0;$i--){
 
   $session_lines_level=array(); $fn = fopen("$PATH/answer.level", 'r');// or die("fail to open file session_lines_level - session $i");
   while($row = fgets($fn)) { array_push($session_lines_level, explode('€', $row)); }
-  echo '<pre>'; print_r($session_lines_level); echo '</pre>';
+  // echo '<pre>'; print_r($session_lines_level); echo '</pre>';
 
   // ██████  ██ ███████ ██████  ██       █████  ██    ██
   // ██   ██ ██ ██      ██   ██ ██      ██   ██  ██  ██
@@ -703,6 +703,7 @@ for($i=18;$i!=0;$i--){
     //FIND LEVEL
     $LEVEL=0;
     foreach($session_lines_level as $session_line_level){
+      echo " ---- {$session_line_level[1]} ---- ";
       if($session_line_level[0]==$line){
         $LEVEL=$session_line_level[1];
       }
