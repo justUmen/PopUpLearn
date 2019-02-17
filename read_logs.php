@@ -977,7 +977,7 @@ fclose($fp);
       slider.max="<?php echo $TODAY-$FIRST_BAD+3; ?>";
       // slider.value="<?php echo $TODAY-$FIRST_BAD+3; ?>";
       slider.onchange = function() {
-        document.location.href="http://127.0.0.1:9999/read_logs.php?DELAY=" + this.value;
+        document.location.href="read_logs.php?DELAY=" + this.value;
       }
       slider.oninput = function() {
         output.innerHTML = this.value;
