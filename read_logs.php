@@ -698,6 +698,7 @@ for($i=18;$i!=0;$i--){
   $THE_GRID.="<div class='grid-container'>\n";
 
   foreach(array_reverse($session_lines) as $line){
+    echo " ---- $line ---- ";
   // foreach($session_lines as $line){
 
     //FIND LEVEL
@@ -707,7 +708,6 @@ for($i=18;$i!=0;$i--){
       // echo " ---- {$session_line_level[1]} ---- ";
       if($session_line_level[0]==$line){
         $LEVEL=$session_line_level[1];
-        echo " ---- $LEVEL ---- ";
       }
     }
 
