@@ -661,7 +661,7 @@ for($i=18;$i!=0;$i--){
   // (
   //     [0] => 医生[yīshēng] |=| doctor
 
-  $session_lines = file("$PATH/session_content.pul", 'r');
+  $session_lines = fopen("$PATH/session_content.pul", 'r');
   // echo '<pre>'; print_r($session_lines); echo '</pre>';
 
   // ███████ ███████ ███████ ███████ ██  ██████  ███    ██ ███████         ██      ██ ███    ██ ███████ ███████         ██      ███████ ██    ██ ███████ ██
