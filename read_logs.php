@@ -620,7 +620,7 @@ for($i=18;$i!=0;$i--){
   //             [1] => 393
   //         )
 
-  $bad_dates_lines=array(); $fn = fopen("$PATH/answer.bad.date", FILE_IGNORE_NEW_LINES)3 or die("fail to open file $PATH/answer.bad.date - session $i");
+  $bad_dates_lines=array(); $fn = fopen("$PATH/answer.bad.date", FILE_IGNORE_NEW_LINES) or die("fail to open file $PATH/answer.bad.date - session $i");
   while($row = fgets($fn)) { $row="{$row}€B"; array_push($bad_dates_lines, explode('€', $row)); }
   // echo '<pre>'; print_r($bad_dates_lines); echo '</pre>';
   // $ALL_BAD_DATES_LINES=array();
