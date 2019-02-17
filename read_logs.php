@@ -706,7 +706,7 @@ for($i=18;$i!=0;$i--){
     foreach($session_lines_level as $session_line_level){
       echo " ---- {$session_line_level[0]} / $line ---- ";
       // echo " ---- {$session_line_level[1]} ---- ";
-      if($session_line_level[0]==$line){
+      if("$session_line_level[0]"=="$line"){
         $LEVEL=$session_line_level[1];
       }
     }
@@ -715,7 +715,7 @@ for($i=18;$i!=0;$i--){
     $LAST_GOOD_PINK=0;
     $THE_GOOD_GRID="";
     foreach($good_dates_lines as $good_line){
-      if($good_line[0]=="$line"){
+      if("$good_line[0]"=="$line"){
         // if($good_line[1]>$DELAY_DAYS_ERRORS){
         //   $THE_GOOD_GRID.="<span style='color:#49f149;'>✔</span>";
         // }
