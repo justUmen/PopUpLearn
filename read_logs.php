@@ -603,7 +603,7 @@ $THE_GRID="";
 for($i=18;$i!=0;$i--){
 // for($i=1;$i!=18;$i++){
   $THE_GRID.="<button type='button' class='btn btn-primary'>⮮ session_$i ⮯</button>";
-  $PATH="logs/cnPI/en/hsk/1/HSK1_cnPI_en.pul/session_$i";
+  $PATH="http://localhost:9995/logs/cnPI/en/hsk/1/HSK1_cnPI_en.pul/session_$i";
   $PATH2="logs/cnPI/en/hsk/1/HSK1_cnPI_en.pul/session_$i";
 
   // ██████   █████  ██████          ██████   █████  ████████ ███████ ███████         ██      ██ ███    ██ ███████ ███████
@@ -620,7 +620,7 @@ for($i=18;$i!=0;$i--){
   //             [1] => 393
   //         )
 
-  $bad_dates_lines=array(); $fn = fopen("$PATH/answer.bad.date", "r");// or die("fail to open file $PATH/answer.bad.date - session $i");
+  $bad_dates_lines=array(); $fn = fopen("$PATH/answer.bad.date", FILE_IGNORE_NEW_LINES);// or die("fail to open file answer.bad.date - session $i");
   while($row = fgets($fn)) { $row="{$row}€B"; array_push($bad_dates_lines, explode('€', $row)); }
   // echo '<pre>'; print_r($bad_dates_lines); echo '</pre>';
   // $ALL_BAD_DATES_LINES=array();
@@ -641,7 +641,7 @@ for($i=18;$i!=0;$i--){
   //             [1] => 393
   //         )
 
-  $good_dates_lines=array(); $fn = fopen("$PATH/answer.good.date", 'r');// or die("fail to open file answer.good.date - session $i");
+  $good_dates_lines=array(); $fn = fopen("$PATH/answer.good.date", FILE_IGNORE_NEW_LINES);// or die("fail to open file answer.good.date - session $i");
   while($row = fgets($fn)) { $row="{$row}€G"; array_push($good_dates_lines, explode('€', $row)); }
   // echo '<pre>'; print_r($good_dates_lines); echo '</pre>';
   // $ALL_GOOD_DATES_LINES=array();
@@ -660,9 +660,8 @@ for($i=18;$i!=0;$i--){
   // $session_lines
   // (
   //     [0] => 医生[yīshēng] |=| doctor
-//
-  $session_lines=array(); $fn = fopen("$PATH/session_content.pul", 'r');
-  while($row = fgets($fn)) { array_push($session_lines, $row); }
+
+  $session_lines = file("$PATH/session_content.pul", FILE_IGNORE_NEW_LINES);
   // echo '<pre>'; print_r($session_lines); echo '</pre>';
 
   // ███████ ███████ ███████ ███████ ██  ██████  ███    ██ ███████         ██      ██ ███    ██ ███████ ███████         ██      ███████ ██    ██ ███████ ██
@@ -679,7 +678,7 @@ for($i=18;$i!=0;$i--){
   //             [1] => 12
   //         )
 
-  $session_lines_level=array(); $fn = fopen("$PATH/answer.level", 'r');// or die("fail to open file session_lines_level - session $i");
+  $session_lines_level=array(); $fn = fopen("$PATH/answer.level", FILE_IGNORE_NEW_LINES);// or die("fail to open file session_lines_level - session $i");
   while($row = fgets($fn)) { array_push($session_lines_level, explode('€', $row)); }
   // echo '<pre>'; print_r($session_lines_level); echo '</pre>';
 
@@ -697,28 +696,21 @@ for($i=18;$i!=0;$i--){
 
   $THE_GRID.="<div class='grid-container'>\n";
 
-  // foreach(array_reverse($session_lines) as $line){
-  foreach($session_lines as $line){
-  // echo " ---- $line ---- ";
+  foreach(array_reverse($session_lines) as $line){
+  // foreach($session_lines as $line){
 
     //FIND LEVEL
-    $LEVEL=0;
     foreach($session_lines_level as $session_line_level){
-      // echo " ---- {$session_line_level[0]} / $line = {$session_line_level[1]} ---- <br>";
-      // echo " ---- {$session_line_level[1]} ---- ";
-      if(strcmp($session_line_level[0],$line)){
-        // echo "------------";
+      if($session_line_level[0]==$line){
         $LEVEL=$session_line_level[1];
-        // break; //???
       }
     }
-    // echo " ---- $LEVEL ---- ";
 
     //FIND WHEN WAS LAST GOOD
     $LAST_GOOD_PINK=0;
     $THE_GOOD_GRID="";
     foreach($good_dates_lines as $good_line){
-      if(strcmp($good_line[0],$line)){
+      if($good_line[0]=="$line"){
         // if($good_line[1]>$DELAY_DAYS_ERRORS){
         //   $THE_GOOD_GRID.="<span style='color:#49f149;'>✔</span>";
         // }
@@ -748,7 +740,7 @@ for($i=18;$i!=0;$i--){
     $LAST_BAD="99999";
     $THE_BAD_GRID="";
     foreach($bad_dates_lines as $bad_line){
-      if(strcmp($bad_line[0],$line)){
+      if($bad_line[0]=="$line"){
         // echo "$bad_line[0]==$line<br>";
         //If error was long time ago, ignore it
         if($bad_line[1]>$DELAY_DAYS_ERRORS){
@@ -772,7 +764,6 @@ for($i=18;$i!=0;$i--){
 
     $THE_GRID.="<div class='grid-item'>";
     switch ($LEVEL) {
-      case 0: $level="<span class='tooltip_right' style='color:white;'>-<span class='tooltiptext_right'>No streak</span></span>";break;
       case 3: $level="<span class='tooltip_right' style='color:white;'>⚀<span class='tooltiptext_right'>3+ days streak</span></span>";break;
       case 6: $level="<span class='tooltip_right' style='color:white;'>⚀⚁<span class='tooltiptext_right'>6+ days streak</span></span>";break;
       case 12: $level="<span class='tooltip_right' style='color:white;'>⚀⚁⚂<span class='tooltiptext_right'>12+ days streak</span></span>";break;
@@ -797,9 +788,9 @@ for($i=18;$i!=0;$i--){
 
     foreach($good_bad_dates_lines as $good_bad_dates_line){
       $good_bad_dates_line[1] = str_replace("\n", '', $good_bad_dates_line[1]);
-      if(strcmp($good_bad_dates_line[0],$line)){
+      if($good_bad_dates_line[0]=="$line"){
         $DAYS_AGO=$TODAY-$good_bad_dates_line[1];
-        if(strcmp($good_bad_dates_line[2],"B")){
+        if($good_bad_dates_line[2]=="B"){
           if($good_bad_dates_line[1]>$DELAY_DAYS_ERRORS){
             $THE_GRID.="<span class='tooltip' style='color:$color_bad;'>❌<span class='tooltiptext' style='color:$color_bad;'>day $TODAY - {$good_bad_dates_line[1]} = $DAYS_AGO days ago</span></span>";
           }
@@ -808,7 +799,7 @@ for($i=18;$i!=0;$i--){
           }
         }
         else{
-          if (!strcmp($good_bad_dates_line[1],$LAST_DATE)){
+          if ($good_bad_dates_line[1]!=$LAST_DATE){
             $color_bad="red"; //After first good bad is red (red = forgotten ???)
             if($good_bad_dates_line[1]>$DELAY_DAYS_ERRORS){
               $THE_GRID.="<span class='tooltip' style='color:#49f149;'>✔<span class='tooltiptext' style='color:#49f149;'><a onclick='if (confirm(\"Are you sure you want to delete the line(s) : {$line}€{$good_bad_dates_line[1]} ?\")) { window.location.href=\"php/logs_delete_good_line.php?FILE=../$PATH2/answer.bad.date&LINE={$line}€{$good_bad_dates_line[1]}\"; }'>remove log</a><br>day $TODAY - {$good_bad_dates_line[1]} = $DAYS_AGO days ago</span></span>";
