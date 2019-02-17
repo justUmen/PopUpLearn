@@ -9,5 +9,5 @@ function remove_line($file, $remove) {
 }
 remove_line($_GET['FILE'],$_GET['LINE']);
 // echo "{$_GET['FILE']} {$_GET['LINE']}";
-header("Location: ../read_logs.php");
+header("Location: http://127.0.0.1:9999/read_logs.php");
 ?>
