@@ -681,7 +681,7 @@ for($i=18;$i!=0;$i--){
 
   $session_lines_level=array(); $fn = fopen("$PATH/answer.level", 'r');// or die("fail to open file session_lines_level - session $i");
   while($row = fgets($fn)) { array_push($session_lines_level, explode('€', $row)); }
-  // echo '<pre>'; print_r($session_lines_level); echo '</pre>';
+  echo '<pre>'; print_r($session_lines_level); echo '</pre>';
 
   // ██████  ██ ███████ ██████  ██       █████  ██    ██
   // ██   ██ ██ ██      ██   ██ ██      ██   ██  ██  ██
@@ -766,7 +766,7 @@ for($i=18;$i!=0;$i--){
 
     $THE_GRID.="<div class='grid-item'>";
     switch ($LEVEL) {
-      case 0: $level="<span class='tooltip_right' style='color:white;'>⚀<span class='tooltiptext_right'>No streak</span></span>";break;
+      case 0: $level="<span class='tooltip_right' style='color:white;'>-<span class='tooltiptext_right'>No streak</span></span>";break;
       case 3: $level="<span class='tooltip_right' style='color:white;'>⚀<span class='tooltiptext_right'>3+ days streak</span></span>";break;
       case 6: $level="<span class='tooltip_right' style='color:white;'>⚀⚁<span class='tooltiptext_right'>6+ days streak</span></span>";break;
       case 12: $level="<span class='tooltip_right' style='color:white;'>⚀⚁⚂<span class='tooltiptext_right'>12+ days streak</span></span>";break;
