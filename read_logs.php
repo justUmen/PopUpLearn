@@ -603,7 +603,7 @@ $THE_GRID="";
 for($i=18;$i!=0;$i--){
 // for($i=1;$i!=18;$i++){
   $THE_GRID.="<button type='button' class='btn btn-primary'>⮮ session_$i ⮯</button>";
-  $PATH="./logs/cnPI/en/hsk/1/HSK1_cnPI_en.pul/session_$i";
+  $PATH="logs/cnPI/en/hsk/1/HSK1_cnPI_en.pul/session_$i";
   $PATH2="logs/cnPI/en/hsk/1/HSK1_cnPI_en.pul/session_$i";
 
   // ██████   █████  ██████          ██████   █████  ████████ ███████ ███████         ██      ██ ███    ██ ███████ ███████
