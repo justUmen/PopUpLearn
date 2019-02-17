@@ -660,10 +660,10 @@ for($i=18;$i!=0;$i--){
   // $session_lines
   // (
   //     [0] => 医生[yīshēng] |=| doctor
-
+//
   $session_lines=array(); $fn = fopen("$PATH/session_content.pul", 'r');
   while($row = fgets($fn)) { array_push($session_lines, $row); }
-  echo '<pre>'; print_r($session_lines); echo '</pre>';
+  // echo '<pre>'; print_r($session_lines); echo '</pre>';
 
   // ███████ ███████ ███████ ███████ ██  ██████  ███    ██ ███████         ██      ██ ███    ██ ███████ ███████         ██      ███████ ██    ██ ███████ ██
   // ██      ██      ██      ██      ██ ██    ██ ████   ██ ██              ██      ██ ████   ██ ██      ██              ██      ██      ██    ██ ██      ██
@@ -697,9 +697,9 @@ for($i=18;$i!=0;$i--){
 
   $THE_GRID.="<div class='grid-container'>\n";
 
-  foreach(array_reverse($session_lines) as $line){
-    echo " ---- $line ---- ";
-  // foreach($session_lines as $line){
+  // foreach(array_reverse($session_lines) as $line){
+  foreach($session_lines as $line){
+  echo " ---- $line ---- ";
 
     //FIND LEVEL
     $LEVEL=0;
