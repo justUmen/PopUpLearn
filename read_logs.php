@@ -620,7 +620,7 @@ for($i=18;$i!=0;$i--){
   //             [1] => 393
   //         )
 
-  $bad_dates_lines=array(); $fn = fopen("$PATH/answer.bad.date", "r") or die("fail to open file $PATH/answer.bad.date - session $i");
+  $bad_dates_lines=array(); $fn = fopen("$PATH/answer.bad.date", "r");// or die("fail to open file $PATH/answer.bad.date - session $i");
   while($row = fgets($fn)) { $row="{$row}€B"; array_push($bad_dates_lines, explode('€', $row)); }
   // echo '<pre>'; print_r($bad_dates_lines); echo '</pre>';
   // $ALL_BAD_DATES_LINES=array();
@@ -641,7 +641,7 @@ for($i=18;$i!=0;$i--){
   //             [1] => 393
   //         )
 
-  $good_dates_lines=array(); $fn = fopen("$PATH/answer.good.date", FILE_IGNORE_NEW_LINES);// or die("fail to open file answer.good.date - session $i");
+  $good_dates_lines=array(); $fn = fopen("$PATH/answer.good.date", "r");// or die("fail to open file answer.good.date - session $i");
   while($row = fgets($fn)) { $row="{$row}€G"; array_push($good_dates_lines, explode('€', $row)); }
   // echo '<pre>'; print_r($good_dates_lines); echo '</pre>';
   // $ALL_GOOD_DATES_LINES=array();
@@ -661,7 +661,7 @@ for($i=18;$i!=0;$i--){
   // (
   //     [0] => 医生[yīshēng] |=| doctor
 
-  $session_lines = file("$PATH/session_content.pul", FILE_IGNORE_NEW_LINES);
+  $session_lines = file("$PATH/session_content.pul", "r");
   // echo '<pre>'; print_r($session_lines); echo '</pre>';
 
   // ███████ ███████ ███████ ███████ ██  ██████  ███    ██ ███████         ██      ██ ███    ██ ███████ ███████         ██      ███████ ██    ██ ███████ ██
@@ -678,7 +678,7 @@ for($i=18;$i!=0;$i--){
   //             [1] => 12
   //         )
 
-  $session_lines_level=array(); $fn = fopen("$PATH/answer.level", FILE_IGNORE_NEW_LINES);// or die("fail to open file session_lines_level - session $i");
+  $session_lines_level=array(); $fn = fopen("$PATH/answer.level", "r");// or die("fail to open file session_lines_level - session $i");
   while($row = fgets($fn)) { array_push($session_lines_level, explode('€', $row)); }
   // echo '<pre>'; print_r($session_lines_level); echo '</pre>';
 
