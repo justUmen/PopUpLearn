@@ -585,7 +585,6 @@ if(isset($_GET['DELAY'])){$DELAY=$_GET['DELAY'];}else{$DELAY=7;}
 <select>
 </h3>
 
-
 <?php
 // answer.bad  answer.bad.date  answer.good  answer.good.date  answer.level  session_content.pul  session_specific_config.conf
 $ALL_BAD_DATES_LINES=array();
@@ -605,6 +604,7 @@ for($i=18;$i!=0;$i--){
 // for($i=1;$i!=18;$i++){
   $THE_GRID.="<button type='button' class='btn btn-primary'>⮮ session_$i ⮯</button>";
   $PATH="http://localhost:9995/logs/cnPI/en/hsk/1/HSK1_cnPI_en.pul/session_$i";
+  $PATH2="logs/cnPI/en/hsk/1/HSK1_cnPI_en.pul/session_$i";
 
   // ██████   █████  ██████          ██████   █████  ████████ ███████ ███████         ██      ██ ███    ██ ███████ ███████
   // ██   ██ ██   ██ ██   ██         ██   ██ ██   ██    ██    ██      ██              ██      ██ ████   ██ ██      ██
@@ -787,6 +787,7 @@ for($i=18;$i!=0;$i--){
     $LAST_DATE="";
 
     foreach($good_bad_dates_lines as $good_bad_dates_line){
+      $good_bad_dates_line[1] = str_replace("\n", '', $good_bad_dates_line[1]);
       if($good_bad_dates_line[0]=="$line"){
         $DAYS_AGO=$TODAY-$good_bad_dates_line[1];
         if($good_bad_dates_line[2]=="B"){
@@ -801,7 +802,7 @@ for($i=18;$i!=0;$i--){
           if ($good_bad_dates_line[1]!=$LAST_DATE){
             $color_bad="red"; //After first good bad is red (red = forgotten ???)
             if($good_bad_dates_line[1]>$DELAY_DAYS_ERRORS){
-              $THE_GRID.="<span class='tooltip' style='color:#49f149;'>✔<span class='tooltiptext' style='color:#49f149;'>day $TODAY - {$good_bad_dates_line[1]} = $DAYS_AGO days ago</span></span>";
+              $THE_GRID.="<span class='tooltip' style='color:#49f149;'>✔<span class='tooltiptext' style='color:#49f149;'><a onclick='if (confirm(\"Are you sure you want to delete the line(s) : {$line}€{$good_bad_dates_line[1]} ?\")) { window.location.href=\"php/logs_delete_good_line.php?FILE=../$PATH2/answer.bad.date&LINE={$line}€{$good_bad_dates_line[1]}\"; }'>remove log</a><br>day $TODAY - {$good_bad_dates_line[1]} = $DAYS_AGO days ago</span></span>";
             }
             else{
               $THE_GRID.="<span class='tooltip' style='color:grey;'>✔<span class='tooltiptext' style='color:grey;'>day $TODAY - {$good_bad_dates_line[1]} = $DAYS_AGO days ago</span></span>";
@@ -1013,6 +1014,14 @@ echo $THE_GRID;
   <button type="button" style="color:black;" class="btn btn-primary">Last X sessions (x)</button>
 
 </div>
+
+<script>
+// if (confirm("Do you want to delete!")) {
+//   txt = "You pressed OK!";
+// } else {
+//   txt = "You pressed Cancel!";
+// }
+</script>
 
 </body>
 </html>
