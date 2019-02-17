@@ -603,7 +603,7 @@ $THE_GRID="";
 for($i=18;$i!=0;$i--){
 // for($i=1;$i!=18;$i++){
   $THE_GRID.="<button type='button' class='btn btn-primary'>⮮ session_$i ⮯</button>";
-  $PATH="logs/cnPI/en/hsk/1/HSK1_cnPI_en.pul/session_$i";
+  $PATH="http://localhost:9995/logs/cnPI/en/hsk/1/HSK1_cnPI_en.pul/session_$i";
   $PATH2="logs/cnPI/en/hsk/1/HSK1_cnPI_en.pul/session_$i";
 
   // ██████   █████  ██████          ██████   █████  ████████ ███████ ███████         ██      ██ ███    ██ ███████ ███████
@@ -679,7 +679,6 @@ for($i=18;$i!=0;$i--){
   //         )
 
   $session_lines_level=array(); $fn = fopen("$PATH/answer.level", FILE_IGNORE_NEW_LINES);// or die("fail to open file session_lines_level - session $i");
-  echo "$PATH/answer.level";
   while($row = fgets($fn)) { array_push($session_lines_level, explode('€', $row)); }
   // echo '<pre>'; print_r($session_lines_level); echo '</pre>';
 
