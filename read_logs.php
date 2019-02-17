@@ -663,7 +663,7 @@ for($i=18;$i!=0;$i--){
 
   $session_lines=array(); $fn = fopen("$PATH/session_content.pul", 'r');
   while($row = fgets($fn)) { array_push($session_lines, $row); }
-  echo '<pre>'; print_r($session_lines); echo '</pre>';
+  // echo '<pre>'; print_r($session_lines); echo '</pre>';
 
   // ███████ ███████ ███████ ███████ ██  ██████  ███    ██ ███████         ██      ██ ███    ██ ███████ ███████         ██      ███████ ██    ██ ███████ ██
   // ██      ██      ██      ██      ██ ██    ██ ████   ██ ██              ██      ██ ████   ██ ██      ██              ██      ██      ██    ██ ██      ██
@@ -701,6 +701,7 @@ for($i=18;$i!=0;$i--){
   // foreach($session_lines as $line){
 
     //FIND LEVEL
+    $LEVEL=0;
     foreach($session_lines_level as $session_line_level){
       if($session_line_level[0]==$line){
         $LEVEL=$session_line_level[1];
@@ -765,6 +766,7 @@ for($i=18;$i!=0;$i--){
 
     $THE_GRID.="<div class='grid-item'>";
     switch ($LEVEL) {
+      case 0: $level="<span class='tooltip_right' style='color:white;'>⚀<span class='tooltiptext_right'>No streak</span></span>";break;
       case 3: $level="<span class='tooltip_right' style='color:white;'>⚀<span class='tooltiptext_right'>3+ days streak</span></span>";break;
       case 6: $level="<span class='tooltip_right' style='color:white;'>⚀⚁<span class='tooltiptext_right'>6+ days streak</span></span>";break;
       case 12: $level="<span class='tooltip_right' style='color:white;'>⚀⚁⚂<span class='tooltiptext_right'>12+ days streak</span></span>";break;
