@@ -746,7 +746,7 @@ for($i=18;$i!=0;$i--){
         if($bad_line[1]>$DELAY_DAYS_ERRORS){
           // $THE_BAD_GRID.="<span style='color:red;'>❌</span>";
           if($LAST_BAD>$bad_line[1]){
-            $LAST_BAD=$TODAY-$bad_line[1];
+            $LAST_BAD=$TODAY-(int)$bad_line[1];
           }
           $NB_ERROR++;
         }
@@ -974,8 +974,8 @@ fclose($fp);
       var slider = document.getElementById("myRange");
       var output = document.getElementById("demo");
       output.innerHTML = slider.value;
-      slider.max="<?php echo $TODAY-$FIRST_BAD+3; ?>";
-      // slider.value="<?php echo $TODAY-$FIRST_BAD+3; ?>";
+      slider.max="<?php echo $TODAY-(int)$FIRST_BAD+3; ?>";
+      // slider.value="<?php echo $TODAY-(int)$FIRST_BAD+3; ?>";
       slider.onchange = function() {
         document.location.href="read_logs.php?DELAY=" + this.value;
       }
