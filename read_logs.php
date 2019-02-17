@@ -718,7 +718,7 @@ for($i=18;$i!=0;$i--){
     $LAST_GOOD_PINK=0;
     $THE_GOOD_GRID="";
     foreach($good_dates_lines as $good_line){
-      if(strcmp($good_line[0],$line){
+      if(strcmp($good_line[0],$line)){
         // if($good_line[1]>$DELAY_DAYS_ERRORS){
         //   $THE_GOOD_GRID.="<span style='color:#49f149;'>✔</span>";
         // }
