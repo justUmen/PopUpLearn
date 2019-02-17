@@ -707,11 +707,12 @@ for($i=18;$i!=0;$i--){
       // echo " ---- {$session_line_level[0]} / $line ---- ";
       // echo " ---- {$session_line_level[1]} ---- ";
       if("{$session_line_level[0]}"=="$line"){
+        echo "------------";
         $LEVEL=$session_line_level[1];
         // break; //???
       }
     }
-    echo " ---- $LEVEL ---- ";
+    // echo " ---- $LEVEL ---- ";
 
     //FIND WHEN WAS LAST GOOD
     $LAST_GOOD_PINK=0;
