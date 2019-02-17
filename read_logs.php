@@ -706,7 +706,7 @@ for($i=18;$i!=0;$i--){
     foreach($session_lines_level as $session_line_level){
       echo " ---- {$session_line_level[0]} / $line = {$session_line_level[1]} ---- <br>";
       // echo " ---- {$session_line_level[1]} ---- ";
-      if($session_line_level[0]==$line){
+      if($session_line_level[0]===$line){
         // echo "------------";
         $LEVEL=$session_line_level[1];
         // break; //???
