@@ -703,10 +703,11 @@ for($i=18;$i!=0;$i--){
     //FIND LEVEL
     $LEVEL=0;
     foreach($session_lines_level as $session_line_level){
-      echo " ---- {$session_line_level[0]} ---- ";
+      // echo " ---- {$session_line_level[0]} ---- ";
       // echo " ---- {$session_line_level[1]} ---- ";
       if($session_line_level[0]==$line){
         $LEVEL=$session_line_level[1];
+        echo " ---- $LEVEL ---- ";
       }
     }
 
