@@ -662,8 +662,8 @@ for($i=18;$i!=0;$i--){
   //     [0] => 医生[yīshēng] |=| doctor
 
   $session_lines=array(); $fn = fopen("$PATH/session_content.pul", 'r');
-  while($row = fgets($fn)) { array_push($session_lines, explode('€', $row)); }
-  // echo '<pre>'; print_r($session_lines); echo '</pre>';
+  while($row = fgets($fn)) { array_push($session_lines, $row); }
+  echo '<pre>'; print_r($session_lines); echo '</pre>';
 
   // ███████ ███████ ███████ ███████ ██  ██████  ███    ██ ███████         ██      ██ ███    ██ ███████ ███████         ██      ███████ ██    ██ ███████ ██
   // ██      ██      ██      ██      ██ ██    ██ ████   ██ ██              ██      ██ ████   ██ ██      ██              ██      ██      ██    ██ ██      ██
