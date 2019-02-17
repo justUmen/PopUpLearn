@@ -797,7 +797,7 @@ for($i=18;$i!=0;$i--){
 
     foreach($good_bad_dates_lines as $good_bad_dates_line){
       $good_bad_dates_line[1] = str_replace("\n", '', $good_bad_dates_line[1]);
-      if(strcmp($good_bad_dates_line[0],$line){
+      if(strcmp($good_bad_dates_line[0],$line)){
         $DAYS_AGO=$TODAY-$good_bad_dates_line[1];
         if(strcmp($good_bad_dates_line[2],"B")){
           if($good_bad_dates_line[1]>$DELAY_DAYS_ERRORS){
