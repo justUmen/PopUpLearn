@@ -704,7 +704,7 @@ for($i=18;$i!=0;$i--){
     //FIND LEVEL
     $LEVEL=0;
     foreach($session_lines_level as $session_line_level){
-      echo " ---- {$session_line_level[0]} / $line = {$session_line_level[1]} ---- <br>";
+      // echo " ---- {$session_line_level[0]} / $line = {$session_line_level[1]} ---- <br>";
       // echo " ---- {$session_line_level[1]} ---- ";
       if(strcmp($session_line_level[0],$line)){
         // echo "------------";
@@ -718,7 +718,7 @@ for($i=18;$i!=0;$i--){
     $LAST_GOOD_PINK=0;
     $THE_GOOD_GRID="";
     foreach($good_dates_lines as $good_line){
-      if("{$good_line[0]}"=="$line"){
+      if(strcmp($good_line[0],$line){
         // if($good_line[1]>$DELAY_DAYS_ERRORS){
         //   $THE_GOOD_GRID.="<span style='color:#49f149;'>✔</span>";
         // }
@@ -748,7 +748,7 @@ for($i=18;$i!=0;$i--){
     $LAST_BAD="99999";
     $THE_BAD_GRID="";
     foreach($bad_dates_lines as $bad_line){
-      if($bad_line[0]=="$line"){
+      if(strcmp($bad_line[0],$line)){
         // echo "$bad_line[0]==$line<br>";
         //If error was long time ago, ignore it
         if($bad_line[1]>$DELAY_DAYS_ERRORS){
@@ -797,9 +797,9 @@ for($i=18;$i!=0;$i--){
 
     foreach($good_bad_dates_lines as $good_bad_dates_line){
       $good_bad_dates_line[1] = str_replace("\n", '', $good_bad_dates_line[1]);
-      if($good_bad_dates_line[0]=="$line"){
+      if(strcmp($good_bad_dates_line[0],$line){
         $DAYS_AGO=$TODAY-$good_bad_dates_line[1];
-        if($good_bad_dates_line[2]=="B"){
+        if(strcmp($good_bad_dates_line[2],"B")){
           if($good_bad_dates_line[1]>$DELAY_DAYS_ERRORS){
             $THE_GRID.="<span class='tooltip' style='color:$color_bad;'>❌<span class='tooltiptext' style='color:$color_bad;'>day $TODAY - {$good_bad_dates_line[1]} = $DAYS_AGO days ago</span></span>";
           }
