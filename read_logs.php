@@ -1,7 +1,7 @@
 <!--
 TODO / ADD :
 - TOP 10 worst errors in the last X days
-
+- Detect automatically the current level based on real answer ??? (delete false "bad answer" but lvl stay low)
 -->
 
 <!DOCTYPE html>
@@ -792,7 +792,7 @@ for($i=18;$i!=0;$i--){
         $DAYS_AGO=$TODAY-$good_bad_dates_line[1];
         if($good_bad_dates_line[2]=="B"){
           if($good_bad_dates_line[1]>$DELAY_DAYS_ERRORS){
-            $THE_GRID.="<span class='tooltip' style='color:$color_bad;'>❌<span class='tooltiptext' style='color:$color_bad;'>day $TODAY - {$good_bad_dates_line[1]} = $DAYS_AGO days ago</span></span>";
+            $THE_GRID.="<span class='tooltip' style='color:$color_bad;'>❌<span class='tooltiptext' style='color:$color_bad;'><a onclick='if (confirm(\"Are you sure you want to delete the line(s) : {$line}€{$good_bad_dates_line[1]} ?\")) { window.location.href=\"http://127.0.0.1:9995/php/logs_delete_good_line.php?FILE=../$PATH2/answer.bad.date&LINE={$line}€{$good_bad_dates_line[1]}\"; }'>remove log</a><br>day $TODAY - {$good_bad_dates_line[1]} = $DAYS_AGO days ago</span></span>";
           }
           else{
             $THE_GRID.="<span class='tooltip' style='color:grey;'>❌<span class='tooltiptext' style='color:grey;'>day $TODAY - {$good_bad_dates_line[1]} = $DAYS_AGO days ago</span></span>";
