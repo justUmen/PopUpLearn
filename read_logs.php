@@ -627,6 +627,9 @@ for($i=18;$i!=0;$i--){
 // for($i=1;$i!=18;$i++){
   $THE_GRID.="<button type='button' class='btn btn-primary'>⮮ session_$i ⮯</button>";
   $PATH="http://localhost:9995/$PUL/session_$i";
+  if (filter_var($PATH, FILTER_VALIDATE_URL) === FALSE) {
+    continue;
+  }
   // 1echo "----- $PATH -----";
   // $PATH2="$PUL/session_$i";
 
