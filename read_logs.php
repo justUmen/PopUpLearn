@@ -586,6 +586,10 @@ foreach($F1 as $f1){
   $F2 = glob("$f1/*", GLOB_ONLYDIR|GLOB_NOSORT);
   foreach($F2 as $f2){
     echo "<div>-- $f1 + $f2 --<div>";
+    $F3 = glob("$f1/$f2/*", GLOB_ONLYDIR|GLOB_NOSORT);
+    foreach($F3 as $f3){
+      echo "<div>-- $f1 + $f2 + $f3 --<div>";
+    }
   }
 }
 ?>
