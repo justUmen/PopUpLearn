@@ -579,6 +579,13 @@ if(isset($_GET['DELAY'])){$DELAY=$_GET['DELAY'];}else{$DELAY=7;}
 
 </pre>
 
+<?php
+$F1 = glob('logs/*', GLOB_ONLYDIR|GLOB_NOSORT);
+foreach($F1 as $f1){
+  echo "<div>-- $f1 --<div>";
+}
+?>
+
 <h3 style="font-family:Monospace;color:white;">Pul file :
 <select class="styled-select">
   <option>DB/LANGUAGE/CN/hsk/hsk1/ALL/HSK1_cnPI_en.pul</option>
@@ -604,7 +611,7 @@ for($i=18;$i!=0;$i--){
 // for($i=1;$i!=18;$i++){
   $THE_GRID.="<button type='button' class='btn btn-primary'>⮮ session_$i ⮯</button>";
   $PATH="http://localhost:9995/logs/cnPI/en/hsk/1/HSK1_cnPI_en.pul/session_$i";
-  $PATH2="logs/cnPI/en/hsk/1/HSK1_cnPI_en.pul/session_$i";
+  // $PATH2="logs/cnPI/en/hsk/1/HSK1_cnPI_en.pul/session_$i";
 
   // ██████   █████  ██████          ██████   █████  ████████ ███████ ███████         ██      ██ ███    ██ ███████ ███████
   // ██   ██ ██   ██ ██   ██         ██   ██ ██   ██    ██    ██      ██              ██      ██ ████   ██ ██      ██
