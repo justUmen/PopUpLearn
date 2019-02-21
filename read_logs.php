@@ -590,7 +590,7 @@ function rsearch($folder, $pattern) {
              echo "<option selected>$change ($PUL)</option>";
            }
            else{
-             echo "<option>$change</option>";
+             echo "<option>$change ($PUL)</option>";
            }
             // return $file;
          }
