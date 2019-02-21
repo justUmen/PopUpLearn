@@ -580,18 +580,18 @@ if(isset($_GET['DELAY'])){$DELAY=$_GET['DELAY'];}else{$DELAY=7;}
 </pre>
 
 <?php
-$PUL="logs/cnPI/en/hsk/1/HSK1_cnPI_en.pul";
-// if(isset($_GET['PUL'])){$PUL=$_GET['PUL'];}else{$PUL="logs/cnPI/en/hsk/1/HSK1_cnPI_en.pul";}
-function rsearch($folder, $pattern) {
+// $PUL="logs/cnPI/en/hsk/1/HSK1_cnPI_en.pul";
+if(isset($_GET['PUL'])){$PUL=$_GET['PUL'];}else{$PUL="logs/cnPI/en/hsk/1/HSK1_cnPI_en.pul";}
+function rsearch($folder, $pattern, $pul) {
     $iti = new RecursiveDirectoryIterator($folder);
     foreach(new RecursiveIteratorIterator($iti) as $file){
          if(strpos($file , $pattern) !== false){
            $change=str_replace("/session_1/session_content.pul","",$file);
-           if($PUL==$change){
-             echo "<option selected>$change ($PUL)</option>";
+           if($pul==$change){
+             echo "<option selected>$change ($pul)</option>";
            }
            else{
-             echo "<option>$change ($PUL)</option>";
+             echo "<option>$change ($pul)</option>";
            }
             // return $file;
          }
@@ -603,7 +603,7 @@ function rsearch($folder, $pattern) {
 <h3 style="font-family:Monospace;color:white;">Pul file :
 <select class="styled-select">
 <?php
-rsearch('logs/', "/session_1/session_content.pul");
+rsearch('logs/', "/session_1/session_content.pul",$PUL);
 ?>
 <select>
 </h3>
