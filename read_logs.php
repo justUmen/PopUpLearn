@@ -624,13 +624,18 @@ rsearch('logs/', "/session_1/session_content.pul",$PUL);
 // FIND MAXIMUM SESSION WITH if (!is_dir($dir))
 //FOR EACH SESSIONS
 $THE_GRID="";
-for($i=18;$i!=0;$i--){
+for($i=1;$i!=20;$i++){
+  if(file_exists("$PUL/session_$i")){
+    $PUL_NB_SESSIONS=$i;
+  }
+  else{
+    break;
+  }
+}
+
+for($i=$PUL_NB_SESSIONS;$i!=0;$i++){
 // for($i=1;$i!=18;$i++){
   $PATH="http://localhost:9995/$PUL/session_$i";
-  if (filter_var($PATH, FILTER_VALIDATE_URL) === FALSE) {
-    continue;
-  }
-
   $THE_GRID.="<button type='button' class='btn btn-primary'>⮮ session_$i ⮯</button>";
   // 1echo "----- $PATH -----";
   // $PATH2="$PUL/session_$i";
