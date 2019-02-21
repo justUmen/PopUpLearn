@@ -580,11 +580,18 @@ if(isset($_GET['DELAY'])){$DELAY=$_GET['DELAY'];}else{$DELAY=7;}
 </pre>
 
 <?php
+if(isset($_GET['PUL'])){$PUL=$_GET['PUL'];}else{$PUL="logs/cnPI/en/hsk/1/HSK1_cnPI_en.pul"}
 function rsearch($folder, $pattern) {
     $iti = new RecursiveDirectoryIterator($folder);
     foreach(new RecursiveIteratorIterator($iti) as $file){
          if(strpos($file , $pattern) !== false){
-           echo "<option>$file</option>";
+           $change=str_replace("/session_1/session_content.pul","",$file);
+           if($PUL=="$change"){
+             echo "<option selected>$change</option>";
+           }
+           else{
+             echo "<option>$change</option>";
+           }
             // return $file;
          }
     }
@@ -597,8 +604,6 @@ function rsearch($folder, $pattern) {
 <?php
 rsearch('logs/', "/session_1/session_content.pul");
 ?>
-  <option>DB/LANGUAGE/CN/hsk/hsk1/ALL/HSK1_cnPI_en.pul</option>
-
 <select>
 </h3>
 
@@ -620,7 +625,7 @@ $THE_GRID="";
 for($i=18;$i!=0;$i--){
 // for($i=1;$i!=18;$i++){
   $THE_GRID.="<button type='button' class='btn btn-primary'>⮮ session_$i ⮯</button>";
-  $PATH="http://localhost:9995/logs/cnPI/en/hsk/1/HSK1_cnPI_en.pul/session_$i";
+  $PATH="/session_$i";
   // $PATH2="logs/cnPI/en/hsk/1/HSK1_cnPI_en.pul/session_$i";
 
   // ██████   █████  ██████          ██████   █████  ████████ ███████ ███████         ██      ██ ███    ██ ███████ ███████
