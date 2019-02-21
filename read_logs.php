@@ -1059,7 +1059,7 @@ function toggle_visibility(className) {
 }
 <?php
 if(isset($_GET['HIDE_SESSION'])){
-  echo "toggle_visibility('session_title_number');":
+  echo "toggle_visibility('session_title_number');";
 }
 ?>
 </script>
