@@ -598,17 +598,7 @@ function rsearch($folder, $pattern, $pul) {
     }
     // return false;
 }
-?>
 
-<h3 style="font-family:Monospace;color:white;">Pul file :
-<select onchange="window.location='read_logs.php?PUL=' + document.getElementById('select_pul').value;" id="select_pul" class="styled-select">
-<?php
-rsearch('logs/', "/session_1/session_content.pul",$PUL);
-?>
-<select>
-</h3>
-
-<?php
 // answer.bad  answer.bad.date  answer.good  answer.good.date  answer.level  session_content.pul  session_specific_config.conf
 $ALL_BAD_DATES_LINES=array();
 $ALL_GOOD_DATES_LINES=array();
@@ -620,6 +610,17 @@ $TODAY=$diff->days; //398
 // echo "today is $TODAY";
 $DELAY_DAYS_ERRORS=$TODAY-$DELAY; //If error was long time ago, ignore it
 
+?>
+
+<h3 style="font-family:Monospace;color:white;">Pul file :
+<select onchange="window.location='read_logs.php?DELAY=<?php echo $DELAY_DAYS_ERRORS; ?>&PUL=' + document.getElementById('select_pul').value;" id="select_pul" class="styled-select">
+<?php
+rsearch('logs/', "/session_1/session_content.pul",$PUL);
+?>
+<select>
+</h3>
+
+<?php
 // FIND MAXIMUM SESSION WITH if (!is_dir($dir))
 //FOR EACH SESSIONS
 $THE_GRID="";
