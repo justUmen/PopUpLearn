@@ -627,8 +627,8 @@ for($i=18;$i!=0;$i--){
 // for($i=1;$i!=18;$i++){
   $THE_GRID.="<button type='button' class='btn btn-primary'>⮮ session_$i ⮯</button>";
   $PATH="$PUL/session_$i";
-  echo "----- $PATH -----";
-  $PATH2="$PUL/session_$i";
+  // echo "----- $PATH -----";
+  // $PATH2="$PUL/session_$i";
 
   // ██████   █████  ██████          ██████   █████  ████████ ███████ ███████         ██      ██ ███    ██ ███████ ███████
   // ██   ██ ██   ██ ██   ██         ██   ██ ██   ██    ██    ██      ██              ██      ██ ████   ██ ██      ██
