@@ -624,7 +624,7 @@ rsearch('logs/', "/session_1/session_content.pul",$PUL);
 // FIND MAXIMUM SESSION WITH if (!is_dir($dir))
 //FOR EACH SESSIONS
 $THE_GRID="";
-for($i=1;$i!=20;$i++){
+for($i=1;$i!=100;$i++){
   if(file_exists("$PUL/session_$i")){
     $PUL_NB_SESSIONS=$i;
   }
@@ -636,7 +636,7 @@ for($i=1;$i!=20;$i++){
 for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
 // for($i=1;$i!=18;$i++){
   $PATH="http://localhost:9995/$PUL/session_$i";
-  $THE_GRID.="<button type='button' class='btn btn-primary'>⮮ session_$i ⮯</button>";
+  $THE_GRID.="<button type='button' class='session_title_number btn btn-primary'>⮮ session_$i ⮯</button>";
   // 1echo "----- $PATH -----";
   // $PATH2="$PUL/session_$i";
 
@@ -1046,6 +1046,19 @@ echo $THE_GRID;
   <button type="button" style="background-color:cyan;color:black;" class="btn btn-primary">Unlearned (x)</button>
   <button type="button" style="background-color:magenta;color:black;" class="btn btn-primary">Relearn (x)</button>
   <button type="button" style="color:black;" class="btn btn-primary">Last X sessions (x)</button>
+
+  <h3>PopUpLearn toggles :</h3>
+
+<script>
+function toggle_visibility(className) {
+    elements = document.getElementsByClassName(className);
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].style.display = elements[i].style.display == 'inline' ? 'none' : 'inline';
+    }
+}
+</script>
+
+  <button type="button" style="color:black;" class="btn btn-primary" onclick="toggle_visibility('session_title_number')">Toggle session number</button>
 
 </div>
 
