@@ -583,6 +583,10 @@ if(isset($_GET['DELAY'])){$DELAY=$_GET['DELAY'];}else{$DELAY=7;}
 $F1 = glob('logs/*', GLOB_ONLYDIR|GLOB_NOSORT);
 foreach($F1 as $f1){
   echo "<div>-- $f1 --<div>";
+  $F2 = glob("$f1/*", GLOB_ONLYDIR|GLOB_NOSORT);
+  foreach($F2 as $f2){
+    echo "<div>-- $f1 + $f2 --<div>";
+  }
 }
 ?>
 
