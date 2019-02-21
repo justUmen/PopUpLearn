@@ -601,7 +601,7 @@ function rsearch($folder, $pattern, $pul) {
 ?>
 
 <h3 style="font-family:Monospace;color:white;">Pul file :
-<select class="styled-select">
+<select onchange="window.location=document.getElementById('select_pul').value;" id="select_pul" class="styled-select">
 <?php
 rsearch('logs/', "/session_1/session_content.pul",$PUL);
 ?>
