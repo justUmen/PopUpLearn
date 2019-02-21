@@ -588,10 +588,10 @@ function rsearch($folder, $pattern, $pul) {
          if(strpos($file , $pattern) !== false){
            $change=str_replace("/session_1/session_content.pul","",$file);
            if($pul==$change){
-             echo "<option value="$change" selected>$change</option>";
+             echo "<option value=\"$change\" selected>$change</option>";
            }
            else{
-             echo "<option value="$change">$change</option>";
+             echo "<option value=\"$change\">$change</option>";
            }
             // return $file;
          }
