@@ -795,7 +795,7 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
     if($NB_ERROR>2){$COLOR="red";}
     else if($NB_ERROR==2){$COLOR="orange";}
     else if ($NB_ERROR==1){$COLOR="yellow";}
-    else{$COLOR="gray";$CLASS=" gray_lines"}
+    else{$COLOR="gray";$CLASS=" gray_lines";}
 
     $THE_GRID.="<div class='grid-item$CLASS'>";
     switch ($LEVEL) {
