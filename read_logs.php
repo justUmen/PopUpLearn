@@ -580,13 +580,13 @@ if(isset($_GET['DELAY'])){$DELAY=$_GET['DELAY'];}else{$DELAY=7;}
 </pre>
 
 <?php
-if(isset($_GET['PUL'])){$PUL=$_GET['PUL'];}else{$PUL="logs/cnPI/en/hsk/1/HSK1_cnPI_en.pul"}
+if(isset($_GET['PUL'])){$PUL=$_GET['PUL'];}else{$PUL="logs/cnPI/en/hsk/1/HSK1_cnPI_en.pul";}
 function rsearch($folder, $pattern) {
     $iti = new RecursiveDirectoryIterator($folder);
     foreach(new RecursiveIteratorIterator($iti) as $file){
          if(strpos($file , $pattern) !== false){
            $change=str_replace("/session_1/session_content.pul","",$file);
-           if($PUL=="$change"){
+           if($PUL==$change){
              echo "<option selected>$change</option>";
            }
            else{
