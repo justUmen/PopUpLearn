@@ -613,7 +613,7 @@ $DELAY_DAYS_ERRORS=$TODAY-$DELAY; //If error was long time ago, ignore it
 ?>
 
 <h3 style="font-family:Monospace;color:white;">Pul file :
-<select onchange="window.location='read_logs.php?DELAY=<?php echo $DELAY; ?>&PUL=' + document.getElementById('select_pul').value;" id="select_pul" class="styled-select">
+<select onchange="window.location='read_logs.php?PUL=' + document.getElementById('select_pul').value;" id="select_pul" class="styled-select">
 <?php
 rsearch('logs/', "/session_1/session_content.pul",$PUL);
 ?>
@@ -1006,7 +1006,7 @@ fclose($fp);
       slider.max="<?php echo $TODAY-(int)$FIRST_BAD+3; ?>";
       // slider.value="<?php echo $TODAY-(int)$FIRST_BAD+3; ?>";
       slider.onchange = function() {
-        document.location.href="read_logs.php?DELAY=" + this.value;
+        document.location.href="read_logs.php?PUL=<?php echo $PUL; ?>&DELAY=" + this.value;
       }
       slider.oninput = function() {
         output.innerHTML = this.value;
