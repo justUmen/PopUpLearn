@@ -633,7 +633,7 @@ for($i=1;$i!=20;$i++){
   }
 }
 
-for($i=$PUL_NB_SESSIONS;$i!=0;$i++){
+for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
 // for($i=1;$i!=18;$i++){
   $PATH="http://localhost:9995/$PUL/session_$i";
   $THE_GRID.="<button type='button' class='btn btn-primary'>⮮ session_$i ⮯</button>";
