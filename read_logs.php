@@ -584,18 +584,21 @@ function rsearch($folder, $pattern) {
     $iti = new RecursiveDirectoryIterator($folder);
     foreach(new RecursiveIteratorIterator($iti) as $file){
          if(strpos($file , $pattern) !== false){
-           echo "<div>$file</div>";
+           echo "<option>$file</option>";
             // return $file;
          }
     }
     // return false;
 }
-$filepath = rsearch('logs/', "/session_1/session_content.pul");
 ?>
 
 <h3 style="font-family:Monospace;color:white;">Pul file :
 <select class="styled-select">
+<?php
+rsearch('logs/', "/session_1/session_content.pul");
+?>
   <option>DB/LANGUAGE/CN/hsk/hsk1/ALL/HSK1_cnPI_en.pul</option>
+
 <select>
 </h3>
 
