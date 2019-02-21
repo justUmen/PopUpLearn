@@ -588,10 +588,10 @@ function rsearch($folder, $pattern, $pul) {
          if(strpos($file , $pattern) !== false){
            $change=str_replace("/session_1/session_content.pul","",$file);
            if($pul==$change){
-             echo "<option selected>$change ($pul)</option>";
+             echo "<option value="$change" selected>$change</option>";
            }
            else{
-             echo "<option>$change ($pul)</option>";
+             echo "<option value="$change">$change</option>";
            }
             // return $file;
          }
@@ -627,7 +627,8 @@ for($i=18;$i!=0;$i--){
 // for($i=1;$i!=18;$i++){
   $THE_GRID.="<button type='button' class='btn btn-primary'>⮮ session_$i ⮯</button>";
   $PATH="$PUL/session_$i";
-  // $PATH2="logs/cnPI/en/hsk/1/HSK1_cnPI_en.pul/session_$i";
+  echo "----- $PATH -----";
+  $PATH2="$PUL/session_$i";
 
   // ██████   █████  ██████          ██████   █████  ████████ ███████ ███████         ██      ██ ███    ██ ███████ ███████
   // ██   ██ ██   ██ ██   ██         ██   ██ ██   ██    ██    ██      ██              ██      ██ ████   ██ ██      ██
