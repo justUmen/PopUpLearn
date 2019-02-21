@@ -1057,6 +1057,11 @@ function toggle_visibility(className) {
         elements[i].style.display = elements[i].style.display == 'none' ? 'inline' : 'none';
     }
 }
+<?php
+if(isset("$_GET['HIDE_SESSION']")){
+  echo "<script>toggle_visibility('session_title_number')</script>":
+}
+?>
 </script>
 
   <button type="button" style="color:black;" class="btn btn-primary" onclick="toggle_visibility('session_title_number')">Toggle session number</button>
