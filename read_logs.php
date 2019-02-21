@@ -791,12 +791,13 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
     }
 
     //DISPLAY ERROR
+    $CLASS="";
     if($NB_ERROR>2){$COLOR="red";}
     else if($NB_ERROR==2){$COLOR="orange";}
     else if ($NB_ERROR==1){$COLOR="yellow";}
-    else{$COLOR="gray";}
+    else{$COLOR="gray";$CLASS=" gray_lines"}
 
-    $THE_GRID.="<div class='grid-item'>";
+    $THE_GRID.="<div class='grid-item$CLASS'>";
     switch ($LEVEL) {
       case 3: $level="<span class='tooltip_right' style='color:white;'>⚀<span class='tooltiptext_right'>3+ days streak</span></span>";break;
       case 6: $level="<span class='tooltip_right' style='color:white;'>⚀⚁<span class='tooltiptext_right'>6+ days streak</span></span>";break;
@@ -1059,6 +1060,7 @@ function toggle_visibility(className) {
 </script>
 
   <button type="button" style="color:black;" class="btn btn-primary" onclick="toggle_visibility('session_title_number')">Toggle session number</button>
+  <button type="button" style="color:black;" class="btn btn-primary" onclick="toggle_visibility('gray_lines')">Toggle gray lines</button>
 
 </div>
 
