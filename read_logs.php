@@ -585,10 +585,10 @@ function rsearch($folder, $pattern) {
     foreach(new RecursiveIteratorIterator($iti) as $file){
          if(strpos($file , $pattern) !== false){
            echo "<div>$file</div>";
-            return $file;
+            // return $file;
          }
     }
-    return false;
+    // return false;
 }
 $filepath = rsearch('logs/', "/session_1/session_content.pul");
 ?>
