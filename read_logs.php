@@ -582,13 +582,16 @@ if(isset($_GET['DELAY'])){$DELAY=$_GET['DELAY'];}else{$DELAY=7;}
 <?php
 $F1 = glob('logs/*', GLOB_ONLYDIR|GLOB_NOSORT);
 foreach($F1 as $f1){
-  echo "<div>-- $f1 --<div>";
+  // echo "<div>-- $f1 --<div>";
   $F2 = glob("$f1/*", GLOB_ONLYDIR|GLOB_NOSORT);
   foreach($F2 as $f2){
-    echo "<div>-- $f1 + $f2 --<div>";
+    // echo "<div>-- $f1 + $f2 --<div>";
     $F3 = glob("$f1/$f2/*", GLOB_ONLYDIR|GLOB_NOSORT);
     foreach($F3 as $f3){
-      echo "<div>-- $f1 + $f2 + $f3 --<div>";
+      $F5 = glob("$f1/$f2/$f3/*", GLOB_ONLYDIR|GLOB_NOSORT);
+      foreach($F4 as $f4){
+      echo "<div>-- $f4 --<div>";
+      }
     }
   }
 }
