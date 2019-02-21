@@ -540,6 +540,10 @@ input[type="button"].btn-block {
 
 }
 
+
+.session_title_number, .gray_lines{
+  display:none;
+}
   </style>
 </head>
 
@@ -1054,7 +1058,7 @@ echo $THE_GRID;
 function toggle_visibility(className) {
     elements = document.getElementsByClassName(className);
     for (var i = 0; i < elements.length; i++) {
-        elements[i].style.display = elements[i].style.display == 'none' ? 'inline' : 'none';
+        elements[i].style.display = elements[i].style.display == 'inline' ? 'none' : 'inline';
     }
 }
 <?php
