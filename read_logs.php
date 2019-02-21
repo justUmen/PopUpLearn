@@ -580,6 +580,7 @@ if(isset($_GET['DELAY'])){$DELAY=$_GET['DELAY'];}else{$DELAY=7;}
 </pre>
 
 <?php
+$PUL="logs/cnPI/en/hsk/1/HSK1_cnPI_en.pul";
 if(isset($_GET['PUL'])){$PUL=$_GET['PUL'];}else{$PUL="logs/cnPI/en/hsk/1/HSK1_cnPI_en.pul";}
 function rsearch($folder, $pattern) {
     $iti = new RecursiveDirectoryIterator($folder);
