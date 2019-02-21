@@ -640,6 +640,7 @@ for($i=1;$i!=100;$i++){
 for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
 // for($i=1;$i!=18;$i++){
   $PATH="http://localhost:9995/$PUL/session_$i";
+  $THE_GRID.="<button type='button' class='session_title_number btn btn-primary'>⮮ session_$i ⮯</button>";
   // 1echo "----- $PATH -----";
   // $PATH2="$PUL/session_$i";
 
@@ -731,6 +732,8 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
   //FOR EACH TEXT IN SESSION
   // echo "<div>session_$i</div>\n";
 
+  $THE_GRID.="<div class='grid-container'>\n";
+
   foreach(array_reverse($session_lines) as $line){
   // foreach($session_lines as $line){
 
@@ -797,10 +800,6 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
     else if($NB_ERROR==2){$COLOR="orange";}
     else if ($NB_ERROR==1){$COLOR="yellow";}
     else{$COLOR="gray";$CLASS=" gray_lines";}
-
-    $THE_GRID.="<button type='button' class='session_title_number btn btn-primary'>⮮ session_$i ⮯</button>";
-
-    $THE_GRID.="<div class='grid-container'>\n";
 
     $THE_GRID.="<div class='grid-item$CLASS'>";
     switch ($LEVEL) {
