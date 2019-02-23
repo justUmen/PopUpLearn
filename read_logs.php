@@ -776,7 +776,7 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
         // }
       }
     }
-    $MOST_RECENT_BAD=$TODAY-$MOST_RECENT_BAD;
+    $MOST_RECENT_BAD=$TODAY-$MOST_RECENT_BAD; //CHANGE to X days ago
 
     //FIND WHEN WAS LAST GOOD
     $LAST_USEFUL_GOOD=0;
@@ -796,7 +796,7 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
         // echo " --- $GOOD>$TODAY-$LAST_GOOD_PINK+$LEVEL --- ";
         if($LAST_GOOD==0){
           $LAST_GOOD=$TODAY-$GOOD;
-          if($LAST_GOOD < $MOST_RECENT_BAD && $LAST_GOOD > $LEVEL){ //GOOD TOO OLD OR GOOD TOO YOUNG - USELESS
+          if(($LAST_GOOD < $MOST_RECENT_BAD && $LAST_GOOD > $LEVEL)||$LAST_USEFUL_GOOD==0){ //GOOD TOO OLD OR GOOD TOO YOUNG - USELESS
             $LAST_USEFUL_GOOD=$TODAY-$GOOD;
           }
         }
@@ -804,7 +804,7 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
           // echo "--- $LAST_GOOD_PINK<$GOOD && $GOOD<$TODAY-$LAST_BAD && $GOOD>$TODAY-$LAST_GOOD_PINK-$LEVEL ---<br>";
           if($LAST_GOOD<$GOOD){
             $LAST_GOOD=$TODAY-$GOOD;
-            if($LAST_GOOD < $MOST_RECENT_BAD_BAD && $LAST_GOOD > $LEVEL){
+            if(($LAST_GOOD < $MOST_RECENT_BAD_BAD && $LAST_GOOD > $LEVEL)||$LAST_USEFUL_GOOD==0){
               $LAST_USEFUL_GOOD=$TODAY-$GOOD;
             }
           }
