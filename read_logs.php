@@ -795,6 +795,7 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
           // echo "--- $LAST_GOOD_PINK<$GOOD && $GOOD<$TODAY-$LAST_BAD && $GOOD>$TODAY-$LAST_GOOD_PINK-$LEVEL ---<br>";
           if($LAST_GOOD<$GOOD){
             $LAST_GOOD=$TODAY-$GOOD;
+            echo "<div>($LAST_GOOD < $LAST_BAD && $LAST_BAD - $LAST_GOOD > $LEVEL)</div>";
             if($LAST_GOOD < $LAST_BAD && $LAST_BAD - $LAST_GOOD > $LEVEL){
               $LAST_USEFUL_GOOD=$TODAY-$GOOD;
             }
