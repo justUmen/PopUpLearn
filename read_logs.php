@@ -540,6 +540,9 @@ input[type="button"].btn-block {
 
 }
 
+a{
+  text-decoration: none;
+}
 
 .session_title_number, .gray_lines{
   display:none;
