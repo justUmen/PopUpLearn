@@ -804,10 +804,10 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
     else if ($NB_ERROR==1){$COLOR="yellow";}
     else{$COLOR="gray";$CLASS=" gray_lines";}
 
-    //CHECK IF PINK / BLUE, PINK => $LAST_BAD=400, $LEVEL=6, $TODAY bigger than $LAST_BAD + $LEVEL
+    //CHECK IF PINK / BLUE, PINK => $LAST_BAD=(days ago)
     $WHITE_BLUE_PINK="white";
     $LAST_BAD_PLUS_LEVEL=$LAST_BAD+$LEVEL;
-    // if($TODAY > ) $WHITE_BLUE_PINK="magenta";
+    if($LAST_BAD > $LEVEL * 2){$WHITE_BLUE_PINK="magenta";}
 
     $THE_GRID.="<div class='grid-item$CLASS'>";
     switch ($LEVEL) {
