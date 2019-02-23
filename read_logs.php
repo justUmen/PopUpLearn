@@ -750,18 +750,23 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
     $NB_ERROR=0;
     //FOR EACH ERROR RAISE LEVEL ERROR BY 1 OF THIS TEXT
     $LAST_BAD=99999;
-    $MOST_RECENT_BAD=99999;
+    $MOST_RECENT_BAD=0;
     $THE_BAD_GRID="";
     foreach($bad_dates_lines as $bad_line){
       if($bad_line[0]=="$line"){
-        if($MOST_RECENT_BAD<$bad_line[1]){
+        if($MOST_RECENT_BAD==0){
           $MOST_RECENT_BAD=$TODAY-(int)$bad_line[1];
+        }
+        else{
+          if($MOST_RECENT_BAD<$TODAY-(int)$bad_line[1]){
+            $MOST_RECENT_BAD=$TODAY-(int)$bad_line[1];
+          }
         }
         // echo "$bad_line[0]==$line<br>";
         //If error was long time ago, ignore it
         if($bad_line[1]>$DELAY_DAYS_ERRORS){
           // $THE_BAD_GRID.="<span style='color:red;'>❌</span>";
-          if($LAST_BAD>$bad_line[1]){
+          if($LAST_BAD>$bad_line[1]){ //??? why not $TODAY-(int) ???
             $LAST_BAD=$TODAY-(int)$bad_line[1];
           }
           $NB_ERROR++;
