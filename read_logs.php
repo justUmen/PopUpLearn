@@ -776,6 +776,7 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
         // }
       }
     }
+    $MOST_RECENT_BAD=$TODAY-$MOST_RECENT_BAD;
 
     //FIND WHEN WAS LAST GOOD
     $LAST_USEFUL_GOOD=0;
