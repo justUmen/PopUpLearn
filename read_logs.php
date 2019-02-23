@@ -755,11 +755,11 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
     foreach($bad_dates_lines as $bad_line){
       if($bad_line[0]=="$line"){
         if($MOST_RECENT_BAD==0){
-          $MOST_RECENT_BAD=$TODAY-(int)$bad_line[1];
+          $MOST_RECENT_BAD=$bad_line[1];
         }
         else{
-          if($MOST_RECENT_BAD<$TODAY-(int)$bad_line[1]){
-            $MOST_RECENT_BAD=$TODAY-(int)$bad_line[1];
+          if($MOST_RECENT_BAD>$bad_line[1]){
+            $MOST_RECENT_BAD=$bad_line[1];
           }
         }
         // echo "$bad_line[0]==$line<br>";
