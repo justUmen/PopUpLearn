@@ -803,7 +803,7 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
           if($LAST_GOOD <= $MOST_RECENT_BAD && $LAST_USEFUL_GOOD - $LAST_GOOD > $COMPTEUR_LEVEL ){
             $COMPTEUR_LEVEL=$COMPTEUR_LEVEL*2;
             $LAST_USEFUL_GOOD=$TODAY-$GOOD;
-            array_push($LAST_USEFUL_GOOD,$ARRAY_GOOD_USEFUL);
+            array_push($ARRAY_GOOD_USEFUL,$LAST_USEFUL_GOOD);
           }
         }
         else{
@@ -814,7 +814,7 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
             if($LAST_GOOD <= $MOST_RECENT_BAD && $LAST_USEFUL_GOOD - $LAST_GOOD > $COMPTEUR_LEVEL ){
               $COMPTEUR_LEVEL=$COMPTEUR_LEVEL*2;
               $LAST_USEFUL_GOOD=$LAST_GOOD;
-              array_push($LAST_USEFUL_GOOD,$ARRAY_GOOD_USEFUL);
+              array_push($ARRAY_GOOD_USEFUL,$LAST_USEFUL_GOOD);
             }
           }
         }
