@@ -878,7 +878,7 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
           }
         }
         else{
-          if (in_array($DAYS_AGO,$ARRAY_GOOD_USEFUL)){$BACKGROUND_USEFUL="background-color:green;";}
+          if (in_array($DAYS_AGO,$ARRAY_GOOD_USEFUL)){$BACKGROUND_USEFUL="background-color:green;border-radius:5px;";}
           else{$BACKGROUND_USEFUL="";}
           if ($good_bad_dates_line[1]!=$LAST_DATE){
             $color_bad="red"; //After first good bad is red (red = forgotten ???)
