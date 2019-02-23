@@ -829,7 +829,7 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
     # $LAST_BAD=(last bad answer : X days ago)
     # $LAST_GOOD=(last good answer : X days ago) - but can have useless answers (no level gain with this good answer)
     $WHITE_BLUE_PINK="white";
-    if($LAST_USEFUL_GOOD > $LEVEL * 2){$WHITE_BLUE_PINK="magenta";$CLASS="";} //Disable gray line (hide) if pink.
+    if($LAST_USEFUL_GOOD > $LEVEL){$WHITE_BLUE_PINK="magenta";$CLASS="";} //Disable gray line (hide) if pink.  * 2
 
     $THE_GRID.="<div class='grid-item$CLASS'>$MOST_RECENT_BAD : $LAST_USEFUL_GOOD -- " . $LEVEL * 2;
     switch ($LEVEL) {
