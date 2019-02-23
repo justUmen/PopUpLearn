@@ -817,7 +817,7 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
       case 6144: $level="<span class='tooltip_right' style='color:white;'>⚀⚁⚂⚃⚄⚅⚀⚁⚂⚃⚄⚅<span class='tooltiptext_right'>6144+ days streak</span></span>";break; //~16 years
     }
 
-    $line_pound=preg_replace("/ |=| /","£",$line);
+    $line_pound=preg_replace("/ \|=\| /","£",$line);
     $THE_GRID.=" $level <span style='color:gray'> ➔ </span> <a target='_blank' href='http://localhost:9995/popup.php?LINE=0£hsk_1£${line_pound}£cnPI£en£BUTTON£16' style='color:$COLOR'>$line</a> <span style='color:gray'> ➔ </span> "; // ($NB_ERROR)
     // $THE_GRID.="<span style='color:#DDD'>$THE_GOOD_GRID</span>";
     // $THE_GRID.="<span style='color:#555'>$THE_BAD_GRID</span>";
