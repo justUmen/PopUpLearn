@@ -786,7 +786,7 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
         // echo " --- $GOOD>$TODAY-$LAST_GOOD_PINK+$LEVEL --- ";
         if($LAST_GOOD==0){
           $LAST_GOOD=$TODAY-$GOOD;
-          if($GOOD>$TODAY + $LAST_BAD){
+          if($LAST_GOOD<$LAST_BAD){
             $LAST_USEFUL_GOOD=$TODAY-$GOOD;
           }
         }
@@ -794,7 +794,7 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
           // echo "--- $LAST_GOOD_PINK<$GOOD && $GOOD<$TODAY-$LAST_BAD && $GOOD>$TODAY-$LAST_GOOD_PINK-$LEVEL ---<br>";
           if($LAST_GOOD<$GOOD){
             $LAST_GOOD=$TODAY-$GOOD;
-            if($GOOD>$TODAY + $LAST_BAD){
+            if($LAST_GOOD<$LAST_BAD){
               $LAST_USEFUL_GOOD=$TODAY-$GOOD;
             }
           }
@@ -810,7 +810,9 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
     else if ($NB_ERROR==1){$COLOR="yellow";}
     else{$COLOR="gray";$CLASS=" gray_lines";}
 
-    //CHECK IF PINK / BLUE, PINK => $LAST_BAD=(days ago)
+    //CHECK IF PINK / BLUE
+    # $LAST_BAD=(last bad answer : X days ago)
+    # $LAST_GOOD=(last good answer : X days ago) - but can have useless answers (no level gain with this good answer)
     $WHITE_BLUE_PINK="white";
     if($LAST_USEFUL_GOOD > $LEVEL * 2){$WHITE_BLUE_PINK="magenta";$CLASS="";} //Disable gray line (hide) if pink.
 
