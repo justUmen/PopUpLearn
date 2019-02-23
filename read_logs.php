@@ -808,7 +808,7 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
     $WHITE_BLUE_PINK="white";
     if($LAST_GOOD_PINK > $LEVEL * 2){$WHITE_BLUE_PINK="magenta";$CLASS="";} //Disable gray line (hide) if pink.
 
-    $THE_GRID.="<div class='grid-item$CLASS'>";
+    $THE_GRID.="<div class='grid-item$CLASS'>$LAST_GOOD_PINK";
     switch ($LEVEL) {
       case 3: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>⚀<span class='tooltiptext_right'>3+ days streak</span></span>";break;
       case 6: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>⚀⚁<span class='tooltiptext_right'>6+ days streak</span></span>";break;
