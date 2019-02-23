@@ -787,7 +787,7 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
         if($LAST_GOOD==0){
           $LAST_GOOD=$TODAY-$GOOD;
           echo "<div>($LAST_GOOD < $LAST_BAD && $LAST_BAD - $LAST_GOOD > $LEVEL)</div>";
-          if($LAST_GOOD < $LAST_BAD && $LAST_BAD - $LAST_GOOD > $LEVEL){ //GOOD TOO OLD OR GOOD TOO YOUNG - USELESS
+          if($LAST_GOOD < $LAST_BAD && $LAST_GOOD > $LEVEL){ //GOOD TOO OLD OR GOOD TOO YOUNG - USELESS
             $LAST_USEFUL_GOOD=$TODAY-$GOOD;
           }
         }
@@ -796,7 +796,7 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
           if($LAST_GOOD<$GOOD){
             $LAST_GOOD=$TODAY-$GOOD;
             echo "<div>($LAST_GOOD < $LAST_BAD && $LAST_BAD - $LAST_GOOD > $LEVEL)</div>";
-            if($LAST_GOOD < $LAST_BAD && $LAST_BAD - $LAST_GOOD > $LEVEL){
+            if($LAST_GOOD < $LAST_BAD && $LAST_GOOD > $LEVEL){
               $LAST_USEFUL_GOOD=$TODAY-$GOOD;
             }
           }
