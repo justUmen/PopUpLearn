@@ -807,11 +807,11 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
     //CHECK IF PINK / BLUE, PINK => $LAST_BAD=(days ago)
     $WHITE_BLUE_PINK="white";
     $LAST_BAD_PLUS_LEVEL=$LAST_BAD+$LEVEL;
-    if($LAST_BAD > $LEVEL * 2){$WHITE_BLUE_PINK="magenta";}
+    if($LAST_BAD > $LEVEL * 2){$WHITE_BLUE_PINK="magenta";$CLASS="";} //Disable gray line (hide) if pink.
 
     $THE_GRID.="<div class='grid-item$CLASS'>";
     switch ($LEVEL) {
-      case 3: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>⚀ $LAST_BAD_PLUS_LEVEL<span class='tooltiptext_right'>3+ days streak</span></span>";break;
+      case 3: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>⚀<span class='tooltiptext_right'>3+ days streak</span></span>";break;
       case 6: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>⚀⚁<span class='tooltiptext_right'>6+ days streak</span></span>";break;
       case 12: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>⚀⚁⚂<span class='tooltiptext_right'>12+ days streak</span></span>";break;
       case 24: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>⚀⚁⚂⚃<span class='tooltiptext_right'>24+ days streak</span></span>";break;
