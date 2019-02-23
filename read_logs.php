@@ -820,7 +820,7 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
         }
       }
     }
-print_r($ARRAY_GOOD_USEFUL);
+    // print_r($ARRAY_GOOD_USEFUL);
 
     //DISPLAY ERROR
     $CLASS="";
@@ -876,13 +876,15 @@ print_r($ARRAY_GOOD_USEFUL);
           }
         }
         else{
+          if (in_array($DAYS_AGO,$ARRAY_GOOD_USEFUL)){$BACKGROUND_USEFUL="background-color:green;"}
+          else{$BACKGROUND_USEFUL="";}
           if ($good_bad_dates_line[1]!=$LAST_DATE){
             $color_bad="red"; //After first good bad is red (red = forgotten ???)
             if($good_bad_dates_line[1]>$DELAY_DAYS_ERRORS){
-              $THE_GRID.="<span class='tooltip' style='color:#49f149;'>✔<span class='tooltiptext' style='color:#49f149;'><a onclick='if (confirm(\"Are you sure you want to delete the line(s) : {$line}€{$good_bad_dates_line[1]} ?\")) { window.location.href=\"http://127.0.0.1:9995/php/logs_delete_good_line.php?FILE=../$PATH2/answer.bad.date&LINE={$line}€{$good_bad_dates_line[1]}\"; }'>remove log</a><br>day $TODAY - {$good_bad_dates_line[1]} = $DAYS_AGO days ago</span></span>";
+              $THE_GRID.="<span class='tooltip' style='color:#49f149;'>✔<span class='tooltiptext' style='color:#49f149;$BACKGROUND_USEFUL'><a onclick='if (confirm(\"Are you sure you want to delete the line(s) : {$line}€{$good_bad_dates_line[1]} ?\")) { window.location.href=\"http://127.0.0.1:9995/php/logs_delete_good_line.php?FILE=../$PATH2/answer.bad.date&LINE={$line}€{$good_bad_dates_line[1]}\"; }'>remove log</a><br>day $TODAY - {$good_bad_dates_line[1]} = $DAYS_AGO days ago</span></span>";
             }
             else{
-              $THE_GRID.="<span class='tooltip' style='color:grey;'>✔<span class='tooltiptext' style='color:grey;'>day $TODAY - {$good_bad_dates_line[1]} = $DAYS_AGO days ago</span></span>";
+              $THE_GRID.="<span class='tooltip' style='color:grey;'>✔<span class='tooltiptext' style='color:grey;$BACKGROUND_USEFUL'>day $TODAY - {$good_bad_dates_line[1]} = $DAYS_AGO days ago</span></span>";
             }
           }
           $LAST_DATE=$good_bad_dates_line[1];
