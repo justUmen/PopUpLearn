@@ -75,7 +75,12 @@ function openCity_2(evt, tabName) {
 $session = file("tmp/session_content.tmp", FILE_IGNORE_NEW_LINES);
 
 //$line example : 0:bash_1:Supprimer le fichier test dans le dossier /home:rm /home/test:fr:fr:BUTTON
-$line = fgets(fopen("tmp/my_line.tmp", 'r'));
+if(!isset($_GET['LINE'])){
+	$line = fgets(fopen("tmp/my_line.tmp", 'r'));
+}
+else{
+	$line = $_GET['LINE'];
+}
 $e = explode("£", $line);
 $FAMILY=$e[1];
 
@@ -193,29 +198,34 @@ if("$LANGUAGE_WIKIPEDIA_2"=="cn"){$LANGUAGE_WIKIPEDIA_2="zh";}
 		<a class='btn glyphicon glyphicon-remove' onclick="close_popup();return false;" href='#' title='close popup'></a>
 	</div> -->
 <!-- 0£hsk_1£méi£no£PI£en£BUTTON0£hsk_1£méi£no£PI£en£BUTTON -->
-	<div style="text-align:center;position:fixed;bottom:20;width:100%;">
-		<div>Session <?php echo $SESSION_NUMBER; ?></div>
-		<select class="form-control" style="display: inline;width:auto;" onchange="if (this.value) window.location.href=this.value">
 <?php
 // $FAMILY=$e[1];
 // $LEFT=$e[2];
 // $RIGHT=$e[3];
 // $LANGUAGE_TAG_1=$e[4];
 // $LANGUAGE_TAG_2=$e[5];
-foreach ($session as &$value) {
-	$lefti = preg_replace('/ \|=\| .*/', '', $value);
-	$righti = preg_replace('/.* \|=\| /', '', $value);
-	if($lefti==$LEFT&&$righti==$RIGHT){
-		echo "<option value=\"http://localhost:9995/popup.php?LEFT=$lefti&RIGHT=$righti\" selected>$value</option>";
+if(!isset($_GET['LINE'])){
+	echo <<<END
+		<div style="text-align:center;position:fixed;bottom:20;width:100%;">
+			<div>Session <?php echo $SESSION_NUMBER; ?></div>
+			<select class="form-control" style="display: inline;width:auto;" onchange="if (this.value) window.location.href=this.value">
+END;
+	foreach ($session as &$value) {
+		$lefti = preg_replace('/ \|=\| .*/', '', $value);
+		$righti = preg_replace('/.* \|=\| /', '', $value);
+		if($lefti==$LEFT&&$righti==$RIGHT){
+			echo "<option value=\"http://localhost:9995/popup.php?LEFT=$lefti&RIGHT=$righti\" selected>$value</option>";
+		}
+		else{
+			echo "<option value=\"http://localhost:9995/popup.php?LEFT=$lefti&RIGHT=$righti\">$value</option>";
+		}
 	}
-	else{
-		echo "<option value=\"http://localhost:9995/popup.php?LEFT=$lefti&RIGHT=$righti\">$value</option>";
-	}
+	echo <<<END
+			</select>
+		</div>
+END;
 }
 ?>
-		</select>
-	</div>
-
 	<?php
 	if(isset($_GET['img'])){
 		echo "<div id='Image1' class='widget'><img src='imgDB/{$LANG}/{$FAMILY}/{$LEFT}_{$RIGHT}.png' /></div>";
