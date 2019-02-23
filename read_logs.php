@@ -839,7 +839,8 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
 
     //$MOST_RECENT_BAD : $LAST_USEFUL_GOOD --
     $THE_GRID.="<div class='grid-item$CLASS'>$NOT_PINK";
-    switch ($LEVEL) {
+    // switch ($LEVEL) {
+    switch ($COMPTEUR_LEVEL) {
       case 3: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>⚀<span class='tooltiptext_right'>3+ days streak</span></span>";break;
       case 6: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>⚀⚁<span class='tooltiptext_right'>6+ days streak</span></span>";break;
       case 12: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>⚀⚁⚂<span class='tooltiptext_right'>12+ days streak</span></span>";break;
