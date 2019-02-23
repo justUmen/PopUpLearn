@@ -804,20 +804,24 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
     else if ($NB_ERROR==1){$COLOR="yellow";}
     else{$COLOR="gray";$CLASS=" gray_lines";}
 
+    //CHECK IF PINK / BLUE, PINK => $LAST_BAD=400, $LEVEL=6, $TODAY bigger than $LAST_BAD + $LEVEL
+    $WHITE_BLUE_PINK="white";
+    if($TODAY > $LAST_BAD + $LEVEL) $WHITE_BLUE_PINK="pink";
+
     $THE_GRID.="<div class='grid-item$CLASS'>";
     switch ($LEVEL) {
-      case 3: $level="<span class='tooltip_right' style='color:white;'>⚀<span class='tooltiptext_right'>3+ days streak</span></span>";break;
-      case 6: $level="<span class='tooltip_right' style='color:white;'>⚀⚁<span class='tooltiptext_right'>6+ days streak</span></span>";break;
-      case 12: $level="<span class='tooltip_right' style='color:white;'>⚀⚁⚂<span class='tooltiptext_right'>12+ days streak</span></span>";break;
-      case 24: $level="<span class='tooltip_right' style='color:white;'>⚀⚁⚂⚃<span class='tooltiptext_right'>24+ days streak</span></span>";break;
-      case 48: $level="<span class='tooltip_right' style='color:white;'>⚀⚁⚂⚃⚄<span class='tooltiptext_right'>48+ days streak</span></span>";break;
-      case 96: $level="<span class='tooltip_right' style='color:white;'>⚀⚁⚂⚃⚄⚅<span class='tooltiptext_right'>96+ days streak</span></span>";break; //~3 months
-      case 192: $level="<span class='tooltip_right' style='color:white;'>⚀⚁⚂⚃⚄⚅⚀<span class='tooltiptext_right'>192+ days streak</span></span>";break;
-      case 384: $level="<span class='tooltip_right' style='color:white;'>⚀⚁⚂⚃⚄⚅⚀⚁<span class='tooltiptext_right'>384+ days streak</span></span>";break;
-      case 768: $level="<span class='tooltip_right' style='color:white;'>⚀⚁⚂⚃⚄⚅⚀⚁⚂<span class='tooltiptext_right'>768+ days streak</span></span>";break;
-      case 1536: $level="<span class='tooltip_right' style='color:white;'>⚀⚁⚂⚃⚄⚅⚀⚁⚂⚃<span class='tooltiptext_right'>1536+ days streak</span></span>";break;
-      case 3072: $level="<span class='tooltip_right' style='color:white;'>⚀⚁⚂⚃⚄⚅⚀⚁⚂⚃⚄<span class='tooltiptext_right'>3072+ days streak</span></span>";break;
-      case 6144: $level="<span class='tooltip_right' style='color:white;'>⚀⚁⚂⚃⚄⚅⚀⚁⚂⚃⚄⚅<span class='tooltiptext_right'>6144+ days streak</span></span>";break; //~16 years
+      case 3: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>⚀<span class='tooltiptext_right'>3+ days streak</span></span>";break;
+      case 6: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>⚀⚁<span class='tooltiptext_right'>6+ days streak</span></span>";break;
+      case 12: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>⚀⚁⚂<span class='tooltiptext_right'>12+ days streak</span></span>";break;
+      case 24: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>⚀⚁⚂⚃<span class='tooltiptext_right'>24+ days streak</span></span>";break;
+      case 48: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>⚀⚁⚂⚃⚄<span class='tooltiptext_right'>48+ days streak</span></span>";break;
+      case 96: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>⚀⚁⚂⚃⚄⚅<span class='tooltiptext_right'>96+ days streak</span></span>";break; //~3 months
+      case 192: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>⚀⚁⚂⚃⚄⚅⚀<span class='tooltiptext_right'>192+ days streak</span></span>";break;
+      case 384: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>⚀⚁⚂⚃⚄⚅⚀⚁<span class='tooltiptext_right'>384+ days streak</span></span>";break;
+      case 768: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>⚀⚁⚂⚃⚄⚅⚀⚁⚂<span class='tooltiptext_right'>768+ days streak</span></span>";break;
+      case 1536: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>⚀⚁⚂⚃⚄⚅⚀⚁⚂⚃<span class='tooltiptext_right'>1536+ days streak</span></span>";break;
+      case 3072: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>⚀⚁⚂⚃⚄⚅⚀⚁⚂⚃⚄<span class='tooltiptext_right'>3072+ days streak</span></span>";break;
+      case 6144: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>⚀⚁⚂⚃⚄⚅⚀⚁⚂⚃⚄⚅<span class='tooltiptext_right'>6144+ days streak</span></span>";break; //~16 years
     }
 
     $line_pound=preg_replace("/ \|=\| /","£",$line);
