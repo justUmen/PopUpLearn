@@ -781,7 +781,7 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
     //FIND WHEN WAS LAST GOOD
     $LAST_USEFUL_GOOD=99999;
     $LAST_GOOD=0;
-    $COMPTEUR_LEVEL=3;
+    $COMPTEUR_LEVEL=1.5;
     $THE_GOOD_GRID="";
     $ARRAY_GOOD_USEFUL=array();
     foreach($good_dates_lines as $good_line){
