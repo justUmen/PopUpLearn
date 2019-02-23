@@ -783,6 +783,7 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
     $LAST_GOOD=0;
     $COMPTEUR_LEVEL=3;
     $THE_GOOD_GRID="";
+    $ARRAY_GOOD_USEFUL=array();
     foreach($good_dates_lines as $good_line){
       if($good_line[0]=="$line"){
         // if($good_line[1]>$DELAY_DAYS_ERRORS){
@@ -802,6 +803,7 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
           if($LAST_GOOD <= $MOST_RECENT_BAD && $LAST_USEFUL_GOOD - $LAST_GOOD > $COMPTEUR_LEVEL ){
             $COMPTEUR_LEVEL=$COMPTEUR_LEVEL*2;
             $LAST_USEFUL_GOOD=$TODAY-$GOOD;
+            array_push($LAST_USEFUL_GOOD,$ARRAY_GOOD_USEFUL);
           }
         }
         else{
@@ -812,12 +814,13 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
             if($LAST_GOOD <= $MOST_RECENT_BAD && $LAST_USEFUL_GOOD - $LAST_GOOD > $COMPTEUR_LEVEL ){
               $COMPTEUR_LEVEL=$COMPTEUR_LEVEL*2;
               $LAST_USEFUL_GOOD=$LAST_GOOD;
+              array_push($LAST_USEFUL_GOOD,$ARRAY_GOOD_USEFUL);
             }
           }
         }
       }
     }
-
+print_r($ARRAY_GOOD_USEFUL);
 
     //DISPLAY ERROR
     $CLASS="";
