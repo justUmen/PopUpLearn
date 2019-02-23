@@ -831,7 +831,7 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
     $WHITE_BLUE_PINK="white";
     $NOT_PINK="";
     if($LAST_USEFUL_GOOD >= $LEVEL){$WHITE_BLUE_PINK="magenta";$CLASS="";} //Disable gray line (hide) if pink. or equal ???
-    else{$TMP=$LEVEL - $LAST_USEFUL_GOOD;$NOT_PINK="Pink $TMP";}
+    else{$TMP=$LEVEL - $LAST_USEFUL_GOOD;$NOT_PINK="Pink $TMP ($LEVEL - $LAST_USEFUL_GOOD)";}
 
     //$MOST_RECENT_BAD : $LAST_USEFUL_GOOD --
     $THE_GRID.="<div class='grid-item$CLASS'>$NOT_PINK";
