@@ -781,6 +781,7 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
     //FIND WHEN WAS LAST GOOD
     $LAST_USEFUL_GOOD=0;
     $LAST_GOOD=0;
+    $COMPTEUR_LEVEL=3;
     $THE_GOOD_GRID="";
     foreach($good_dates_lines as $good_line){
       if($good_line[0]=="$line"){
@@ -798,7 +799,7 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
         if($LAST_GOOD==0){
           $LAST_GOOD=$TODAY-$GOOD;
           // if(($LAST_GOOD < $MOST_RECENT_BAD && $LAST_USEFUL_GOOD > $LEVEL)||$LAST_USEFUL_GOOD==0){ //GOOD TOO OLD OR GOOD TOO YOUNG - USELESS
-          if($LAST_GOOD <= $MOST_RECENT_BAD && $LAST_GOOD > $LEVEL){
+          if($LAST_GOOD <= $MOST_RECENT_BAD && $LAST_USEFUL_GOOD - $LAST_GOOD > $COMPTEUR_LEVEL ){
             $LAST_USEFUL_GOOD=$TODAY-$GOOD;
           }
         }
@@ -806,7 +807,9 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
           // echo "--- $LAST_GOOD_PINK<$GOOD && $GOOD<$TODAY-$LAST_BAD && $GOOD>$TODAY-$LAST_GOOD_PINK-$LEVEL ---<br>";
           if($LAST_GOOD<$GOOD){
             $LAST_GOOD=$TODAY-$GOOD;
-            if($LAST_GOOD <= $MOST_RECENT_BAD && $LAST_GOOD > $LEVEL){
+            // GOOD TOO YOUNG IF : xxxOxxxWOOOWOOOW, days after the previous $LAST_USEFUL_GOOD > 3, then > 6 ...
+            if($LAST_GOOD <= $MOST_RECENT_BAD && $LAST_USEFUL_GOOD - $LAST_GOOD > $COMPTEUR_LEVEL ){
+              $COMPTEUR_LEVEL=$COMPTEUR_LEVEL*2;
               $LAST_USEFUL_GOOD=$LAST_GOOD;
             }
           }
