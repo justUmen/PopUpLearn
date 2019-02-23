@@ -829,9 +829,11 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
     # $LAST_BAD=(last bad answer : X days ago)
     # $LAST_GOOD=(last good answer : X days ago) - but can have useless answers (no level gain with this good answer)
     $WHITE_BLUE_PINK="white";
-    if($LAST_USEFUL_GOOD > $LEVEL * 2){$WHITE_BLUE_PINK="magenta";$CLASS="";} //Disable gray line (hide) if pink.
+    $LEVEL_TIMES_2=$LEVEL * 2;
+    if($LAST_USEFUL_GOOD > $LEVEL_TIMES_2){$WHITE_BLUE_PINK="magenta";$CLASS="";} //Disable gray line (hide) if pink.
 
-    $THE_GRID.="<div class='grid-item$CLASS'>$MOST_RECENT_BAD : $LAST_USEFUL_GOOD";
+    $LEVE
+    $THE_GRID.="<div class='grid-item$CLASS'>$MOST_RECENT_BAD : $LAST_USEFUL_GOOD ($LEVEL_TIMES_2)";
     switch ($LEVEL) {
       case 3: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>⚀<span class='tooltiptext_right'>3+ days streak</span></span>";break;
       case 6: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>⚀⚁<span class='tooltiptext_right'>6+ days streak</span></span>";break;
