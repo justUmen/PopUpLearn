@@ -749,10 +749,14 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
 
     $NB_ERROR=0;
     //FOR EACH ERROR RAISE LEVEL ERROR BY 1 OF THIS TEXT
-    $LAST_BAD="99999";
+    $LAST_BAD=99999;
+    $MOST_RECENT_BAD=99999;
     $THE_BAD_GRID="";
     foreach($bad_dates_lines as $bad_line){
       if($bad_line[0]=="$line"){
+        if($MOST_RECENT_BAD<$bad_line[1]){
+          $MOST_RECENT_BAD=$TODAY-(int)$bad_line[1];
+        }
         // echo "$bad_line[0]==$line<br>";
         //If error was long time ago, ignore it
         if($bad_line[1]>$DELAY_DAYS_ERRORS){
@@ -786,7 +790,7 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
         // echo " --- $GOOD>$TODAY-$LAST_GOOD_PINK+$LEVEL --- ";
         if($LAST_GOOD==0){
           $LAST_GOOD=$TODAY-$GOOD;
-          if($LAST_GOOD < $LAST_BAD && $LAST_GOOD > $LEVEL){ //GOOD TOO OLD OR GOOD TOO YOUNG - USELESS
+          if($LAST_GOOD < $MOST_RECENT_BAD && $LAST_GOOD > $LEVEL){ //GOOD TOO OLD OR GOOD TOO YOUNG - USELESS
             $LAST_USEFUL_GOOD=$TODAY-$GOOD;
           }
         }
@@ -794,7 +798,7 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
           // echo "--- $LAST_GOOD_PINK<$GOOD && $GOOD<$TODAY-$LAST_BAD && $GOOD>$TODAY-$LAST_GOOD_PINK-$LEVEL ---<br>";
           if($LAST_GOOD<$GOOD){
             $LAST_GOOD=$TODAY-$GOOD;
-            if($LAST_GOOD < $LAST_BAD && $LAST_GOOD > $LEVEL){
+            if($LAST_GOOD < $MOST_RECENT_BAD_BAD && $LAST_GOOD > $LEVEL){
               $LAST_USEFUL_GOOD=$TODAY-$GOOD;
             }
           }
@@ -816,7 +820,7 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
     $WHITE_BLUE_PINK="white";
     if($LAST_USEFUL_GOOD > $LEVEL * 2){$WHITE_BLUE_PINK="magenta";$CLASS="";} //Disable gray line (hide) if pink.
 
-    $THE_GRID.="<div class='grid-item$CLASS'>$LAST_USEFUL_GOOD : $LAST_GOOD < $LAST_BAD && $LAST_GOOD > $LEVEL";
+    $THE_GRID.="<div class='grid-item$CLASS'>$MOST_RECENT_BAD : $LAST_USEFUL_GOOD : $LAST_GOOD < $LAST_BAD && $LAST_GOOD > $LEVEL";
     switch ($LEVEL) {
       case 3: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>⚀<span class='tooltiptext_right'>3+ days streak</span></span>";break;
       case 6: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>⚀⚁<span class='tooltiptext_right'>6+ days streak</span></span>";break;
