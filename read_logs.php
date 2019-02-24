@@ -841,7 +841,7 @@ for($i=$PUL_NB_SESSIONS;$i!=0;$i--){
     $THE_GRID.="<div class='grid-item$CLASS'>$NOT_PINK";
     // switch ($LEVEL) {
     switch ($COMPTEUR_LEVEL) {
-      case 1.5: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>-<span class='tooltiptext_right'>3+ days streak</span></span>";break;
+      case 1.5: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>▢<span class='tooltiptext_right'>3+ days streak</span></span>";break;
       case 3: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>⚀<span class='tooltiptext_right'>3+ days streak</span></span>";break;
       case 6: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>⚀⚁<span class='tooltiptext_right'>6+ days streak</span></span>";break;
       case 12: $level="<span class='tooltip_right' style='color:$WHITE_BLUE_PINK;'>⚀⚁⚂<span class='tooltiptext_right'>12+ days streak</span></span>";break;
